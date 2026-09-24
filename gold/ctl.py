@@ -51,6 +51,7 @@ GC_P = dict(
     plant_must_last=25,
     final_water=True,
     carrot_edge=1.0,
+    lot_frac=0.0,         # >0: cap a timed lot where the marginal quote falls below this fraction of the current quote
     room0_v2=False,       # hour-0 room sales only for purchases, only the units needed, cheapest-to-sell first
     carrot_fc=False,      # choose carrots per slot from the forecast quote at harvest (town drain, visible plots)
     carrot_fc_units=3.5,
@@ -1796,6 +1797,16 @@ class GoldCtl:
                     n = k
                     if n <= 0:
                         continue
+            if GC_P["lot_frac"] > 0 and p in GC_P["timed"] and not last and n > 1:
+                # never crash our own book: stop the lot where the next unit would sell below lot_frac of the quote
+                i0 = int(inv[p]); p0 = _gc_price(p, i0); k = 0
+                while k < n and _gc_price(p, i0 + k) >= GC_P["lot_frac"] * p0:
+                    k += 1
+                k = max(1, k)
+                if k < n:
+                    held[p] = held.get(p, 0) + (n - k)
+                    _GC_REPORT["gc_lot_cut"] = _GC_REPORT.get("gc_lot_cut", 0) + (n - k)
+                    n = k
             if GC_P["sell_timing"] and p in GC_P["timed"] and not last:
                 w = self._rival_wait(p, day, hour)
                 if w is not None and 0 < w <= GC_P["hold_max"]:
