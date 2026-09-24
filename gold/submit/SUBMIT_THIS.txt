@@ -1,15 +1,18 @@
-gold/submit — takeover-controller builds (updated 24 Sep 2026, 19:15 UTC)
+gold/submit — takeover-controller builds (updated 24 Sep 2026, 19:25 UTC)
 
-PRIMARY  main_ctl_d24.py  sha256 a7ee102cd7c4...  chassis v15a+ADAPT until day 24, gold controller v52b from day 24
-SECOND   main_ctl_d20.py  sha256 e6a4dbec47ea...  controller v58 from day 20 (carrot forecast, per-unit floor,
-                                              tomatoes allowed on day 20): strongest vs divergent teams
+Both files: chassis v15a+ADAPT until the takeover day, then the gold controller.
+  main_ctl_d20.py  controller v58 from day 20  (carrot forecast, per-unit floor, tomatoes on day 20)
+  main_ctl_d24.py  controller v52b from day 24 (carrot forecast)
 
-Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= our live logic; baseline 125-124, +$1,463):
-                    wins  copies  divergent  opp>=2800   margin
-  baseline          125   111     14         38          +$1,463
-  main_ctl_d24.py   160   144     16         58          +$2,410  (flips +38/-3)
-  main_ctl_d20.py   155                                  +$3,531  (v52b d20: 152 wins, 24 divergent, 59 >=2800)
-Closed-loop mirror vs chassis (60 seeds): d24 +$970 (47/60), d20 +$1,540 (41/60).
+Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= our live logic):
+                    wins  copies(171)  divergent(78)  opp>=2800(131)  margin
+  live logic        125   111          14             38              +$1,463
+  main_ctl_d24.py   160   144          16             58              +$2,410   flips +38/-3
+  main_ctl_d20.py   155   129          26             61              +$3,531   flips +54/-24
+Closed-loop mirror vs chassis (60 seeds): d24 +$970 (47/60 wins), d20 +$1,540 (41/60 wins).
 0 agent/controller errors in all pinned runs; official kaggle_environments runner verified; max step 0.17 s.
 
-Suggested: main_ctl_d24.py now; main_ctl_d20.py in the second tracked slot.
+Recommendation: submit both. If only one slot can change now, main_ctl_d20.py is the better bet against
+the >= 2800 / divergent teams at the top of the ladder; main_ctl_d24.py is safest against copies.
+a7ee102cd7c447f1baf234dd537b14858ddafaf25ae80dfc3967a4b8da98e5e0  submit/main_ctl_d24.py
+e6a4dbec47ea8ee84681bdb063519277b90f5a0c05dbe02ab120a8717f780575  submit/main_ctl_d20.py
