@@ -1,11 +1,11 @@
-gold/submit — takeover-controller builds (updated 24 Sep 2026, 15:50 UTC)
+gold/submit — takeover-controller builds (updated 24 Sep 2026, 16:55 UTC)
 
-PRIMARY  main_ctl_d24.py  sha256 76b55e15e277...  chassis v15a+ADAPT until day 24, gold controller v47b from day 24
+PRIMARY  main_ctl_d24.py  sha256 a7ee102cd7c4...  chassis v15a+ADAPT until day 24, gold controller v52b from day 24
 SECOND   main_ctl_d22.py  sha256 c052899df84d...  same controller from day 22 (bigger margins, a few more losses flipped)
 
 Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= our live logic; baseline 125-124, +$1,463):
                     wins   vs opp>=2800 (131)          margin diff (all)     flips (all)
-  main_ctl_d24.py   151    57 (baseline 38; +21/-2)    +$859  +- 112 (z 7.7)   +35/-9
+  main_ctl_d24.py   160    58 (baseline 38; +21/-1)    +$947  +- 108 (z 8.7)   +38/-3
   main_ctl_d22.py   150    56 (+24/-6)                 +$1,287 +- 143 (z 9.0)  +43/-18
 Closed-loop mirror vs chassis (60 seeds, seat 0): d24 +$883.
 0 agent errors and 0 controller-internal errors in 498 pinned games; official kaggle_environments runner
@@ -13,3 +13,6 @@ verified in both seats.
 
 Supersedes the 14:40 d24/d20 package (v40f): the v47b controller plans day 29 with its return delivery
 against the hour-22 deadline and lets age-2 carrots grow into the final day.
+
+16:55 UTC: main_ctl_d24.py -> v52b (carrot price forecast at harvest, edge 0.85): 160 wins vs 151 for v47b,
+flips vs v47b +10/-1. main_ctl_d22.py is still the v47b controller.
