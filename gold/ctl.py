@@ -12,6 +12,7 @@ import math as _gc_math
 
 GC_P = dict(
     start=288,            # takeover step (must be hour 0)
+    start_div=None,       # takeover step against a rival ADAPT classed as divergent (hour 0, >= 384)
     max_hands=12,
     animals_must=True,
     wheat_fert_gain=25.0,  # fertilize one-time crops only when the extra yield beats selling the fertilizer by this much
@@ -117,7 +118,8 @@ GC_P = dict(
     sell_floor={},        # e.g. {'STRAWBERRY': 30}: hold a product while its quote is below this (until floor_last_day)
     floor_last_day=26,
     floor_marginal=False,  # cap each lot at the units whose marginal quote stays >= the floor
-    floor_drain_aware=False,  # hold below the floor only if the town drains the book back above it within floor_wait_days
+    floor_drain_aware=False,
+    floor_rival_aware=False,  # with floor_drain_aware: the rival's last-day sales of p offset the drain  # hold below the floor only if the town drains the book back above it within floor_wait_days
     floor_wait_days=1.5,         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
 )
 
@@ -1718,7 +1720,11 @@ class GoldCtl:
             items = _GC_SHOPS.get(sh, [])
             if p in items:
                 per_day += 6 * (2 if len(items) == 1 else 1)
-        return k <= per_day * GC_P["floor_wait_days"]
+        if GC_P["floor_rival_aware"]:
+            # the rival's own supply of p over the last day offsets the town's drain
+            step = int(obs["step"])
+            per_day -= sum(q for d, h, q in self.rival_sales.get(p, ()) if d * 24 + h >= step - 24)
+        return per_day > 0 and k <= per_day * GC_P["floor_wait_days"]
 
     def _rival_wait(self, p, day, hour):
         """Turns to wait so our lot of p sells one turn before the rival's next predicted sale (hours at which it
@@ -1785,7 +1791,7 @@ class GoldCtl:
                 held[p] = n
                 _GC_REPORT["gc_floor_held"] = _GC_REPORT.get("gc_floor_held", 0) + n
                 continue
-            if fl and GC_P["floor_marginal"] and not last and day <= GC_P["floor_last_day"]:
+            if fl and GC_P["floor_marginal"] and not last and day <= GC_P["floor_last_day"] and self._floor_recovers(obs, p, fl, day):
                 # sell only the units whose own marginal quote stays at or above the floor (convex gluts
                 # absorb a handful of units before collapsing to $1)
                 k = 0; i0 = int(inv[p])
@@ -1850,7 +1856,14 @@ def agent(observation, configuration=None):
     if step == 0:
         _GC.reset()
     _GC.me = int(observation["player"])
-    if step < GC_P["start"]:
+    start = GC_P["start"]
+    if GC_P["start_div"] is not None:
+        # ADAPT (chassis layer) flags a rival whose farm diverged from ours by step 143/359: take over earlier
+        ad = globals().get("_AD_STATE")
+        if isinstance(ad, dict) and ad.get("off"):
+            start = GC_P["start_div"]
+            _GC_REPORT["gc_start"] = start
+    if step < start:
         return _GC_PARENT(observation, configuration)
     try:
         return _GC.act(observation)
