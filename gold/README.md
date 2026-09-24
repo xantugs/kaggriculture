@@ -72,7 +72,20 @@ The chassis sells premium goods before the rival; the controller sold them next 
   - higher floors;
   - fertilizer reserve 0 / carrot fertilizer threshold.
 
-## Submission candidates (see submit/SUBMIT_THIS.txt)
-Pinned (249 games) vs chassis+ADAPT (baseline 125-124):
-- `main_ctl_d24.py` (v40f) wins 145; against opponents rated >= 2800 it wins 56 vs 38.
-- `main_ctl_d20.py` wins 133.
+## Submission candidates (see submit/SUBMIT_THIS.txt), 24 Sep 20:45 UTC
+Adaptive takeover: the chassis's ADAPT layer already compares the two farms at steps 143/359. The controller
+takes over on day 24 against a chassis copy and earlier against a divergent rival (day 16 in v61, day 20 in v62),
+with the per-unit price floor and day-20 tomatoes enabled only in that case.
+
+Pinned (249 recorded strong-team games) vs chassis+ADAPT (baseline 125 wins; 111 copy, 14 divergent, 38 vs >= 2800):
+- `main_ctl_adapt.py` (v61): 172 wins (144 copy, 28 divergent, 69 vs >= 2800); flips +50/-3.
+- `main_ctl_adapt_d20.py` (v62): 170 wins (144 / 26 / 66).
+- Other ingredients:
+  - carrot price forecast at harvest (edge 0.85), which gained 9 wins at d24;
+  - day-29 return-aware routing with age-2 carrots kept for the final day.
+- Tested and rejected:
+  - minimal hour-0 room sales (the midnight dump of the top lot wins races);
+  - lot-size caps;
+  - rival-aware floors;
+  - day-27 carrot plantings;
+  - care at any price.
