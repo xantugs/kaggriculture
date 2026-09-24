@@ -1,17 +1,18 @@
-gold/submit — takeover-controller builds (updated 24 Sep 2026, 20:45 UTC)
+gold/submit — takeover-controller builds (updated 24 Sep 2026, 21:45 UTC)
 
-PRIMARY  main_ctl_adapt.py      controller v61, adaptive takeover
+PRIMARY  main_ctl_adapt.py      controller v64, adaptive takeover (+ melon planner vs divergent rivals)
 SECOND   main_ctl_adapt_d20.py  controller v62, same but divergent rivals -> day 20
 
 How they play: our live chassis (v15a + ADAPT) runs the opening. ADAPT compares the two farms at steps
 143/359 (as it already does live). Against a chassis copy the gold controller takes over on day 24;
 against a divergent rival it takes over on day 16 (v61) or day 20 (v62), with the per-unit price floor
-and day-20 tomato planting enabled for that case.
+and day-20 tomato planting enabled for that case; v64 also plants forecast-driven melons on days 16-18
+against divergent rivals (melons are glutted in mirrors but sell at $130-220 in several elite towns).
 
 Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= our live logic):
                         wins  copies(171)  divergent(78)  opp>=2800(131)  margin    flips (all / >=2800)
   live logic            125   111          14             38              +$1,463
-  main_ctl_adapt.py     172   144          28             69              +$2,956   +50/-3  /  +32/-1
+  main_ctl_adapt.py     173   144          29             69              +$3,095   +51/-3  /  +32/-1
   main_ctl_adapt_d20.py 170   144          26             66              +$2,977   +48/-3  /  +29/-1
   (old/main_ctl_d24_v52b.py 160 / 144 / 16 / 58; old/main_ctl_d20_v58.py 155 / 129 / 26 / 61)
 Closed-loop mirror vs chassis (copies path == d24 v52b): +$970/game, 47/60 wins, both seats checked.
@@ -21,5 +22,5 @@ Divergent path vs a reacting divergent agent (versions/main_v13.py, 20 seeds): 2
 verified in both seats; max step 0.17 s.
 
 Recommendation: submit main_ctl_adapt.py and main_ctl_adapt_d20.py into the two tracked slots.
-dad48bf67f120059f178465061b41985cd16877f054bafe86f2ee48e6fd76463  submit/main_ctl_adapt.py
+c453fef4851fb71d0d660dfb82ea94b5e9ccc5a76fa5260de172e80abed5094d  submit/main_ctl_adapt.py
 fed1c7e62553297e1451e6cc70c74d0a14a53005d9745d7a9fba6ca408b1db00  submit/main_ctl_adapt_d20.py

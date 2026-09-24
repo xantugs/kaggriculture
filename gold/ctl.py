@@ -55,6 +55,12 @@ GC_P = dict(
     carrot_edge=1.0,
     lot_frac=0.0,         # >0: cap a timed lot where the marginal quote falls below this fraction of the current quote
     room0_v2=False,       # hour-0 room sales only for purchases, only the units needed, cheapest-to-sell first
+    melon_on=False,       # forecast-driven melon plots (harvest ~11 days later)
+    melon_last=18,
+    melon_age=11,
+    melon_max_day=10,
+    melon_alt_day=40.0,
+    melon_labor=60.0,
     carrot_fc=False,      # choose carrots per slot from the forecast quote at harvest (town drain, visible plots)
     carrot_fc_units=3.5,
     hire_cost_w=1.0,
@@ -718,6 +724,46 @@ class GoldCtl:
                 best_n, best_v = n, v
         return best_n
 
+    def _melon_value(self, obs, day, n):
+        """Revenue of n melon plots planted today (6 units at age ~11), sold on arrival into a book drained one unit
+        a day by the town centre and supplied by every visible melon plot maturing before them."""
+        inv = float(obs["market"]["inventory"]["MELON"])
+        sup = {}
+        for farm in obs["farms"]:
+            for row in farm["tiles"]:
+                for t in row:
+                    if isinstance(t, dict) and t.get("crop") == "MELON":
+                        hd = int(t["planted_day"]) + GC_P["melon_age"]
+                        if hd >= day:
+                            sup[hd] = sup.get(hd, 0) + 6
+        rev = 0.0
+        hd_new = day + GC_P["melon_age"]
+        for d in range(day, 30):
+            inv -= 1.0
+            inv += sup.get(d, 0)
+            if d == min(hd_new, 29) and n > 0:
+                q = 6 * n
+                tot = 0.0
+                for k in range(q):
+                    tot += _gc_price("MELON", int(inv) + k)
+                rev += tot
+                inv += q
+        return rev
+
+    def _melon_count(self, obs, day, n_free):
+        if not GC_P["melon_on"] or day > GC_P["melon_last"] or n_free <= 0:
+            return 0
+        fert = self.pnow.get("FERTILIZER", 50)
+        alt = GC_P["melon_alt_day"] * GC_P["melon_age"]
+        cost = 80 + GC_P["melon_labor"]
+        base = self._melon_value(obs, day, 0)
+        best_n, best_v = 0, 0.0
+        for n in range(1, min(n_free, GC_P["melon_max_day"]) + 1):
+            v = self._melon_value(obs, day, n) - base - n * (cost + alt)
+            if v > best_v:
+                best_n, best_v = n, v
+        return best_n
+
     def _carrot_book_at_harvest(self, obs, day, shops):
         """Projected carrot market inventory on the harvest day of a carrot planted today (age 3)."""
         inv = float(obs["market"]["inventory"]["CARROT"])
@@ -763,6 +809,8 @@ class GoldCtl:
         spare = max(0, n_slots - feed_first - (straw_room if day <= GC_P["straw_last_plant"] else 0))
         n_tom = min(self._tomato_count(obs, day, spare, shops, val), spare)
         self.n_tomato_today = n_tom
+        n_mel = min(self._melon_count(obs, day, spare - n_tom), spare - n_tom) if GC_P["melon_on"] else 0
+        placed_m = 0
         placed_t = 0
         # feed wheat goes on the farthest slots (low-maintenance), tomatoes and strawberries near the shed
         far = sorted(slots, key=lambda p: -_gc_dist(p, (4.5, 4.5)))
@@ -779,6 +827,8 @@ class GoldCtl:
                 out[pos] = "STRAWBERRY"; straw_room -= 1
             elif placed_t < n_tom:
                 out[pos] = "TOMATO"; placed_t += 1
+            elif placed_m < n_mel:
+                out[pos] = "MELON"; placed_m += 1
             elif car_inv is not None:
                 q = car_inv + 4 * n_car + 2
                 pc = _gc_price("CARROT", int(q))
@@ -794,6 +844,8 @@ class GoldCtl:
                     out[pos] = c
         if n_car:
             _GC_REPORT["gc_carrot_fc"] = _GC_REPORT.get("gc_carrot_fc", 0) + n_car
+        if placed_m:
+            _GC_REPORT["gc_melon"] = _GC_REPORT.get("gc_melon", 0) + placed_m
         n_tom = n_tom - placed_t
         if self.n_tomato_today:
             _GC_REPORT["gc_tomato_planned"] = _GC_REPORT.get("gc_tomato_planned", 0) + self.n_tomato_today - n_tom
