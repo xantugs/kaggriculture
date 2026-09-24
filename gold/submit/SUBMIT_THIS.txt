@@ -1,16 +1,15 @@
-gold/submit — takeover-controller builds (updated 24 Sep 2026, 17:30 UTC)
+gold/submit — takeover-controller builds (updated 24 Sep 2026, 19:15 UTC)
 
 PRIMARY  main_ctl_d24.py  sha256 a7ee102cd7c4...  chassis v15a+ADAPT until day 24, gold controller v52b from day 24
-SECOND   main_ctl_d20.py  (see sha256 below)       same controller from day 20: strongest vs divergent teams
+SECOND   main_ctl_d20.py  sha256 e6a4dbec47ea...  controller v58 from day 20 (carrot forecast, per-unit floor,
+                                              tomatoes allowed on day 20): strongest vs divergent teams
 
 Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= our live logic; baseline 125-124, +$1,463):
-                    wins  copies  divergent  opp>=2800   margin diff (all)       flips (all)
-  baseline          125   111     14         38
-  main_ctl_d24.py   160   144     16         58 (+21/-1)  +$947   +- 108 (z 8.7)   +38/-3
-  main_ctl_d20.py   152   128     24         59 (+29/-8)  +$1,860 +- 186 (z 10.0)  +50/-23
-Closed-loop mirror vs chassis (60 seeds): d24 +$970; controller from day 20 +$1.3k.
-0 agent errors and 0 controller-internal errors in all pinned runs; official kaggle_environments runner
-verified in both seats; max step 0.17 s.
+                    wins  copies  divergent  opp>=2800   margin
+  baseline          125   111     14         38          +$1,463
+  main_ctl_d24.py   160   144     16         58          +$2,410  (flips +38/-3)
+  main_ctl_d20.py   155                                  +$3,531  (v52b d20: 152 wins, 24 divergent, 59 >=2800)
+Closed-loop mirror vs chassis (60 seeds): d24 +$970 (47/60), d20 +$1,540 (41/60).
+0 agent/controller errors in all pinned runs; official kaggle_environments runner verified; max step 0.17 s.
 
-Suggested: main_ctl_d24.py now; main_ctl_d20.py in the second tracked slot (diversifies copies vs divergent).
-fd480a539364f69e0a89102fa6d47a36f30d62398f81ad4c2e5c179f7e15038d  submit/main_ctl_d20.py
+Suggested: main_ctl_d24.py now; main_ctl_d20.py in the second tracked slot.
