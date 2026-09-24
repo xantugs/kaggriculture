@@ -31,6 +31,8 @@ GC_P = dict(
     prem_drop=True,
     prem_drop_max=4,
     replant_done=False,
+    replant_dig=False,
+    dig_structs=True,     # an empty coop/pasture with no animal waiting is dug and planted    # a dig of a finished plant also replants the tile in the same visit
     feed_tiles_per_animal=0.75,
     feed_reserve_tiles=False,
     tomato_on=True,
@@ -70,7 +72,10 @@ GC_P = dict(
     ovf_hire=True,        # hire search counts end-of-day shed overflow (goods lost) and visits popped for shed stops
     ovf_value=50.0,
     order_cap_fix=True,
-    stop_v2=True,         # shed stops are route visits; a stop that does not fit moves visits to other routes
+    stop_v2=True,
+    shed_any=True,        # pickups/drops at whichever shed-access tile the unit stands on
+    water_first=True,     # ongoing-crop visits water (survival) before harvesting
+    rematch=True,         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
 )
 
 _GC_CROPS = {
@@ -246,7 +251,7 @@ class GoldCtl:
             v = self._plant_visit(pos, t, day, val, final)
             if v is not None:
                 visits.append(v)
-                if (v.tag == "C" and v.acts and v.acts[-1][0] == "HARVEST") or v.tag == "R":
+                if (v.tag == "C" and v.acts and v.acts[-1][0] == "HARVEST") or v.tag == "R" or (v.tag == "D" and GC_P["replant_dig"]):
                     replant.append(v)
         for pos, t in animals:
             v = self._animal_visit(pos, t, day, val, final)
@@ -270,6 +275,11 @@ class GoldCtl:
                     taken.add(pos)
                     visits.append(_GcVisit(pos, [["BUILD_" + st], ["PLACE", an]], value=300.0, must=True, anim=an, tag="L"))
 
+        # ---- empty coops/pastures no animal will use: dig and plant them like weeds
+        if GC_P["dig_structs"] and not final:
+            for st in ("COOP", "PASTURE"):
+                for pos in free_struct[st]:
+                    weeds.append(pos)
         # ---- planting
         need_seeds = {}
         if not final:
@@ -489,6 +499,8 @@ class GoldCtl:
             return None
         if not acts:
             return None
+        if GC_P["water_first"]:
+            acts = [a for a in acts if a[0] != "HARVEST"] + [a for a in acts if a[0] == "HARVEST"]
         return _GcVisit(pos, acts, value=value, must=must, fert=fert, gain=gain, tag="O", carry=carry)
 
     def _animal_visit(self, pos, t, day, val, final):
@@ -1283,12 +1295,49 @@ class GoldCtl:
         _GC_REPORT["gc_dispatch"] = _GC_REPORT.get("gc_dispatch", 0) + 1
         return q
 
+    def _rematch(self, farm):
+        """Hands hired after hour 0 spawn wherever the engine's occupancy rule puts them at that moment, which the
+        plan could not know. Swap their queues so each route starts from the closest actual hand (cheapest total)."""
+        n0 = getattr(self, "n0_hires", 10)
+        hands = [tuple(p) for p in farm["hands"]]
+        late = [u for u in range(n0 + 1, len(hands) + 1) if u in self.queues]
+        if len(late) < 2:
+            return
+        def qcost(q, start):
+            t = 0; p = start
+            for tgt, a, v in q:
+                if a[0] in ("PICKUP", "DROP"):
+                    tg = p if p in _GC_ACCESS_SET else _gc_near_access(p)
+                else:
+                    tg = tgt
+                t += abs(p[0] - tg[0]) + abs(p[1] - tg[1]) + 1
+                p = tuple(tg)
+            return t
+        qs = [self.queues[u] for u in late]
+        pos = [hands[u - 1] for u in late]
+        import itertools
+        best = None
+        if len(late) <= 6:
+            for perm in itertools.permutations(range(len(late))):
+                c = sum(max(0, qcost(qs[perm[i]], pos[i]) - 22) * 100 + qcost(qs[perm[i]], pos[i]) for i in range(len(late)))
+                if best is None or c < best[0]:
+                    best = (c, perm)
+            perm = best[1]
+        else:
+            perm = list(range(len(late)))
+        for i, u in enumerate(late):
+            self.queues[u] = qs[perm[i]]
+        _GC_REPORT["gc_rematch"] = _GC_REPORT.get("gc_rematch", 0) + 1
+
     def _step_unit(self, u, pos, tiles, inv, seeds, planting, sim, shed, room, hour=0):
         q = self.queues.get(u)
         if q and hour >= GC_P["trim_hour"]:
             self._trim_queue(q, pos, 23 - hour)
         while q:
             tgt, act, _v = q[0]
+            if GC_P["shed_any"] and act[0] in ("PICKUP", "DROP"):
+                # any shed-access tile serves: use the one we stand on, else the nearest
+                tgt = tuple(pos) if tuple(pos) in _GC_ACCESS_SET else _gc_near_access(pos)
             if tuple(pos) != tuple(tgt):
                 dx = tgt[0] - pos[0]; dy = tgt[1] - pos[1]
                 if dx:
@@ -1326,6 +1375,9 @@ class GoldCtl:
             self.day_plan = day
             self.queues = {u: q for u, q in enumerate(self._compile(self.routes, self.spawns))}
         tiles = farm["tiles"]
+        if GC_P["rematch"] and hour == 2 and not getattr(self, "_rematched", None) == day:
+            self._rematched = day
+            self._rematch(farm)
         seeds = dict(priv["seeds"])
         shed = {k: int(v) for k, v in dict(priv["shed"]).items()}
         room = [100 - sum(shed.values())]
