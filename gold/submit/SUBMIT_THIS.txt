@@ -1,26 +1,23 @@
-gold/submit — takeover-controller builds (updated 24 Sep 2026, 21:45 UTC)
+gold/submit — takeover-controller builds (updated 24 Sep 2026, 23:00 UTC)
 
-PRIMARY  main_ctl_adapt.py      controller v64, adaptive takeover (+ melon planner vs divergent rivals)
-SECOND   main_ctl_adapt_d20.py  controller v62, same but divergent rivals -> day 20
+PRIMARY  main_ctl_adapt_m7.py   v64 controller on the main_7 chassis (other session's 6 retuned constants)
+SECOND   main_ctl_adapt_m8.py   v64 controller on the main_8 chassis (8 retuned constants)
+         main_ctl_adapt.py      v64 controller on the untuned v15a+ADAPT chassis (reference)
+         main_ctl_adapt_d20.py  v62 (divergent rivals -> day 20) on the untuned chassis
 
-How they play: our live chassis (v15a + ADAPT) runs the opening. ADAPT compares the two farms at steps
-143/359 (as it already does live). Against a chassis copy the gold controller takes over on day 24;
-against a divergent rival it takes over on day 16 (v61) or day 20 (v62), with the per-unit price floor
-and day-20 tomato planting enabled for that case; v64 also plants forecast-driven melons on days 16-18
-against divergent rivals (melons are glutted in mirrors but sell at $130-220 in several elite towns).
+Adaptive takeover: chassis until day 24 vs a chassis copy, day 16 vs a divergent rival (ADAPT, steps 143/359).
 
 Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= our live logic):
-                        wins  copies(171)  divergent(78)  opp>=2800(131)  margin    flips (all / >=2800)
-  live logic            125   111          14             38              +$1,463
-  main_ctl_adapt.py     173   144          29             69              +$3,095   +51/-3  /  +32/-1
-  main_ctl_adapt_d20.py 170   144          26             66              +$2,977   +48/-3  /  +29/-1
-  (old/main_ctl_d24_v52b.py 160 / 144 / 16 / 58; old/main_ctl_d20_v58.py 155 / 129 / 26 / 61)
-Closed-loop mirror vs chassis (copies path == d24 v52b): +$970/game, 47/60 wins, both seats checked.
-Divergent path vs a reacting divergent agent (versions/main_v13.py, 20 seeds): 20/20 took over on day 16,
-0 errors, +$51.5k vs +$44.8k for the live logic.
-0 agent errors and 0 controller-internal errors in all pinned runs; official kaggle_environments runner
-verified in both seats; max step 0.17 s.
-
-Recommendation: submit main_ctl_adapt.py and main_ctl_adapt_d20.py into the two tracked slots.
+                          wins  copies(171)  divergent(78)  opp>=2800(131)  margin    flips vs live
+  live logic              125   111          14             38              +$1,463
+  main_7 alone            129   115          14             41              +$1,416   (retuning alone ~neutral here)
+  main_8 (their build)    150   133          17             58              +$2,141
+  main_ctl_adapt.py       173   144          29             69              +$3,095   +51/-3
+  main_ctl_adapt_m8.py    173   144          29             69              +$3,158   +53/-5
+  main_ctl_adapt_m7.py    175   146          29             69              +$3,162   +53/-3
+m7 vs untuned v64: +$66 +- 32 (z 2.1), flips +3/-1. Closed-loop mirror vs v15a (60 seeds): m7 +$1,239, m8 +$1,179,
+untuned +$970. 0 agent/controller errors in all runs; official runner verified in both seats.
+670bcd33531d9874d1c95549a14fea2c40d5cbeb7bfcc6ff8de1db9c074e410d  submit/main_ctl_adapt_m7.py
+98477c7524533ca86fb335f3ef4a9ff206c11e8aaa01bab89bb989c2143035c1  submit/main_ctl_adapt_m8.py
 c453fef4851fb71d0d660dfb82ea94b5e9ccc5a76fa5260de172e80abed5094d  submit/main_ctl_adapt.py
 fed1c7e62553297e1451e6cc70c74d0a14a53005d9745d7a9fba6ca408b1db00  submit/main_ctl_adapt_d20.py
