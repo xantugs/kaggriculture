@@ -51,6 +51,8 @@ GC_P = dict(
     plant_must_last=25,
     final_water=True,
     carrot_edge=1.0,
+    carrot_fc=False,      # choose carrots per slot from the forecast quote at harvest (town drain, visible plots)
+    carrot_fc_units=3.5,
     hire_cost_w=1.0,
     dispatch=True,
     dispatch_min_value=8.0,
@@ -693,6 +695,20 @@ class GoldCtl:
                 best_n, best_v = n, v
         return best_n
 
+    def _carrot_book_at_harvest(self, obs, day, shops):
+        """Projected carrot market inventory on the harvest day of a carrot planted today (age 3)."""
+        inv = float(obs["market"]["inventory"]["CARROT"])
+        per_day = 1.0 + sum((12.0 if sh == "PET_CAFE" else (6.0 if sh == "FARMERS_MARKET" else 0.0)) for sh in shops)
+        sup = 0.0
+        for farm in obs["farms"]:
+            for row in farm["tiles"]:
+                for t in row:
+                    if isinstance(t, dict) and t.get("crop") == "CARROT":
+                        hd = int(t["planted_day"]) + 3
+                        if day <= hd <= day + 3:
+                            sup += GC_P["carrot_fc_units"]
+        return inv - per_day * 3.0 + sup
+
     def _choose_crops(self, obs, day, free, replant, shops, val, counts):
         out = {}
         straw_room = 0
@@ -728,6 +744,11 @@ class GoldCtl:
         # feed wheat goes on the farthest slots (low-maintenance), tomatoes and strawberries near the shed
         far = sorted(slots, key=lambda p: -_gc_dist(p, (4.5, 4.5)))
         feed_tiles = set(far[:feed_first])
+        # carrot forecast: quote at harvest (day+3) after the town's drain and every visible carrot plot maturing by
+        # then; the k-th new carrot plot sells 4 units into a book already holding the previous k-1 plots' units
+        n_car = 0; car_inv = None
+        if GC_P["carrot_fc"] and day >= GC_P["carrot_first"] and day <= GC_P["carrot_last_plant"]:
+            car_inv = self._carrot_book_at_harvest(obs, day, shops)
         for pos in slots:
             if pos in feed_tiles:
                 out[pos] = "WHEAT"; continue
@@ -735,10 +756,21 @@ class GoldCtl:
                 out[pos] = "STRAWBERRY"; straw_room -= 1
             elif placed_t < n_tom:
                 out[pos] = "TOMATO"; placed_t += 1
+            elif car_inv is not None:
+                q = car_inv + 4 * n_car + 2
+                pc = _gc_price("CARROT", int(q))
+                vc = (4 * pc - 20 - fert) / 3.0
+                vw = v_wheat if day <= GC_P["wheat_last_plant"] else -1e9
+                if vc > GC_P["carrot_edge"] * vw and vc > 0:
+                    out[pos] = "CARROT"; n_car += 1
+                elif day <= GC_P["wheat_last_plant"]:
+                    out[pos] = "WHEAT"
             else:
                 c = fill(day)
                 if c:
                     out[pos] = c
+        if n_car:
+            _GC_REPORT["gc_carrot_fc"] = _GC_REPORT.get("gc_carrot_fc", 0) + n_car
         n_tom = n_tom - placed_t
         if self.n_tomato_today:
             _GC_REPORT["gc_tomato_planned"] = _GC_REPORT.get("gc_tomato_planned", 0) + self.n_tomato_today - n_tom
