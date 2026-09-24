@@ -106,6 +106,10 @@ if __name__ == '__main__':
     D0 = int(sys.argv[4]) if len(sys.argv) > 4 else 12
     with mp.Pool(4) as p:
         res = p.map(run, [(A0, B0, sd, D0) for sd in seeds])
+    for sd, (a, b) in zip(seeds, res):
+        byday = {k[len('losteod_day'):]: v for k, v in a.items() if k.startswith('losteod_day')}
+        if byday:
+            print('seed %d A eod losses by day %s' % (sd, byday))
     T = [collections.Counter(), collections.Counter()]
     for a, b in res:
         T[0].update(a); T[1].update(b)

@@ -76,6 +76,20 @@ GC_P = dict(
     shed_any=True,        # pickups/drops at whichever shed-access tile the unit stands on
     water_first=True,     # ongoing-crop visits water (survival) before harvesting
     rematch=True,
+    footprint=True,       # cap planted plots at the chassis's count at takeover (+ slack)
+    footprint_slack=2,
+    labor_cap=0,          # >0: cap new plots by a turns/day labour model instead of the takeover footprint
+    labor_anim=5.3,
+    labor_on=3.0,
+    labor_one=4.2,
+    multi_stop=True,      # a route may get several shed stops
+    d28_zero_reserve=True,  # day 28 keeps no feed/fertilizer for the final day (nothing is fed or fertilized then)
+    eod_room_d28=96,
+    courier=True,         # execution-time shed drops when tonight's projected load would overflow the shed
+    courier_hour=12,
+    courier_min=4,
+    courier_margin=2,
+    courier_max_detour=8,
     sell_timing=False,    # hold premium lots and sell one turn before the rival's predicted sale
     timed=("STRAWBERRY", "MILK", "WOOL", "TOMATO"),
     rival_min_lot=2,
@@ -199,6 +213,7 @@ class GoldCtl:
         self.rival_sales = {}
         self._mk_prev = None
         self.se_day = None
+        self.footprint_n = None
         self.n_animals = 0
         self.final = False
 
@@ -215,6 +230,7 @@ class GoldCtl:
     def plan_day(self, obs):
         _GC_REPORT["gc_days"] += 1
         step = int(obs["step"]); day = step // 24
+        self.day = day
         me = self.me
         farm = obs["farms"][me]
         priv = obs["private"]
@@ -313,6 +329,21 @@ class GoldCtl:
         need_seeds = {}
         if not final:
             free = [p for p in empties if p not in taken] + list(weeds)
+            if GC_P["footprint"]:
+                # never grow more plots than the chassis ran at takeover (its labour plan): extra plots overcommit
+                # the hands and the shed. Plots freed by harvests/digs today are replanted inside the cap.
+                n_plants = len(plants)
+                if getattr(self, "footprint_n", None) is None:
+                    self.footprint_n = n_plants + len(weeds) + GC_P["footprint_slack"]
+                room_new = max(0, self.footprint_n - n_plants)
+                if GC_P["labor_cap"] > 0:
+                    # labour model (turns/day): animals, ongoing crops, one-time crops
+                    n_on = sum(1 for _p, t in plants if _GC_CROPS[t["crop"]]["on"])
+                    load = GC_P["labor_anim"] * len(animals) + GC_P["labor_on"] * n_on + GC_P["labor_one"] * (len(plants) - n_on)
+                    room_new = max(0, int((GC_P["labor_cap"] - load) / GC_P["labor_one"]))
+                if len(free) > room_new:
+                    free = sorted(free, key=lambda q: _gc_dist(q, (4.5, 4.5)))[:room_new]
+                    _GC_REPORT["gc_footprint_cut"] = _GC_REPORT.get("gc_footprint_cut", 0) + 1
             crop_for = self._choose_crops(obs, day, free, [v.pos for v in replant], shops, val, counts)
             for pos in free:
                 crop = crop_for.get(pos)
@@ -438,6 +469,8 @@ class GoldCtl:
         self.fert_tomorrow = fert_tom
         self.reserve = {"WHEAT": int(GC_P["feed_reserve"] * len(animals)) + 2,
                         "FERTILIZER": max(GC_P["fert_keep"], fert_tom + 2)}
+        if GC_P["d28_zero_reserve"] and day >= 28:
+            self.reserve = {"WHEAT": 0, "FERTILIZER": 0}
 
     # ------------------------------------------------------------------ jobs
     def _plant_visit(self, pos, t, day, val, final):
@@ -982,6 +1015,8 @@ class GoldCtl:
         A stop that does not fit its route moves visits after it to other routes (cheapest feasible insertion),
         popping optional ones only when nobody can take them. Mutates `routes`. Returns (overflow units, popped value)."""
         room = GC_P["eod_room"]
+        if GC_P["d28_zero_reserve"] and getattr(self, "day", 0) == 28:
+            room = GC_P["eod_room_d28"]
         popped = 0.0
         n = len(routes)
         caps = [self._cap(u) for u in range(n)]
@@ -1024,7 +1059,8 @@ class GoldCtl:
             if best is None:
                 break
             _, u, k, extra = best
-            tried.add(u)
+            if not GC_P["multi_stop"]:
+                tried.add(u)
             r2 = routes[u][:k + 1] + [self._stop_visit(routes[u][k].pos)] + routes[u][k + 1:]
             c2 = costs[u] + extra
             moved = []
@@ -1073,6 +1109,7 @@ class GoldCtl:
                 routes[u] = r2; costs[u] = c2; popped += pv
             else:
                 # undo the moves
+                tried.add(u)
                 for w, v in moved:
                     routes[w] = [x for x in routes[w] if x is not v]
                     costs[w] = self._rcost(spawns[w], routes[w])
@@ -1361,6 +1398,57 @@ class GoldCtl:
             self.queues[u] = qs[perm[i]]
         _GC_REPORT["gc_rematch"] = _GC_REPORT.get("gc_rematch", 0) + 1
 
+    def _courier(self, positions, invs, tiles, shed, hour):
+        """End-of-day room at execution time: project tonight's shed load (reserves + goods carried + harvests still
+        queued after each unit's last queued drop); while it exceeds the shed, send the loaded units that can
+        afford the detour (nearest first) to drop at the closest shed-access tile."""
+        turns_left = 23 - hour + 1
+        res = sum(int(v) for v in self.reserve.values())
+        shed_eod = min(sum(int(v) for v in shed.values()), res)
+        info = []
+        total = shed_eod
+        for u, pos in enumerate(positions):
+            pos = tuple(pos)
+            inv = invs[u] if u < len(invs) else {}
+            c = sum(int(x) for x in inv.values())
+            q = self.queues.get(u) or []
+            last_drop = max((i for i, it in enumerate(q) if it[1][0] == "DROP"), default=-1)
+            fut = 0
+            for i, (tgt, a, v) in enumerate(q):
+                if i <= last_drop:
+                    continue
+                if a[0] == "HARVEST":
+                    t = tiles[tgt[1]][tgt[0]]
+                    fut += int(t.get("yield_units", 0) or 0) if isinstance(t, dict) else 0
+                elif a[0] == "COLLECT_FERTILIZER":
+                    fut += 1
+            eod = fut + (0 if last_drop >= 0 else c)
+            total += eod
+            if last_drop < 0 and c >= GC_P["courier_min"]:
+                qc = 0; pp = pos
+                for tgt, a, v in q:
+                    qc += abs(pp[0] - tgt[0]) + abs(pp[1] - tgt[1]) + 1; pp = tuple(tgt)
+                acc = pos if pos in _GC_ACCESS_SET else _gc_near_access(pos)
+                d0 = abs(pos[0] - acc[0]) + abs(pos[1] - acc[1])
+                if q:
+                    nx = q[0][0]
+                    detour = d0 + 1 + abs(acc[0] - nx[0]) + abs(acc[1] - nx[1]) - (abs(pos[0] - nx[0]) + abs(pos[1] - nx[1]))
+                else:
+                    detour = d0 + 1
+                info.append((detour / float(c), u, acc, c, qc, detour))
+        limit = 100 - GC_P["courier_margin"]
+        if total <= limit:
+            return
+        for _sc, u, acc, c, qc, detour in sorted(info):
+            if total <= limit:
+                break
+            if qc + detour > turns_left or detour > GC_P["courier_max_detour"]:
+                continue
+            q = self.queues.get(u) or []
+            self.queues[u] = [(acc, ["DROP"], None)] + list(q)
+            total -= c
+            _GC_REPORT["gc_courier"] = _GC_REPORT.get("gc_courier", 0) + 1
+
     def _step_unit(self, u, pos, tiles, inv, seeds, planting, sim, shed, room, hour=0):
         q = self.queues.get(u)
         if q and hour >= GC_P["trim_hour"]:
@@ -1424,6 +1512,8 @@ class GoldCtl:
         planting = {}
         sim = {}
         positions = [farm["farmer"]] + list(farm["hands"])
+        if GC_P["courier"] and hour >= GC_P["courier_hour"] and not self.final:
+            self._courier(positions, invs, tiles, shed, hour)
         units = []
         claimed = {tgt for qq in self.queues.values() for tgt, _a, _v in (qq or [])}
         for u, pos in enumerate(positions):
