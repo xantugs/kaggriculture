@@ -55,3 +55,24 @@ The chassis sells premium goods before the rival; the controller sold them next 
 - Town demand is 6 per shop per day (12 for single-product shops), plus 1 per day from the town centre.
   Sales at $1 do not add market supply.
 - Care bonus: +1 per fed+cared day, paid at the next production (fed). Sheep reach 4 wool per 3 days with daily care.
+
+## Late takeover and endgame (24 Sep afternoon)
+- The takeover-day sweep (60 seeds, closed loop, v43 code) ran from day 20 +$1.07k to day 27 -$0.95k (7/60 wins).
+  The controller's own final days were weaker than the chassis's fd4 endgame.
+- Courier: from hour 12, project tonight's shed load and send loaded units to drop.
+- Footprint cap: never grow more plots than the chassis ran at takeover. In herd-heavy towns the chassis leaves
+  land idle on purpose; planting it overcommitted labour and the shed (seed 6008 lost 100+ goods on day 28).
+- Day 29, return-aware: routes include their final delivery against the hour-22 deadline (the last processed step is 718).
+  Combined with leaving age-2 carrots to grow into day 29 plus a final watering, this adds +$313 ± 78 per game (47/60 better).
+- Tested and rejected:
+  - planting carrots on day 27 (-$1.1k: wages);
+  - keeping all growing crops for day 29 (-$0.2k);
+  - SE tomato annex (-$3.1k);
+  - care at any price (-$2.2k);
+  - higher floors;
+  - fertilizer reserve 0 / carrot fertilizer threshold.
+
+## Submission candidates (see submit/SUBMIT_THIS.txt)
+Pinned (249 games) vs chassis+ADAPT (baseline 125-124):
+- `main_ctl_d24.py` (v40f) wins 145; against opponents rated >= 2800 it wins 56 vs 38.
+- `main_ctl_d20.py` wins 133.
