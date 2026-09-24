@@ -51,6 +51,7 @@ GC_P = dict(
     plant_must_last=25,
     final_water=True,
     carrot_edge=1.0,
+    room0_v2=False,       # hour-0 room sales only for purchases, only the units needed, cheapest-to-sell first
     carrot_fc=False,      # choose carrots per slot from the forecast quote at harvest (town drain, visible plots)
     carrot_fc_units=3.5,
     hire_cost_w=1.0,
@@ -418,7 +419,25 @@ class GoldCtl:
             if n > 0:
                 sell0.append(["SELL", p, n])
         need_room = sum(int(v) for v in shed.values()) + sum(int(o[2]) for o in buys0) - 95
-        sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
+        if GC_P["room0_v2"] and GC_P["max_sell0"] == 0:
+            # a full shed only matters for this morning's purchases: free exactly that room, selling first what
+            # loses least by being sold now (untimed goods, then those quoted furthest below normal... last)
+            sell0 = []
+            if buys0 and need_room > 0:
+                timed = set(GC_P["timed"]) if GC_P["sell_timing"] else set()
+                cands = []
+                for p in _GC_PRODUCTS:
+                    n = int(shed.get(p, 0)) - (res_w if p == "WHEAT" else (GC_P["fert_keep"] if p == "FERTILIZER" else 0))
+                    if n > 0:
+                        cands.append(((1 if p in timed else 0), -val.get(p, 0) / float(_GC_MKT[p][0]), p, n))
+                take = need_room
+                for _t, _r, p, n in sorted(cands):
+                    if take <= 0:
+                        break
+                    k = min(n, take)
+                    sell0.append(["SELL", p, k]); take -= k
+        else:
+            sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
         self.sell0 = sell0
         self.n0_hires = 10 - len(buys0) - len(sell0)
         import time as _t

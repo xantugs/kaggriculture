@@ -7684,6 +7684,9 @@ GC_P = dict(
     plant_must_last=25,
     final_water=True,
     carrot_edge=1.0,
+    room0_v2=False,       # hour-0 room sales only for purchases, only the units needed, cheapest-to-sell first
+    carrot_fc=False,      # choose carrots per slot from the forecast quote at harvest (town drain, visible plots)
+    carrot_fc_units=3.5,
     hire_cost_w=1.0,
     dispatch=True,
     dispatch_min_value=8.0,
@@ -7750,7 +7753,7 @@ GC_P = dict(
     floor_wait_days=1.5,         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
 )
 
-GC_P.update({'start': 528, 'max_hands': 15, 'drop_slack': 0, 'max_sell0': 0, 'hire_cost_w': 0.6, 'carrot_last_plant': 26, 'plant_must_last': 29, 'prem_drop': False, 'drip_on': False, 'ovf_value': 100.0, 'replant_done': True, 'sell_timing': True, 'sell_floor': {'STRAWBERRY': 30, 'MILK': 25, 'WOOL': 25}, 'final_ret': True, 'final_water': True, 'd28_keep_carrots': True})
+GC_P.update({'start': 480, 'max_hands': 15, 'drop_slack': 0, 'max_sell0': 0, 'hire_cost_w': 0.6, 'carrot_last_plant': 26, 'plant_must_last': 29, 'prem_drop': False, 'drip_on': False, 'ovf_value': 100.0, 'replant_done': True, 'sell_timing': True, 'sell_floor': {'STRAWBERRY': 30, 'MILK': 25, 'WOOL': 25}, 'final_ret': True, 'final_water': True, 'd28_keep_carrots': True, 'carrot_fc': True, 'carrot_edge': 0.85})
 _GC_CROPS = {
     "WHEAT": dict(seed=10, fy=2, my=4, iv=0, mx=6, on=False),
     "CARROT": dict(seed=20, fy=2, my=3, iv=0, mx=4, on=False),
@@ -8050,7 +8053,25 @@ class GoldCtl:
             if n > 0:
                 sell0.append(["SELL", p, n])
         need_room = sum(int(v) for v in shed.values()) + sum(int(o[2]) for o in buys0) - 95
-        sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
+        if GC_P["room0_v2"] and GC_P["max_sell0"] == 0:
+            # a full shed only matters for this morning's purchases: free exactly that room, selling first what
+            # loses least by being sold now (untimed goods, then those quoted furthest below normal... last)
+            sell0 = []
+            if buys0 and need_room > 0:
+                timed = set(GC_P["timed"]) if GC_P["sell_timing"] else set()
+                cands = []
+                for p in _GC_PRODUCTS:
+                    n = int(shed.get(p, 0)) - (res_w if p == "WHEAT" else (GC_P["fert_keep"] if p == "FERTILIZER" else 0))
+                    if n > 0:
+                        cands.append(((1 if p in timed else 0), -val.get(p, 0) / float(_GC_MKT[p][0]), p, n))
+                take = need_room
+                for _t, _r, p, n in sorted(cands):
+                    if take <= 0:
+                        break
+                    k = min(n, take)
+                    sell0.append(["SELL", p, k]); take -= k
+        else:
+            sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
         self.sell0 = sell0
         self.n0_hires = 10 - len(buys0) - len(sell0)
         import time as _t
@@ -8327,6 +8348,20 @@ class GoldCtl:
                 best_n, best_v = n, v
         return best_n
 
+    def _carrot_book_at_harvest(self, obs, day, shops):
+        """Projected carrot market inventory on the harvest day of a carrot planted today (age 3)."""
+        inv = float(obs["market"]["inventory"]["CARROT"])
+        per_day = 1.0 + sum((12.0 if sh == "PET_CAFE" else (6.0 if sh == "FARMERS_MARKET" else 0.0)) for sh in shops)
+        sup = 0.0
+        for farm in obs["farms"]:
+            for row in farm["tiles"]:
+                for t in row:
+                    if isinstance(t, dict) and t.get("crop") == "CARROT":
+                        hd = int(t["planted_day"]) + 3
+                        if day <= hd <= day + 3:
+                            sup += GC_P["carrot_fc_units"]
+        return inv - per_day * 3.0 + sup
+
     def _choose_crops(self, obs, day, free, replant, shops, val, counts):
         out = {}
         straw_room = 0
@@ -8362,6 +8397,11 @@ class GoldCtl:
         # feed wheat goes on the farthest slots (low-maintenance), tomatoes and strawberries near the shed
         far = sorted(slots, key=lambda p: -_gc_dist(p, (4.5, 4.5)))
         feed_tiles = set(far[:feed_first])
+        # carrot forecast: quote at harvest (day+3) after the town's drain and every visible carrot plot maturing by
+        # then; the k-th new carrot plot sells 4 units into a book already holding the previous k-1 plots' units
+        n_car = 0; car_inv = None
+        if GC_P["carrot_fc"] and day >= GC_P["carrot_first"] and day <= GC_P["carrot_last_plant"]:
+            car_inv = self._carrot_book_at_harvest(obs, day, shops)
         for pos in slots:
             if pos in feed_tiles:
                 out[pos] = "WHEAT"; continue
@@ -8369,10 +8409,21 @@ class GoldCtl:
                 out[pos] = "STRAWBERRY"; straw_room -= 1
             elif placed_t < n_tom:
                 out[pos] = "TOMATO"; placed_t += 1
+            elif car_inv is not None:
+                q = car_inv + 4 * n_car + 2
+                pc = _gc_price("CARROT", int(q))
+                vc = (4 * pc - 20 - fert) / 3.0
+                vw = v_wheat if day <= GC_P["wheat_last_plant"] else -1e9
+                if vc > GC_P["carrot_edge"] * vw and vc > 0:
+                    out[pos] = "CARROT"; n_car += 1
+                elif day <= GC_P["wheat_last_plant"]:
+                    out[pos] = "WHEAT"
             else:
                 c = fill(day)
                 if c:
                     out[pos] = c
+        if n_car:
+            _GC_REPORT["gc_carrot_fc"] = _GC_REPORT.get("gc_carrot_fc", 0) + n_car
         n_tom = n_tom - placed_t
         if self.n_tomato_today:
             _GC_REPORT["gc_tomato_planned"] = _GC_REPORT.get("gc_tomato_planned", 0) + self.n_tomato_today - n_tom
