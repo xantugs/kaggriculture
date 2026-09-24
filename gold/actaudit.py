@@ -6,7 +6,7 @@ sys.path.insert(0, '/home/user/kaggriculture/arena')
 
 
 def run(args):
-    A0, B0, seed, D0 = args
+    A0, B0, seed, D0, D1 = args
     import lean, decouple
     from kaggle_environments.envs.kaggriculture import kaggriculture as K
     decouple.install(0)
@@ -16,7 +16,7 @@ def run(args):
     oa = K._apply_unit_action
 
     def apply(farm, private, idx, action, bs, day, tpd, cap=100):
-        if PRIVS[0] is None or day < D0:
+        if PRIVS[0] is None or day < D0 or day > D1:
             return oa(farm, private, idx, action, bs, day, tpd, cap)
         i = 0 if private is PRIVS[0] else 1
         c = C[i]
@@ -68,8 +68,9 @@ if __name__ == '__main__':
     s = sys.argv[3]
     seeds = list(range(int(s.split('-')[0]), int(s.split('-')[1]) + 1)) if '-' in s else [int(x) for x in s.split(',')]
     D0 = int(sys.argv[4]) if len(sys.argv) > 4 else 12
+    D1 = int(sys.argv[5]) if len(sys.argv) > 5 else 29
     with mp.Pool(4) as p:
-        res = p.map(run, [(A0, B0, sd, D0) for sd in seeds])
+        res = p.map(run, [(A0, B0, sd, D0, D1) for sd in seeds])
     T = [collections.Counter(), collections.Counter()]
     for a, b in res:
         T[0].update(a); T[1].update(b)

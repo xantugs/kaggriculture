@@ -75,7 +75,21 @@ GC_P = dict(
     stop_v2=True,
     shed_any=True,        # pickups/drops at whichever shed-access tile the unit stands on
     water_first=True,     # ongoing-crop visits water (survival) before harvesting
-    rematch=True,         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
+    rematch=True,
+    sell_timing=False,    # hold premium lots and sell one turn before the rival's predicted sale
+    timed=("STRAWBERRY", "MILK", "WOOL", "TOMATO"),
+    rival_min_lot=2,
+    rival_days=2,
+    hold_max=23,
+    hold_room=80,
+    se_on=False,          # buy the SE quadrant as a tomato annex when the forecast pays for it
+    se_first=12,
+    se_last=17,
+    se_plots=16,
+    se_reserve=1500,
+    se_margin=2000.0,
+    sell_floor={},        # e.g. {'STRAWBERRY': 30}: hold a product while its quote is below this (until floor_last_day)
+    floor_last_day=26,         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
 )
 
 _GC_CROPS = {
@@ -182,6 +196,9 @@ class GoldCtl:
         self.hires_planned = 0; self.hires_left = 0
         self.reserve = {}
         self.last_hires = 10
+        self.rival_sales = {}
+        self._mk_prev = None
+        self.se_day = None
         self.n_animals = 0
         self.final = False
 
@@ -223,6 +240,18 @@ class GoldCtl:
                 orders0.append(["BUY_LAND"]); spend += 1000; new_quads.append("NE")
             elif "NE" in quads and "SW" not in quads and day >= GC_P["land_sw_day"] and money - hire_budget >= 2400:
                 orders0.append(["BUY_LAND"]); spend += 2000; new_quads.append("SW")
+        if (GC_P["se_on"] and not new_quads and not final and "NE" in quads and "SW" in quads and "SE" not in quads
+                and GC_P["se_first"] <= day <= GC_P["se_last"] and money - hire_budget >= 4000 + GC_P["se_reserve"]):
+            # the last quadrant pays only as a tomato annex: price the plots it would carry against land + inputs + labour
+            n_se = GC_P["se_plots"]
+            fert = self.pnow.get("FERTILIZER", 50)
+            gain = self._tomato_value(obs, day, n_se, shops) - self._tomato_value(obs, day, 0, shops)
+            cost = 4000 + n_se * (50 + 2 * fert + GC_P["tomato_labor"])
+            _GC_REPORT["gc_se_eval"] = int(gain - cost)
+            if gain - cost > GC_P["se_margin"]:
+                orders0.append(["BUY_LAND"]); spend += 4000; new_quads.append("SE")
+                self.se_day = day
+                _GC_REPORT["gc_se_bought"] = day
         owned = set(quads) | set(new_quads)
 
         # ---- scan
@@ -607,7 +636,10 @@ class GoldCtl:
         cost = 50 + 2 * fert + GC_P["tomato_labor"]
         best_n, best_v = 0, 0.0
         base = self._tomato_value(obs, day, 0, shops)
-        for n in range(GC_P["tomato_step"], min(n_free, GC_P["tomato_max_day"]) + 1, GC_P["tomato_step"]):
+        mx = GC_P["tomato_max_day"]
+        if getattr(self, "se_day", None) == day:
+            mx = max(mx, GC_P["se_plots"])
+        for n in range(GC_P["tomato_step"], min(n_free, mx) + 1, GC_P["tomato_step"]):
             v = self._tomato_value(obs, day, n, shops) - base - n * (cost + alt)
             if v > best_v:
                 best_n, best_v = n, v
@@ -1347,6 +1379,7 @@ class GoldCtl:
             tile = sim[key] if key in sim else tiles[pos[1]][pos[0]]
             if act[0] == "DROP" and sum(int(x) for x in inv.values()) > room[0]:
                 # the shed cannot take the load yet: wait a turn for the sale that makes room
+                self._drop_wait = getattr(self, "_drop_wait", 0) + sum(int(x) for x in inv.values())
                 return ["PASS"]
             if self._useful(act, tile, inv, seeds, planting, shed, room):
                 q.pop(0)
@@ -1367,6 +1400,11 @@ class GoldCtl:
 
     def act(self, obs):
         hour = int(obs["hour"]); day = int(obs["day"])
+        if GC_P["sell_timing"]:
+            try:
+                self._mk_track(obs)
+            except Exception:
+                _GC_REPORT["gc_mk_errors"] = _GC_REPORT.get("gc_mk_errors", 0) + 1
         me = self.me
         farm = obs["farms"][me]
         priv = obs["private"]
@@ -1375,6 +1413,7 @@ class GoldCtl:
             self.day_plan = day
             self.queues = {u: q for u, q in enumerate(self._compile(self.routes, self.spawns))}
         tiles = farm["tiles"]
+        self._drop_wait = 0
         if GC_P["rematch"] and hour == 2 and not getattr(self, "_rematched", None) == day:
             self._rematched = day
             self._rematch(farm)
@@ -1414,7 +1453,12 @@ class GoldCtl:
             carried += sum(int(x) for x in inv.values())
             for k2, n2 in inv.items():
                 self.carried_items[k2] = self.carried_items.get(k2, 0) + int(n2)
-        market = self._market(obs, shed, carried, hour, day)
+        market = self._market(obs, shed, carried, hour, day)[:10]
+        if GC_P["sell_timing"]:
+            try:
+                self._mk_store(obs, shed, market)
+            except Exception:
+                _GC_REPORT["gc_mk_errors"] = _GC_REPORT.get("gc_mk_errors", 0) + 1
         if hour == 23:
             left = [(u, len(q), sum(1 for _, a, _v in q if a[0] not in ("DROP",))) for u, q in self.queues.items() if q]
             _GC_REPORT["gc_unfinished_units"] = _GC_REPORT.get("gc_unfinished_units", 0) + len(left)
@@ -1422,6 +1466,65 @@ class GoldCtl:
             _GC_REPORT["gc_units_seen"] = _GC_REPORT.get("gc_units_seen", 0) + len(positions)
             _GC_REPORT["gc_units_planned"] = _GC_REPORT.get("gc_units_planned", 0) + len(self.routes)
         return {"farmer": units[0], "hands": units[1:], "market": market[:10]}
+
+    # ------------------------------------------------------------------ rival sale timing
+    @staticmethod
+    def _town_draw(shops, step):
+        """Units the town removes after `step`'s market: each shop every 4 turns (2 for single-product shops),
+        the town centre one of each product every 24 turns."""
+        draw = {}
+        if step % 4 == 0:
+            for sh in shops:
+                items = _GC_SHOPS.get(sh, [])
+                for it in items:
+                    draw[it] = draw.get(it, 0) + (2 if len(items) == 1 else 1)
+        if step % 24 == 0:
+            for it in _GC_PRODUCTS:
+                if it != "FERTILIZER":
+                    draw[it] = draw.get(it, 0) + 1
+        return draw
+
+    def _mk_track(self, obs):
+        """Rival sales of the last turn = inventory change + town drain - our own fills (+ our buys)."""
+        step = int(obs["step"])
+        inv = obs["market"]["inventory"]
+        prev = self._mk_prev
+        if prev is None or prev["step"] != step - 1:
+            return
+        draw = self._town_draw(prev["shops"], step - 1)
+        for p in _GC_PRODUCTS:
+            if prev["px"].get(p, 0) <= 1:
+                continue
+            resid = int(inv[p]) - int(prev["inv"][p]) + draw.get(p, 0) - prev["sold"].get(p, 0) + prev["bought"].get(p, 0)
+            if resid >= GC_P["rival_min_lot"]:
+                self.rival_sales.setdefault(p, []).append(((step - 1) // 24, (step - 1) % 24, resid))
+
+    def _mk_store(self, obs, shed, market):
+        sold = {}; bought = {}
+        for o in market:
+            if not o or len(o) < 3:
+                continue
+            if o[0] == "SELL":
+                sold[o[1]] = sold.get(o[1], 0) + int(o[2])
+            elif o[0] == "BUY_PRODUCT":
+                bought[o[1]] = bought.get(o[1], 0) + int(o[2])
+        for p in list(sold):
+            sold[p] = min(sold[p], max(0, int(shed.get(p, 0))))
+        m = obs["market"]
+        self._mk_prev = {"step": int(obs["step"]), "inv": {p: int(m["inventory"][p]) for p in _GC_PRODUCTS},
+                         "px": {p: int(m["prices"][p]) for p in _GC_PRODUCTS},
+                         "shops": list(_gc_get(obs["town"], "unlocked_shops", []) or []), "sold": sold, "bought": bought}
+
+    def _rival_wait(self, p, day, hour):
+        """Turns to wait so our lot of p sells one turn before the rival's next predicted sale (hours at which it
+        sold p on recent days). None when the rival has no recent sales of p."""
+        lo = day - GC_P["rival_days"]
+        hours = sorted({h for d, h, q in self.rival_sales.get(p, ()) if d >= lo})
+        if not hours:
+            return None
+        cur = day * 24 + hour
+        cands = [day * 24 + h for h in hours if day * 24 + h >= cur + 1] + [(day + 1) * 24 + h for h in hours]
+        return max(0, min(cands) - 1 - cur)
 
     # ------------------------------------------------------------------ market
     def _market(self, obs, shed, carried, hour, day):
@@ -1434,6 +1537,9 @@ class GoldCtl:
             h0 = max(0, min(self.hires_planned, 10 - len(fixed)))
             self.hires_left = self.hires_planned - h0
             orders = fixed + [["HIRE"]] * h0
+            if GC_P["sell_timing"]:
+                have = {o[1] for o in fixed if o and o[0] == "SELL"}
+                orders += [o for o in prem if o[1] not in have and o[1] in self._due]
             return orders[:10]
         if hour == 1:
             h1 = min(self.hires_left, 10 - len(self.orders1))
@@ -1453,6 +1559,9 @@ class GoldCtl:
         ci = getattr(self, "carried_items", {})
         total_shed = sum(int(v) for v in shed.values())
         pressure = total_shed + carried > GC_P["drip_room"]
+        held = {}
+        self._due = set()
+        val_now = {q: _gc_price(q, inv[q]) for q in _GC_PRODUCTS}
         for p in _GC_PRODUCTS:
             n = int(shed.get(p, 0))
             if not last:
@@ -1466,7 +1575,31 @@ class GoldCtl:
             lot = GC_P["drip"].get(p) if GC_P["drip_on"] else None
             if lot and not last and not pressure and day < 29:
                 n = min(n, lot)
+            fl = GC_P["sell_floor"].get(p) if GC_P["sell_floor"] else None
+            if fl and not last and day <= GC_P["floor_last_day"] and val_now.get(p, 0) < fl:
+                held[p] = n
+                _GC_REPORT["gc_floor_held"] = _GC_REPORT.get("gc_floor_held", 0) + n
+                continue
+            if GC_P["sell_timing"] and p in GC_P["timed"] and not last:
+                w = self._rival_wait(p, day, hour)
+                if w is not None and 0 < w <= GC_P["hold_max"]:
+                    held[p] = n
+                    _GC_REPORT["gc_held"] = _GC_REPORT.get("gc_held", 0) + n
+                    continue
+                if w == 0:
+                    self._due.add(p)
             out.append(["SELL", p, n])
+        # shed room: the end-of-day drop (and any drop) must fit; release held lots first when it would not
+        if held:
+            total = sum(int(v) for v in shed.values()) - sum(int(o[2]) for o in out)
+            over = max(total + (carried if hour >= 20 else 0) - (100 if hour >= 20 else GC_P["hold_room"]),
+                       total + getattr(self, "_drop_wait", 0) - 100)
+            for p in sorted(held, key=lambda q: val_now.get(q, 0)):
+                if over <= 0:
+                    break
+                k = min(over, held[p])
+                out.append(["SELL", p, k]); over -= k
+                _GC_REPORT["gc_held_released"] = _GC_REPORT.get("gc_held_released", 0) + k
         # end-of-day room for carried goods: sell reserves too if the auto-drop would overflow
         if hour == 23 and not last:
             total = sum(int(v) for v in shed.values()) - sum(int(o[2]) for o in out)
