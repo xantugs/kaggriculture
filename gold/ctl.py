@@ -13,6 +13,7 @@ import math as _gc_math
 GC_P = dict(
     start=288,            # takeover step (must be hour 0)
     start_div=None,       # takeover step against a rival ADAPT classed as divergent (hour 0, >= 384)
+    div_over={},          # GC_P overrides applied for a divergent rival (restored at the next game's step 0)
     max_hands=12,
     animals_must=True,
     wheat_fert_gain=25.0,  # fertilize one-time crops only when the extra yield beats selling the fertilizer by this much
@@ -1848,6 +1849,7 @@ class GoldCtl:
 
 
 _GC = GoldCtl()
+_GC_DIV_SAVED = {}
 _GC_PARENT = agent
 
 
@@ -1856,6 +1858,8 @@ def agent(observation, configuration=None):
     if step == 0:
         _GC.reset()
     _GC.me = int(observation["player"])
+    if step == 0 and _GC_DIV_SAVED:
+        GC_P.update(_GC_DIV_SAVED); _GC_DIV_SAVED.clear()
     start = GC_P["start"]
     if GC_P["start_div"] is not None:
         # ADAPT (chassis layer) flags a rival whose farm diverged from ours by step 143/359: take over earlier
@@ -1863,6 +1867,10 @@ def agent(observation, configuration=None):
         if isinstance(ad, dict) and ad.get("off"):
             start = GC_P["start_div"]
             _GC_REPORT["gc_start"] = start
+            if GC_P["div_over"] and not _GC_DIV_SAVED:
+                for k, v in GC_P["div_over"].items():
+                    _GC_DIV_SAVED[k] = GC_P.get(k)
+                GC_P.update(GC_P["div_over"])
     if step < start:
         return _GC_PARENT(observation, configuration)
     try:
