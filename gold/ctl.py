@@ -67,6 +67,10 @@ GC_P = dict(
     prem_w=1.0,
     drop_after_animals=True,
     deliver_min=6,        # append a shed delivery when a route is expected to carry at least this many goods
+    ovf_hire=True,        # hire search counts end-of-day shed overflow (goods lost) and visits popped for shed stops
+    ovf_value=50.0,
+    order_cap_fix=True,
+    stop_v2=True,         # shed stops are route visits; a stop that does not fit moves visits to other routes
 )
 
 _GC_CROPS = {
@@ -347,40 +351,16 @@ class GoldCtl:
         self.spawns = spawns
         self.day = day
         # shed stops: only as many as needed so the end-of-day drop fits in the shed
-        self.drop_at = {}
-        room = GC_P["eod_room"]
-        carried = [sum(v.carry for v in r) for r in routes]
-        total = sum(carried)
-        done = set()
-        guard = 0
-        while (total > room or GC_P["always_drop"]) and guard < 40:
-            guard += 1
-            best = None
-            for u, r in enumerate(routes):
-                if u in done or not r or carried[u] < GC_P["deliver_min"]:
-                    continue
-                cap = 23 if u == 0 else (23 if u <= self.n0_hires else 22)
-                k, extra, got = self._drop_best(spawns[u], r, cap + 99)
-                if k is None:
-                    continue
-                sc = got / (extra + 0.5)
-                if best is None or sc > best[0]:
-                    best = (sc, u, k, extra, got)
-            if best is None:
-                break
-            _, u, k, extra, got = best
-            cap = 23 if u == 0 else (23 if u <= self.n0_hires else 22)
-            r = routes[u]
-            # make room by dropping the lowest-value optional visits after the stop
-            while self._rcost(spawns[u], r) + extra > cap:
-                opt = [i for i, v in enumerate(r) if not v.must and i > k]
-                if not opt:
-                    break
-                j = min(opt, key=lambda i: r[i].value / (len(r[i].acts) + 1.0))
-                r.pop(j)
-            if self._rcost(spawns[u], r) + extra <= cap:
-                self.drop_at[u] = k; total -= got
-            done.add(u)
+        if GC_P["stop_v2"]:
+            self.drop_at = {}
+            _ovf, _pv = self._plan_stops(routes, spawns)
+            if final:
+                for u, r in enumerate(routes):
+                    if r and r[-1].tag != "S":
+                        r.append(self._stop_visit(r[-1].pos))
+        else:
+            self.drop_at, _ovf, _pv = self._plan_drops(routes, spawns)
+        _GC_REPORT["gc_ovf_plan"] = _GC_REPORT.get("gc_ovf_plan", 0) + int(_ovf)
         if GC_P["prem_drop"] and not final:
             for u, r in enumerate(routes):
                 if u in self.drop_at or not r:
@@ -401,7 +381,7 @@ class GoldCtl:
                 if extra <= GC_P["prem_drop_max"] and self._rcost(spawns[u], r) + extra <= cap:
                     self.drop_at[u] = k
                     _GC_REPORT["gc_prem_drops"] = _GC_REPORT.get("gc_prem_drops", 0) + 1
-        if final:
+        if final and not GC_P["stop_v2"]:
             for u, r in enumerate(routes):
                 if r:
                     self.drop_at[u] = len(r) - 1
@@ -644,11 +624,11 @@ class GoldCtl:
                 return "CARROT"
             return None
         # wheat plots needed to feed the herd (a fertilized plot yields ~6 per 4-day cycle)
-        wheat_now = counts.get("WHEAT", 0) - len(replant)          # plots that stay wheat today
+        wheat_now = max(0, counts.get("WHEAT", 0) - len(replant))  # plots that stay wheat today
         need_w = int(GC_P["feed_tiles_per_animal"] * self.n_animals + 0.999) if (day <= GC_P["wheat_last_plant"] and GC_P["feed_reserve_tiles"]) else 0
         slots = sorted(free, key=lambda p: _gc_dist(p, (4.5, 4.5))) + sorted(replant, key=lambda p: _gc_dist(p, (4.5, 4.5)))
         n_slots = len(slots)
-        feed_first = max(0, need_w - wheat_now)
+        feed_first = max(0, need_w - wheat_now) if need_w > 0 else 0
         spare = max(0, n_slots - feed_first - (straw_room if day <= GC_P["straw_last_plant"] else 0))
         n_tom = min(self._tomato_count(obs, day, spare, shops, val), spare)
         self.n_tomato_today = n_tom
@@ -814,8 +794,10 @@ class GoldCtl:
         # local search: 2-opt inside each route (animal cluster first), then try to place unserved visits again
         for u in range(n_units):
             if len(routes[u]) > 2:
-                routes[u] = self._order_anim_first(spawns[u], routes[u], caps[u])
-                costs[u] = self._rcost(spawns[u], routes[u])
+                new = self._order_anim_first(spawns[u], routes[u], caps[u])
+                c = self._rcost(spawns[u], new)
+                if c <= caps[u] or c <= costs[u] or not GC_P["order_cap_fix"]:
+                    routes[u] = new; costs[u] = c
         if unserved:
             left = []
             for v in unserved:
@@ -872,11 +854,18 @@ class GoldCtl:
                 break
             routes, spawns, unserved = self._vrp(visits, h)
             pen = sum((v.value + (1e5 if v.must else 0.0)) for v in unserved)
+            ovf = 0
+            if GC_P["ovf_hire"] and not final:
+                if GC_P["stop_v2"]:
+                    ovf, popped = self._plan_stops([list(r) for r in routes], spawns)
+                else:
+                    _d, ovf, popped = self._plan_drops([list(r) for r in routes], spawns)
+                pen += ovf * GC_P["ovf_value"] + popped
             score = -pen - GC_P["hire_cost_w"] * cost
             if best is None or score > best[0]:
                 best = (score, h, routes, spawns, sum(v.value for v in unserved))
                 self._last_unserved = (sum(1 for v in unserved if v.must), len(unserved), sorted({v.tag for v in unserved}))
-            if not unserved and best[1] < h:
+            if not unserved and ovf == 0 and best[1] < h:
                 break
         _GC_REPORT["gc_unserved"] += int(best[4])
         return best[2], best[1], best[3]
@@ -905,6 +894,185 @@ class GoldCtl:
                     q.append((_gc_near_access(v.pos), ["DROP"], None))
             qs.append(q)
         return qs
+
+    def _cap(self, u):
+        s = GC_P["drop_slack"] if not self.final else 5
+        return (23 if u == 0 else (23 if u <= self.n0_hires else 22)) - s
+
+    @staticmethod
+    def _stop_visit(pos):
+        return _GcVisit(_gc_near_access(pos), [["DROP"]], value=0.0, must=True, tag="S")
+
+    @staticmethod
+    def _eod_carry(r):
+        c = 0
+        for v in r:
+            if v.tag == "S":
+                c = 0
+            else:
+                c += v.carry
+        return c
+
+    @staticmethod
+    def _ins_delta(start, r, v):
+        """Cheapest insertion of v into route r: (extra turns, index)."""
+        extra = len(v.acts)
+        if v.wheat and not any(x.wheat for x in r): extra += 1
+        if v.fert and not any(x.fert for x in r): extra += 1
+        if v.anim and all(x.anim != v.anim for x in r): extra += 1
+        best_d, best_i = None, 0
+        prev = start
+        n = len(r)
+        for i in range(n + 1):
+            dd = abs(prev[0] - v.pos[0]) + abs(prev[1] - v.pos[1])
+            if i < n:
+                nx = r[i].pos
+                dd += abs(v.pos[0] - nx[0]) + abs(v.pos[1] - nx[1]) - abs(prev[0] - nx[0]) - abs(prev[1] - nx[1])
+                prev = nx
+            if best_d is None or dd < best_d:
+                best_d, best_i = dd, i
+        return best_d + extra, best_i
+
+    def _plan_stops(self, routes, spawns):
+        """Insert shed-stop visits (tag S) until the goods carried at the end of the day fit the shed room.
+        A stop that does not fit its route moves visits after it to other routes (cheapest feasible insertion),
+        popping optional ones only when nobody can take them. Mutates `routes`. Returns (overflow units, popped value)."""
+        room = GC_P["eod_room"]
+        popped = 0.0
+        n = len(routes)
+        caps = [self._cap(u) for u in range(n)]
+        costs = [self._rcost(spawns[u], routes[u]) for u in range(n)]
+        tried = set()
+        for _it in range(3 * n + 5):
+            total = sum(self._eod_carry(r) for r in routes)
+            if total <= room:
+                break
+            best = None
+            for u in range(n):
+                r = routes[u]
+                if u in tried or not r or self._eod_carry(r) < GC_P["deliver_min"]:
+                    continue
+                last_s = max((i for i, v in enumerate(r) if v.tag == "S"), default=-1)
+                carried = 0
+                t = 0; pos = spawns[u]
+                if any(v.wheat for v in r): t += 1
+                if any(v.fert for v in r): t += 1
+                t += len({v.anim for v in r if v.anim})
+                for k, v in enumerate(r):
+                    t += abs(pos[0] - v.pos[0]) + abs(pos[1] - v.pos[1]) + len(v.acts); pos = v.pos
+                    if k <= last_s:
+                        continue
+                    carried += v.carry
+                    if carried < GC_P["deliver_min"]:
+                        continue
+                    a = _gc_near_access(v.pos)
+                    back = abs(v.pos[0] - a[0]) + abs(v.pos[1] - a[1])
+                    if t + back + 1 > caps[u] - 1:     # the stop must land by hour 22 so its goods sell today
+                        continue
+                    if k + 1 < len(r):
+                        nx = r[k + 1].pos
+                        extra = back + 1 + abs(a[0] - nx[0]) + abs(a[1] - nx[1]) - (abs(v.pos[0] - nx[0]) + abs(v.pos[1] - nx[1]))
+                    else:
+                        extra = back + 1
+                    sc = carried / (extra + 0.5)
+                    if best is None or sc > best[0]:
+                        best = (sc, u, k, extra)
+            if best is None:
+                break
+            _, u, k, extra = best
+            tried.add(u)
+            r2 = routes[u][:k + 1] + [self._stop_visit(routes[u][k].pos)] + routes[u][k + 1:]
+            c2 = costs[u] + extra
+            moved = []
+            pv = 0.0
+            guard = 0
+            while c2 > caps[u] and guard < 15:
+                guard += 1
+                cands = []
+                for i in range(k + 2, len(r2)):
+                    v = r2[i]
+                    if v.tag == "S":
+                        continue
+                    sav = c2 - self._rcost(spawns[u], r2[:i] + r2[i + 1:])
+                    cands.append((sav, i))
+                if not cands:
+                    break
+                cands.sort(key=lambda x: -x[0])
+                done = False
+                for sav, i in cands[:6]:
+                    v = r2[i]
+                    bw = None
+                    for w in range(n):
+                        if w == u:
+                            continue
+                        d, j = self._ins_delta(spawns[w], routes[w], v)
+                        if costs[w] + d <= caps[w] and (bw is None or d < bw[0]):
+                            bw = (d, w, j)
+                    if bw is not None:
+                        d, w, j = bw
+                        routes[w] = routes[w][:j] + [v] + routes[w][j:]
+                        costs[w] += d
+                        moved.append((w, v))
+                        r2 = r2[:i] + r2[i + 1:]
+                        c2 = self._rcost(spawns[u], r2)
+                        done = True
+                        break
+                if not done:
+                    opt = [i for i in range(k + 2, len(r2)) if not r2[i].must and r2[i].tag != "S"]
+                    if not opt:
+                        break
+                    j = min(opt, key=lambda i: r2[i].value / (len(r2[i].acts) + 1.0))
+                    pv += r2[j].value
+                    r2 = r2[:j] + r2[j + 1:]
+                    c2 = self._rcost(spawns[u], r2)
+            if c2 <= caps[u]:
+                routes[u] = r2; costs[u] = c2; popped += pv
+            else:
+                # undo the moves
+                for w, v in moved:
+                    routes[w] = [x for x in routes[w] if x is not v]
+                    costs[w] = self._rcost(spawns[w], routes[w])
+        return max(0, sum(self._eod_carry(r) for r in routes) - room), popped
+
+    def _plan_drops(self, routes, spawns):
+        """Shed stops so the end-of-day drop fits in the shed. Mutates routes (may pop optional visits after a stop).
+        Returns (drop_at, units still over the room, value of popped visits)."""
+        drop_at = {}
+        room = GC_P["eod_room"]
+        carried = [sum(v.carry for v in r) for r in routes]
+        total = sum(carried)
+        done = set(); popped = 0.0
+        guard = 0
+        while (total > room or GC_P["always_drop"]) and guard < 40:
+            guard += 1
+            best = None
+            for u, r in enumerate(routes):
+                if u in done or not r or carried[u] < GC_P["deliver_min"]:
+                    continue
+                cap = 23 if u == 0 else (23 if u <= self.n0_hires else 22)
+                k, extra, got = self._drop_best(spawns[u], r, cap + 99)
+                if k is None:
+                    continue
+                sc = got / (extra + 0.5)
+                if best is None or sc > best[0]:
+                    best = (sc, u, k, extra, got)
+            if best is None:
+                break
+            _, u, k, extra, got = best
+            cap = 23 if u == 0 else (23 if u <= self.n0_hires else 22)
+            r = routes[u]
+            # make room by dropping the lowest-value optional visits after the stop
+            while self._rcost(spawns[u], r) + extra > cap:
+                opt = [i for i, v in enumerate(r) if not v.must and i > k]
+                if not opt:
+                    break
+                j = min(opt, key=lambda i: r[i].value / (len(r[i].acts) + 1.0))
+                popped += r[j].value
+                r.pop(j)
+            if self._rcost(spawns[u], r) + extra <= cap:
+                drop_at[u] = k; total -= got
+            done.add(u)
+        return drop_at, max(0, total - room), popped
 
     def _is_premium_visit(self, v):
         t = self.tiles_today[v.pos[1]][v.pos[0]] if getattr(self, "tiles_today", None) else None
