@@ -16,7 +16,7 @@ GC_P = dict(
     animals_must=True,
     wheat_fert_gain=25.0,  # fertilize one-time crops only when the extra yield beats selling the fertilizer by this much
     wheat_last_plant=25,  # wheat planted on day d is ripe on day d+4
-    carrot_last_plant=26,
+    carrot_last_plant=27,
     carrot_first=14,
     carrot_min_demand=1,
     wheat_feed_bonus=4.0,  # own wheat saves buying feed at the ask
@@ -24,6 +24,32 @@ GC_P = dict(
     straw_target=33,      # strawberry plants to hold while planting them is allowed
     feed_reserve=1.0,     # wheat kept per animal for the next morning
     fert_keep=6,
+    fert_carrots=True,
+    drip_on=True,
+    drip={'STRAWBERRY': 6, 'MILK': 6, 'WOOL': 4, 'TOMATO': 6},
+    drip_room=80,
+    prem_drop=True,
+    prem_drop_max=4,
+    replant_done=False,
+    feed_tiles_per_animal=0.75,
+    feed_reserve_tiles=False,
+    tomato_on=True,
+    tomato_first=12,
+    tomato_last=18,
+    tomato_max_day=12,
+    tomato_step=2,
+    tomato_alt_day=35.0,
+    tomato_labor=60.0,
+    tomato_harvest_min=3,
+    opp_tomato_w=1.0,
+    future_shop_w=1.0,
+    plant_must=True,
+    plant_must_last=25,
+    final_water=True,
+    carrot_edge=1.0,
+    hire_cost_w=1.0,
+    dispatch=True,
+    dispatch_min_value=8.0,
     fert_cost_w=1.0,
     ongoing_fert_gain=10.0,
     feed_all=False,
@@ -171,6 +197,7 @@ class GoldCtl:
         money = float(farm["money"])
         shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
         tiles = farm["tiles"]
+        self.tiles_today = tiles
         final = day >= 29
         self.final = final
         val = self._values(obs)
@@ -215,7 +242,7 @@ class GoldCtl:
             v = self._plant_visit(pos, t, day, val, final)
             if v is not None:
                 visits.append(v)
-                if v.tag == "C" and v.acts and v.acts[-1][0] == "HARVEST":
+                if (v.tag == "C" and v.acts and v.acts[-1][0] == "HARVEST") or v.tag == "R":
                     replant.append(v)
         for pos, t in animals:
             v = self._animal_visit(pos, t, day, val, final)
@@ -249,7 +276,8 @@ class GoldCtl:
                 if not crop:
                     continue
                 acts = ([["DIG"]] if pos in weeds else []) + [["PLANT", crop], ["WATER"]]
-                visits.append(_GcVisit(pos, acts, value=GC_P["plant_defer"] * self._crop_value(crop, val), tag="P"))
+                visits.append(_GcVisit(pos, acts, value=GC_P["plant_defer"] * self._crop_value(crop, val), tag="P",
+                                       must=GC_P["plant_must"] and day <= GC_P["plant_must_last"]))
                 need_seeds[crop] = need_seeds.get(crop, 0) + 1
             for v in replant:
                 crop = crop_for.get(v.pos)
@@ -353,6 +381,26 @@ class GoldCtl:
             if self._rcost(spawns[u], r) + extra <= cap:
                 self.drop_at[u] = k; total -= got
             done.add(u)
+        if GC_P["prem_drop"] and not final:
+            for u, r in enumerate(routes):
+                if u in self.drop_at or not r:
+                    continue
+                prem_idx = [k for k, v in enumerate(r) if v.carry > 0 and self._is_premium_visit(v)]
+                if not prem_idx:
+                    continue
+                k = prem_idx[-1]
+                v = r[k]
+                a = _gc_near_access(v.pos)
+                back = abs(v.pos[0] - a[0]) + abs(v.pos[1] - a[1])
+                if k + 1 < len(r):
+                    nx = r[k + 1].pos
+                    extra = back + 1 + abs(a[0] - nx[0]) + abs(a[1] - nx[1]) - (abs(v.pos[0] - nx[0]) + abs(v.pos[1] - nx[1]))
+                else:
+                    extra = back + 1
+                cap = 23 if u == 0 else (23 if u <= self.n0_hires else 22)
+                if extra <= GC_P["prem_drop_max"] and self._rcost(spawns[u], r) + extra <= cap:
+                    self.drop_at[u] = k
+                    _GC_REPORT["gc_prem_drops"] = _GC_REPORT.get("gc_prem_drops", 0) + 1
         if final:
             for u, r in enumerate(routes):
                 if r:
@@ -387,12 +435,18 @@ class GoldCtl:
             in_window = ws <= age <= cd["my"]
             if final:
                 if ready and yu > 0:
-                    return _GcVisit(pos, [["HARVEST"]], value=yu * pv, must=True, tag="H", carry=yu)
+                    acts = []
+                    g = 0
+                    if GC_P["final_water"] and in_window and yu < cd["mx"] and not t.get("watered_today"):
+                        g = min(2 if fu >= day else 1, cd["mx"] - yu)
+                        acts.append(["WATER"])
+                    acts.append(["HARVEST"])
+                    return _GcVisit(pos, acts, value=(yu + g) * pv, must=True, tag="H", carry=yu + g)
                 return None
             yu2 = yu
             if in_window and yu < cd["mx"]:
                 fert_active = fu >= day
-                if (not fert_active) and age == ws:
+                if (not fert_active) and age == ws and not (crop == "CARROT" and not GC_P["fert_carrots"]):
                     rem_days = cd["my"] - age + 1
                     extra = min(cd["mx"] - yu, 2 * rem_days) - min(cd["mx"] - yu, rem_days)
                     fert_gain = extra * pv - self.pnow.get("FERTILIZER", 50)
@@ -427,7 +481,8 @@ class GoldCtl:
         add = (2 if fert_active else 1) if eve else 0
         if yu > 0:
             over = max(0, yu + add - cd["mx"])
-            if over > 0 or done or day >= 28 or yu >= 2:
+            thr = GC_P["tomato_harvest_min"] if crop == "TOMATO" else 2
+            if over > 0 or done or day >= 28 or yu >= thr:
                 acts.append(["HARVEST"]); value += over * pv + (yu * pv * 0.15) + (yu * pv if done else 0); carry = yu
         if eve:
             if not fert_active:
@@ -444,9 +499,13 @@ class GoldCtl:
                 acts.append(["WATER"]); value += 4 * pv; must = True
         elif cu >= 1 and not done:
             acts.append(["WATER"]); value += 4 * pv; must = True
+        if done and day <= GC_P["carrot_last_plant"] and GC_P["replant_done"]:
+            # no further production: take what is left, clear the plant and let the tile be replanted now
+            acts = [a for a in acts if a[0] == "HARVEST"] + [["DIG"]]
+            return _GcVisit(pos, acts, value=value + 40.0, must=GC_P["plant_must"], tag="R", carry=carry)
         if done and yu == 0 and not acts:
             if day <= 26:
-                return _GcVisit(pos, [["DIG"]], value=15.0, tag="D")
+                return _GcVisit(pos, [["DIG"]], value=40.0, tag="D", must=GC_P["plant_must"])
             return None
         if not acts:
             return None
@@ -508,6 +567,60 @@ class GoldCtl:
         units = {"WHEAT": 5.0, "CARROT": 3.5, "TOMATO": 7.0, "STRAWBERRY": 7.0, "MELON": 6.0}[crop]
         return units * val[crop] - cd["seed"]
 
+    def _tomato_value(self, obs, day, n, shops):
+        """Forecast revenue of n tomato plots planted today (4 units at age 9 and 11 each), selling on arrival,
+        against town demand (current + expected new shops) and the opponent's visible tomato plants."""
+        inv = float(obs["market"]["inventory"]["TOMATO"])
+        k_now = sum(1 for s in shops if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
+        n_shops = len(shops)
+        opp = obs["farms"][1 - self.me]
+        opp_sup = {}
+        for row in opp["tiles"]:
+            for t in row:
+                if isinstance(t, dict) and t.get("crop") == "TOMATO":
+                    pd = int(t["planted_day"])
+                    for age, u in ((9, 4), (11, 4)):
+                        d = pd + age
+                        if d >= day:
+                            opp_sup[d] = opp_sup.get(d, 0) + u * GC_P["opp_tomato_w"]
+        mine = {}
+        for row in obs["farms"][self.me]["tiles"]:
+            for t in row:
+                if isinstance(t, dict) and t.get("crop") == "TOMATO":
+                    pd = int(t["planted_day"])
+                    for age, u in ((9, 4), (11, 4)):
+                        d = pd + age
+                        if d >= day:
+                            mine[d] = mine.get(d, 0) + u
+        rev = 0.0
+        for d in range(day, 30):
+            # expected tomato shops by day d (a shop unlocks at the start of days 3,6,..., 8 at most)
+            unl = min(8, d // 3) - n_shops
+            k = k_now + max(0, unl) * 0.25 * GC_P["future_shop_w"]
+            inv -= 6.0 * k + 1.0
+            inv += opp_sup.get(d, 0) + mine.get(d, 0)
+            for age in (9, 11):
+                if d == day + age and d <= 29:
+                    q = 4 * n
+                    p0 = _gc_price("TOMATO", inv); p1 = _gc_price("TOMATO", inv + q)
+                    rev += q * 0.5 * (p0 + p1)
+                    inv += q
+        return rev
+
+    def _tomato_count(self, obs, day, n_free, shops, val):
+        if not GC_P["tomato_on"] or day < GC_P["tomato_first"] or day > GC_P["tomato_last"] or n_free <= 0:
+            return 0
+        fert = self.pnow.get("FERTILIZER", 50)
+        alt = GC_P["tomato_alt_day"] * 12.0      # what the tile earns as wheat/carrot over the same 12 days
+        cost = 50 + 2 * fert + GC_P["tomato_labor"]
+        best_n, best_v = 0, 0.0
+        base = self._tomato_value(obs, day, 0, shops)
+        for n in range(GC_P["tomato_step"], min(n_free, GC_P["tomato_max_day"]) + 1, GC_P["tomato_step"]):
+            v = self._tomato_value(obs, day, n, shops) - base - n * (cost + alt)
+            if v > best_v:
+                best_n, best_v = n, v
+        return best_n
+
     def _choose_crops(self, obs, day, free, replant, shops, val, counts):
         out = {}
         straw_room = 0
@@ -519,7 +632,7 @@ class GoldCtl:
         v_wheat = (6 * val["WHEAT"] - 10 - fert) / 4.0 + GC_P["wheat_feed_bonus"]
         v_carrot = (4 * val["CARROT"] - 20 - fert) / 3.0
         filler = "WHEAT"
-        if carrot_demand >= GC_P["carrot_min_demand"] and v_carrot > v_wheat and day >= GC_P["carrot_first"]:
+        if carrot_demand >= GC_P["carrot_min_demand"] and v_carrot > GC_P["carrot_edge"] * v_wheat and day >= GC_P["carrot_first"]:
             filler = "CARROT"
 
         def fill(d):
@@ -530,17 +643,33 @@ class GoldCtl:
             if d <= GC_P["carrot_last_plant"]:
                 return "CARROT"
             return None
-        for pos in sorted(free, key=lambda p: _gc_dist(p, (4.5, 4.5))):
-            if straw_room > 0:
+        # wheat plots needed to feed the herd (a fertilized plot yields ~6 per 4-day cycle)
+        wheat_now = counts.get("WHEAT", 0) - len(replant)          # plots that stay wheat today
+        need_w = int(GC_P["feed_tiles_per_animal"] * self.n_animals + 0.999) if (day <= GC_P["wheat_last_plant"] and GC_P["feed_reserve_tiles"]) else 0
+        slots = sorted(free, key=lambda p: _gc_dist(p, (4.5, 4.5))) + sorted(replant, key=lambda p: _gc_dist(p, (4.5, 4.5)))
+        n_slots = len(slots)
+        feed_first = max(0, need_w - wheat_now)
+        spare = max(0, n_slots - feed_first - (straw_room if day <= GC_P["straw_last_plant"] else 0))
+        n_tom = min(self._tomato_count(obs, day, spare, shops, val), spare)
+        self.n_tomato_today = n_tom
+        placed_t = 0
+        # feed wheat goes on the farthest slots (low-maintenance), tomatoes and strawberries near the shed
+        far = sorted(slots, key=lambda p: -_gc_dist(p, (4.5, 4.5)))
+        feed_tiles = set(far[:feed_first])
+        for pos in slots:
+            if pos in feed_tiles:
+                out[pos] = "WHEAT"; continue
+            if straw_room > 0 and pos in free:
                 out[pos] = "STRAWBERRY"; straw_room -= 1
+            elif placed_t < n_tom:
+                out[pos] = "TOMATO"; placed_t += 1
             else:
                 c = fill(day)
                 if c:
                     out[pos] = c
-        for pos in replant:
-            c = fill(day)
-            if c:
-                out[pos] = c
+        n_tom = n_tom - placed_t
+        if self.n_tomato_today:
+            _GC_REPORT["gc_tomato_planned"] = _GC_REPORT.get("gc_tomato_planned", 0) + self.n_tomato_today - n_tom
         return out
 
     # ------------------------------------------------------------------ routing
@@ -743,7 +872,7 @@ class GoldCtl:
                 break
             routes, spawns, unserved = self._vrp(visits, h)
             pen = sum((v.value + (1e5 if v.must else 0.0)) for v in unserved)
-            score = -pen - cost
+            score = -pen - GC_P["hire_cost_w"] * cost
             if best is None or score > best[0]:
                 best = (score, h, routes, spawns, sum(v.value for v in unserved))
                 self._last_unserved = (sum(1 for v in unserved if v.must), len(unserved), sorted({v.tag for v in unserved}))
@@ -776,6 +905,16 @@ class GoldCtl:
                     q.append((_gc_near_access(v.pos), ["DROP"], None))
             qs.append(q)
         return qs
+
+    def _is_premium_visit(self, v):
+        t = self.tiles_today[v.pos[1]][v.pos[0]] if getattr(self, "tiles_today", None) else None
+        if not isinstance(t, dict):
+            return False
+        if t.get("kind") == "PLANT":
+            return t.get("crop") in ("STRAWBERRY", "TOMATO", "MELON") and any(a[0] == "HARVEST" for a in v.acts)
+        if t.get("animal") in ("COW", "SHEEP"):
+            return any(a[0] == "HARVEST" for a in v.acts)
+        return False
 
     def _drop_best(self, spawn, r, cap):
         """(index, extra turns, goods delivered) of the best single shed stop in a route."""
@@ -895,6 +1034,87 @@ class GoldCtl:
             q[:] = [it for it in q if it[2] is not worst]
             _GC_REPORT["gc_trimmed"] = _GC_REPORT.get("gc_trimmed", 0) + 1
 
+    def _dispatch(self, u, pos, inv, turns_left, tiles, sim, seeds, shed, claimed, day, hour):
+        """Idle unit: queue the best remaining unclaimed job it can finish today (value per turn)."""
+        if turns_left <= 1:
+            return None
+        cache = getattr(self, "_dcache", None)
+        if cache is None or cache[0] != (day, hour):
+            cands = []
+            for y in range(10):
+                for x in range(10):
+                    key = (x, y)
+                    t = sim[key] if key in sim else tiles[y][x]
+                    if not isinstance(t, dict):
+                        continue
+                    if t.get("kind") == "PLANT":
+                        v = self._plant_visit(key, t, day, self.val, self.final)
+                    elif t.get("animal"):
+                        v = self._animal_visit(key, t, day, self.val, self.final)
+                    else:
+                        v = None
+                    if v is None:
+                        continue
+                    acts = []
+                    for a in v.acts:
+                        op = a[0]
+                        if op == "WATER" and t.get("watered_today"): continue
+                        if op == "FEED" and t.get("fed_today"): continue
+                        if op == "CARE" and t.get("cared_today"): continue
+                        if op == "COLLECT_FERTILIZER" and not t.get("fertilizer_available"): continue
+                        if op == "HARVEST" and int(t.get("yield_units", 0) or 0) <= 0: continue
+                        if op in ("PLANT", "DIG", "BUILD_COOP", "BUILD_PASTURE", "PLACE"): continue
+                        acts.append(list(a))
+                    if not acts:
+                        continue
+                    # value of the remaining actions only (rough: scale by the share of actions left)
+                    val = v.value * len(acts) / max(1, len(v.acts))
+                    if any(a[0] == "CARE" for a in acts) and not t.get("fed_today") and not any(a[0] == "FEED" for a in acts):
+                        acts = [a for a in acts if a[0] != "CARE"]
+                        if not acts:
+                            continue
+                    cands.append((key, acts, val, v.must))
+            self._dcache = ((day, hour), cands)
+            cache = self._dcache
+        best = None
+        for key, acts, val, must in cache[1]:
+            if key in claimed:
+                continue
+            need_w = any(a[0] == "FEED" for a in acts) and inv.get("WHEAT", 0) <= 0
+            need_f = any(a[0] == "FERTILIZE" for a in acts) and inv.get("FERTILIZER", 0) <= 0
+            acts2 = acts
+            if need_f:
+                acts2 = [a for a in acts2 if a[0] != "FERTILIZE"]
+            detour = 0; pick = None
+            if need_w:
+                if shed.get("WHEAT", 0) <= 0:
+                    acts2 = [a for a in acts2 if a[0] not in ("FEED", "CARE")]
+                else:
+                    a0 = _gc_near_access(pos)
+                    detour = _gc_dist(pos, a0) + 1 + _gc_dist(a0, key) - _gc_dist(pos, key)
+                    pick = a0
+            if not acts2:
+                continue
+            cost = _gc_dist(pos, key) + detour + len(acts2)
+            if cost > turns_left:
+                continue
+            v2 = val if acts2 is acts else val * len(acts2) / max(1, len(acts))
+            if v2 < GC_P["dispatch_min_value"]:
+                continue
+            sc = (1e4 if must else 0) + v2 / (cost + 0.5)
+            if best is None or sc > best[0]:
+                best = (sc, key, acts2, pick)
+        if best is None:
+            return None
+        _, key, acts2, pick = best
+        q = []
+        if pick is not None:
+            q.append((pick, ["PICKUP", "WHEAT", 2], None))
+        for a in acts2:
+            q.append((key, a, None))
+        _GC_REPORT["gc_dispatch"] = _GC_REPORT.get("gc_dispatch", 0) + 1
+        return q
+
     def _step_unit(self, u, pos, tiles, inv, seeds, planting, sim, shed, room, hour=0):
         q = self.queues.get(u)
         if q and hour >= GC_P["trim_hour"]:
@@ -946,8 +1166,14 @@ class GoldCtl:
         sim = {}
         positions = [farm["farmer"]] + list(farm["hands"])
         units = []
+        claimed = {tgt for qq in self.queues.values() for tgt, _a, _v in (qq or [])}
         for u, pos in enumerate(positions):
             inv = dict(invs[u]) if u < len(invs) else {}
+            if GC_P["dispatch"] and not self.queues.get(u) and hour >= 1 and not (self.final and hour >= 18):
+                nq = self._dispatch(u, pos, inv, 23 - hour + 1, tiles, sim, seeds, shed, claimed, day, hour)
+                if nq:
+                    self.queues[u] = nq
+                    claimed.update(tgt for tgt, _a, _v in nq)
             a = self._step_unit(u, pos, tiles, inv, seeds, planting, sim, shed, room, hour)
             key = (pos[0], pos[1])
             if a[0] in ("WATER", "CARE", "FEED", "HARVEST", "COLLECT_FERTILIZER") and isinstance(tiles[pos[1]][pos[0]], dict):
@@ -1005,6 +1231,8 @@ class GoldCtl:
         reserve = self.reserve
         last = step >= 716 or day >= 29
         ci = getattr(self, "carried_items", {})
+        total_shed = sum(int(v) for v in shed.values())
+        pressure = total_shed + carried > GC_P["drip_room"]
         for p in _GC_PRODUCTS:
             n = int(shed.get(p, 0))
             if not last:
@@ -1015,6 +1243,9 @@ class GoldCtl:
                 n -= keep
             if n <= 0:
                 continue
+            lot = GC_P["drip"].get(p) if GC_P["drip_on"] else None
+            if lot and not last and not pressure and day < 29:
+                n = min(n, lot)
             out.append(["SELL", p, n])
         # end-of-day room for carried goods: sell reserves too if the auto-drop would overflow
         if hour == 23 and not last:
