@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+# raw top-tier game dumps exceed GitHub's 100 MB file limit; gzipped copies (*.jsonl.gz) are committed instead
+moon/elite/games_2026-09-2?.jsonl

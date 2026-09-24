@@ -1,0 +1,9691 @@
+{
+  "id": 111428871,
+  "top": "Majkel1337",
+  "top_seat": 1,
+  "rewards": [
+    106776.0,
+    116132.0
+  ],
+  "exact_reproduction": true,
+  "crops": [
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 87,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 0,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 246,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 2,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 246,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 1,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 246,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 54,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 0,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 249,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 62,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 1,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 248,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 1,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 259,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 3,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 246,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 81,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 81,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 81,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 3,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 245,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 2,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 247,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 4,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 245,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 62,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 60,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 2,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 260,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 4,
+      "crop": "MELON",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 246,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 65,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 84,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 0,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 79,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 79,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 1,
+      "crop": "MELON",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 269,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 3,
+      "crop": "MELON",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 272,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 11
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 1,
+      "crop": "MELON",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 271,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 2,
+      "crop": "MELON",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 275,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 102,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 1,
+      "crop": "MELON",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 273,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 1,
+      "crop": "MELON",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 278,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 2,
+      "crop": "MELON",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 270,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 112,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 108,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 1,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 135,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 3,
+      "crop": "MELON",
+      "planted_day": 2,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 295,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 2,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 105,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 0,
+      "crop": "MELON",
+      "planted_day": 2,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 295,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 2,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 106,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 2,
+      "crop": "MELON",
+      "planted_day": 2,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 293,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 0,
+      "crop": "MELON",
+      "planted_day": 2,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 309,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 11
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 0,
+      "crop": "MELON",
+      "planted_day": 2,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 296,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 2,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 110,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 0,
+      "crop": "MELON",
+      "planted_day": 2,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 297,
+          "units": 6
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 11
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 3,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 132,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 3,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 152,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 3,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 137,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 3,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 139,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 3,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 141,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 4,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 167,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 4,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 161,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 4,
+      "crop": "STRAWBERRY",
+      "planted_day": 4,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 341,
+          "units": 2
+        },
+        {
+          "step": 389,
+          "units": 2
+        },
+        {
+          "step": 442,
+          "units": 2
+        },
+        {
+          "step": 489,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 15
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 4,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 355,
+          "units": 2
+        },
+        {
+          "step": 400,
+          "units": 2
+        },
+        {
+          "step": 452,
+          "units": 2
+        },
+        {
+          "step": 492,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 14
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 4,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 164,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 4,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 354,
+          "units": 2
+        },
+        {
+          "step": 398,
+          "units": 2
+        },
+        {
+          "step": 443,
+          "units": 2
+        },
+        {
+          "step": 487,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 16
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 3,
+      "crop": "STRAWBERRY",
+      "planted_day": 5,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 367,
+          "units": 2
+        },
+        {
+          "step": 413,
+          "units": 2
+        },
+        {
+          "step": 462,
+          "units": 2
+        },
+        {
+          "step": 524,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 5,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 182,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 5,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 372,
+          "units": 2
+        },
+        {
+          "step": 418,
+          "units": 2
+        },
+        {
+          "step": 467,
+          "units": 2
+        },
+        {
+          "step": 523,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 5,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 375,
+          "units": 2
+        },
+        {
+          "step": 422,
+          "units": 2
+        },
+        {
+          "step": 473,
+          "units": 2
+        },
+        {
+          "step": 516,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 5,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 369,
+          "units": 2
+        },
+        {
+          "step": 415,
+          "units": 2
+        },
+        {
+          "step": 464,
+          "units": 2
+        },
+        {
+          "step": 522,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 391,
+          "units": 2
+        },
+        {
+          "step": 439,
+          "units": 2
+        },
+        {
+          "step": 502,
+          "units": 2
+        },
+        {
+          "step": 541,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 6,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 199,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 389,
+          "units": 2
+        },
+        {
+          "step": 437,
+          "units": 2
+        },
+        {
+          "step": 485,
+          "units": 2
+        },
+        {
+          "step": 536,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 0,
+      "x": 6,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 391,
+          "units": 2
+        },
+        {
+          "step": 442,
+          "units": 2
+        },
+        {
+          "step": 492,
+          "units": 2
+        },
+        {
+          "step": 533,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 387,
+          "units": 2
+        },
+        {
+          "step": 435,
+          "units": 2
+        },
+        {
+          "step": 483,
+          "units": 2
+        },
+        {
+          "step": 531,
+          "units": 1
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 404,
+          "units": 2
+        },
+        {
+          "step": 439,
+          "units": 2
+        },
+        {
+          "step": 487,
+          "units": 2
+        },
+        {
+          "step": 551,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 13
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 3,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 395,
+          "units": 2
+        },
+        {
+          "step": 437,
+          "units": 2
+        },
+        {
+          "step": 491,
+          "units": 2
+        },
+        {
+          "step": 536,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 4,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 389,
+          "units": 2
+        },
+        {
+          "step": 435,
+          "units": 2
+        },
+        {
+          "step": 483,
+          "units": 2
+        },
+        {
+          "step": 531,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 13
+    },
+    {
+      "seat": 0,
+      "x": 5,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 389,
+          "units": 2
+        },
+        {
+          "step": 444,
+          "units": 2
+        },
+        {
+          "step": 486,
+          "units": 2
+        },
+        {
+          "step": 533,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 209,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 3,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 391,
+          "units": 2
+        },
+        {
+          "step": 437,
+          "units": 2
+        },
+        {
+          "step": 485,
+          "units": 2
+        },
+        {
+          "step": 536,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 406,
+          "units": 2
+        },
+        {
+          "step": 445,
+          "units": 2
+        },
+        {
+          "step": 500,
+          "units": 2
+        },
+        {
+          "step": 546,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 13
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 398,
+          "units": 2
+        },
+        {
+          "step": 439,
+          "units": 2
+        },
+        {
+          "step": 487,
+          "units": 2
+        },
+        {
+          "step": 539,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 13
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 4,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 401,
+          "units": 2
+        },
+        {
+          "step": 441,
+          "units": 2
+        },
+        {
+          "step": 494,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 3,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 397,
+          "units": 2
+        },
+        {
+          "step": 439,
+          "units": 2
+        },
+        {
+          "step": 486,
+          "units": 2
+        },
+        {
+          "step": 538,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 4,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 391,
+          "units": 2
+        },
+        {
+          "step": 437,
+          "units": 2
+        },
+        {
+          "step": 485,
+          "units": 2
+        },
+        {
+          "step": 533,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 5,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 209,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 206,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 393,
+          "units": 2
+        },
+        {
+          "step": 439,
+          "units": 2
+        },
+        {
+          "step": 490,
+          "units": 2
+        },
+        {
+          "step": 551,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 3,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 401,
+          "units": 2
+        },
+        {
+          "step": 439,
+          "units": 2
+        },
+        {
+          "step": 491,
+          "units": 2
+        },
+        {
+          "step": 541,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 13
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 396,
+          "units": 2
+        },
+        {
+          "step": 437,
+          "units": 2
+        },
+        {
+          "step": 485,
+          "units": 2
+        },
+        {
+          "step": 534,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 405,
+          "units": 2
+        },
+        {
+          "step": 443,
+          "units": 2
+        },
+        {
+          "step": 495,
+          "units": 2
+        },
+        {
+          "step": 549,
+          "units": 1
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 400,
+          "units": 1
+        },
+        {
+          "step": 441,
+          "units": 2
+        },
+        {
+          "step": 497,
+          "units": 2
+        },
+        {
+          "step": 544,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 14
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 405,
+          "units": 2
+        },
+        {
+          "step": 452,
+          "units": 2
+        },
+        {
+          "step": 489,
+          "units": 2
+        },
+        {
+          "step": 546,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 14
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 247,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 4,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 393,
+          "units": 2
+        },
+        {
+          "step": 442,
+          "units": 2
+        },
+        {
+          "step": 487,
+          "units": 2
+        },
+        {
+          "step": 541,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 6,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 204,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 213,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 395,
+          "units": 2
+        },
+        {
+          "step": 449,
+          "units": 2
+        },
+        {
+          "step": 488,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 8
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 3,
+      "crop": "STRAWBERRY",
+      "planted_day": 6,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 395,
+          "units": 2
+        },
+        {
+          "step": 443,
+          "units": 2
+        },
+        {
+          "step": 500,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 13
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 3,
+      "crop": "STRAWBERRY",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 421,
+          "units": 2
+        },
+        {
+          "step": 465,
+          "units": 2
+        },
+        {
+          "step": 524,
+          "units": 2
+        },
+        {
+          "step": 571,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 426,
+          "units": 2
+        },
+        {
+          "step": 474,
+          "units": 2
+        },
+        {
+          "step": 522,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 424,
+          "units": 2
+        },
+        {
+          "step": 471,
+          "units": 2
+        },
+        {
+          "step": 523,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 14
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 261,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 7,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 233,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 254,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 2,
+      "crop": "STRAWBERRY",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 419,
+          "units": 2
+        },
+        {
+          "step": 475,
+          "units": 2
+        },
+        {
+          "step": 526,
+          "units": 1
+        },
+        {
+          "step": 575,
+          "units": 1
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 11
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 428,
+          "units": 2
+        },
+        {
+          "step": 469,
+          "units": 2
+        },
+        {
+          "step": 515,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 416,
+          "units": 2
+        },
+        {
+          "step": 474,
+          "units": 2
+        },
+        {
+          "step": 527,
+          "units": 1
+        },
+        {
+          "step": 568,
+          "units": 1
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 7,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 420,
+          "units": 2
+        },
+        {
+          "step": 469,
+          "units": 2
+        },
+        {
+          "step": 521,
+          "units": 1
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 8
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 232,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 7,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 235,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 7,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 237,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 7,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 237,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 298,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 261,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 257,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 6,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 438,
+          "units": 2
+        },
+        {
+          "step": 490,
+          "units": 2
+        },
+        {
+          "step": 545,
+          "units": 1
+        },
+        {
+          "step": 591,
+          "units": 1
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 281,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 5,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 435,
+          "units": 2
+        },
+        {
+          "step": 483,
+          "units": 2
+        },
+        {
+          "step": 531,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 455,
+          "units": 2
+        },
+        {
+          "step": 500,
+          "units": 2
+        },
+        {
+          "step": 537,
+          "units": 1
+        },
+        {
+          "step": 593,
+          "units": 1
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 6,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 439,
+          "units": 2
+        },
+        {
+          "step": 487,
+          "units": 2
+        },
+        {
+          "step": 560,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 306,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 6,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 437,
+          "units": 2
+        },
+        {
+          "step": 485,
+          "units": 2
+        },
+        {
+          "step": 536,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 0,
+      "x": 5,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 446,
+          "units": 2
+        },
+        {
+          "step": 488,
+          "units": 2
+        },
+        {
+          "step": 535,
+          "units": 2
+        },
+        {
+          "step": 589,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 1,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 453,
+          "units": 2
+        },
+        {
+          "step": 494,
+          "units": 2
+        },
+        {
+          "step": 535,
+          "units": 1
+        },
+        {
+          "step": 595,
+          "units": 1
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 7,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 447,
+          "units": 2
+        },
+        {
+          "step": 494,
+          "units": 2
+        },
+        {
+          "step": 565,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 280,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 6,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 449,
+          "units": 2
+        },
+        {
+          "step": 515,
+          "units": 2
+        },
+        {
+          "step": 550,
+          "units": 2
+        },
+        {
+          "step": 586,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 15
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 293,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 8,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 282,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 7,
+      "crop": "STRAWBERRY",
+      "planted_day": 8,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 449,
+          "units": 2
+        },
+        {
+          "step": 496,
+          "units": 2
+        },
+        {
+          "step": 541,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 328,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 8,
+      "crop": "STRAWBERRY",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 466,
+          "units": 2
+        },
+        {
+          "step": 514,
+          "units": 2
+        },
+        {
+          "step": 620,
+          "units": 3
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 14
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 8,
+      "crop": "STRAWBERRY",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 462,
+          "units": 2
+        },
+        {
+          "step": 510,
+          "units": 2
+        },
+        {
+          "step": 571,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 13
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 325,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 8,
+      "crop": "STRAWBERRY",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 464,
+          "units": 2
+        },
+        {
+          "step": 512,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 330,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 297,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 284,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 323,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 9,
+      "crop": "STRAWBERRY",
+      "planted_day": 9,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 474,
+          "units": 2
+        },
+        {
+          "step": 526,
+          "units": 2
+        },
+        {
+          "step": 564,
+          "units": 2
+        },
+        {
+          "step": 613,
+          "units": 2
+        }
+      ],
+      "fertilizer": 3,
+      "waters": 14
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 299,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 279,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 9,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 287,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 350,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 329,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 324,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 322,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 329,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 323,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 304,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 305,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 334,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 329,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 345,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 5
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 10,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 331,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 5,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 522,
+          "units": 2
+        },
+        {
+          "step": 553,
+          "units": 2
+        },
+        {
+          "step": 601,
+          "units": 2
+        },
+        {
+          "step": 656,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 6,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 515,
+          "units": 2
+        },
+        {
+          "step": 555,
+          "units": 2
+        },
+        {
+          "step": 604,
+          "units": 2
+        },
+        {
+          "step": 650,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 5,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 520,
+          "units": 2
+        },
+        {
+          "step": 556,
+          "units": 2
+        },
+        {
+          "step": 603,
+          "units": 2
+        },
+        {
+          "step": 658,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 5,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 507,
+          "units": 2
+        },
+        {
+          "step": 558,
+          "units": 2
+        },
+        {
+          "step": 611,
+          "units": 2
+        },
+        {
+          "step": 651,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 371,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 7,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 510,
+          "units": 2
+        },
+        {
+          "step": 560,
+          "units": 2
+        },
+        {
+          "step": 606,
+          "units": 2
+        },
+        {
+          "step": 655,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 6,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 518,
+          "units": 2
+        },
+        {
+          "step": 573,
+          "units": 2
+        },
+        {
+          "step": 604,
+          "units": 2
+        },
+        {
+          "step": 660,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 5,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 509,
+          "units": 2
+        },
+        {
+          "step": 570,
+          "units": 2
+        },
+        {
+          "step": 609,
+          "units": 2
+        },
+        {
+          "step": 660,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 8,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 512,
+          "units": 2
+        },
+        {
+          "step": 562,
+          "units": 2
+        },
+        {
+          "step": 608,
+          "units": 2
+        },
+        {
+          "step": 660,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 353,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 6,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 513,
+          "units": 2
+        },
+        {
+          "step": 559,
+          "units": 2
+        },
+        {
+          "step": 613,
+          "units": 2
+        },
+        {
+          "step": 654,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 7,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 508,
+          "units": 2
+        },
+        {
+          "step": 575,
+          "units": 2
+        },
+        {
+          "step": 606,
+          "units": 2
+        },
+        {
+          "step": 653,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 6,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 511,
+          "units": 2
+        },
+        {
+          "step": 557,
+          "units": 2
+        },
+        {
+          "step": 616,
+          "units": 2
+        },
+        {
+          "step": 659,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 377,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 7,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 515,
+          "units": 2
+        },
+        {
+          "step": 561,
+          "units": 2
+        },
+        {
+          "step": 615,
+          "units": 1
+        },
+        {
+          "step": 660,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 8,
+      "crop": "STRAWBERRY",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 527,
+          "units": 1
+        },
+        {
+          "step": 575,
+          "units": 2
+        },
+        {
+          "step": 608,
+          "units": 2
+        },
+        {
+          "step": 656,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 353,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 345,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 330,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 348,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 352,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 372,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 357,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 348,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 350,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 350,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 327,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 357,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 368,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 367,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 357,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 329,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 11,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 366,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 392,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 403,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 381,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "unused",
+      "harvests": [
+        {
+          "step": 379,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 379,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 405,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 382,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 381,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 405,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 400,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 12,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 568,
+          "units": 2
+        },
+        {
+          "step": 639,
+          "units": 3
+        },
+        {
+          "step": 687,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 12
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 373,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 12,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 376,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 0,
+      "crop": "STRAWBERRY",
+      "planted_day": 12,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 565,
+          "units": 2
+        },
+        {
+          "step": 590,
+          "units": 2
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 8
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 2,
+      "crop": "TOMATO",
+      "planted_day": 12,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 499,
+          "units": 2
+        },
+        {
+          "step": 514,
+          "units": 2
+        },
+        {
+          "step": 540,
+          "units": 2
+        },
+        {
+          "step": 558,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 0,
+      "crop": "TOMATO",
+      "planted_day": 12,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 519,
+          "units": 3
+        },
+        {
+          "step": 547,
+          "units": 2
+        },
+        {
+          "step": 566,
+          "units": 2
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 400,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 426,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 404,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 423,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 399,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 404,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 378,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 423,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 400,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 415,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 417,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 425,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 378,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 377,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 380,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 13,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 398,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 453,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 453,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 417,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 423,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 427,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 416,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 417,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 446,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 441,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 446,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 427,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 422,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 14,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 417,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 461,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 462,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 475,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 451,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 467,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 8,
+      "crop": "TOMATO",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 573,
+          "units": 2
+        },
+        {
+          "step": 597,
+          "units": 2
+        },
+        {
+          "step": 623,
+          "units": 2
+        },
+        {
+          "step": 639,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 437,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "MELON",
+      "harvests": [
+        {
+          "step": 475,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 0,
+      "crop": "TOMATO",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 570,
+          "units": 2
+        },
+        {
+          "step": 587,
+          "units": 2
+        },
+        {
+          "step": 636,
+          "units": 4
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 8
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 1,
+      "crop": "TOMATO",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 573,
+          "units": 2
+        },
+        {
+          "step": 614,
+          "units": 4
+        },
+        {
+          "step": 642,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 8
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 452,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 9,
+      "crop": "TOMATO",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 570,
+          "units": 2
+        },
+        {
+          "step": 598,
+          "units": 2
+        },
+        {
+          "step": 646,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 453,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 476,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 476,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 442,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 15,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 451,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 494,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 500,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 9,
+      "crop": "TOMATO",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 595,
+          "units": 2
+        },
+        {
+          "step": 622,
+          "units": 2
+        },
+        {
+          "step": 670,
+          "units": 3
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 499,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 496,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 495,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 0,
+      "crop": "TOMATO",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 645,
+          "units": 4
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 499,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 477,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 466,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 501,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 16,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 447,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 512,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 5
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 4,
+      "crop": "TOMATO",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 633,
+          "units": 4
+        },
+        {
+          "step": 659,
+          "units": 2
+        },
+        {
+          "step": 683,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 520,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 517,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 515,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 1,
+      "crop": "TOMATO",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 617,
+          "units": 2
+        },
+        {
+          "step": 640,
+          "units": 2
+        },
+        {
+          "step": 682,
+          "units": 3
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 11
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 501,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 511,
+          "units": 6
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 7,
+      "crop": "TOMATO",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 636,
+          "units": 4
+        },
+        {
+          "step": 689,
+          "units": 3
+        }
+      ],
+      "fertilizer": 3,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 2,
+      "crop": "TOMATO",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 614,
+          "units": 2
+        },
+        {
+          "step": 639,
+          "units": 2
+        },
+        {
+          "step": 667,
+          "units": 2
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 10
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 9,
+      "crop": "TOMATO",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 619,
+          "units": 2
+        },
+        {
+          "step": 638,
+          "units": 2
+        },
+        {
+          "step": 687,
+          "units": 3
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 521,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 521,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 17,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 520,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 2,
+      "crop": "TOMATO",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 655,
+          "units": 4
+        },
+        {
+          "step": 677,
+          "units": 2
+        },
+        {
+          "step": 707,
+          "units": 2
+        }
+      ],
+      "fertilizer": 3,
+      "waters": 11
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 540,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 541,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 541,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 2,
+      "crop": "TOMATO",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 664,
+          "units": 4
+        },
+        {
+          "step": 689,
+          "units": 2
+        },
+        {
+          "step": 708,
+          "units": 2
+        }
+      ],
+      "fertilizer": 3,
+      "waters": 10
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 549,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 547,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 1,
+      "crop": "TOMATO",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 663,
+          "units": 3
+        },
+        {
+          "step": 680,
+          "units": 2
+        },
+        {
+          "step": 704,
+          "units": 2
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 9
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 519,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 549,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 549,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 18,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 518,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 533,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 565,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 565,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 571,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 567,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 573,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 544,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 545,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 19,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 571,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 542,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 565,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 562,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 570,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 585,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 557,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 582,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 592,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 567,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 567,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 597,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 595,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 20,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 564,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 615,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 5
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 610,
+          "units": 6
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 615,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 591,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 590,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 621,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 587,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 593,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 593,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 622,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 619,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 587,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 595,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 597,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 567,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 597,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 572,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 21,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 613,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 610,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 608,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 604,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 629,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 615,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 633,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 609,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 609,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 619,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 587,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 635,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 645,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 587,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 614,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 614,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 608,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 596,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 611,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 592,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 643,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 621,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 592,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 592,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 638,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 621,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 22,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 621,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 654,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 636,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 669,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 5,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 657,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 630,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 641,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 643,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 656,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 662,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 638,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 664,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 639,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 638,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 635,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 645,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 633,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 634,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 621,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "TOMATO",
+      "harvests": [
+        {
+          "step": 642,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 654,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 645,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 641,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 663,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 667,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 669,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 6,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 639,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 23,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 661,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 691,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 683,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 659,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 659,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 682,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 658,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 669,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 686,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 688,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 685,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 694,
+          "units": 6
+        }
+      ],
+      "fertilizer": 2,
+      "waters": 5
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 685,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 660,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 663,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 691,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 684,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 664,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 692,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 9,
+      "crop": "CARROT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 666,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 691,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 695,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 687,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 693,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 2,
+      "crop": "CARROT",
+      "planted_day": 24,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 661,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 1,
+      "crop": "CARROT",
+      "planted_day": 24,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 667,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 701,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 677,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 686,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 5,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 678,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 685,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 708,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 700,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 681,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 6,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 687,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 3,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 682,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 705,
+          "units": 6
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 9,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 707,
+          "units": 4
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 711,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 2,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 688,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 9,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 690,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 2,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 681,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 1,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 683,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 8,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 686,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 695,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 667,
+          "units": 1
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 1
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 671,
+          "units": 1
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 1
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 3,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 682,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 4,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 679,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 9,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 671,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 689,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 25,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 669,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 4,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 701,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 6,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 701,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 3,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 708,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 1,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 703,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 702,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 8,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 705,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 7,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 681,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 1,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 706,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "TOMATO",
+      "harvests": [
+        {
+          "step": 691,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 6,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 704,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 2,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 702,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 702,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 6,
+      "y": 1,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 709,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 1,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 686,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 8,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "TOMATO",
+      "harvests": [
+        {
+          "step": 694,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 9,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 709,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [],
+      "fertilizer": 1,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 2,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 703,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 704,
+          "units": 5
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 8,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 704,
+          "units": 4
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 8,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 707,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 707,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 7,
+      "crop": "CARROT",
+      "planted_day": 26,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 705,
+          "units": 3
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 4
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 711,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 4,
+      "crop": "CARROT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 704,
+          "units": 3
+        }
+      ],
+      "fertilizer": 1,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 701,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 4,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 703,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 8,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 711,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 2,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 715,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 5,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 706,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 2,
+      "y": 2,
+      "crop": "CARROT",
+      "planted_day": 27,
+      "previous_crop": "TOMATO",
+      "harvests": [
+        {
+          "step": 705,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 2,
+      "crop": "CARROT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 705,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 5,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 711,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 710,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 6,
+      "y": 0,
+      "crop": "CARROT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 3,
+      "y": 6,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 701,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 9,
+      "y": 4,
+      "crop": "CARROT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 703,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 1,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "STRAWBERRY",
+      "harvests": [
+        {
+          "step": 701,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 9,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 708,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 3,
+      "y": 8,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 710,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 7,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 703,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 1,
+      "y": 7,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 707,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 1,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 706,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 0,
+      "x": 7,
+      "y": 3,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 705,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 0,
+      "x": 0,
+      "y": 5,
+      "crop": "CARROT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 702,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 2
+    },
+    {
+      "seat": 1,
+      "x": 8,
+      "y": 0,
+      "crop": "WHEAT",
+      "planted_day": 27,
+      "previous_crop": "WHEAT",
+      "harvests": [
+        {
+          "step": 709,
+          "units": 2
+        }
+      ],
+      "fertilizer": 0,
+      "waters": 3
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 5,
+      "crop": "WHEAT",
+      "planted_day": 28,
+      "previous_crop": "WHEAT",
+      "harvests": [],
+      "fertilizer": 0,
+      "waters": 1
+    },
+    {
+      "seat": 1,
+      "x": 0,
+      "y": 4,
+      "crop": "WHEAT",
+      "planted_day": 28,
+      "previous_crop": "WHEAT",
+      "harvests": [],
+      "fertilizer": 0,
+      "waters": 2
+    }
+  ],
+  "shops": {
+    "0": [],
+    "1": [],
+    "2": [],
+    "3": [
+      "SMOOTHIE_SHOP"
+    ],
+    "4": [
+      "SMOOTHIE_SHOP"
+    ],
+    "5": [
+      "SMOOTHIE_SHOP"
+    ],
+    "6": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT"
+    ],
+    "7": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT"
+    ],
+    "8": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT"
+    ],
+    "9": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP"
+    ],
+    "10": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP"
+    ],
+    "11": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP"
+    ],
+    "12": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP"
+    ],
+    "13": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP"
+    ],
+    "14": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP"
+    ],
+    "15": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE"
+    ],
+    "16": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE"
+    ],
+    "17": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE"
+    ],
+    "18": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE"
+    ],
+    "19": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE"
+    ],
+    "20": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE"
+    ],
+    "21": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET"
+    ],
+    "22": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET"
+    ],
+    "23": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET"
+    ],
+    "24": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET",
+      "SMOOTHIE_SHOP"
+    ],
+    "25": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET",
+      "SMOOTHIE_SHOP"
+    ],
+    "26": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET",
+      "SMOOTHIE_SHOP"
+    ],
+    "27": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET",
+      "SMOOTHIE_SHOP"
+    ],
+    "28": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET",
+      "SMOOTHIE_SHOP"
+    ],
+    "29": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "YARN_STORE",
+      "FARMERS_MARKET",
+      "SMOOTHIE_SHOP"
+    ]
+  },
+  "animal_yield_clipped_by_capacity": [
+    {
+      "WOOL": 0,
+      "MILK": 3,
+      "EGG": 0
+    },
+    {
+      "WOOL": 0,
+      "MILK": 14,
+      "EGG": 0
+    }
+  ],
+  "daily_sales": {
+    "0:0": {
+      "WHEAT": [
+        15,
+        427
+      ]
+    },
+    "1:1": {
+      "FERTILIZER": [
+        6,
+        595
+      ]
+    },
+    "0:1": {
+      "FERTILIZER": [
+        3,
+        299
+      ]
+    },
+    "0:2": {
+      "FERTILIZER": [
+        5,
+        484
+      ],
+      "WHEAT": [
+        2,
+        60
+      ]
+    },
+    "1:2": {
+      "FERTILIZER": [
+        6,
+        585
+      ]
+    },
+    "0:3": {
+      "WHEAT": [
+        7,
+        210
+      ],
+      "FERTILIZER": [
+        4,
+        378
+      ]
+    },
+    "1:3": {
+      "FERTILIZER": [
+        6,
+        573
+      ]
+    },
+    "0:4": {
+      "FERTILIZER": [
+        6,
+        555
+      ],
+      "WHEAT": [
+        2,
+        60
+      ]
+    },
+    "1:4": {
+      "FERTILIZER": [
+        7,
+        652
+      ]
+    },
+    "0:5": {
+      "FERTILIZER": [
+        5,
+        449
+      ],
+      "WHEAT": [
+        2,
+        62
+      ]
+    },
+    "1:5": {
+      "FERTILIZER": [
+        7,
+        634
+      ]
+    },
+    "0:6": {
+      "FERTILIZER": [
+        9,
+        797
+      ],
+      "WOOL": [
+        12,
+        2440
+      ],
+      "WHEAT": [
+        9,
+        290
+      ]
+    },
+    "1:6": {
+      "WOOL": [
+        17,
+        3265
+      ],
+      "FERTILIZER": [
+        4,
+        350
+      ]
+    },
+    "0:7": {
+      "FERTILIZER": [
+        9,
+        768
+      ]
+    },
+    "1:7": {
+      "FERTILIZER": [
+        12,
+        1018
+      ]
+    },
+    "0:8": {
+      "FERTILIZER": [
+        10,
+        815
+      ],
+      "MILK": [
+        12,
+        2476
+      ],
+      "WHEAT": [
+        4,
+        140
+      ]
+    },
+    "1:8": {
+      "FERTILIZER": [
+        8,
+        648
+      ],
+      "MILK": [
+        18,
+        3635
+      ]
+    },
+    "0:9": {
+      "FERTILIZER": [
+        14,
+        1081
+      ],
+      "WOOL": [
+        8,
+        1150
+      ],
+      "WHEAT": [
+        4,
+        148
+      ]
+    },
+    "1:9": {
+      "FERTILIZER": [
+        7,
+        547
+      ],
+      "WOOL": [
+        11,
+        1766
+      ]
+    },
+    "0:10": {
+      "FERTILIZER": [
+        9,
+        662
+      ],
+      "MELON": [
+        60,
+        14797
+      ],
+      "MILK": [
+        12,
+        2523
+      ],
+      "WHEAT": [
+        6,
+        240
+      ]
+    },
+    "1:10": {
+      "FERTILIZER": [
+        19,
+        1396
+      ]
+    },
+    "0:11": {
+      "MELON": [
+        12,
+        2643
+      ],
+      "FERTILIZER": [
+        14,
+        959
+      ],
+      "MILK": [
+        6,
+        1253
+      ],
+      "WHEAT": [
+        18,
+        738
+      ]
+    },
+    "1:11": {
+      "FERTILIZER": [
+        8,
+        565
+      ],
+      "MELON": [
+        36,
+        6800
+      ],
+      "MILK": [
+        8,
+        1676
+      ],
+      "EGG": [
+        4,
+        212
+      ]
+    },
+    "0:12": {
+      "FERTILIZER": [
+        16,
+        1027
+      ],
+      "WOOL": [
+        8,
+        874
+      ],
+      "WHEAT": [
+        18,
+        738
+      ],
+      "MILK": [
+        6,
+        1271
+      ]
+    },
+    "1:12": {
+      "FERTILIZER": [
+        16,
+        1027
+      ],
+      "WOOL": [
+        1,
+        129
+      ],
+      "MELON": [
+        36,
+        4407
+      ],
+      "EGG": [
+        2,
+        106
+      ],
+      "MILK": [
+        7,
+        1495
+      ],
+      "WHEAT": [
+        4,
+        164
+      ]
+    },
+    "0:13": {
+      "FERTILIZER": [
+        17,
+        980
+      ],
+      "MILK": [
+        6,
+        1284
+      ]
+    },
+    "1:13": {
+      "FERTILIZER": [
+        15,
+        870
+      ],
+      "MELON": [
+        6,
+        446
+      ],
+      "EGG": [
+        8,
+        424
+      ],
+      "WHEAT": [
+        6,
+        246
+      ]
+    },
+    "1:14": {
+      "FERTILIZER": [
+        8,
+        429
+      ],
+      "WHEAT": [
+        17,
+        702
+      ],
+      "MILK": [
+        22,
+        4690
+      ],
+      "WOOL": [
+        1,
+        98
+      ],
+      "EGG": [
+        4,
+        212
+      ]
+    },
+    "0:14": {
+      "FERTILIZER": [
+        15,
+        776
+      ],
+      "MILK": [
+        15,
+        3167
+      ],
+      "WOOL": [
+        12,
+        754
+      ]
+    },
+    "0:15": {
+      "MILK": [
+        21,
+        4208
+      ],
+      "EGG": [
+        8,
+        418
+      ],
+      "FERTILIZER": [
+        16,
+        785
+      ],
+      "WHEAT": [
+        5,
+        205
+      ],
+      "STRAWBERRY": [
+        8,
+        1785
+      ]
+    },
+    "1:15": {
+      "EGG": [
+        8,
+        424
+      ],
+      "FERTILIZER": [
+        2,
+        100
+      ],
+      "MILK": [
+        10,
+        2037
+      ],
+      "WHEAT": [
+        16,
+        662
+      ]
+    },
+    "0:16": {
+      "WOOL": [
+        14,
+        1177
+      ],
+      "FERTILIZER": [
+        11,
+        511
+      ],
+      "EGG": [
+        6,
+        312
+      ],
+      "WHEAT": [
+        6,
+        246
+      ],
+      "MILK": [
+        12,
+        2191
+      ],
+      "STRAWBERRY": [
+        16,
+        3482
+      ]
+    },
+    "1:16": {
+      "EGG": [
+        4,
+        209
+      ],
+      "MILK": [
+        22,
+        4157
+      ],
+      "WHEAT": [
+        27,
+        1107
+      ],
+      "FERTILIZER": [
+        4,
+        183
+      ],
+      "STRAWBERRY": [
+        19,
+        4179
+      ]
+    },
+    "0:17": {
+      "MILK": [
+        3,
+        501
+      ],
+      "FERTILIZER": [
+        10,
+        439
+      ],
+      "EGG": [
+        6,
+        312
+      ],
+      "WHEAT": [
+        7,
+        287
+      ],
+      "STRAWBERRY": [
+        16,
+        3320
+      ]
+    },
+    "1:17": {
+      "EGG": [
+        8,
+        416
+      ],
+      "FERTILIZER": [
+        6,
+        254
+      ],
+      "STRAWBERRY": [
+        20,
+        4275
+      ],
+      "MILK": [
+        18,
+        3339
+      ],
+      "WHEAT": [
+        3,
+        123
+      ]
+    },
+    "0:18": {
+      "MILK": [
+        15,
+        2093
+      ],
+      "FERTILIZER": [
+        14,
+        563
+      ],
+      "WHEAT": [
+        11,
+        451
+      ],
+      "EGG": [
+        5,
+        260
+      ],
+      "WOOL": [
+        12,
+        2084
+      ],
+      "STRAWBERRY": [
+        16,
+        3039
+      ]
+    },
+    "1:18": {
+      "MILK": [
+        18,
+        2565
+      ],
+      "WHEAT": [
+        22,
+        902
+      ],
+      "FERTILIZER": [
+        8,
+        308
+      ],
+      "STRAWBERRY": [
+        44,
+        8678
+      ],
+      "EGG": [
+        4,
+        208
+      ]
+    },
+    "0:19": {
+      "MILK": [
+        18,
+        2105
+      ],
+      "STRAWBERRY": [
+        18,
+        3148
+      ],
+      "FERTILIZER": [
+        9,
+        329
+      ],
+      "EGG": [
+        4,
+        208
+      ],
+      "WHEAT": [
+        6,
+        246
+      ],
+      "WOOL": [
+        4,
+        827
+      ]
+    },
+    "1:19": {
+      "STRAWBERRY": [
+        20,
+        3510
+      ],
+      "FERTILIZER": [
+        3,
+        106
+      ],
+      "MILK": [
+        12,
+        1426
+      ],
+      "EGG": [
+        8,
+        416
+      ],
+      "WHEAT": [
+        3,
+        123
+      ]
+    },
+    "0:20": {
+      "MILK": [
+        9,
+        954
+      ],
+      "STRAWBERRY": [
+        26,
+        3404
+      ],
+      "EGG": [
+        7,
+        360
+      ],
+      "WOOL": [
+        4,
+        874
+      ],
+      "WHEAT": [
+        6,
+        246
+      ],
+      "FERTILIZER": [
+        5,
+        175
+      ]
+    },
+    "1:20": {
+      "MILK": [
+        17,
+        1749
+      ],
+      "STRAWBERRY": [
+        32,
+        4626
+      ],
+      "FERTILIZER": [
+        7,
+        244
+      ],
+      "EGG": [
+        12,
+        613
+      ],
+      "WHEAT": [
+        11,
+        451
+      ]
+    },
+    "0:21": {
+      "FERTILIZER": [
+        13,
+        421
+      ],
+      "MILK": [
+        9,
+        764
+      ],
+      "WOOL": [
+        8,
+        1827
+      ],
+      "WHEAT": [
+        7,
+        287
+      ],
+      "STRAWBERRY": [
+        28,
+        1541
+      ],
+      "EGG": [
+        7,
+        357
+      ]
+    },
+    "1:21": {
+      "MILK": [
+        18,
+        1503
+      ],
+      "STRAWBERRY": [
+        24,
+        1816
+      ],
+      "FERTILIZER": [
+        8,
+        243
+      ],
+      "WHEAT": [
+        5,
+        210
+      ],
+      "WOOL": [
+        12,
+        2772
+      ],
+      "TOMATO": [
+        2,
+        160
+      ]
+    },
+    "0:22": {
+      "STRAWBERRY": [
+        21,
+        341
+      ],
+      "MILK": [
+        14,
+        912
+      ],
+      "WOOL": [
+        8,
+        1842
+      ],
+      "EGG": [
+        4,
+        201
+      ],
+      "FERTILIZER": [
+        19,
+        540
+      ],
+      "WHEAT": [
+        13,
+        545
+      ]
+    },
+    "1:22": {
+      "EGG": [
+        10,
+        507
+      ],
+      "MILK": [
+        18,
+        1166
+      ],
+      "FERTILIZER": [
+        9,
+        243
+      ],
+      "STRAWBERRY": [
+        4,
+        74
+      ],
+      "WHEAT": [
+        9,
+        378
+      ],
+      "WOOL": [
+        6,
+        1396
+      ],
+      "TOMATO": [
+        7,
+        571
+      ]
+    },
+    "0:23": {
+      "STRAWBERRY": [
+        20,
+        163
+      ],
+      "FERTILIZER": [
+        18,
+        437
+      ],
+      "WOOL": [
+        4,
+        927
+      ],
+      "EGG": [
+        9,
+        446
+      ],
+      "WHEAT": [
+        12,
+        504
+      ],
+      "MILK": [
+        16,
+        678
+      ]
+    },
+    "1:23": {
+      "MILK": [
+        6,
+        301
+      ],
+      "FERTILIZER": [
+        6,
+        137
+      ],
+      "WOOL": [
+        29,
+        6755
+      ],
+      "WHEAT": [
+        14,
+        588
+      ],
+      "STRAWBERRY": [
+        3,
+        42
+      ],
+      "EGG": [
+        8,
+        399
+      ],
+      "TOMATO": [
+        2,
+        166
+      ]
+    },
+    "0:24": {
+      "WOOL": [
+        16,
+        3695
+      ],
+      "FERTILIZER": [
+        10,
+        225
+      ],
+      "EGG": [
+        5,
+        237
+      ],
+      "WHEAT": [
+        18,
+        755
+      ],
+      "STRAWBERRY": [
+        22,
+        272
+      ],
+      "MILK": [
+        9,
+        401
+      ]
+    },
+    "1:24": {
+      "WHEAT": [
+        15,
+        630
+      ],
+      "MILK": [
+        16,
+        929
+      ],
+      "FERTILIZER": [
+        4,
+        90
+      ],
+      "TOMATO": [
+        14,
+        1188
+      ],
+      "WOOL": [
+        3,
+        696
+      ],
+      "EGG": [
+        4,
+        190
+      ],
+      "STRAWBERRY": [
+        4,
+        84
+      ]
+    },
+    "0:25": {
+      "FERTILIZER": [
+        16,
+        338
+      ],
+      "EGG": [
+        8,
+        372
+      ],
+      "STRAWBERRY": [
+        9,
+        288
+      ],
+      "MILK": [
+        21,
+        790
+      ],
+      "WHEAT": [
+        31,
+        1280
+      ]
+    },
+    "1:25": {
+      "WHEAT": [
+        50,
+        2054
+      ],
+      "MILK": [
+        11,
+        531
+      ],
+      "FERTILIZER": [
+        1,
+        21
+      ],
+      "STRAWBERRY": [
+        3,
+        135
+      ],
+      "EGG": [
+        4,
+        184
+      ],
+      "WOOL": [
+        8,
+        1883
+      ],
+      "TOMATO": [
+        6,
+        520
+      ]
+    },
+    "0:26": {
+      "WOOL": [
+        4,
+        938
+      ],
+      "FERTILIZER": [
+        15,
+        294
+      ],
+      "EGG": [
+        3,
+        135
+      ],
+      "WHEAT": [
+        33,
+        1316
+      ],
+      "MILK": [
+        9,
+        420
+      ],
+      "STRAWBERRY": [
+        21,
+        828
+      ]
+    },
+    "1:26": {
+      "EGG": [
+        10,
+        454
+      ],
+      "WHEAT": [
+        30,
+        1182
+      ],
+      "FERTILIZER": [
+        3,
+        59
+      ],
+      "STRAWBERRY": [
+        10,
+        457
+      ],
+      "MILK": [
+        11,
+        559
+      ],
+      "TOMATO": [
+        10,
+        903
+      ]
+    },
+    "1:27": {
+      "WHEAT": [
+        37,
+        1412
+      ],
+      "FERTILIZER": [
+        3,
+        49
+      ],
+      "MILK": [
+        15,
+        850
+      ],
+      "STRAWBERRY": [
+        13,
+        751
+      ],
+      "TOMATO": [
+        36,
+        3216
+      ],
+      "WOOL": [
+        8,
+        1912
+      ]
+    },
+    "0:27": {
+      "FERTILIZER": [
+        20,
+        331
+      ],
+      "WOOL": [
+        6,
+        1426
+      ],
+      "WHEAT": [
+        35,
+        1340
+      ],
+      "EGG": [
+        2,
+        90
+      ],
+      "MILK": [
+        15,
+        664
+      ],
+      "STRAWBERRY": [
+        6,
+        351
+      ]
+    },
+    "0:28": {
+      "STRAWBERRY": [
+        20,
+        721
+      ],
+      "MILK": [
+        16,
+        736
+      ],
+      "WOOL": [
+        9,
+        2154
+      ],
+      "EGG": [
+        8,
+        360
+      ],
+      "FERTILIZER": [
+        11,
+        143
+      ],
+      "CARROT": [
+        21,
+        836
+      ],
+      "WHEAT": [
+        25,
+        884
+      ]
+    },
+    "1:28": {
+      "WHEAT": [
+        67,
+        2415
+      ],
+      "FERTILIZER": [
+        2,
+        28
+      ],
+      "STRAWBERRY": [
+        5,
+        261
+      ],
+      "EGG": [
+        13,
+        590
+      ],
+      "CARROT": [
+        3,
+        117
+      ],
+      "TOMATO": [
+        18,
+        1559
+      ]
+    },
+    "0:29": {
+      "WHEAT": [
+        61,
+        1866
+      ],
+      "CARROT": [
+        74,
+        2578
+      ],
+      "MILK": [
+        18,
+        423
+      ],
+      "EGG": [
+        10,
+        440
+      ],
+      "FERTILIZER": [
+        14,
+        136
+      ],
+      "WOOL": [
+        8,
+        1928
+      ]
+    },
+    "1:29": {
+      "WHEAT": [
+        80,
+        2228
+      ],
+      "CARROT": [
+        31,
+        985
+      ],
+      "FERTILIZER": [
+        13,
+        122
+      ],
+      "STRAWBERRY": [
+        26,
+        1419
+      ],
+      "MILK": [
+        28,
+        1445
+      ],
+      "TOMATO": [
+        16,
+        1373
+      ],
+      "WOOL": [
+        4,
+        964
+      ],
+      "EGG": [
+        2,
+        88
+      ]
+    }
+  }
+}

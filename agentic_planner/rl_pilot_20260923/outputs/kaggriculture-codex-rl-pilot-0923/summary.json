@@ -1,0 +1,30 @@
+{
+  "selected_checkpoint": "initial_bc",
+  "selection_score": [
+    1.0,
+    -1376.4375
+  ],
+  "initial_test": {
+    "label": "test_initial",
+    "n": 64,
+    "wins": 1,
+    "draws": 0,
+    "mean_delta": -2029.015625,
+    "elapsed": 3585,
+    "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"
+  },
+  "selected_test": {
+    "label": "test_selected",
+    "n": 64,
+    "wins": 1,
+    "draws": 0,
+    "mean_delta": -2029.015625,
+    "elapsed": 3702,
+    "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"
+  },
+  "iterations": 60,
+  "training_transition_count": 100800,
+  "elapsed": 3702,
+  "incumbent": "omw_v13f",
+  "note": "Experimental continuation policy. No competition submission. Codec retains documented limitations."
+}

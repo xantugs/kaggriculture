@@ -1,0 +1,341 @@
+[
+  {
+    "gid": 111034126,
+    "donor": 111495993,
+    "team": "吃白饭的大肥鱼",
+    "shops_seen": [
+      "BRUNCH_SPOT",
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "PIZZA_SHOP",
+      "BRUNCH_SPOT"
+    ],
+    "distance": 22032.6,
+    "tile_mismatch": 0,
+    "base_us": 100310.0,
+    "base_them": 101479.0,
+    "base_margin": -1169.0,
+    "retrieved_us": 105268.0,
+    "retrieved_them": 101712.0,
+    "retrieved_margin": 3556.0,
+    "cash_delta": 4958.0,
+    "margin_delta": 4725.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111207387,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 111440630,
+    "donor": 111495993,
+    "team": "mtmr_s1",
+    "shops_seen": [
+      "BAKERY",
+      "PIZZA_SHOP",
+      "BRUNCH_SPOT",
+      "SMOOTHIE_SHOP",
+      "PET_CAFE"
+    ],
+    "distance": 12118.1,
+    "tile_mismatch": 0,
+    "base_us": 64128.0,
+    "base_them": 63246.0,
+    "base_margin": 882.0,
+    "retrieved_us": 65476.0,
+    "retrieved_them": 63891.0,
+    "retrieved_margin": 1585.0,
+    "cash_delta": 1348.0,
+    "margin_delta": 703.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111501679,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 111559455,
+    "donor": 111908972,
+    "team": "mtmr_s1",
+    "shops_seen": [
+      "BRUNCH_SPOT",
+      "ICE_CREAM_SHOP",
+      "BAKERY",
+      "PET_CAFE",
+      "PET_CAFE"
+    ],
+    "distance": 11012.4,
+    "tile_mismatch": 0,
+    "base_us": 71177.0,
+    "base_them": 78161.0,
+    "base_margin": -6984.0,
+    "retrieved_us": 72817.0,
+    "retrieved_them": 82341.0,
+    "retrieved_margin": -9524.0,
+    "cash_delta": 1640.0,
+    "margin_delta": -2540.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111618252,
+    "donor": 111908972,
+    "team": "mtmr_s1",
+    "shops_seen": [
+      "BRUNCH_SPOT",
+      "ICE_CREAM_SHOP",
+      "PET_CAFE",
+      "FARMERS_MARKET",
+      "PET_CAFE"
+    ],
+    "distance": 11539.0,
+    "tile_mismatch": 0,
+    "base_us": 97874.0,
+    "base_them": 98933.0,
+    "base_margin": -1059.0,
+    "retrieved_us": 81986.0,
+    "retrieved_them": 102207.0,
+    "retrieved_margin": -20221.0,
+    "cash_delta": -15888.0,
+    "margin_delta": -19162.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111658613,
+    "donor": 111824988,
+    "team": "mtmr_s1",
+    "shops_seen": [
+      "FARMERS_MARKET",
+      "PIZZA_SHOP",
+      "YARN_STORE",
+      "SMOOTHIE_SHOP",
+      "FARMERS_MARKET"
+    ],
+    "distance": 21177.65,
+    "tile_mismatch": 0,
+    "base_us": 123134.0,
+    "base_them": 123331.0,
+    "base_margin": -197.0,
+    "retrieved_us": 133521.0,
+    "retrieved_them": 123018.0,
+    "retrieved_margin": 10503.0,
+    "cash_delta": 10387.0,
+    "margin_delta": 10700.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111784958,
+    "donor": 111495993,
+    "team": "吃白饭的大肥鱼",
+    "shops_seen": [
+      "BAKERY",
+      "ICE_CREAM_SHOP",
+      "BRUNCH_SPOT",
+      "YARN_STORE",
+      "SMOOTHIE_SHOP"
+    ],
+    "distance": 12593.85,
+    "tile_mismatch": 0,
+    "base_us": 96322.0,
+    "base_them": 96806.0,
+    "base_margin": -484.0,
+    "retrieved_us": 100547.0,
+    "retrieved_them": 106194.0,
+    "retrieved_margin": -5647.0,
+    "cash_delta": 4225.0,
+    "margin_delta": -5163.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111822443,
+    "donor": 111115521,
+    "team": "mtmr_s1",
+    "shops_seen": [
+      "BAKERY",
+      "SMOOTHIE_SHOP",
+      "FARMERS_MARKET",
+      "PET_CAFE",
+      "PET_CAFE"
+    ],
+    "distance": 21137.75,
+    "tile_mismatch": 0,
+    "base_us": 63006.0,
+    "base_them": 79646.0,
+    "base_margin": -16640.0,
+    "retrieved_us": 66122.0,
+    "retrieved_them": 83027.0,
+    "retrieved_margin": -16905.0,
+    "cash_delta": 3116.0,
+    "margin_delta": -265.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111870193,
+    "donor": 111115521,
+    "team": "mtmr_s1",
+    "shops_seen": [
+      "SMOOTHIE_SHOP",
+      "BRUNCH_SPOT",
+      "FARMERS_MARKET",
+      "ICE_CREAM_SHOP",
+      "BRUNCH_SPOT"
+    ],
+    "distance": 11584.85,
+    "tile_mismatch": 0,
+    "base_us": 109221.0,
+    "base_them": 123246.0,
+    "base_margin": -14025.0,
+    "retrieved_us": 115407.0,
+    "retrieved_them": 129384.0,
+    "retrieved_margin": -13977.0,
+    "cash_delta": 6186.0,
+    "margin_delta": 48.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 111913538,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 111915785,
+    "donor": 111688826,
+    "team": "mtmr_s1",
+    "shops_seen": [
+      "BRUNCH_SPOT",
+      "BRUNCH_SPOT",
+      "FARMERS_MARKET",
+      "ICE_CREAM_SHOP",
+      "BAKERY"
+    ],
+    "distance": 21517.35,
+    "tile_mismatch": 0,
+    "base_us": 104028.0,
+    "base_them": 111093.0,
+    "base_margin": -7065.0,
+    "retrieved_us": 99942.0,
+    "retrieved_them": 118051.0,
+    "retrieved_margin": -18109.0,
+    "cash_delta": -4086.0,
+    "margin_delta": -11044.0,
+    "base_err": [
+      null,
+      null
+    ],
+    "retrieved_err": [
+      null,
+      null
+    ],
+    "recorded_reproduced": true
+  },
+  {
+    "gid": 112048464,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112054508,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112059793,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112062458,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112077155,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112090653,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112099591,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112126965,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112140059,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112146154,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112151491,
+    "skip": "no aligned donor"
+  },
+  {
+    "gid": 112158759,
+    "skip": "no aligned donor"
+  }
+]

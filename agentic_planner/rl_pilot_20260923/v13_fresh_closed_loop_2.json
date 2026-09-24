@@ -1,0 +1,977 @@
+[
+  {
+    "seed": 910000001,
+    "seat": 0,
+    "label": "conservative",
+    "us": 120501.0,
+    "them": 120824.0,
+    "margin": -323.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.4198
+  },
+  {
+    "seed": 910000001,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 120501.0,
+    "them": 120823.0,
+    "margin": -322.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.4558
+  },
+  {
+    "seed": 910000002,
+    "seat": 0,
+    "label": "base",
+    "us": 74585.0,
+    "them": 74585.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3839
+  },
+  {
+    "seed": 910000002,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 70235.0,
+    "them": 74664.0,
+    "margin": -4429.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3243
+  },
+  {
+    "seed": 910000002,
+    "seat": 1,
+    "label": "schedule",
+    "us": 70245.0,
+    "them": 74672.0,
+    "margin": -4427.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3606
+  },
+  {
+    "seed": 910000003,
+    "seat": 0,
+    "label": "conservative",
+    "us": 79066.0,
+    "them": 81454.0,
+    "margin": -2388.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3712
+  },
+  {
+    "seed": 910000003,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 79066.0,
+    "them": 81454.0,
+    "margin": -2388.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3895
+  },
+  {
+    "seed": 910000004,
+    "seat": 0,
+    "label": "base",
+    "us": 84767.0,
+    "them": 84767.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2834
+  },
+  {
+    "seed": 910000004,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 84173.0,
+    "them": 85299.0,
+    "margin": -1126.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3154
+  },
+  {
+    "seed": 910000004,
+    "seat": 1,
+    "label": "schedule",
+    "us": 84170.0,
+    "them": 85305.0,
+    "margin": -1135.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2842
+  },
+  {
+    "seed": 910000005,
+    "seat": 0,
+    "label": "conservative",
+    "us": 122796.0,
+    "them": 122813.0,
+    "margin": -17.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.348
+  },
+  {
+    "seed": 910000005,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 122797.0,
+    "them": 122817.0,
+    "margin": -20.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3991
+  },
+  {
+    "seed": 910000006,
+    "seat": 0,
+    "label": "base",
+    "us": 114367.0,
+    "them": 114367.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3816
+  },
+  {
+    "seed": 910000006,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 114284.0,
+    "them": 114468.0,
+    "margin": -184.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.5696
+  },
+  {
+    "seed": 910000006,
+    "seat": 1,
+    "label": "schedule",
+    "us": 114285.0,
+    "them": 114469.0,
+    "margin": -184.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3142
+  },
+  {
+    "seed": 910000007,
+    "seat": 0,
+    "label": "conservative",
+    "us": 81384.0,
+    "them": 82456.0,
+    "margin": -1072.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1929
+  },
+  {
+    "seed": 910000007,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 81384.0,
+    "them": 82458.0,
+    "margin": -1074.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1921
+  },
+  {
+    "seed": 910000008,
+    "seat": 0,
+    "label": "base",
+    "us": 137887.0,
+    "them": 135027.0,
+    "margin": 2860.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2055
+  },
+  {
+    "seed": 910000008,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 137824.0,
+    "them": 135274.0,
+    "margin": 2550.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1754
+  },
+  {
+    "seed": 910000008,
+    "seat": 1,
+    "label": "schedule",
+    "us": 127601.0,
+    "them": 130421.0,
+    "margin": -2820.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1802
+  },
+  {
+    "seed": 910000009,
+    "seat": 0,
+    "label": "conservative",
+    "us": 130800.0,
+    "them": 130975.0,
+    "margin": -175.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2799
+  },
+  {
+    "seed": 910000009,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 130800.0,
+    "them": 130975.0,
+    "margin": -175.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.302
+  },
+  {
+    "seed": 910000010,
+    "seat": 0,
+    "label": "base",
+    "us": 75401.0,
+    "them": 75401.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2402
+  },
+  {
+    "seed": 910000010,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 74658.0,
+    "them": 75159.0,
+    "margin": -501.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1791
+  },
+  {
+    "seed": 910000010,
+    "seat": 1,
+    "label": "schedule",
+    "us": 74658.0,
+    "them": 75159.0,
+    "margin": -501.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3982
+  },
+  {
+    "seed": 910000011,
+    "seat": 0,
+    "label": "conservative",
+    "us": 96816.0,
+    "them": 97534.0,
+    "margin": -718.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.5892
+  },
+  {
+    "seed": 910000011,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 96822.0,
+    "them": 97549.0,
+    "margin": -727.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.5949
+  },
+  {
+    "seed": 910000012,
+    "seat": 0,
+    "label": "base",
+    "us": 79025.0,
+    "them": 79025.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3656
+  },
+  {
+    "seed": 910000012,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 78631.0,
+    "them": 78560.0,
+    "margin": 71.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.357
+  },
+  {
+    "seed": 910000012,
+    "seat": 1,
+    "label": "schedule",
+    "us": 78631.0,
+    "them": 78560.0,
+    "margin": 71.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3713
+  },
+  {
+    "seed": 910000013,
+    "seat": 0,
+    "label": "conservative",
+    "us": 89411.0,
+    "them": 89796.0,
+    "margin": -385.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3966
+  },
+  {
+    "seed": 910000013,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 89339.0,
+    "them": 89893.0,
+    "margin": -554.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3541
+  },
+  {
+    "seed": 910000014,
+    "seat": 0,
+    "label": "base",
+    "us": 105923.0,
+    "them": 105923.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3945
+  },
+  {
+    "seed": 910000014,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 105818.0,
+    "them": 106484.0,
+    "margin": -666.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.4309
+  },
+  {
+    "seed": 910000014,
+    "seat": 1,
+    "label": "schedule",
+    "us": 106194.0,
+    "them": 106388.0,
+    "margin": -194.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3689
+  },
+  {
+    "seed": 910000015,
+    "seat": 0,
+    "label": "conservative",
+    "us": 115540.0,
+    "them": 116631.0,
+    "margin": -1091.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.67
+  },
+  {
+    "seed": 910000015,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 115539.0,
+    "them": 116641.0,
+    "margin": -1102.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.5798
+  },
+  {
+    "seed": 910000016,
+    "seat": 0,
+    "label": "base",
+    "us": 96812.0,
+    "them": 96812.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3617
+  },
+  {
+    "seed": 910000016,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 96473.0,
+    "them": 97101.0,
+    "margin": -628.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3577
+  },
+  {
+    "seed": 910000016,
+    "seat": 1,
+    "label": "schedule",
+    "us": 96586.0,
+    "them": 97151.0,
+    "margin": -565.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3579
+  },
+  {
+    "seed": 910000017,
+    "seat": 0,
+    "label": "conservative",
+    "us": 132580.0,
+    "them": 132664.0,
+    "margin": -84.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2881
+  },
+  {
+    "seed": 910000017,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 132580.0,
+    "them": 132664.0,
+    "margin": -84.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2728
+  },
+  {
+    "seed": 910000018,
+    "seat": 0,
+    "label": "base",
+    "us": 77184.0,
+    "them": 77184.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3419
+  },
+  {
+    "seed": 910000018,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 77020.0,
+    "them": 77303.0,
+    "margin": -283.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3779
+  },
+  {
+    "seed": 910000018,
+    "seat": 1,
+    "label": "schedule",
+    "us": 77018.0,
+    "them": 77311.0,
+    "margin": -293.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3649
+  },
+  {
+    "seed": 910000019,
+    "seat": 0,
+    "label": "conservative",
+    "us": 141880.0,
+    "them": 142093.0,
+    "margin": -213.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.6041
+  },
+  {
+    "seed": 910000019,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 141880.0,
+    "them": 142093.0,
+    "margin": -213.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.6912
+  },
+  {
+    "seed": 910000020,
+    "seat": 0,
+    "label": "base",
+    "us": 70379.0,
+    "them": 70379.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3231
+  },
+  {
+    "seed": 910000020,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 69491.0,
+    "them": 70523.0,
+    "margin": -1032.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2511
+  },
+  {
+    "seed": 910000020,
+    "seat": 1,
+    "label": "schedule",
+    "us": 69564.0,
+    "them": 70493.0,
+    "margin": -929.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1781
+  },
+  {
+    "seed": 910000021,
+    "seat": 0,
+    "label": "conservative",
+    "us": 89146.0,
+    "them": 89645.0,
+    "margin": -499.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1625
+  },
+  {
+    "seed": 910000021,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 89144.0,
+    "them": 89655.0,
+    "margin": -511.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1761
+  },
+  {
+    "seed": 910000022,
+    "seat": 0,
+    "label": "base",
+    "us": 93388.0,
+    "them": 93388.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.1738
+  },
+  {
+    "seed": 910000022,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 93364.0,
+    "them": 93445.0,
+    "margin": -81.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3566
+  },
+  {
+    "seed": 910000022,
+    "seat": 1,
+    "label": "schedule",
+    "us": 93364.0,
+    "them": 93445.0,
+    "margin": -81.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3952
+  },
+  {
+    "seed": 910000023,
+    "seat": 0,
+    "label": "conservative",
+    "us": 95851.0,
+    "them": 96142.0,
+    "margin": -291.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2681
+  },
+  {
+    "seed": 910000023,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 95851.0,
+    "them": 96142.0,
+    "margin": -291.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.284
+  },
+  {
+    "seed": 910000024,
+    "seat": 0,
+    "label": "base",
+    "us": 92291.0,
+    "them": 92291.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3488
+  },
+  {
+    "seed": 910000024,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 91965.0,
+    "them": 92656.0,
+    "margin": -691.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3359
+  },
+  {
+    "seed": 910000024,
+    "seat": 1,
+    "label": "schedule",
+    "us": 91912.0,
+    "them": 92657.0,
+    "margin": -745.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3754
+  },
+  {
+    "seed": 910000025,
+    "seat": 0,
+    "label": "conservative",
+    "us": 89778.0,
+    "them": 89390.0,
+    "margin": 388.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3441
+  },
+  {
+    "seed": 910000025,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 89555.0,
+    "them": 89559.0,
+    "margin": -4.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3322
+  },
+  {
+    "seed": 910000026,
+    "seat": 0,
+    "label": "base",
+    "us": 102345.0,
+    "them": 102345.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.5796
+  },
+  {
+    "seed": 910000026,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 102093.0,
+    "them": 102864.0,
+    "margin": -771.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.559
+  },
+  {
+    "seed": 910000026,
+    "seat": 1,
+    "label": "schedule",
+    "us": 102093.0,
+    "them": 102864.0,
+    "margin": -771.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.5308
+  },
+  {
+    "seed": 910000027,
+    "seat": 0,
+    "label": "conservative",
+    "us": 109308.0,
+    "them": 109550.0,
+    "margin": -242.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3208
+  },
+  {
+    "seed": 910000027,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 109176.0,
+    "them": 109700.0,
+    "margin": -524.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3363
+  },
+  {
+    "seed": 910000028,
+    "seat": 0,
+    "label": "base",
+    "us": 108456.0,
+    "them": 103154.0,
+    "margin": 5302.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3694
+  },
+  {
+    "seed": 910000028,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 108118.0,
+    "them": 103415.0,
+    "margin": 4703.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.527
+  },
+  {
+    "seed": 910000028,
+    "seat": 1,
+    "label": "schedule",
+    "us": 102818.0,
+    "them": 108714.0,
+    "margin": -5896.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.4285
+  },
+  {
+    "seed": 910000029,
+    "seat": 0,
+    "label": "conservative",
+    "us": 106408.0,
+    "them": 107018.0,
+    "margin": -610.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2836
+  },
+  {
+    "seed": 910000029,
+    "seat": 1,
+    "label": "gluth8",
+    "us": 106408.0,
+    "them": 107018.0,
+    "margin": -610.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.2788
+  },
+  {
+    "seed": 910000030,
+    "seat": 0,
+    "label": "base",
+    "us": 158590.0,
+    "them": 158590.0,
+    "margin": 0.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.3234
+  },
+  {
+    "seed": 910000030,
+    "seat": 0,
+    "label": "screen_combo",
+    "us": 158661.0,
+    "them": 158522.0,
+    "margin": 139.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.4056
+  },
+  {
+    "seed": 910000030,
+    "seat": 1,
+    "label": "schedule",
+    "us": 158595.0,
+    "them": 158597.0,
+    "margin": -2.0,
+    "error": [
+      null,
+      null
+    ],
+    "tmax": 0.313
+  }
+]

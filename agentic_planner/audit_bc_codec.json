@@ -1,0 +1,2752 @@
+{
+  "method": "Perfect encoded teacher labels injected into actual BC decoder; no network inference.",
+  "source_sha256": {
+    "bc_core.py": "44ae7056c3f8cb08fd717ddd8e5d379d866ad8b175b55de3441d1589981e8e33",
+    "bc_layer.py": "5184e0d611766bbda8bfe1293c91aa64f145291e75e8bba803f856793402acfb"
+  },
+  "synthetic": [
+    {
+      "case": "same_turn_delivery_sale",
+      "teacher": {
+        "farmer": [
+          "DROP"
+        ],
+        "market": [
+          [
+            "SELL",
+            "STRAWBERRY",
+            10
+          ]
+        ],
+        "hands": []
+      },
+      "decoded": {
+        "farmer": [
+          "DROP"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "outcomes": {
+        "teacher": {
+          "cash": 2113.0,
+          "private": {
+            "shed": {
+              "STRAWBERRY": 0
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {}
+            ]
+          }
+        },
+        "perfect_labels_decoded": {
+          "cash": 1000.0,
+          "private": {
+            "shed": {
+              "STRAWBERRY": 10
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "sale_funds_purchase",
+      "teacher": {
+        "farmer": [
+          "PASS"
+        ],
+        "market": [
+          [
+            "SELL",
+            "WOOL",
+            10
+          ],
+          [
+            "BUY_ANIMAL",
+            "COW",
+            1
+          ]
+        ],
+        "hands": []
+      },
+      "decoded": {
+        "farmer": [
+          "PASS"
+        ],
+        "hands": [],
+        "market": [
+          [
+            "SELL",
+            "WOOL",
+            10
+          ]
+        ]
+      },
+      "outcomes": {
+        "teacher": {
+          "cash": 1683.0,
+          "private": {
+            "shed": {
+              "WOOL": 0,
+              "COW": 1
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {}
+            ]
+          }
+        },
+        "perfect_labels_decoded": {
+          "cash": 2083.0,
+          "private": {
+            "shed": {
+              "WOOL": 0
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "order_and_buy_quantity",
+      "teacher": {
+        "farmer": [
+          "PASS"
+        ],
+        "market": [
+          [
+            "SELL",
+            "WOOL",
+            10
+          ],
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            10
+          ]
+        ],
+        "hands": []
+      },
+      "decoded": {
+        "farmer": [
+          "PASS"
+        ],
+        "hands": [],
+        "market": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            8
+          ],
+          [
+            "SELL",
+            "WOOL",
+            10
+          ]
+        ]
+      },
+      "outcomes": {
+        "teacher": {
+          "cash": 11711.0,
+          "private": {
+            "shed": {
+              "WOOL": 0,
+              "WHEAT": 10
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {}
+            ]
+          }
+        },
+        "perfect_labels_decoded": {
+          "cash": 11767.0,
+          "private": {
+            "shed": {
+              "WOOL": 0,
+              "WHEAT": 8
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "pickup_quantity",
+      "teacher": {
+        "farmer": [
+          "PICKUP",
+          "WHEAT",
+          13
+        ],
+        "market": [],
+        "hands": []
+      },
+      "decoded": {
+        "farmer": [
+          "PICKUP",
+          "WHEAT",
+          12
+        ],
+        "hands": [],
+        "market": []
+      },
+      "outcomes": {
+        "teacher": {
+          "cash": 1000.0,
+          "private": {
+            "shed": {
+              "WHEAT": 7
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {
+                "WHEAT": 13
+              }
+            ]
+          }
+        },
+        "perfect_labels_decoded": {
+          "cash": 1000.0,
+          "private": {
+            "shed": {
+              "WHEAT": 8
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {
+                "WHEAT": 12
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "selective_deposit",
+      "teacher": {
+        "farmer": [
+          "PLACE",
+          "WHEAT",
+          1
+        ],
+        "market": [],
+        "hands": []
+      },
+      "decoded": {
+        "farmer": [
+          "DROP"
+        ],
+        "hands": [],
+        "market": []
+      },
+      "outcomes": {
+        "teacher": {
+          "cash": 1000.0,
+          "private": {
+            "shed": {
+              "WHEAT": 1
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {
+                "WHEAT": 4,
+                "STRAWBERRY": 7
+              }
+            ]
+          }
+        },
+        "perfect_labels_decoded": {
+          "cash": 1000.0,
+          "private": {
+            "shed": {
+              "WHEAT": 5,
+              "STRAWBERRY": 7
+            },
+            "seeds": {
+              "WHEAT": 0,
+              "CARROT": 0,
+              "TOMATO": 0,
+              "STRAWBERRY": 0,
+              "MELON": 0
+            },
+            "inventories": [
+              {}
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "replays": [
+    {
+      "file": "agentic_planner\\codec_samples\\111815047.json",
+      "teams": [
+        "Unknown Mother-Goose",
+        "DSM"
+      ],
+      "reproduced_rewards": [
+        94484.0,
+        106084.0
+      ],
+      "counts": [
+        {
+          "turns": 719,
+          "teacher_sale_turns": 291,
+          "pickup_commands": 237,
+          "pickup_requested_quantity_changed": 178,
+          "delivery_sale_omitted_turns": 63,
+          "delivery_sale_omitted_orders": 89
+        },
+        {
+          "turns": 719,
+          "teacher_sale_turns": 310,
+          "pickup_commands": 213,
+          "pickup_requested_quantity_changed": 87,
+          "delivery_sale_omitted_turns": 41,
+          "delivery_sale_omitted_orders": 41
+        }
+      ],
+      "examples": [
+        {
+          "step": 147,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 147,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 149,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 149,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                8
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "file": "agentic_planner\\codec_samples\\111815056.json",
+      "teams": [
+        "Vadim Vasilenko",
+        "Unknown Mother-Goose"
+      ],
+      "reproduced_rewards": [
+        129297.0,
+        120588.0
+      ],
+      "counts": [
+        {
+          "turns": 719,
+          "teacher_sale_turns": 296,
+          "pickup_commands": 232,
+          "pickup_requested_quantity_changed": 83,
+          "delivery_sale_omitted_turns": 43,
+          "delivery_sale_omitted_orders": 53
+        },
+        {
+          "turns": 719,
+          "teacher_sale_turns": 298,
+          "pickup_commands": 254,
+          "pickup_requested_quantity_changed": 185,
+          "delivery_sale_omitted_turns": 46,
+          "delivery_sale_omitted_orders": 47
+        }
+      ],
+      "examples": [
+        {
+          "step": 147,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 147,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 149,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 149,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_PRODUCT",
+                "WHEAT",
+                3
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                8
+              ],
+              [
+                "BUY_PRODUCT",
+                "WHEAT",
+                4
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                12
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "file": "agentic_planner\\codec_samples\\111820573.json",
+      "teams": [
+        "Vadim Vasilenko",
+        "DSM"
+      ],
+      "reproduced_rewards": [
+        89050.0,
+        95606.0
+      ],
+      "counts": [
+        {
+          "turns": 719,
+          "teacher_sale_turns": 277,
+          "pickup_commands": 204,
+          "pickup_requested_quantity_changed": 62,
+          "delivery_sale_omitted_turns": 33,
+          "delivery_sale_omitted_orders": 45
+        },
+        {
+          "turns": 719,
+          "teacher_sale_turns": 281,
+          "pickup_commands": 196,
+          "pickup_requested_quantity_changed": 73,
+          "delivery_sale_omitted_turns": 39,
+          "delivery_sale_omitted_orders": 39
+        }
+      ],
+      "examples": [
+        {
+          "step": 147,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 147,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 149,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 149,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                8
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                8
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "file": "agentic_planner\\codec_samples\\111820581.json",
+      "teams": [
+        "Vadim Vasilenko",
+        "Unknown Mother-Goose"
+      ],
+      "reproduced_rewards": [
+        123061.0,
+        109468.0
+      ],
+      "counts": [
+        {
+          "turns": 719,
+          "teacher_sale_turns": 292,
+          "pickup_commands": 239,
+          "pickup_requested_quantity_changed": 89,
+          "delivery_sale_omitted_turns": 45,
+          "delivery_sale_omitted_orders": 57
+        },
+        {
+          "turns": 719,
+          "teacher_sale_turns": 299,
+          "pickup_commands": 250,
+          "pickup_requested_quantity_changed": 190,
+          "delivery_sale_omitted_turns": 62,
+          "delivery_sale_omitted_orders": 92
+        }
+      ],
+      "examples": [
+        {
+          "step": 147,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 147,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "DROP"
+            ],
+            "hands": [
+              [
+                "HARVEST"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "HARVEST"
+              ],
+              [
+                "WEST"
+              ],
+              [
+                "WEST"
+              ]
+            ],
+            "market": []
+          }
+        },
+        {
+          "step": 149,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 149,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_LAND"
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "WEST"
+            ],
+            "hands": [
+              [
+                "EAST"
+              ],
+              [
+                "FEED"
+              ],
+              [
+                "COLLECT_FERTILIZER"
+              ],
+              [
+                "SOUTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "EAST"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_LAND"
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 0,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_PRODUCT",
+                "WHEAT",
+                5
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "SHEEP",
+                1
+              ],
+              [
+                "BUY_SEED",
+                "STRAWBERRY",
+                1
+              ],
+              [
+                "BUY_PRODUCT",
+                "WHEAT",
+                4
+              ]
+            ]
+          }
+        },
+        {
+          "step": 150,
+          "seat": 1,
+          "products": [
+            "WOOL"
+          ],
+          "teacher": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "PLACE",
+                "FERTILIZER",
+                1
+              ]
+            ],
+            "market": [
+              [
+                "SELL",
+                "WOOL",
+                6
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          },
+          "decoded": {
+            "farmer": [
+              "FEED"
+            ],
+            "hands": [
+              [
+                "DROP"
+              ],
+              [
+                "CARE"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "DROP"
+              ],
+              [
+                "WATER"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "NORTH"
+              ],
+              [
+                "DROP"
+              ]
+            ],
+            "market": [
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ],
+              [
+                "BUY_ANIMAL",
+                "COW",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+games 188
+runs 1692 wall 1584
+v12             85-103 margin    +1275 us   100334 them    99059
+v13f            91-97  margin    +1366 us   100377 them    99011
+tomcash         85-103 margin    +1275 us   100334 them    99059
+inw3            85-103 margin    +1275 us   100334 them    99059
+infert          85-103 margin    +1275 us   100333 them    99059
+inval           89-99  margin    +1379 us   100428 them    99049
+carrot          87-101 margin    +1345 us   100408 them    99064
+herd            85-103 margin    +1275 us   100334 them    99059
+gluth           88-100 margin    +1203 us   100216 them    99014

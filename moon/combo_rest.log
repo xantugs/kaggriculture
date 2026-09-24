@@ -1,0 +1,10 @@
+games 141 variants 8
+runs 1128 wall 1048
+_HD2_CARE=0.6                                n=141 wins  70 dWin  +0 dMargin    +127 ± 103  z= +1.2
+_GLUTH_H=8                                   n=141 wins  71 dWin  +1 dMargin     +96 ±  31  z= +3.1
+_SR_MARGIN=14                                n=141 wins  71 dWin  +1 dMargin     +36 ±  11  z= +3.3
+combo4                                       n=141 wins  69 dWin  -1 dMargin     +28 ± 126  z= +0.2
+combo5                                       n=141 wins  69 dWin  -1 dMargin      +3 ± 132  z= +0.0
+base                                         n=141 wins  70 dWin  +0 dMargin      +0 ±   0  z= +0.0
+_CA_MARGIN=0.0                               n=141 wins  69 dWin  -1 dMargin     -19 ±  20  z= -1.0
+_CS_FROM=168                                 n=141 wins  67 dWin  -3 dMargin    -209 ±  62  z= -3.4

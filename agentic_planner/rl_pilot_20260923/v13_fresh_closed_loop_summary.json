@@ -1,0 +1,126 @@
+{
+  "files": [
+    "v13_fresh_closed_loop_0.json",
+    "v13_fresh_closed_loop_1.json",
+    "v13_fresh_closed_loop_2.json",
+    "v13_fresh_closed_loop_3.json"
+  ],
+  "rows": 300,
+  "report": [
+    {
+      "label": "base",
+      "margin": {
+        "n": 60,
+        "mean": 0.0,
+        "median": 0.0,
+        "se": 143.22945914197152,
+        "min": -5302.0,
+        "max": 5302.0
+      },
+      "paired_delta": {
+        "n": 60,
+        "mean": 0.0,
+        "median": 0.0,
+        "se": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "wins": 4,
+      "draws": 52,
+      "win_flips_up": 0,
+      "win_flips_down": 0
+    },
+    {
+      "label": "conservative",
+      "margin": {
+        "n": 60,
+        "mean": -475.0833333333333,
+        "median": -323.0,
+        "se": 158.46680361640176,
+        "min": -5897.0,
+        "max": 4703.0
+      },
+      "paired_delta": {
+        "n": 60,
+        "mean": -475.0833333333333,
+        "median": -362.0,
+        "se": 66.3613047163291,
+        "min": -2388.0,
+        "max": 388.0
+      },
+      "wins": 8,
+      "draws": 0,
+      "win_flips_up": 6,
+      "win_flips_down": 2
+    },
+    {
+      "label": "gluth8",
+      "margin": {
+        "n": 60,
+        "mean": -496.8,
+        "median": -322.0,
+        "se": 157.16260570749125,
+        "min": -5896.0,
+        "max": 4703.0
+      },
+      "paired_delta": {
+        "n": 60,
+        "mean": -496.8,
+        "median": -404.0,
+        "se": 63.207396942514464,
+        "min": -2388.0,
+        "max": 71.0
+      },
+      "wins": 4,
+      "draws": 0,
+      "win_flips_up": 2,
+      "win_flips_down": 2
+    },
+    {
+      "label": "schedule",
+      "margin": {
+        "n": 60,
+        "mean": -647.1833333333333,
+        "median": -451.5,
+        "se": 181.11396432740338,
+        "min": -5896.0,
+        "max": 4703.0
+      },
+      "paired_delta": {
+        "n": 60,
+        "mean": -647.1833333333333,
+        "median": -441.0,
+        "se": 113.43766672750299,
+        "min": -4427.0,
+        "max": 71.0
+      },
+      "wins": 4,
+      "draws": 0,
+      "win_flips_up": 2,
+      "win_flips_down": 2
+    },
+    {
+      "label": "screen_combo",
+      "margin": {
+        "n": 60,
+        "mean": -681.3,
+        "median": -517.0,
+        "se": 181.0318873494063,
+        "min": -5897.0,
+        "max": 4703.0
+      },
+      "paired_delta": {
+        "n": 60,
+        "mean": -681.3,
+        "median": -517.0,
+        "se": 113.29335777199931,
+        "min": -4429.0,
+        "max": 236.0
+      },
+      "wins": 8,
+      "draws": 0,
+      "win_flips_up": 6,
+      "win_flips_down": 2
+    }
+  ]
+}

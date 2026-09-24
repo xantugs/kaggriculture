@@ -1,0 +1,12 @@
+SUBMIT:  tape_a2\main.py        sha256 2b30ea9c...  <-- THIS ONE
+         route 110905948 + 2-hour sell-ahead
+         54.7% on the 8-agent external panel; 119/120 vs the plain tape.
+
+ALREADY ON THE LADDER:
+         tape_champion\main.py  sha256 c2cc463e...   plain route 110905948 (42.9% panel)
+
+SUPERSEDED - DO NOT SUBMIT:
+         tape_c4\main.py        4-hour window, 51.6% panel. Second best.
+         main.py / main_v13.py  planner agents. 42.9% -> 18.8% territory. Retired.
+
+Why 2 hours and not 11: see ..\RESULTS_sell_timing.md section 4.

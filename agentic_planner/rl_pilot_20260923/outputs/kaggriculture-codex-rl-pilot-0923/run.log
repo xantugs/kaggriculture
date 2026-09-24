@@ -1,0 +1,2043 @@
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.7/60.7 MB 16.5 MB/s eta 0:00:00
+OpenSpiel exception: Unknown game 'go_fish'. Available games are:
+2048
+add_noise
+amazons
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+battleship
+blackjack
+blotto
+breakthrough
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+checkers
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+colored_trails
+connect_four
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+othello
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'capture_the_flag'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+checkers
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+colored_trails
+connect_four
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'capture_the_flag'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+breakthrough_proxy
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+chat_game
+checkers
+checkers_proxy
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+coin_game_proxy
+colored_trails
+connect_four
+connect_four_proxy
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+dark_hex_proxy
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+go_proxy
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+hive_proxy
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+markov_soccer_proxy
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+othello_proxy
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+python_ant_foraging
+python_ant_foraging_proxy
+python_block_dominoes
+python_dynamic_routing
+python_hangman
+python_iterated_prisoners_dilemma
+python_kuhn_poker
+python_liars_poker
+python_pokerkit_wrapper
+python_pokerkit_wrapper_acpc_style
+python_repeated_pokerkit
+python_team_dominoes
+python_tic_tac_toe
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+snake_proxy
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'go_fish'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+breakthrough_proxy
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+chat_game
+checkers
+checkers_proxy
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+coin_game_proxy
+colored_trails
+connect_four
+connect_four_proxy
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+dark_hex_proxy
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+go_proxy
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+hive_proxy
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+markov_soccer_proxy
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+othello_proxy
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+python_ant_foraging
+python_ant_foraging_proxy
+python_block_dominoes
+python_dynamic_routing
+python_hangman
+python_iterated_prisoners_dilemma
+python_kuhn_poker
+python_liars_poker
+python_pokerkit_wrapper
+python_pokerkit_wrapper_acpc_style
+python_repeated_pokerkit
+python_team_dominoes
+python_tic_tac_toe
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+snake_proxy
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+cpus 4 rollout workers 2
+init /kaggle/input/notebooks/offhand/kaggriculture-bc-train/bc_model.npz hidden 64 globals 114 device cpu
+OpenSpiel exception: Unknown game 'go_fish'. Available games are:
+2048
+add_noise
+amazons
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+battleship
+blackjack
+blotto
+breakthrough
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+checkers
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+colored_trails
+connect_four
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+othello
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'go_fish'. Available games are:
+2048
+add_noise
+amazons
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+battleship
+blackjack
+blotto
+breakthrough
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+checkers
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+colored_trails
+connect_four
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+othello
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'capture_the_flag'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+checkers
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+colored_trails
+connect_four
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'capture_the_flag'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+checkers
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+colored_trails
+connect_four
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'capture_the_flag'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+breakthrough_proxy
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+chat_game
+checkers
+checkers_proxy
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+coin_game_proxy
+colored_trails
+connect_four
+connect_four_proxy
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+dark_hex_proxy
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+go_proxy
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+hive_proxy
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+markov_soccer_proxy
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+othello_proxy
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+python_ant_foraging
+python_ant_foraging_proxy
+python_block_dominoes
+python_dynamic_routing
+python_hangman
+python_iterated_prisoners_dilemma
+python_kuhn_poker
+python_liars_poker
+python_pokerkit_wrapper
+python_pokerkit_wrapper_acpc_style
+python_repeated_pokerkit
+python_team_dominoes
+python_tic_tac_toe
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+snake_proxy
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'capture_the_flag'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+breakthrough_proxy
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+chat_game
+checkers
+checkers_proxy
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+coin_game_proxy
+colored_trails
+connect_four
+connect_four_proxy
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+dark_hex_proxy
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+go_proxy
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+hive_proxy
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+markov_soccer_proxy
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+othello_proxy
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+python_ant_foraging
+python_ant_foraging_proxy
+python_block_dominoes
+python_dynamic_routing
+python_hangman
+python_iterated_prisoners_dilemma
+python_kuhn_poker
+python_liars_poker
+python_pokerkit_wrapper
+python_pokerkit_wrapper_acpc_style
+python_repeated_pokerkit
+python_team_dominoes
+python_tic_tac_toe
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+snake_proxy
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'go_fish'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+breakthrough_proxy
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+chat_game
+checkers
+checkers_proxy
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+coin_game_proxy
+colored_trails
+connect_four
+connect_four_proxy
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+dark_hex_proxy
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+go_proxy
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+hive_proxy
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+markov_soccer_proxy
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+othello_proxy
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+python_ant_foraging
+python_ant_foraging_proxy
+python_block_dominoes
+python_dynamic_routing
+python_hangman
+python_iterated_prisoners_dilemma
+python_kuhn_poker
+python_liars_poker
+python_pokerkit_wrapper
+python_pokerkit_wrapper_acpc_style
+python_repeated_pokerkit
+python_team_dominoes
+python_tic_tac_toe
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+snake_proxy
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+OpenSpiel exception: Unknown game 'go_fish'. Available games are:
+2048
+add_noise
+amazons
+amazons_proxy
+ant_foraging_arena
+antichess
+backgammon
+backgammon_proxy
+banqi
+bargaining
+bargaining_proxy
+battleship
+blackjack
+blotto
+breakthrough
+breakthrough_proxy
+bridge
+bridge_arena
+bridge_uncontested_bidding
+cached_tree
+catch
+chat_game
+checkers
+checkers_proxy
+chess
+chinese_checkers
+cliff_walking
+clobber
+clobber_proxy
+coin_game
+coin_game_arena
+coin_game_proxy
+colored_trails
+connect_four
+connect_four_proxy
+coop_box_pushing
+coop_to_1p
+coordinated_mp
+crazy_eights
+crazyhouse
+cribbage
+cursor_go
+dark_chess
+dark_hex
+dark_hex_ir
+dark_hex_proxy
+deep_sea
+dots_and_boxes
+dots_and_boxes_proxy
+dou_dizhu
+efg_game
+einstein_wurfelt_nicht
+euchre
+first_sealed_auction
+gin_rummy
+gin_rummy_proxy
+go
+go_proxy
+gomoku
+goofspiel
+hanabi
+havannah
+havannah_proxy
+hearts
+hex
+hive
+hive_proxy
+kriegspiel
+kuhn_poker
+laser_tag
+latent_ttt
+leduc_poker
+lewis_signaling
+liars_dice
+liars_dice_ir
+lines_of_action
+lines_of_action_proxy
+maedn
+mancala
+mancala_proxy
+markov_soccer
+markov_soccer_proxy
+matching_pennies_3p
+matrix_bos
+matrix_brps
+matrix_cd
+matrix_coordination
+matrix_mp
+matrix_pd
+matrix_rps
+matrix_rpsw
+matrix_sh
+matrix_shapleys_game
+mfg_crowd_modelling
+mfg_crowd_modelling_2d
+mfg_dynamic_routing
+mfg_garnet
+misere
+mnk
+morpion_solitaire
+negotiation
+negotiation_proxy
+nfg_game
+nim
+nine_mens_morris
+nine_mens_morris_proxy
+normal_form_extensive_game
+oh_hell
+oshi_zumo
+oshi_zumo_proxy
+othello
+othello_proxy
+oware
+pathfinding
+pentago
+phantom_go
+phantom_ttt
+phantom_ttt_ir
+pig
+python_ant_foraging
+python_ant_foraging_proxy
+python_block_dominoes
+python_dynamic_routing
+python_hangman
+python_iterated_prisoners_dilemma
+python_kuhn_poker
+python_liars_poker
+python_pokerkit_wrapper
+python_pokerkit_wrapper_acpc_style
+python_repeated_pokerkit
+python_team_dominoes
+python_tic_tac_toe
+quoridor
+rbc
+repeated_game
+repeated_leduc_poker
+repeated_poker
+restricted_nash_response
+sheriff
+shogi
+shogi_proxy
+skat
+snake
+snake_proxy
+solitaire
+spades
+start_at
+stones_and_gems
+tarok
+tic_tac_toe
+tiny_bridge_2p
+tiny_bridge_4p
+tiny_hanabi
+trade_comm
+turn_based_simultaneous_game
+twixt
+ultimate_tic_tac_toe
+ultimate_tic_tac_toe_proxy
+universal_poker
+xiangqi
+y
+y_proxy
+yacht
+zerosum
+EVAL {"label": "initial_bc", "n": 16, "wins": 1, "draws": 0, "mean_delta": -1376.4375, "elapsed": 40, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}
+WARM_DATA 3008 steps 32 seeds
+PARITY 3.814697265625e-05
+WARM 1 36.624804638801734 132
+WARM 2 15.797141014261449 138
+WARM 3 7.0245454920099135 143
+WARM 4 4.885065885300332 149
+WARM 5 3.9367438529400114 154
+WARM 6 3.3350501567759414 159
+WARM 7 2.8620422723445484 165
+WARM 8 2.481275758844741 170
+EVAL {"label": "warm_bc", "n": 16, "wins": 0, "draws": 0, "mean_delta": -4624.8125, "elapsed": 198, "weights_sha256": "79cba552a93ca30b2f24d910f29f8187d8dc1cc936046775a6d9966f2d4e6c94"}
+it 0 S 672 n 8 | greedy-v12 -5210  sample-v12 -4539  best-v12 -2977 | wins greedy 0 v12 0 | v12 margin +0
+it 0 S 696 n 8 | greedy-v12 -1612  sample-v12 -2924  best-v12 -1997 | wins greedy 0 v12 0 | v12 margin +0
+PARITY 2.6702880859375e-05
+ITER {"it": 0, "groups": 8, "steps": 1680, "roll_s": 42, "errors": 0, "lost": 0, "pg": 0.0193, "kl": 0.0031, "diag": {"672": {"n": 8, "greedy": -5210.1, "sample": -4539.4}, "696": {"n": 8, "greedy": -1612.0, "sample": -2923.9}}, "elapsed": 249}
+it 1 S 672 n 8 | greedy-v12 -6263  sample-v12 -5717  best-v12 -3611 | wins greedy 0 v12 1 | v12 margin +0
+it 1 S 696 n 8 | greedy-v12 -1647  sample-v12 -2721  best-v12 -1822 | wins greedy 1 v12 1 | v12 margin +0
+ITER {"it": 1, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0209, "kl": 0.0064, "diag": {"672": {"n": 8, "greedy": -6263.4, "sample": -5717.4}, "696": {"n": 8, "greedy": -1646.9, "sample": -2720.8}}, "elapsed": 298}
+it 2 S 672 n 8 | greedy-v12 -5161  sample-v12 -4849  best-v12 -3549 | wins greedy 0 v12 0 | v12 margin +0
+it 2 S 696 n 8 | greedy-v12 -1882  sample-v12 -3487  best-v12 -2646 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 2, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0209, "kl": 0.0094, "diag": {"672": {"n": 8, "greedy": -5161.0, "sample": -4848.7}, "696": {"n": 8, "greedy": -1882.2, "sample": -3486.5}}, "elapsed": 347}
+it 3 S 672 n 8 | greedy-v12 -6582  sample-v12 -4409  best-v12 -2627 | wins greedy 0 v12 0 | v12 margin +0
+it 3 S 696 n 8 | greedy-v12 -1244  sample-v12 -1961  best-v12 -1663 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 3, "groups": 8, "steps": 1680, "roll_s": 36, "errors": 0, "lost": 0, "pg": 0.0201, "kl": 0.0119, "diag": {"672": {"n": 8, "greedy": -6581.6, "sample": -4408.5}, "696": {"n": 8, "greedy": -1244.2, "sample": -1961.0}}, "elapsed": 392}
+it 4 S 672 n 8 | greedy-v12 -6649  sample-v12 -5805  best-v12 -4536 | wins greedy 0 v12 0 | v12 margin +0
+it 4 S 696 n 8 | greedy-v12 -3024  sample-v12 -3451  best-v12 -2333 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 4, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0274, "kl": 0.0177, "diag": {"672": {"n": 8, "greedy": -6649.0, "sample": -5805.3}, "696": {"n": 8, "greedy": -3024.4, "sample": -3450.8}}, "elapsed": 440}
+EVAL {"label": "rl_005", "n": 16, "wins": 1, "draws": 0, "mean_delta": -3544.8125, "elapsed": 469, "weights_sha256": "1402fbbe69557fa6af70c07617057020ee42a794d60adb3602f7db293dffc1d0"}
+it 5 S 672 n 8 | greedy-v12 -8806  sample-v12 -11248  best-v12 -6738 | wins greedy 0 v12 0 | v12 margin +0
+it 5 S 696 n 8 | greedy-v12 -3331  sample-v12 -4775  best-v12 -3563 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 5, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0361, "kl": 0.0285, "diag": {"672": {"n": 8, "greedy": -8806.5, "sample": -11247.6}, "696": {"n": 8, "greedy": -3331.0, "sample": -4775.3}}, "elapsed": 517}
+it 6 S 672 n 8 | greedy-v12 -9750  sample-v12 -8434  best-v12 -7024 | wins greedy 0 v12 1 | v12 margin +0
+it 6 S 696 n 8 | greedy-v12 -4167  sample-v12 -4454  best-v12 -3532 | wins greedy 0 v12 1 | v12 margin +0
+ITER {"it": 6, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0225, "kl": 0.0318, "diag": {"672": {"n": 8, "greedy": -9749.5, "sample": -8434.0}, "696": {"n": 8, "greedy": -4167.4, "sample": -4454.0}}, "elapsed": 566}
+it 7 S 672 n 8 | greedy-v12 -5177  sample-v12 -4082  best-v12 -2345 | wins greedy 0 v12 0 | v12 margin +0
+it 7 S 696 n 8 | greedy-v12 -1356  sample-v12 -2573  best-v12 -1664 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 7, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0254, "kl": 0.034, "diag": {"672": {"n": 8, "greedy": -5177.0, "sample": -4081.9}, "696": {"n": 8, "greedy": -1355.9, "sample": -2572.8}}, "elapsed": 614}
+it 8 S 672 n 8 | greedy-v12 -5176  sample-v12 -4676  best-v12 -2664 | wins greedy 0 v12 0 | v12 margin +0
+it 8 S 696 n 8 | greedy-v12 -2912  sample-v12 -1895  best-v12 -956 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 8, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0256, "kl": 0.0327, "diag": {"672": {"n": 8, "greedy": -5175.5, "sample": -4675.7}, "696": {"n": 8, "greedy": -2912.2, "sample": -1894.5}}, "elapsed": 664}
+it 9 S 672 n 8 | greedy-v12 -6839  sample-v12 -5160  best-v12 -3614 | wins greedy 0 v12 2 | v12 margin +0
+it 9 S 696 n 8 | greedy-v12 -1434  sample-v12 -3203  best-v12 -1728 | wins greedy 0 v12 2 | v12 margin +0
+ITER {"it": 9, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0234, "kl": 0.0342, "diag": {"672": {"n": 8, "greedy": -6838.8, "sample": -5160.5}, "696": {"n": 8, "greedy": -1434.1, "sample": -3203.1}}, "elapsed": 714}
+EVAL {"label": "rl_010", "n": 16, "wins": 1, "draws": 0, "mean_delta": -4021.0, "elapsed": 742, "weights_sha256": "5a1a49743c9bc805f80432bb467fa4814c45b6f24badc66f9194503b6ec2ba41"}
+it 10 S 672 n 8 | greedy-v12 -5620  sample-v12 -4067  best-v12 -3125 | wins greedy 0 v12 0 | v12 margin +0
+it 10 S 696 n 8 | greedy-v12 -1480  sample-v12 -2740  best-v12 -1948 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 10, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.027, "kl": 0.034, "diag": {"672": {"n": 8, "greedy": -5619.6, "sample": -4067.0}, "696": {"n": 8, "greedy": -1479.8, "sample": -2740.4}}, "elapsed": 789}
+it 11 S 672 n 8 | greedy-v12 -8322  sample-v12 -6534  best-v12 -4728 | wins greedy 0 v12 0 | v12 margin +0
+it 11 S 696 n 8 | greedy-v12 -2914  sample-v12 -3962  best-v12 -3128 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 11, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0299, "kl": 0.0366, "diag": {"672": {"n": 8, "greedy": -8322.5, "sample": -6533.8}, "696": {"n": 8, "greedy": -2914.4, "sample": -3962.0}}, "elapsed": 837}
+it 12 S 672 n 8 | greedy-v12 -7919  sample-v12 -5362  best-v12 -3124 | wins greedy 0 v12 0 | v12 margin +0
+it 12 S 696 n 8 | greedy-v12 -1218  sample-v12 -2897  best-v12 -2041 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 12, "groups": 8, "steps": 1680, "roll_s": 35, "errors": 0, "lost": 0, "pg": 0.0213, "kl": 0.036, "diag": {"672": {"n": 8, "greedy": -7919.2, "sample": -5362.4}, "696": {"n": 8, "greedy": -1217.5, "sample": -2897.4}}, "elapsed": 880}
+it 13 S 672 n 8 | greedy-v12 -7792  sample-v12 -4930  best-v12 -3943 | wins greedy 0 v12 0 | v12 margin +0
+it 13 S 696 n 8 | greedy-v12 -2622  sample-v12 -3129  best-v12 -2372 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 13, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0216, "kl": 0.0425, "diag": {"672": {"n": 8, "greedy": -7791.5, "sample": -4929.8}, "696": {"n": 8, "greedy": -2622.0, "sample": -3129.3}}, "elapsed": 927}
+it 14 S 672 n 8 | greedy-v12 -7650  sample-v12 -7119  best-v12 -5031 | wins greedy 0 v12 0 | v12 margin +0
+it 14 S 696 n 8 | greedy-v12 -1759  sample-v12 -2542  best-v12 -1801 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 14, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0395, "kl": 0.0489, "diag": {"672": {"n": 8, "greedy": -7649.8, "sample": -7119.1}, "696": {"n": 8, "greedy": -1759.1, "sample": -2541.7}}, "elapsed": 975}
+EVAL {"label": "rl_015", "n": 16, "wins": 1, "draws": 0, "mean_delta": -3459.875, "elapsed": 1003, "weights_sha256": "cc6e176b67bf9df2a2b7ed23cde3c06218ca3e66072bdf45b82c8d0012249f73"}
+it 15 S 672 n 8 | greedy-v12 -8809  sample-v12 -5071  best-v12 -3276 | wins greedy 0 v12 0 | v12 margin +0
+it 15 S 696 n 8 | greedy-v12 -2273  sample-v12 -2882  best-v12 -2025 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 15, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0225, "kl": 0.05, "diag": {"672": {"n": 8, "greedy": -8809.2, "sample": -5071.4}, "696": {"n": 8, "greedy": -2273.4, "sample": -2881.9}}, "elapsed": 1051}
+it 16 S 672 n 8 | greedy-v12 -6149  sample-v12 -6009  best-v12 -3949 | wins greedy 0 v12 0 | v12 margin +0
+it 16 S 696 n 8 | greedy-v12 -1953  sample-v12 -3517  best-v12 -2268 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 16, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0344, "kl": 0.05, "diag": {"672": {"n": 8, "greedy": -6149.1, "sample": -6009.3}, "696": {"n": 8, "greedy": -1953.4, "sample": -3516.6}}, "elapsed": 1099}
+it 17 S 672 n 8 | greedy-v12 -10660  sample-v12 -7400  best-v12 -3712 | wins greedy 0 v12 0 | v12 margin +0
+it 17 S 696 n 8 | greedy-v12 -3378  sample-v12 -3447  best-v12 -2173 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 17, "groups": 8, "steps": 1680, "roll_s": 37, "errors": 0, "lost": 0, "pg": 0.0325, "kl": 0.0466, "diag": {"672": {"n": 8, "greedy": -10660.5, "sample": -7400.0}, "696": {"n": 8, "greedy": -3378.1, "sample": -3447.2}}, "elapsed": 1145}
+it 18 S 672 n 8 | greedy-v12 -8494  sample-v12 -6591  best-v12 -5141 | wins greedy 0 v12 0 | v12 margin +0
+it 18 S 696 n 8 | greedy-v12 -2863  sample-v12 -4660  best-v12 -3122 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 18, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0181, "kl": 0.0543, "diag": {"672": {"n": 8, "greedy": -8493.6, "sample": -6590.8}, "696": {"n": 8, "greedy": -2862.6, "sample": -4660.0}}, "elapsed": 1194}
+it 19 S 672 n 8 | greedy-v12 -8974  sample-v12 -8660  best-v12 -5510 | wins greedy 0 v12 0 | v12 margin +0
+it 19 S 696 n 8 | greedy-v12 -3311  sample-v12 -5410  best-v12 -4002 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 19, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0144, "kl": 0.0636, "diag": {"672": {"n": 8, "greedy": -8973.6, "sample": -8660.4}, "696": {"n": 8, "greedy": -3310.8, "sample": -5410.0}}, "elapsed": 1241}
+EVAL {"label": "rl_020", "n": 16, "wins": 1, "draws": 0, "mean_delta": -4425.0, "elapsed": 1268, "weights_sha256": "e589423e38cd38f6cf8841bbd787768e6c9bce989d60ce4cd6da5c0dc19d61c1"}
+it 20 S 672 n 8 | greedy-v12 -4388  sample-v12 -3556  best-v12 -2334 | wins greedy 0 v12 0 | v12 margin +0
+it 20 S 696 n 8 | greedy-v12 -1665  sample-v12 -2190  best-v12 -1739 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 20, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0098, "kl": 0.0631, "diag": {"672": {"n": 8, "greedy": -4387.6, "sample": -3556.2}, "696": {"n": 8, "greedy": -1665.1, "sample": -2189.8}}, "elapsed": 1316}
+it 21 S 672 n 8 | greedy-v12 -7008  sample-v12 -4830  best-v12 -3161 | wins greedy 0 v12 0 | v12 margin +0
+it 21 S 696 n 8 | greedy-v12 -2831  sample-v12 -2493  best-v12 -1610 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 21, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0306, "kl": 0.0705, "diag": {"672": {"n": 8, "greedy": -7007.8, "sample": -4829.6}, "696": {"n": 8, "greedy": -2831.2, "sample": -2493.0}}, "elapsed": 1364}
+it 22 S 672 n 8 | greedy-v12 -9156  sample-v12 -6353  best-v12 -4298 | wins greedy 0 v12 0 | v12 margin +0
+it 22 S 696 n 8 | greedy-v12 -3268  sample-v12 -4132  best-v12 -2436 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 22, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0359, "kl": 0.0622, "diag": {"672": {"n": 8, "greedy": -9155.5, "sample": -6353.3}, "696": {"n": 8, "greedy": -3268.1, "sample": -4132.3}}, "elapsed": 1413}
+it 23 S 672 n 8 | greedy-v12 -8001  sample-v12 -4981  best-v12 -3341 | wins greedy 0 v12 0 | v12 margin +0
+it 23 S 696 n 8 | greedy-v12 -1797  sample-v12 -2858  best-v12 -1969 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 23, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0216, "kl": 0.0582, "diag": {"672": {"n": 8, "greedy": -8001.0, "sample": -4980.8}, "696": {"n": 8, "greedy": -1797.1, "sample": -2857.7}}, "elapsed": 1462}
+it 24 S 672 n 8 | greedy-v12 -9619  sample-v12 -6579  best-v12 -4700 | wins greedy 0 v12 1 | v12 margin +0
+it 24 S 696 n 8 | greedy-v12 -3623  sample-v12 -4068  best-v12 -3141 | wins greedy 0 v12 1 | v12 margin +0
+ITER {"it": 24, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0174, "kl": 0.0655, "diag": {"672": {"n": 8, "greedy": -9618.6, "sample": -6579.5}, "696": {"n": 8, "greedy": -3623.2, "sample": -4068.0}}, "elapsed": 1510}
+EVAL {"label": "rl_025", "n": 16, "wins": 0, "draws": 0, "mean_delta": -2675.75, "elapsed": 1537, "weights_sha256": "d719d20e6bd435e19e76a3a785ed1e61d2db192a40eed034936fa799b0e041f3"}
+it 25 S 672 n 8 | greedy-v12 -6678  sample-v12 -5985  best-v12 -4010 | wins greedy 0 v12 2 | v12 margin +0
+it 25 S 696 n 8 | greedy-v12 -1622  sample-v12 -2674  best-v12 -1441 | wins greedy 1 v12 2 | v12 margin +0
+ITER {"it": 25, "groups": 8, "steps": 1680, "roll_s": 37, "errors": 0, "lost": 0, "pg": 0.0208, "kl": 0.0729, "diag": {"672": {"n": 8, "greedy": -6678.1, "sample": -5984.6}, "696": {"n": 8, "greedy": -1621.9, "sample": -2673.6}}, "elapsed": 1584}
+it 26 S 672 n 8 | greedy-v12 -6185  sample-v12 -5179  best-v12 -3180 | wins greedy 0 v12 0 | v12 margin +0
+it 26 S 696 n 8 | greedy-v12 -2206  sample-v12 -2465  best-v12 -1511 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 26, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0195, "kl": 0.0771, "diag": {"672": {"n": 8, "greedy": -6185.2, "sample": -5178.6}, "696": {"n": 8, "greedy": -2206.4, "sample": -2464.5}}, "elapsed": 1632}
+it 27 S 672 n 8 | greedy-v12 -8724  sample-v12 -6924  best-v12 -5570 | wins greedy 0 v12 0 | v12 margin +0
+it 27 S 696 n 8 | greedy-v12 -2086  sample-v12 -3148  best-v12 -2111 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 27, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0181, "kl": 0.0738, "diag": {"672": {"n": 8, "greedy": -8723.9, "sample": -6923.9}, "696": {"n": 8, "greedy": -2085.6, "sample": -3148.0}}, "elapsed": 1679}
+it 28 S 672 n 8 | greedy-v12 -8107  sample-v12 -6516  best-v12 -5601 | wins greedy 0 v12 0 | v12 margin +0
+it 28 S 696 n 8 | greedy-v12 -2702  sample-v12 -3276  best-v12 -1610 | wins greedy 2 v12 0 | v12 margin +0
+ITER {"it": 28, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0169, "kl": 0.0724, "diag": {"672": {"n": 8, "greedy": -8107.4, "sample": -6516.0}, "696": {"n": 8, "greedy": -2702.4, "sample": -3276.2}}, "elapsed": 1727}
+it 29 S 672 n 8 | greedy-v12 -4390  sample-v12 -3113  best-v12 -1921 | wins greedy 0 v12 0 | v12 margin +0
+it 29 S 696 n 8 | greedy-v12 -1579  sample-v12 -2043  best-v12 -1173 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 29, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0319, "kl": 0.0843, "diag": {"672": {"n": 8, "greedy": -4389.9, "sample": -3113.2}, "696": {"n": 8, "greedy": -1579.1, "sample": -2042.9}}, "elapsed": 1775}
+EVAL {"label": "rl_030", "n": 16, "wins": 0, "draws": 0, "mean_delta": -3929.0625, "elapsed": 1802, "weights_sha256": "2423d8d653f476559c758d1efdaca3e7d9ebc9a80b6d7c2e18a5ab48edf1337e"}
+it 30 S 672 n 8 | greedy-v12 -8633  sample-v12 -5617  best-v12 -4724 | wins greedy 0 v12 0 | v12 margin +0
+it 30 S 696 n 8 | greedy-v12 -3112  sample-v12 -2882  best-v12 -1857 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 30, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0136, "kl": 0.0944, "diag": {"672": {"n": 8, "greedy": -8633.0, "sample": -5617.1}, "696": {"n": 8, "greedy": -3112.1, "sample": -2882.1}}, "elapsed": 1849}
+it 31 S 672 n 8 | greedy-v12 -6921  sample-v12 -5205  best-v12 -3050 | wins greedy 0 v12 1 | v12 margin +0
+it 31 S 696 n 8 | greedy-v12 -3096  sample-v12 -3385  best-v12 -2364 | wins greedy 0 v12 1 | v12 margin +0
+ITER {"it": 31, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0269, "kl": 0.1019, "diag": {"672": {"n": 8, "greedy": -6920.6, "sample": -5205.5}, "696": {"n": 8, "greedy": -3096.2, "sample": -3384.9}}, "elapsed": 1899}
+it 32 S 672 n 8 | greedy-v12 -3803  sample-v12 -3962  best-v12 -2742 | wins greedy 0 v12 0 | v12 margin +0
+it 32 S 696 n 8 | greedy-v12 -1610  sample-v12 -2355  best-v12 -1872 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 32, "groups": 8, "steps": 1680, "roll_s": 36, "errors": 0, "lost": 0, "pg": 0.0107, "kl": 0.0947, "diag": {"672": {"n": 8, "greedy": -3803.4, "sample": -3961.8}, "696": {"n": 8, "greedy": -1610.5, "sample": -2354.8}}, "elapsed": 1945}
+it 33 S 672 n 8 | greedy-v12 -7748  sample-v12 -6211  best-v12 -4705 | wins greedy 0 v12 0 | v12 margin +0
+it 33 S 696 n 8 | greedy-v12 -2099  sample-v12 -3424  best-v12 -2544 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 33, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0236, "kl": 0.0864, "diag": {"672": {"n": 8, "greedy": -7748.0, "sample": -6211.1}, "696": {"n": 8, "greedy": -2098.8, "sample": -3424.4}}, "elapsed": 1993}
+it 34 S 672 n 8 | greedy-v12 -5511  sample-v12 -4323  best-v12 -2923 | wins greedy 0 v12 0 | v12 margin +0
+it 34 S 696 n 8 | greedy-v12 -1610  sample-v12 -2322  best-v12 -1826 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 34, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0183, "kl": 0.1094, "diag": {"672": {"n": 8, "greedy": -5511.4, "sample": -4323.0}, "696": {"n": 8, "greedy": -1610.0, "sample": -2321.5}}, "elapsed": 2040}
+EVAL {"label": "rl_035", "n": 16, "wins": 0, "draws": 0, "mean_delta": -4028.375, "elapsed": 2069, "weights_sha256": "21bb499fb0215f8b153a599fd2dd392a1c5d4480570abd0f3d9f69179db2510a"}
+it 35 S 672 n 8 | greedy-v12 -4724  sample-v12 -3669  best-v12 -2645 | wins greedy 0 v12 1 | v12 margin +0
+it 35 S 696 n 8 | greedy-v12 -1409  sample-v12 -2649  best-v12 -1782 | wins greedy 0 v12 1 | v12 margin +0
+ITER {"it": 35, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0236, "kl": 0.1199, "diag": {"672": {"n": 8, "greedy": -4724.2, "sample": -3669.0}, "696": {"n": 8, "greedy": -1409.2, "sample": -2649.1}}, "elapsed": 2118}
+it 36 S 672 n 8 | greedy-v12 -7876  sample-v12 -6187  best-v12 -2817 | wins greedy 0 v12 1 | v12 margin +0
+it 36 S 696 n 8 | greedy-v12 -2499  sample-v12 -3553  best-v12 -2477 | wins greedy 1 v12 1 | v12 margin +0
+ITER {"it": 36, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0376, "kl": 0.1118, "diag": {"672": {"n": 8, "greedy": -7875.8, "sample": -6186.8}, "696": {"n": 8, "greedy": -2498.9, "sample": -3553.2}}, "elapsed": 2167}
+it 37 S 672 n 8 | greedy-v12 -8201  sample-v12 -5527  best-v12 -3599 | wins greedy 0 v12 0 | v12 margin +0
+it 37 S 696 n 8 | greedy-v12 -1638  sample-v12 -2187  best-v12 -1615 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 37, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0273, "kl": 0.1155, "diag": {"672": {"n": 8, "greedy": -8200.8, "sample": -5527.5}, "696": {"n": 8, "greedy": -1637.5, "sample": -2186.9}}, "elapsed": 2213}
+it 38 S 672 n 8 | greedy-v12 -7188  sample-v12 -5177  best-v12 -3114 | wins greedy 0 v12 0 | v12 margin +0
+it 38 S 696 n 8 | greedy-v12 -2483  sample-v12 -2070  best-v12 -1416 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 38, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0234, "kl": 0.1241, "diag": {"672": {"n": 8, "greedy": -7188.5, "sample": -5176.6}, "696": {"n": 8, "greedy": -2482.9, "sample": -2070.0}}, "elapsed": 2261}
+it 39 S 672 n 8 | greedy-v12 -6700  sample-v12 -12552  best-v12 -5306 | wins greedy 0 v12 0 | v12 margin +0
+it 39 S 696 n 8 | greedy-v12 -4528  sample-v12 -4409  best-v12 -3119 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 39, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0205, "kl": 0.144, "diag": {"672": {"n": 8, "greedy": -6699.5, "sample": -12551.8}, "696": {"n": 8, "greedy": -4527.8, "sample": -4409.5}}, "elapsed": 2310}
+EVAL {"label": "rl_040", "n": 16, "wins": 0, "draws": 0, "mean_delta": -3778.75, "elapsed": 2338, "weights_sha256": "43cc015df6a03f4cc6c07fc6228d5e2f8f0427a29e84dac6113373a86ba80106"}
+it 40 S 672 n 8 | greedy-v12 -8863  sample-v12 -7061  best-v12 -4866 | wins greedy 0 v12 0 | v12 margin +0
+it 40 S 696 n 8 | greedy-v12 -3137  sample-v12 -3748  best-v12 -2576 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 40, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0131, "kl": 0.1394, "diag": {"672": {"n": 8, "greedy": -8863.2, "sample": -7060.8}, "696": {"n": 8, "greedy": -3136.8, "sample": -3748.3}}, "elapsed": 2389}
+it 41 S 672 n 8 | greedy-v12 -6196  sample-v12 -4402  best-v12 -2740 | wins greedy 0 v12 1 | v12 margin +0
+it 41 S 696 n 8 | greedy-v12 -2438  sample-v12 -2407  best-v12 -1878 | wins greedy 0 v12 1 | v12 margin +0
+ITER {"it": 41, "groups": 8, "steps": 1680, "roll_s": 43, "errors": 0, "lost": 0, "pg": 0.0287, "kl": 0.1365, "diag": {"672": {"n": 8, "greedy": -6196.0, "sample": -4401.8}, "696": {"n": 8, "greedy": -2438.1, "sample": -2407.3}}, "elapsed": 2442}
+it 42 S 672 n 8 | greedy-v12 -6054  sample-v12 -5413  best-v12 -3607 | wins greedy 0 v12 1 | v12 margin +0
+it 42 S 696 n 8 | greedy-v12 -2570  sample-v12 -2187  best-v12 -1456 | wins greedy 0 v12 1 | v12 margin +0
+ITER {"it": 42, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0225, "kl": 0.1395, "diag": {"672": {"n": 8, "greedy": -6054.2, "sample": -5413.4}, "696": {"n": 8, "greedy": -2569.8, "sample": -2186.8}}, "elapsed": 2492}
+it 43 S 672 n 8 | greedy-v12 -6108  sample-v12 -3477  best-v12 -2252 | wins greedy 0 v12 0 | v12 margin +0
+it 43 S 696 n 8 | greedy-v12 -3023  sample-v12 -2457  best-v12 -1952 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 43, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0196, "kl": 0.1548, "diag": {"672": {"n": 8, "greedy": -6107.8, "sample": -3477.3}, "696": {"n": 8, "greedy": -3022.8, "sample": -2456.7}}, "elapsed": 2541}
+it 44 S 672 n 8 | greedy-v12 -7738  sample-v12 -4869  best-v12 -3792 | wins greedy 0 v12 0 | v12 margin +0
+it 44 S 696 n 8 | greedy-v12 -1651  sample-v12 -2750  best-v12 -1890 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 44, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0181, "kl": 0.1466, "diag": {"672": {"n": 8, "greedy": -7737.8, "sample": -4869.1}, "696": {"n": 8, "greedy": -1650.9, "sample": -2750.2}}, "elapsed": 2592}
+EVAL {"label": "rl_045", "n": 16, "wins": 1, "draws": 0, "mean_delta": -4195.4375, "elapsed": 2621, "weights_sha256": "fc580dd1f39de6879cff78e4913ae9f89af721d95f00545bff0c9a58ba0e403b"}
+it 45 S 672 n 8 | greedy-v12 -7478  sample-v12 -7162  best-v12 -3799 | wins greedy 0 v12 0 | v12 margin +0
+it 45 S 696 n 8 | greedy-v12 -3081  sample-v12 -2831  best-v12 -1449 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 45, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0133, "kl": 0.1549, "diag": {"672": {"n": 8, "greedy": -7477.6, "sample": -7162.2}, "696": {"n": 8, "greedy": -3081.0, "sample": -2831.4}}, "elapsed": 2672}
+it 46 S 672 n 8 | greedy-v12 -9277  sample-v12 -5168  best-v12 -3258 | wins greedy 0 v12 0 | v12 margin +0
+it 46 S 696 n 8 | greedy-v12 -2605  sample-v12 -2694  best-v12 -1836 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 46, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0308, "kl": 0.1653, "diag": {"672": {"n": 8, "greedy": -9277.1, "sample": -5168.0}, "696": {"n": 8, "greedy": -2604.9, "sample": -2693.7}}, "elapsed": 2722}
+it 47 S 672 n 8 | greedy-v12 -3726  sample-v12 -3492  best-v12 -2248 | wins greedy 0 v12 0 | v12 margin +0
+it 47 S 696 n 8 | greedy-v12 -3068  sample-v12 -2591  best-v12 -1743 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 47, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0229, "kl": 0.1643, "diag": {"672": {"n": 8, "greedy": -3725.8, "sample": -3492.1}, "696": {"n": 8, "greedy": -3067.5, "sample": -2590.8}}, "elapsed": 2773}
+it 48 S 672 n 8 | greedy-v12 -6229  sample-v12 -5269  best-v12 -2925 | wins greedy 0 v12 0 | v12 margin +0
+it 48 S 696 n 8 | greedy-v12 -2364  sample-v12 -2944  best-v12 -2010 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 48, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0367, "kl": 0.173, "diag": {"672": {"n": 8, "greedy": -6229.2, "sample": -5268.7}, "696": {"n": 8, "greedy": -2363.6, "sample": -2944.1}}, "elapsed": 2823}
+it 49 S 672 n 8 | greedy-v12 -6703  sample-v12 -11868  best-v12 -4959 | wins greedy 0 v12 0 | v12 margin +0
+it 49 S 696 n 8 | greedy-v12 -3284  sample-v12 -3154  best-v12 -2455 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 49, "groups": 8, "steps": 1680, "roll_s": 40, "errors": 0, "lost": 0, "pg": 0.0275, "kl": 0.1667, "diag": {"672": {"n": 8, "greedy": -6703.1, "sample": -11867.8}, "696": {"n": 8, "greedy": -3284.2, "sample": -3153.7}}, "elapsed": 2873}
+EVAL {"label": "rl_050", "n": 16, "wins": 0, "draws": 0, "mean_delta": -3526.3125, "elapsed": 2902, "weights_sha256": "b7520b7feeed0ded37dea534a104578fcce909172e1c1017a3f40ba66ad0036d"}
+it 50 S 672 n 8 | greedy-v12 -4260  sample-v12 -4649  best-v12 -2896 | wins greedy 0 v12 0 | v12 margin +0
+it 50 S 696 n 8 | greedy-v12 -1749  sample-v12 -2774  best-v12 -1690 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 50, "groups": 8, "steps": 1680, "roll_s": 41, "errors": 0, "lost": 0, "pg": 0.0226, "kl": 0.1501, "diag": {"672": {"n": 8, "greedy": -4260.0, "sample": -4648.8}, "696": {"n": 8, "greedy": -1749.2, "sample": -2773.5}}, "elapsed": 2952}
+it 51 S 672 n 8 | greedy-v12 -8455  sample-v12 -9933  best-v12 -4487 | wins greedy 0 v12 0 | v12 margin +0
+it 51 S 696 n 8 | greedy-v12 -2779  sample-v12 -3841  best-v12 -2191 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 51, "groups": 8, "steps": 1680, "roll_s": 42, "errors": 0, "lost": 0, "pg": 0.0232, "kl": 0.1728, "diag": {"672": {"n": 8, "greedy": -8455.0, "sample": -9933.1}, "696": {"n": 8, "greedy": -2779.2, "sample": -3840.9}}, "elapsed": 3002}
+it 52 S 672 n 8 | greedy-v12 -6370  sample-v12 -4822  best-v12 -3351 | wins greedy 0 v12 1 | v12 margin +0
+it 52 S 696 n 8 | greedy-v12 -2928  sample-v12 -2555  best-v12 -1578 | wins greedy 0 v12 1 | v12 margin +0
+ITER {"it": 52, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0148, "kl": 0.1701, "diag": {"672": {"n": 8, "greedy": -6370.1, "sample": -4822.1}, "696": {"n": 8, "greedy": -2927.8, "sample": -2555.0}}, "elapsed": 3051}
+it 53 S 672 n 8 | greedy-v12 -6032  sample-v12 -6617  best-v12 -4017 | wins greedy 0 v12 0 | v12 margin +0
+it 53 S 696 n 8 | greedy-v12 -2464  sample-v12 -2658  best-v12 -1792 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 53, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0182, "kl": 0.1952, "diag": {"672": {"n": 8, "greedy": -6032.5, "sample": -6616.8}, "696": {"n": 8, "greedy": -2464.1, "sample": -2658.0}}, "elapsed": 3099}
+it 54 S 672 n 8 | greedy-v12 -6701  sample-v12 -3392  best-v12 -2176 | wins greedy 0 v12 0 | v12 margin +0
+it 54 S 696 n 8 | greedy-v12 -1612  sample-v12 -2458  best-v12 -1517 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 54, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0246, "kl": 0.1833, "diag": {"672": {"n": 8, "greedy": -6701.2, "sample": -3392.2}, "696": {"n": 8, "greedy": -1611.5, "sample": -2458.0}}, "elapsed": 3147}
+EVAL {"label": "rl_055", "n": 16, "wins": 1, "draws": 0, "mean_delta": -3086.6875, "elapsed": 3174, "weights_sha256": "04c55824da689de461c0933ce5b216d21e87c9029b25ea81f6d2cf6ca6803c8a"}
+it 55 S 672 n 8 | greedy-v12 -4702  sample-v12 -4960  best-v12 -2282 | wins greedy 0 v12 0 | v12 margin +0
+it 55 S 696 n 8 | greedy-v12 -2547  sample-v12 -2452  best-v12 -1453 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 55, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0372, "kl": 0.1731, "diag": {"672": {"n": 8, "greedy": -4702.1, "sample": -4959.5}, "696": {"n": 8, "greedy": -2547.2, "sample": -2452.1}}, "elapsed": 3222}
+it 56 S 672 n 8 | greedy-v12 -6594  sample-v12 -6683  best-v12 -4465 | wins greedy 0 v12 0 | v12 margin +0
+it 56 S 696 n 8 | greedy-v12 -2322  sample-v12 -2768  best-v12 -2149 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 56, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0172, "kl": 0.1994, "diag": {"672": {"n": 8, "greedy": -6593.6, "sample": -6682.9}, "696": {"n": 8, "greedy": -2321.5, "sample": -2768.2}}, "elapsed": 3270}
+it 57 S 672 n 8 | greedy-v12 -7362  sample-v12 -6283  best-v12 -4692 | wins greedy 0 v12 1 | v12 margin +0
+it 57 S 696 n 8 | greedy-v12 -1390  sample-v12 -2819  best-v12 -1572 | wins greedy 2 v12 1 | v12 margin +0
+ITER {"it": 57, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0183, "kl": 0.199, "diag": {"672": {"n": 8, "greedy": -7361.9, "sample": -6283.3}, "696": {"n": 8, "greedy": -1390.5, "sample": -2818.5}}, "elapsed": 3318}
+it 58 S 672 n 8 | greedy-v12 -4225  sample-v12 -3668  best-v12 -2464 | wins greedy 0 v12 0 | v12 margin +0
+it 58 S 696 n 8 | greedy-v12 -1088  sample-v12 -2045  best-v12 -1535 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 58, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0177, "kl": 0.1939, "diag": {"672": {"n": 8, "greedy": -4224.8, "sample": -3668.0}, "696": {"n": 8, "greedy": -1088.2, "sample": -2045.0}}, "elapsed": 3367}
+it 59 S 672 n 8 | greedy-v12 -4350  sample-v12 -3618  best-v12 -2509 | wins greedy 0 v12 0 | v12 margin +0
+it 59 S 696 n 8 | greedy-v12 -1902  sample-v12 -2289  best-v12 -1580 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 59, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0178, "kl": 0.1785, "diag": {"672": {"n": 8, "greedy": -4349.6, "sample": -3617.7}, "696": {"n": 8, "greedy": -1902.4, "sample": -2289.4}}, "elapsed": 3414}
+EVAL {"label": "rl_060", "n": 16, "wins": 1, "draws": 0, "mean_delta": -3528.875, "elapsed": 3442, "weights_sha256": "750121cc99abea7d459f44dc122fae7290753e64b143cc47fe4dfc916078460c"}
+EVAL {"label": "last_update", "n": 16, "wins": 1, "draws": 0, "mean_delta": -3528.875, "elapsed": 3470, "weights_sha256": "750121cc99abea7d459f44dc122fae7290753e64b143cc47fe4dfc916078460c"}
+EVAL {"label": "test_initial", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3585, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}
+EVAL {"label": "test_selected", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3702, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}
+FINAL {"selected_checkpoint": "initial_bc", "selection_score": [1.0, -1376.4375], "initial_test": {"label": "test_initial", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3585, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}, "selected_test": {"label": "test_selected", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3702, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}, "iterations": 60, "training_transition_count": 100800, "elapsed": 3702, "incumbent": "omw_v13f", "note": "Experimental continuation policy. No competition submission. Codec retains documented limitations."}
+done 3703 s
+/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __script__.ipynb to html
+[NbConvertApp] Writing 1454971 bytes to __results__.html

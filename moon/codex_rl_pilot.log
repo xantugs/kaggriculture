@@ -1,0 +1,20 @@
+ 0.199, "diag": {"672": {"n": 8, "greedy": -7361.9, "sample": -6283.3}, "696": {"n": 8, "greedy": -1390.5, "sample": -2818.5}}, "elapsed": 3318}
+it 58 S 672 n 8 | greedy-v12 -4225  sample-v12 -3668  best-v12 -2464 | wins greedy 0 v12 0 | v12 margin +0
+it 58 S 696 n 8 | greedy-v12 -1088  sample-v12 -2045  best-v12 -1535 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 58, "groups": 8, "steps": 1680, "roll_s": 39, "errors": 0, "lost": 0, "pg": 0.0177, "kl": 0.1939, "diag": {"672": {"n": 8, "greedy": -4224.8, "sample": -3668.0}, "696": {"n": 8, "greedy": -1088.2, "sample": -2045.0}}, "elapsed": 3367}
+it 59 S 672 n 8 | greedy-v12 -4350  sample-v12 -3618  best-v12 -2509 | wins greedy 0 v12 0 | v12 margin +0
+it 59 S 696 n 8 | greedy-v12 -1902  sample-v12 -2289  best-v12 -1580 | wins greedy 0 v12 0 | v12 margin +0
+ITER {"it": 59, "groups": 8, "steps": 1680, "roll_s": 38, "errors": 0, "lost": 0, "pg": 0.0178, "kl": 0.1785, "diag": {"672": {"n": 8, "greedy": -4349.6, "sample": -3617.7}, "696": {"n": 8, "greedy": -1902.4, "sample": -2289.4}}, "elapsed": 3414}
+EVAL {"label": "rl_060", "n": 16, "wins": 1, "draws": 0, "mean_delta": -3528.875, "elapsed": 3442, "weights_sha256": "750121cc99abea7d459f44dc122fae7290753e64b143cc47fe4dfc916078460c"}
+EVAL {"label": "last_update", "n": 16, "wins": 1, "draws": 0, "mean_delta": -3528.875, "elapsed": 3470, "weights_sha256": "750121cc99abea7d459f44dc122fae7290753e64b143cc47fe4dfc916078460c"}
+EVAL {"label": "test_initial", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3585, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}
+EVAL {"label": "test_selected", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3702, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}
+FINAL {"selected_checkpoint": "initial_bc", "selection_score": [1.0, -1376.4375], "initial_test": {"label": "test_initial", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3585, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}, "selected_test": {"label": "test_selected", "n": 64, "wins": 1, "draws": 0, "mean_delta": -2029.015625, "elapsed": 3702, "weights_sha256": "62c8503f9fb23f65b8963d810da03af4b0f265091298687dcae8d87997d6f3c1"}, "iterations": 60, "training_transition_count": 100800, "elapsed": 3702, "incumbent": "omw_v13f", "note": "Experimental continuation policy. No competition submission. Codec retains documented limitations."}
+done 3703 s
+/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __script__.ipynb to html
+[NbConvertApp] Writing 1454971 bytes to __results__.html
+

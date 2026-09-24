@@ -1,0 +1,12 @@
+_v13f.py vs .py: 200-0-0 of 200  margin +17425  us 112157  them 94732  errs 0  tmax 1.277  wall 221s
+  net us-them: CARRO -133 EGG +512 FERTI +3094 MELON +0 MILK +8629 STRAW +5477 TOMAT -34 WHEAT -1370 WOOL +2349 anim -941 hire +59 seed -217
+_v13f.py vs _v10.py: 169-31-0 of 200  margin +725  us 98109  them 97384  errs 0  tmax 2.273  wall 247s
+  net us-them: CARRO -18 EGG +29 FERTI -192 MELON +0 MILK +37 STRAW +132 TOMAT +4 WHEAT +575 WOOL +272 anim +0 hire -223 seed +108
+_v14a.py vs .py: 200-0-0 of 200  margin +17607  us 112364  them 94758  errs 0  tmax 1.008  wall 205s
+  net us-them: CARRO -116 EGG +523 FERTI +3088 MELON +0 MILK +8675 STRAW +5506 TOMAT -38 WHEAT -1366 WOOL +2439 anim -941 hire +55 seed -218
+_v14a.py vs _v10.py: 170-30-0 of 200  margin +843  us 98303  them 97461  errs 0  tmax 1.248  wall 232s
+  net us-them: CARRO -24 EGG +42 FERTI -185 MELON +0 MILK +88 STRAW +174 TOMAT +4 WHEAT +579 WOOL +277 anim +0 hire -221 seed +108
+_v14c.py vs .py: 200-0-0 of 200  margin +17431  us 112160  them 94729  errs 0  tmax 1.059  wall 223s
+  net us-them: CARRO -133 EGG +526 FERTI +3090 MELON +0 MILK +8630 STRAW +5471 TOMAT -34 WHEAT -1369 WOOL +2351 anim -941 hire +59 seed -217
+_v14c.py vs _v10.py: 170-30-0 of 200  margin +729  us 98104  them 97376  errs 0  tmax 1.226  wall 232s
+  net us-them: CARRO -18 EGG +43 FERTI -191 MELON +0 MILK +39 STRAW +128 TOMAT +4 WHEAT +572 WOOL +265 anim +0 hire -222 seed +108

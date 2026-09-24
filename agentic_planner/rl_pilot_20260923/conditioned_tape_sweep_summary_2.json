@@ -1,0 +1,139 @@
+{
+  "covered_targets": 2,
+  "candidate_games": 12,
+  "all_candidates": {
+    "mean": -934.0833333333334,
+    "median": -970.0,
+    "positive": 5,
+    "cash_mean": 4452.666666666667
+  },
+  "nearest": {
+    "mean": 5701.5,
+    "median": 5701.5,
+    "positive": 2,
+    "cash_mean": 5867.5
+  },
+  "oracle": {
+    "mean": 7522.5,
+    "median": 7522.5,
+    "positive": 2,
+    "cash_mean": 11328.0
+  },
+  "worst": {
+    "mean": -10566.0,
+    "median": -10566.0,
+    "positive": 0,
+    "cash_mean": -1340.5
+  },
+  "oracle_rows": [
+    {
+      "gid": 111440630,
+      "donor": 111862309,
+      "margin_delta": 4345.0,
+      "cash_delta": 12269.0,
+      "target_shops": [
+        "BAKERY",
+        "PIZZA_SHOP",
+        "BRUNCH_SPOT",
+        "SMOOTHIE_SHOP",
+        "PET_CAFE"
+      ],
+      "donor_shops": [
+        "PIZZA_SHOP",
+        "BRUNCH_SPOT",
+        "BAKERY",
+        "BRUNCH_SPOT",
+        "PIZZA_SHOP"
+      ],
+      "plan": {
+        "PASS": 176,
+        "SELL": 121,
+        "SELL:FERTILIZER": 25,
+        "SELL:EGG": 18,
+        "SELL:WHEAT": 25,
+        "BUY_SEED": 12,
+        "BUY_SEED:TOMATO": 3,
+        "HIRE": 156,
+        "PICKUP": 105,
+        "NORTH": 496,
+        "WEST": 500,
+        "SOUTH": 351,
+        "EAST": 343,
+        "FEED": 134,
+        "COLLECT_FERTILIZER": 211,
+        "CARE": 111,
+        "HARVEST": 348,
+        "FERTILIZE": 192,
+        "WATER": 669,
+        "PLANT": 117,
+        "PLANT:TOMATO": 35,
+        "DIG": 53,
+        "SELL:MILK": 18,
+        "SELL:STRAWBERRY": 18,
+        "BUY_SEED:WHEAT": 8,
+        "PLANT:WHEAT": 68,
+        "DROP": 49,
+        "SELL:WOOL": 1,
+        "BUY_PRODUCT": 10,
+        "SELL:TOMATO": 12,
+        "BUY_SEED:CARROT": 1,
+        "PLANT:CARROT": 14,
+        "SELL:CARROT": 4
+      }
+    },
+    {
+      "gid": 111658613,
+      "donor": 111824988,
+      "margin_delta": 10700.0,
+      "cash_delta": 10387.0,
+      "target_shops": [
+        "FARMERS_MARKET",
+        "PIZZA_SHOP",
+        "YARN_STORE",
+        "SMOOTHIE_SHOP",
+        "FARMERS_MARKET"
+      ],
+      "donor_shops": [
+        "FARMERS_MARKET",
+        "ICE_CREAM_SHOP",
+        "YARN_STORE",
+        "BRUNCH_SPOT",
+        "FARMERS_MARKET"
+      ],
+      "plan": {
+        "PASS": 260,
+        "SELL": 122,
+        "SELL:FERTILIZER": 29,
+        "SELL:WHEAT": 21,
+        "BUY_SEED": 14,
+        "BUY_SEED:WHEAT": 10,
+        "HIRE": 160,
+        "WEST": 464,
+        "PICKUP": 112,
+        "NORTH": 494,
+        "EAST": 366,
+        "SOUTH": 314,
+        "FEED": 152,
+        "CARE": 138,
+        "COLLECT_FERTILIZER": 210,
+        "WATER": 656,
+        "HARVEST": 345,
+        "PLANT": 136,
+        "PLANT:WHEAT": 78,
+        "FERTILIZE": 190,
+        "DIG": 46,
+        "SELL:MILK": 18,
+        "SELL:WOOL": 20,
+        "SELL:STRAWBERRY": 18,
+        "BUY_SEED:TOMATO": 1,
+        "PLANT:TOMATO": 15,
+        "DROP": 61,
+        "BUY_PRODUCT": 10,
+        "BUY_SEED:CARROT": 3,
+        "PLANT:CARROT": 43,
+        "SELL:TOMATO": 5,
+        "SELL:CARROT": 11
+      }
+    }
+  ]
+}
