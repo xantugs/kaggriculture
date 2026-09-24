@@ -1,0 +1,14 @@
+gold/submit — takeover-controller builds (24 Sep 2026, 14:40 UTC)
+
+PRIMARY  main_ctl_d24.py   chassis v15a+ADAPT until day 24, gold controller (v40f) from day 24 hour 0
+SECOND   main_ctl_d20.py   same controller from day 20 (bigger margins, more variance)
+
+Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (our live logic; baseline 125-124, +$1,463):
+                     wins    vs opp>=2800 (131 games)      margin diff (all)
+  main_ctl_d24.py    145     56 (baseline 38; flips +21/-3)  +$580 +- 107
+  main_ctl_d20.py    133     49 (flips +23/-12)              +$1,181 +- 190
+Closed loop mirror vs chassis (60 seeds): d24 +$618 (45/60 seat 0), +$584 (43/60 seat 1); d20 +$918 (36/60).
+No agent errors and no controller-internal errors; max step time 0.4 s under 4-way load; official
+kaggle_environments runner verified (identical rewards to the lean runner).
+
+Build: gold/build.py with the GC_P overrides embedded in the file (grep "GC_P.update").

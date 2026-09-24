@@ -126,8 +126,10 @@ def job(t):
         r = lean.play(None, None, d['info']['seed'], agent_objs=ag)
     finally:
         K._end_of_day = orig; K._commit_unit = oc; K._process_market = opm
+    tel = getattr(A, 'telemetry', None)
+    tel = {k: v for k, v in tel.items() if isinstance(v, (int, float, str))} if isinstance(tel, dict) else None
     return dict(led_us=dict(led[P]), led_them=dict(led[O]), gid=d['id'], opp=names[O], cand=cand, S=S, rec=d['rewards'][P] - d['rewards'][O], rec_ok=rec_ok,
-                us=r['r'][P], them=r['r'][O], m=(r['r'][P] - r['r'][O]) if r['r'][P] is not None else None, err=r['err'])
+                us=r['r'][P], them=r['r'][O], m=(r['r'][P] - r['r'][O]) if r['r'][P] is not None else None, err=r['err'], tel=tel)
 
 
 if __name__ == '__main__':

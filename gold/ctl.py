@@ -25,6 +25,8 @@ GC_P = dict(
     feed_reserve=1.0,     # wheat kept per animal for the next morning
     fert_keep=6,
     fert_carrots=True,
+    carrot_fert_gain=25.0,
+    fert_res_extra=2,
     drip_on=True,
     drip={'STRAWBERRY': 6, 'MILK': 6, 'WOOL': 4, 'TOMATO': 6},
     drip_room=80,
@@ -468,7 +470,7 @@ class GoldCtl:
                 fert_tom += 1
         self.fert_tomorrow = fert_tom
         self.reserve = {"WHEAT": int(GC_P["feed_reserve"] * len(animals)) + 2,
-                        "FERTILIZER": max(GC_P["fert_keep"], fert_tom + 2)}
+                        "FERTILIZER": max(GC_P["fert_keep"], fert_tom + GC_P["fert_res_extra"])}
         if GC_P["d28_zero_reserve"] and day >= 28:
             self.reserve = {"WHEAT": 0, "FERTILIZER": 0}
 
@@ -502,7 +504,7 @@ class GoldCtl:
                     rem_days = cd["my"] - age + 1
                     extra = min(cd["mx"] - yu, 2 * rem_days) - min(cd["mx"] - yu, rem_days)
                     fert_gain = extra * pv - self.pnow.get("FERTILIZER", 50)
-                    if fert_gain > GC_P["wheat_fert_gain"]:
+                    if fert_gain > (GC_P["carrot_fert_gain"] if crop == "CARROT" else GC_P["wheat_fert_gain"]):
                         acts.append(["FERTILIZE"]); fert = 1; gain["fert"] = fert_gain; value += fert_gain
                         fert_active = True
                 g = min(2 if fert_active else 1, cd["mx"] - yu)
