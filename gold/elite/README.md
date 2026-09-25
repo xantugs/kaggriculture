@@ -151,3 +151,11 @@ variables; `v219e` in the controller sets them at day 12 by tomato demand. Mirro
   V219 in copy games; an earlier block trades them for volume and wages. Not pursued.
 | e11 | `hire_cost_w` 0.3 (cheaper hiring in controller days) | -$104 +- 71 | +3/-5 |
 | e12 | e11 + 18 hands | -$239 +- 90 | +3/-6 |
+| e16 | strawberry annex check at 2 shops (`rich_min` 2, forecast-gated) | never fires differently (0 games changed) | |
+| e17 | herd margins 2000 / 3000 | +$19 +- 35 (5 games changed) | +1/-1 |
+| e18 | e9 + e16 + e17 | +$493 +- 154 | +7/-5 |
+| e19 | divergent takeover day 18 | +$152 +- 145 | +6/-6 |
+| e20 | divergent takeover day 22 | +$39 +- 169 | +3/-7 |
+
+e9 on the pinned 2800+ gate: divergent games +$24 +- 385 (flips +1/-3), copies unchanged by construction. The
+takeover-day curve against elites (16: 0, 18: +152, 20: +474, 22: +39, 24: -14) is a marginal effect at best.

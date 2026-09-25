@@ -2631,6 +2631,10 @@ def _straw_cap(obs, action):
     shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
     if step < 24 * int(GC_P["straw_cap"].get("from_day", 6)):
         return action   # too few shops known to judge the strawberry market
+    if GC_P["straw_cap"].get("div_only"):
+        ad = globals().get("_AD_STATE")
+        if not (isinstance(ad, dict) and ad.get("off")):
+            return action   # a copy rival floods the strawberry market anyway; our flood then mostly denies it
     dem = sum(6 for s in shops if s in ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET"))
     cap = GC_P["straw_cap"].get(str(dem))
     if cap is None:
