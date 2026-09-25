@@ -78,7 +78,10 @@ pipe16 40-0 +$21,666, ahmed v47 39-1 +$6,501. Newest public top agents (Sep 20 b
   metav4 v13 (Tschinkel, 2945 Farm; = master-engine-v3)  36-4 +$3,137 (v86a 37-3 +$2,788; per seed +$349)
   a-smaller-market-shock (dmitriigluzdov)                37-3 +$3,580 (v86a 37-3 +$3,099; per seed +$480)
   one-more-wheat 40-0 +$21,465; demand-preserving-turn-sale-timing, v54 idle workers, farmer-john 40-0 +$21,666. Official runner: seed 6043 (seat 0, cow takeover) 120,404 vs 113,984;
-seed 6029 (seat 1) 79,703 vs 77,358; both DONE.
+seed 6029 (seat 1) 79,703 vs 77,358; seat 1 vs live v15a seeds 6135 / 6205: 107,291 vs 104,873 / 137,989 vs
+121,458; seat 1 vs metav4 v13 seed 6126: 130,907 vs 111,007; all DONE.
+Robustness sweep, 400 closed-loop games vs live v15a (seeds 6100-6299, both seats): 371-29 +$3,775, 0 errors, max
+step 0.28 s (tomato block 20 plants in 64 games, 15 in 184; herd fired in 9).
 
 10141c6fa605caf8ec426d7cc62a9d147db34f6024b053c400c671d9509fafe4  submit/main_ctl_rich5_m7.py
 19d93b9b5041cef3f9d05bfdd41237e86d079a3dd9f30bfad84e3772c8228f5b  submit/main_ctl_rich4_m7.py
