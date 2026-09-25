@@ -206,3 +206,12 @@ and wool.
 - v108 vs v100: +$170 +- 63 per game (copy +$178, divergent +$152), no flips; fired in 13 games (11 better, +$0.5k to
   +$8.6k). Geese were never chosen. Mirror 51-9 +$2,867; pipe16 40-0, ahmed v47 39-1; official runner DONE.
 Also rejected: carrot_edge 0.7 / 1.0 / 1.2 on copy games (-$174 / -$59 / -$415; 0.85 stays), 0.7 on divergent (-$3).
+Rejected after v108 (pinned vs v108 unless noted):
+- copy takeover day 23: +$44 +- 118, wins 154 -> 152 (day 24 stays);
+- herd-rich margin 3000: identical (no cow forecast between 3000 and 4000); geese in the controller herd: never chosen;
+- strawberry-rich path: carrot_edge 1.0 -$95, carrot forecast off -$199; rich margin 1500 / 3500: -4 wins / -$135;
+- 15-plant tomato option, closed loop (200 games vs live v15a): +$64 +- 84 where chosen (neutral; pinned +$1.4k
+  per eligible game), kept.
+Robustness: 400 closed-loop games vs live v15a 371-29, 0 errors, max step 0.28 s; vs the newest public top agents
+metav4 v13 36-4, a-smaller-market-shock 37-3, one-more-wheat / pipe16 variants 40-0 (+$349 / +$480 per game over v86a
+against the two strongest). metav4 v13 is classified a chassis copy by ADAPT (day-24 takeover) and plays like live v15a.
