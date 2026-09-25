@@ -103,7 +103,7 @@ under-supplied. Elite rivals (e.g. 摆烂小分队, +30 strawberries on days 14-
 - `rich_eval` at step 288: SE quadrant as a 16-plot strawberry annex (land + seeds + 3 fertilizer + labour). Take over
   at day 12 only if it clears `se_straw_margin`; then `se_straw` buys SE and `straw_fc` plants extra strawberries
   (on SE and on replant slots) until day 17.
-- Pinned (249): 175 -> 181 wins, +$1,088 +- 264 per game, flips +7/-1. Fired in 39 games (+$6,946 each).
+- Pinned (249): 175 -> 180 wins, +$1,066 +- 265 per game, flips +7/-2. Fired in 40 games (+$6,635 each).
   Closed loop, 60 rich seeds vs live v15a: +$3,818 +- 1,004.
 - A day-12 takeover without the forecast gate costs 21 of 62 wins in rich towns (-$1,562 per game): the gate matters.
 

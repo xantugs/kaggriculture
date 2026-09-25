@@ -17,8 +17,9 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
                           wins  copies(171)  divergent(78)  opp>=2800(131)  margin
   live logic              125   111          14             38              +$1,463
   v18 main_ctl_adapt_m7   175   146          29             69              +$3,162
-  v74 main_ctl_rich_m7    181   150          31             74              +$4,250
-v74 vs v18: +$1,088 +- 264 per game (z 4.1), flips +7/-1; the rule fired in 39 games: wins 27 -> 33, +$6,946 per game.
+  v74 main_ctl_rich_m7    180   149          31             74              +$4,228
+v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
+(corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
 Closed-loop mirror vs live v15a, 60 strawberry-rich seeds (decoupled engine): +$3,818 +- 1,004 per game (z 3.8),
 fired in 26/60 (+$8,810 each), non-firing seeds identical, 0 errors, max step 0.31 s.

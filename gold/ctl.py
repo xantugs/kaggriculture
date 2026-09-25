@@ -138,6 +138,9 @@ GC_P = dict(
     straw_units=2.0,      # units per production (fertilized)
     straw_opp_w=1.0,
     straw_our_w=1.0,      # calibrated on recorded rich towns: 0.9
+    straw_future_w=1.0,   # weight of the expected strawberry demand from shops not yet open (trigger evaluation)
+    straw_count_future_w=None,  # the same for choosing how many plots to add (None: straw_future_w)
+    straw_replant=True,   # forecast strawberries may also take replant slots (else only free tiles)
     straw_lag=0,          # days between a production and its sale (calibrated: 1)
     se_straw=False,       # the SE quadrant as a strawberry annex when the forecast pays for land + plots
     se_straw_margin=2500.0,
@@ -763,7 +766,7 @@ class GoldCtl:
                     inv += q
         return rev
 
-    def _straw_value(self, obs, day, n, shops):
+    def _straw_value(self, obs, day, n, shops, fw=None):
         """Revenue of n strawberry plots planted today (straw_units at ages 10, 12, 14, 16 up to day 29), sold on
         arrival into a book drained by the town's strawberry shops and supplied by every visible strawberry plant."""
         inv = float(obs["market"]["inventory"]["STRAWBERRY"])
@@ -788,7 +791,7 @@ class GoldCtl:
         new_days = {day + 10 + 2 * k + lag for k in range(4)}
         for d in range(day, 30):
             unl = min(8, d // 3) - n_shops
-            k = k_now + max(0, unl) * 0.5 * GC_P["future_shop_w"]
+            k = k_now + max(0, unl) * 0.5 * GC_P["future_shop_w"] * (GC_P["straw_future_w"] if fw is None else fw)
             inv -= 6.0 * k + 1.0
             inv += sup.get(d, 0)
             if n == 0 and getattr(self, "_straw_path", None) is not None:
@@ -857,10 +860,11 @@ class GoldCtl:
         life = min(16, 29 - day) + 1
         alt = GC_P["straw_alt_day"] * life
         cost = 100 + 3 * fert + GC_P["straw_labor"]
-        base = self._straw_value(obs, day, 0, shops)
+        cfw = GC_P["straw_count_future_w"]
+        base = self._straw_value(obs, day, 0, shops, fw=cfw)
         best_n, best_v = 0, 0.0
         for n in range(GC_P["straw_fc_step"], min(n_free, GC_P["straw_fc_max"]) + 1, GC_P["straw_fc_step"]):
-            v = self._straw_value(obs, day, n, shops) - base - n * (cost + alt)
+            v = self._straw_value(obs, day, n, shops, fw=cfw) - base - n * (cost + alt)
             if v > best_v:
                 best_n, best_v = n, v
         _GC_REPORT["gc_straw_fc"] = _GC_REPORT.get("gc_straw_fc", 0) + best_n
@@ -974,7 +978,7 @@ class GoldCtl:
         n_mel = min(self._melon_count(obs, day, spare - n_tom), spare - n_tom) if GC_P["melon_on"] else 0
         placed_m = 0
         placed_t = 0
-        straw_any = n_sfc > 0   # forecast strawberries may also take replant slots
+        straw_any = n_sfc > 0 and GC_P["straw_replant"]   # forecast strawberries may also take replant slots
         # feed wheat goes on the farthest slots (low-maintenance), tomatoes and strawberries near the shed
         far = sorted(slots, key=lambda p: -_gc_dist(p, (4.5, 4.5)))
         feed_tiles = set(far[:feed_first])
