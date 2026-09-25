@@ -68,3 +68,44 @@ diagnosis, benchmarks, evaluating GOLD files). The GOLD session owns `GoldCtl` /
 ## Tools
 - `moon/evalnew.sh their_file.py name` — the full eval: timing, fresh16/17, train/hold, closed loop vs v18.
 - `moon/cl_split.py` — splits a closed-loop jsonl by strawberry-shop count and by rich firing.
+
+## Update ~10:20 UTC — v81 (`gold/submit/main_ctl_rich2_m7.py`) evaluated → staged as `submit/v20/main.py`
+- **Result 1: in towns where all 4 shops buy strawberries, v81's rich takeover now beats SES.**
+  - `straw_replant: False` fixed the rich takeover there.
+  - On the same 300 closed-loop games vs v18 (`ses_seeds.json`):
+
+    | Build | Record | Margin/game |
+    |---|---|---|
+    | r81 (v81 GOLD on the v18 chassis) | **264-36** | +$8.4k |
+    | SES (v19) | 250-42-8 | +$6.2k |
+    | rich7 | 203-97 | +$5.7k |
+
+  - So the SES layer is superseded; don't combine them.
+- **Result 2: in towns where 3 of 4 shops buy strawberries, `straw_replant` changes nothing.** Rich still goes
+  42-38 (+$680) when it fires (80 of 300 games).
+- **Result 3: the tomato block at ≥ 2 shops is real but modest.**
+  - About +$100-130/game pinned, +1 win.
+  - The closed loop overstates it (68-34 vs 43-25 without it): mirror draws flip on any small edge. All the
+    change is in towns with 2 tomato shops among the first 6.
+- **Result 4: the v18 chassis vs m7 under the same v81 logic.**
+  - Head-to-head, r81t2 (v18 chassis) vs raw v81 (m7 chassis): 104-96, +$119.
+  - Pinned: +$100/game, same wins.
+  - So it's a small edge only.
+- **Pinned wins over 282 games** (train 131, hold 81, fresh16 46, fresh17 24):
+
+  | Build | Wins | $/game vs v18 |
+  |---|---|---|
+  | v18 | 170 | |
+  | v19 (SES) | 177 | |
+  | r81 | 180 | |
+  | r81_raw | 181 | +1352 |
+  | r81t2 | 181 | +1454 |
+  | r81ht2 | 182 | +1213 |
+
+- **Closed loop vs v18, seeds 0-99:** r81t2 68-34-98 (+$707), r81 43-25-132, rich7h 40-26-134.
+- **`submit/v20/main.py` = `arena/cand/r81t2.py`** = v18 chassis + V219 tomato block at ≥ 2 shops + v81 GOLD.
+  - sha256 e620ef35f5b07f7166a46c2a…
+  - Official runner, 48 seeds (8 with the rich takeover): all DONE, worst step 0.372 s, 0 errors.
+  - Not submitted.
+- **Dead end: a day-15 rich check** (waiting for shop 5 to become visible). rich_eval stays under $2,500 on
+  day 15. With the margin at 0 it fires 84 times and goes 28-56, because day 15 is too late.
