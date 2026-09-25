@@ -14,10 +14,9 @@ while len(sel) < 8 and any(byt.values()):
     for t in list(byt):
         if byt[t] and len(sel) < 8: sel.append(byt[t].pop(0))
 games = {g['id']: g for g in load_games(path)}
-variants = [('outcome only', dict(slack_min=0, emergency=False, plant_trim=False)),
-            ('+R2 plant trim', dict(slack_min=0, emergency=False, plant_trim=True)),
-            ('+R1 hire reserve', dict(slack_min=8, emergency=False, plant_trim=True)),
-            ('+R3 emergency sells', dict(slack_min=8, emergency=True, plant_trim=True))]
+variants = [('outcome +R2', dict(slack_min=0, emergency=False, plant_trim=True)),
+            ("+R1' drift-gated", dict(slack_min=8, emergency=False, plant_trim=True)),
+            ("+R1' slack 20", dict(slack_min=20, emergency=False, plant_trim=True))]
 for label, rs in (('ROBUST', robust), ('COLLAPSED', sel)):
     print(f"=== {label} ({len(rs)} games) ===")
     refs = {(r['gid'], r['seat']): reference_log(games[r['gid']], r['seat']) for r in rs}

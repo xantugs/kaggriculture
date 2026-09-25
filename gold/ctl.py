@@ -1286,9 +1286,11 @@ class GoldCtl:
         best = None
         lo = 0 if (day == GC_P["start"] // 24 or final) else max(0, self.last_hires - 3)
         hi = GC_P["max_hands_final"] if final else GC_P["max_hands"]
+        while lo > 0 and sum(_gc_fib(q) for q in range(lo)) > cash - 20:
+            lo -= 1   # a farm that wakes up broke must still get a plan (fewer hands), not a crashed day
         for h in range(lo, hi + 1):
             cost = sum(_gc_fib(q) for q in range(h))
-            if cost > cash - 20:
+            if h > 0 and cost > cash - 20:
                 break
             routes, spawns, unserved = self._vrp(visits, h)
             if final and GC_P["final_by_value"]:

@@ -80,24 +80,37 @@ def _orders_from_outcomes(lst):
     return out
 
 
-def build_agent(acts, seat, ref, slack_min=8, emergency=True, plant_trim=True):
+def build_agent(acts, seat, ref, slack_min=8, emergency=False, plant_trim=True):
     hands_rec, money_rec, outcomes = ref['hands'], ref['money'], ref['outcomes']
     orders = {t: _orders_from_outcomes(lst) for t, lst in outcomes.items()}
-    # R1: day-0 hire reservation
+    # R1': day-0 hire reservation, armed only when the recording reached its day-1 hires with a thin margin and
+    # fired only once live cash is observed below the recorded trajectory; drops one unit of a feed-safe seed
+    # (melon, tomato, carrot, strawberry; wheat last) from the latest remaining day-0 seed purchase.
     need_d1 = _fib_cost(hands_rec[25] if len(hands_rec) > 25 else 0)
     slack = (money_rec[23] if len(money_rec) > 23 else 0) - need_d1
-    if need_d1 > 0 and slack < slack_min:
-        best = None   # (price, -step, step, idx)
-        for t in range(23, -1, -1):
-            for j, o in enumerate(orders.get(t, [])):
-                if o[0] == 'BUY_SEED' and o[2] > 0 and (best is None or SEED_PRICE.get(o[1], 0) < best[0]):
-                    best = (SEED_PRICE.get(o[1], 0), t, j)
-            if best is not None and best[0] <= 20:
-                break
-        if best is not None:
-            _, t, j = best
-            o = orders[t][j]; o[2] -= 1
-            if o[2] <= 0: orders[t].pop(j)
+    r1 = {'armed': need_d1 > 0 and slack < slack_min, 'done': False, 'slack': slack}
+    PREF = {'MELON': 0, 'TOMATO': 1, 'CARROT': 2, 'STRAWBERRY': 3, 'WHEAT': 4}
+
+    def _r1_check(t, live_money):
+        if not r1['armed'] or r1['done'] or t > 23:
+            return
+        drift = money_rec[t] - live_money
+        if drift <= max(0.0, r1['slack']):
+            return
+        best = None
+        for t2 in range(23, t, -1):
+            for j, o in enumerate(orders.get(t2, [])):
+                if o[0] == 'BUY_SEED' and o[2] > 0:
+                    key = (PREF.get(o[1], 9), -t2)
+                    if best is None or key < best[0]:
+                        best = (key, t2, j)
+        if best is None:
+            return
+        _, t2, j = best
+        o = orders[t2][j]; o[2] -= 1
+        if o[2] <= 0:
+            orders[t2].pop(j)
+        r1['done'] = True
 
     def agent(obs, cfg=None):
         t = obs['step']
@@ -106,6 +119,7 @@ def build_agent(acts, seat, ref, slack_min=8, emergency=True, plant_trim=True):
             a = {"farmer": ["PASS"], "hands": [], "market": []}
         farm = obs['farms'][obs['player']]
         priv = obs['private']
+        _r1_check(t, float(farm['money']))
         live_hands = farm.get('hands') or []
         farmer = a.get('farmer') or ['PASS']
         hands = list(a.get('hands') or [])
