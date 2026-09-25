@@ -187,3 +187,22 @@ Rejected (pinned, 25-26 Sep):
   earliest the geometry allows).
 Where the rest is: divergent losses (47) are mostly elite rivals ahead by > $5k on every product (their opening builds
 tomatoes, melons, geese and earlier strawberries by day 12); copy losses (17) are within $2.5k except one.
+
+## 26 Sep: v108 (`submit/main_ctl_rich5_m7.py`) = v100 + herd expansion
+Milk and wool books spike in some towns (px12 peaks: a quarter of games >= $189; up to $268 milk / $249 wool) because
+the chassis picks its herd from the first two shops only; later yarn stores and milk shops go unserved. A
+perfect-foresight bound (extra animals bought on day 12, actual price paths) was > $1k in ~45 games each for milk
+and wool.
+- `herd_on` (controller days: divergent 16-18, strawberry-rich 12-18): price k extra sheep/cows from a book forecast
+  (town drain now + expected shops, every visible animal on both farms at its cared rate - the rival's at 1.0, not 0.8:
+  elite rivals care fully, which is what sank the first version -, new animals min(held, fy) units after fy days then
+  1+iv every iv days, the day's lot shared with the rival), net of price, feed, labour ($60/animal-day), fertilizer and
+  land (own SE or tiles beyond 6 spare only: the first version put 12 geese on the strawberry annex, -$44k).
+  Buy when > $3,000, at most 6 animals a game, hour-0 BUY_ANIMAL so the day's routes place them.
+- `herd_rich_margin` 4000, cows only: copy games take over on day 12 when the cow forecast is large (sheep excluded,
+  wool's glut side is quadratic: the two sheep takeovers lost $7.8k / $2.4k). A div-over leak once let a sheep forecast
+  fire the cow rule and buy nothing: the day-12 takeover alone cost $16.9k in that game (fixed: the check prices only
+  the rule's own kinds).
+- v108 vs v100: +$170 +- 63 per game (copy +$178, divergent +$152), no flips; fired in 13 games (11 better, +$0.5k to
+  +$8.6k). Geese were never chosen. Mirror 51-9 +$2,867; pipe16 40-0, ahmed v47 39-1; official runner DONE.
+Also rejected: carrot_edge 0.7 / 1.0 / 1.2 on copy games (-$174 / -$59 / -$415; 0.85 stays), 0.7 on divergent (-$3).

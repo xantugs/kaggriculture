@@ -854,13 +854,13 @@ class GoldCtl:
             inv += q_tot
         return rev
 
-    def _herd_plan(self, obs, day, shops, n_empty, se_open, money):
+    def _herd_plan(self, obs, day, shops, n_empty, se_open, money, kinds=None):
         """Best (kind, k, value, needs_se) for extra animals bought now."""
         pn = getattr(self, "pnow", None) or {}
         wheat_px = pn.get("WHEAT", 40); fert_px = pn.get("FERTILIZER", 30)
         best = (None, 0, 0.0, False)
         days = 30 - (day + GC_P["herd_place_lag"])
-        for kind in GC_P["herd_kinds"]:
+        for kind in (kinds or GC_P["herd_kinds"]):
             a = _GC_ANIM[kind]
             base = self._herd_value(obs, day, kind, 0, shops)
             for k in range(1, min(GC_P["herd_max"], GC_P["herd_total_max"] - getattr(self, "herd_total", 0)) + 1):
@@ -2733,7 +2733,8 @@ def agent(observation, configuration=None):
                 se_open = "SE" not in quads and "NE" in quads and "SW" in quads
                 allshops = list(_gc_get(observation["town"], "unlocked_shops", []) or [])
                 hk, hn, hv, _hs = _GC._herd_plan(observation, step // 24, allshops, max(0, n_empty - GC_P["herd_keep_free"]),
-                                                   se_open, float(farm["money"]) - GC_P["rich_hire_budget"])
+                                                   se_open, float(farm["money"]) - GC_P["rich_hire_budget"],
+                                                   kinds=GC_P["herd_rich_over"].get("herd_kinds"))
             except Exception as e:
                 hk, hn, hv = None, 0, -1e9
                 _GC_REPORT["gc_rich_err"] = repr(e)[:120]

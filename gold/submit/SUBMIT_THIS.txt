@@ -1,8 +1,10 @@
-gold/submit — takeover-controller builds (updated 25 Sep 2026, late night)
+gold/submit — takeover-controller builds (updated 26 Sep 2026)
 
-PRIMARY  main_ctl_rich4_m7.py   v100 = v86a + day-18 SE tomato block sized by a tomato forecast (10/15/20 plants)
+PRIMARY  main_ctl_rich5_m7.py   v108 = v100 + herd expansion: extra cows/sheep bought when a milk/wool book forecast
+                                pays (controller days; a day-12 takeover for cows when the forecast is large)
+SECOND   main_ctl_rich4_m7.py   v100 = v86a + day-18 SE tomato block sized by a tomato forecast (10/15/20 plants)
                                 + divergent games: plain sells move off the hour right before the town's purchase
-SECOND   main_ctl_rich3_m7.py   v86a = v81 + day-29 deliveries land by hour 19 (before the copy rival's final dumps)
+         main_ctl_rich3_m7.py   v86a = v81 + day-29 deliveries land by hour 19 (before the copy rival's final dumps)
                                 + the top 3 lots sold at hour 0 of day 29
          main_ctl_rich2_m7.py   v81 = v74 + extra strawberries only on the SE annex + chassis tomato block (V219) at >= 2
                                 pizza/farmers-market shops instead of 3
@@ -27,6 +29,7 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
   v81 main_ctl_rich2_m7   180   149          31             74              +$4,422
   v86a main_ctl_rich3_m7  182   151          31             75              +$4,614
   v100 main_ctl_rich4_m7  185   154          31             78              +$5,051
+  v108 main_ctl_rich5_m7  185   154          31             78              +$5,221
 v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
 (corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
@@ -63,6 +66,18 @@ Official runner: seed 6003 (seat 0) 84,433 vs 80,382; seed 6011 (seat 1) 124,162
 Closed loop vs strong public agents (seeds 6000-6039, seat 0): pipe16 40-0 +$21,262 (v74 +$20,668); ahmed v47 39-1
 +$6,264 (v74 37-3 +$5,323); 0 errors, max step 0.23 s.
 
+v108 vs v100: +$170 +- 63 per game (copy +$178 +- 78, divergent +$152 +- 105), flips 0/0; 84 most recent games: 45 wins.
+- Herd expansion (herd_on): on controller days (divergent 16-18, strawberry-rich 12-18) price k extra sheep or cows
+  from a book forecast of wool/milk (town drain now and expected, every visible animal on both farms at its cared rate,
+  new animals yield min(held, fy) after fy days then 1+iv every iv days; net of price, feed, labour $60/day, fertilizer,
+  land: its own SE or spare tiles only); buy when it beats $3,000, at most 6 a game. Copy games (takeover day 24) only
+  via a day-12 takeover when the cow forecast beats $4,000 (sheep excluded: wool's glut side is quadratic).
+  Fired in 13/249 games: 11 better (+$0.5k to +$8.6k), 2 slightly worse (-$3.7k, -$0.1k).
+Closed-loop mirror (seeds 6000-6059, seat 0): 51-9 +$2,867 (v100 +$2,805), 0 errors, max step 0.22 s. Public agents:
+pipe16 40-0 +$21,666, ahmed v47 39-1 +$6,501. Official runner: seed 6043 (seat 0, cow takeover) 120,404 vs 113,984;
+seed 6029 (seat 1) 79,703 vs 77,358; both DONE.
+
+10141c6fa605caf8ec426d7cc62a9d147db34f6024b053c400c671d9509fafe4  submit/main_ctl_rich5_m7.py
 19d93b9b5041cef3f9d05bfdd41237e86d079a3dd9f30bfad84e3772c8228f5b  submit/main_ctl_rich4_m7.py
 7171a3648d5e60eb80a58a4197e397e8c8984b00ef04043dcee7dc4143e466c4  submit/main_ctl_rich3_m7.py
 4b6ca9365c759999741949044b56111b733acf3e7f0ffc54357399c038afcd06  submit/main_ctl_rich2_m7.py
