@@ -134,3 +134,18 @@ v108 on the elite gate: 60-150 (29%), -$3,204 (DSM -$6.2k, Yannik -$5.2k, M & M 
 
 The controller's execution from day 12 costs more than any production package it plants, even in tomato towns
 against elites. The production-mix gap in section 1 cannot be closed by handing the farm to the controller earlier.
+
+## 10. Takeover timing against elites, and an earlier SE tomato block (elite gate, paired vs v108)
+
+| candidate | change | paired delta | flips |
+|---|---|---:|---|
+| e9 | divergent takeover at day 20 (`start_div` 480) instead of 16 | +$474 +- 153 | +6/-5 |
+| e10 | divergent takeover at day 24 | -$14 +- 185 | +6/-8 |
+
+`base_m7_t4.py` makes the chassis's SE tomato block (V219) planting day, shop minimum, cash floor and price floor
+variables; `v219e` in the controller sets them at day 12 by tomato demand. Mirror seeds (vs omw_v15a):
+- day-13 block, 20 plants (seed 6042, tomato demand 18): sold 247 tomatoes at $97-220 vs v108's day-18 block's 133
+  at $238-429; cash $10k lower by day 18 (land, seeds, and 3-4 extra hires a day at Fibonacci wages on top of the
+  tape's roster); our own ADAPT then misread the copy rival as divergent (the block lands before the day-15 check).
+  -$11.2k; day-15 block -$11.6k (seed 6042), -$11.0k (6046). The late block's hinge prices are the whole value of
+  V219 in copy games; an earlier block trades them for volume and wages. Not pursued.
