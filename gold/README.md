@@ -215,3 +215,5 @@ Rejected after v108 (pinned vs v108 unless noted):
 Robustness: 400 closed-loop games vs live v15a 371-29, 0 errors, max step 0.28 s; vs the newest public top agents
 metav4 v13 36-4, a-smaller-market-shock 37-3, one-more-wheat / pipe16 variants 40-0 (+$349 / +$480 per game over v86a
 against the two strongest). metav4 v13 is classified a chassis copy by ADAPT (day-24 takeover) and plays like live v15a.
+- tomato harvest threshold 2 / 1 (sell the day-26 production at the top of the book): -$226 / -$181 on tomato and
+  divergent games; day-26 sales only pull day-27 prices down, the day-29 dump (60-80 units at ~$110 in rich towns) stays.
