@@ -76,3 +76,21 @@ always evaluates the zero-hand plan. v100 rebuilt with the patched controller pl
 - `hybrid_smoke.py`, `diag_collapse.py`, `diag_batch.py`, `diag_repaired.py`, `ablate_repairs.py`.
 - `timing_anatomy.py games.json out`, `elite_ledger.py dump out [nproc]`, `composition_table.py elite.jsonl ours.jsonl`.
 Built agents live in `gold/elite/bases/` (ignored; reproducible).
+
+## 6. What the elite winners grow, by demand known at the time (`composition_table.txt`)
+
+Demand = daily units the shops known at day D drain for the product (6 per multi-product shop, 12 per single-product
+shop; day 12 knows 4 shops, day 18 six, day 24 eight). Elite winners (639 seats) / our live seats (131):
+
+| product, day | demand 0 | 6 | 12 | 18 | 24 |
+|---|---:|---:|---:|---:|---:|
+| tomato tiles, day 18 | 2.9 / 0.0 | 5.5 / 0.0 | 7.2 / 0.0 | 11.3 / 5.3 | 18.8 / 6.0 |
+| strawberry tiles, day 12 | 15.2 / 33 | 20.2 / 33 | 26.1 / 33 | 31.8 / 33 | 38.2 / 33 |
+| carrot tiles, day 24 | 2.0 / 0.0 | 2.4 / 0.0 | 8.0 / 3.3 | 9.6 / 4.6 | 17.1 / 9.6 |
+| cows, day 12 | 5.0 / 6.0 | 7.1 / 6.6 | 9.5 / 7.5 | 12.0 / 9.4 | 14.6 / 12.0 |
+| sheep, day 12 (demand 0/12/24) | 3.2 / 5.7 | | 8.5 / 9.4 | | 15.6 / 16.6 |
+
+Elite cash rises with tomato demand known at day 12 ($110.7k at 0, $115.9k at 18). The tape plants 33 strawberries
+in every town; 26% of towns have strawberry demand 0-6 at day 12, where the winners hold 15-20. Day 6: winners
+already have 9.2 strawberries (ours 4.3). Winners hold 25 locked tiles at day 24 (three quadrants); we buy the
+fourth in a fifth of games.
