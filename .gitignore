@@ -5,3 +5,6 @@ moon/elite/games_2026-09-2?.jsonl
 
 # gold/ built candidates (1 MB each) are reproducible with gold/build.py
 gold/c_*.py
+
+# gold/elite built agents (elite bases and controller hybrids) are reproducible with gold/elite/build_elite.py + gold/build.py
+gold/elite/bases/
