@@ -1,0 +1,8 @@
+[["hl_p40", "omw_hl_a", {}],
+ ["hl_p20", "omw_hl_a", {"_HL_CFG": {"items": ["STRAWBERRY"], "d0": 20, "d1": 27, "p_min": 20, "room": 85}}],
+ ["hl_p70", "omw_hl_a", {"_HL_CFG": {"items": ["STRAWBERRY"], "d0": 20, "d1": 27, "p_min": 70, "room": 85}}],
+ ["hl_sm40", "omw_hl_a", {"_HL_CFG": {"items": ["STRAWBERRY", "MILK"], "d0": 20, "d1": 27, "p_min": 40, "room": 85}}],
+ ["sn_h23", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY"], "d0": 15, "last_step": 695, "min_price": 2, "keep": 0, "hours": [23], "front": true}}],
+ ["sn_h0", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY"], "d0": 15, "last_step": 695, "min_price": 2, "keep": 0, "hours": [0], "front": true}}],
+ ["snm_h23", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY", "MILK"], "d0": 15, "last_step": 695, "min_price": 2, "keep": 0, "hours": [23], "front": true}}],
+ ["sn_h12", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY"], "d0": 15, "last_step": 695, "min_price": 2, "keep": 0, "hours": [12], "front": true}}]]

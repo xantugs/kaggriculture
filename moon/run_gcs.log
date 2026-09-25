@@ -1,0 +1,16 @@
+TRAIN
+gc600                                    MIR    -54 ± 193 dW  +0 | DIV   +254 ± 204 dW  +0 | all    +87
+base                                     MIR     +0 ±   0 dW  +0 | DIV     +0 ±   0 dW  +0 | all     +0
+gc624                                    MIR   -418 ± 153 dW  -8 | DIV   -641 ± 159 dW  +0 | all   -520
+gc648                                    MIR   -760 ± 140 dW -11 | DIV   -746 ± 139 dW  +0 | all   -753
+HOLD
+gc600                                    MIR   +320 ± 233 dW  +2 | DIV   +527 ± 278 dW  +0 | all   +363
+base                                     MIR     +0 ±   0 dW  +0 | DIV     +0 ±   0 dW  +0 | all     +0
+gc624                                    MIR   -178 ± 177 dW  -3 | DIV   -513 ± 271 dW  -1 | all   -248
+gc648                                    MIR   -522 ± 115 dW -11 | DIV   -243 ± 203 dW  +0 | all   -463
+../arena/cand/omw_ad_a5gc600.py vs ../arena/cand/omw_v15b.py: 141-59-0 of 200  margin +681  us 97814  them 97133  errs 0  tmax 0.926  wall 191s
+../arena/cand/omw_ad_a5gc600.py vs ../arena/cand/omw_ad_a5.py: 103-97-0 of 200  margin +129  us 97594  them 97465  errs 0  tmax 1.972  wall 289s
+../arena/cand/omw_ad_a5gc624.py vs ../arena/cand/omw_v15b.py: 118-82-0 of 200  margin +364  us 97363  them 96999  errs 0  tmax 2.001  wall 370s
+../arena/cand/omw_ad_a5gc624.py vs ../arena/cand/omw_ad_a5.py: 78-122-0 of 200  margin -150  us 97196  them 97346  errs 0  tmax 1.853  wall 329s
+../arena/cand/omw_ad_a5gc648.py vs ../arena/cand/omw_v15b.py: 94-106-0 of 200  margin -69  us 97115  them 97183  errs 0  tmax 2.465  wall 331s
+../arena/cand/omw_ad_a5gc648.py vs ../arena/cand/omw_ad_a5.py: 31-169-0 of 200  margin -808  us 96794  them 97601  errs 0  tmax 1.705  wall 348s

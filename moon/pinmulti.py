@@ -58,6 +58,9 @@ def _job(t):
             for k, v in (glb or {}).items():
                 if k == '__skip__':
                     skip_layers(A.__globals__, path, v)
+                elif '.' in k:   # 'GC_P.key': set one key of a dict global
+                    g, key = k.split('.', 1)
+                    A.__globals__[g][key] = v
                 else:
                     A.__globals__[k] = v
             ag = [None, None]
