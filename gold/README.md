@@ -89,3 +89,33 @@ Pinned (249 recorded strong-team games) vs chassis+ADAPT (baseline 125 wins; 111
   - rival-aware floors;
   - day-27 carrot plantings;
   - care at any price.
+
+## 25 Sep: strawberry-rich towns (v74, `submit/main_ctl_rich_m7.py`)
+The first four shops (known at day 12) predict the late strawberry market. With >= 3 strawberry buyers among them
+(brunch, ice cream, smoothie, farmers market; 81 of 249 recorded games) the day-24 strawberry price has a median of
+$155-213; with 0-2 it has crashed to $5-14. The tape always plants 33 strawberries, so in rich towns the market stays
+under-supplied. Elite rivals (e.g. 摆烂小分队, +30 strawberries on days 14-16, $93k strawberry revenue) exploit it.
+
+- `_straw_value`: n new plots planted today, straw_units at ages 10/12/14/16, sold `straw_lag` days after production
+  into a book drained 6/day per strawberry shop (+1 town centre, +0.5 expected per future shop) and supplied by every
+  visible strawberry plant on both farms. Calibrated on the 80 recorded rich towns (predicted vs actual quote, days
+  13-29): lag 1, our weight 0.9, rival 1.0 cut the RMSE from $55 to $23.
+- `rich_eval` at step 288: SE quadrant as a 16-plot strawberry annex (land + seeds + 3 fertilizer + labour). Take over
+  at day 12 only if it clears `se_straw_margin`; then `se_straw` buys SE and `straw_fc` plants extra strawberries
+  (on SE and on replant slots) until day 17.
+- Pinned (249): 175 -> 181 wins, +$1,088 +- 264 per game, flips +7/-1. Fired in 39 games (+$6,946 each).
+  Closed loop, 60 rich seeds vs live v15a: +$3,818 +- 1,004.
+- A day-12 takeover without the forecast gate costs 21 of 62 wins in rich towns (-$1,562 per game): the gate matters.
+
+Tested today and rejected (pinned):
+- `room_v3` (courier and stop planning count held lots; loss-ranked room releases): -$297 +- 145 (69 games).
+  End-of-day dumps are market gluts, mostly in the chassis phase.
+- `race_harvest` (harvest premium goods at 1 unit): -$83 at d16, +$114 at d12 (animals are already harvested at every
+  production once cared for).
+- No sell timing on the divergent path: -$864 +- 220 (the rival-timing hold is worth keeping).
+- Divergent-path tweaks (more tomatoes -$901, hold_max 35 / max_hands 17 no-ops, melons/floors/hire weight ~0).
+- Per-day caps on forecast strawberries (16/20): no change.
+
+Tools: `harness/pinned4.py` now takes `PIN_GIDS=file` (game subset) and `PIN_FILLS=1` (our fills, hires, h12 prices).
+Full-game pinned replays (S=0) reproduce the recorded margins (corr 0.996, 81/84 same winner), so day-0 changes can be
+evaluated against recorded rivals too.

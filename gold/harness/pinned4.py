@@ -102,22 +102,40 @@ def job(t):
     import collections
     led = [collections.Counter(), collections.Counter()]
     FARMS = [None, None]
+    FILLS = []  # our fills from S on: (step, op, item, price), when PIN_FILLS is set
+    STEP = [0]
+    want_fills = bool(os.environ.get("PIN_FILLS"))
     oc = K._commit_unit
     def commit(op, item, price, farm, private, market, cap=100):
         ok = oc(op, item, price, farm, private, market, cap)
         if ok and FARMS[0] is not None:
             i = 0 if farm is FARMS[0] else 1
+            if want_fills and i == P and op in ('SELL', 'BUY_PRODUCT'):
+                FILLS.append((STEP[0], op[0], item, price))
             if op == 'SELL': led[i][item] += price
             elif op == 'BUY_PRODUCT': led[i][item] -= price
             elif op == 'BUY_SEED': led[i]['seed'] -= price
             elif op == 'BUY_ANIMAL': led[i]['anim'] -= price
         return ok
+    PX = {}
     opm = K._process_market
     def pm(state, env):
+        st0 = state[0].observation.step
+        if want_fills and st0 % 24 == 12:
+            PX[st0 // 24] = {p: int(v) for p, v in state[0].observation.market['prices'].items()}
         if state[0].observation.step >= S:
             FARMS[0], FARMS[1] = state[0].observation.farms[0], state[0].observation.farms[1]
+        STEP[0] = state[0].observation.step
         return opm(state, env)
-    K._commit_unit = commit; K._process_market = pm
+    oh = K._do_hire
+    def hire(farm, private, bs, mult=1):
+        m0 = farm['money']; oh(farm, private, bs, mult)
+        if FARMS[0] is not None:
+            i = 0 if farm is FARMS[0] else 1
+            led[i]['hire'] += farm['money'] - m0
+            if want_fills and i == P:
+                FILLS.append((STEP[0], 'H', 'HIRE', farm['money'] - m0))
+    K._commit_unit = commit; K._process_market = pm; K._do_hire = hire
     try:
         A = lean.load(cand)
         ag = [None, None]
@@ -125,11 +143,12 @@ def job(t):
         ag[O] = _tape(d['acts'], O)
         r = lean.play(None, None, d['info']['seed'], agent_objs=ag)
     finally:
-        K._end_of_day = orig; K._commit_unit = oc; K._process_market = opm
+        K._end_of_day = orig; K._commit_unit = oc; K._process_market = opm; K._do_hire = oh
     tel = getattr(A, 'telemetry', None)
     tel = {k: v for k, v in tel.items() if isinstance(v, (int, float, str))} if isinstance(tel, dict) else None
     return dict(led_us=dict(led[P]), led_them=dict(led[O]), gid=d['id'], opp=names[O], cand=cand, S=S, rec=d['rewards'][P] - d['rewards'][O], rec_ok=rec_ok,
-                us=r['r'][P], them=r['r'][O], m=(r['r'][P] - r['r'][O]) if r['r'][P] is not None else None, err=r['err'], tel=tel)
+                us=r['r'][P], them=r['r'][O], m=(r['r'][P] - r['r'][O]) if r['r'][P] is not None else None, err=r['err'], tel=tel,
+                **({'fills': FILLS, 'px12': PX} if want_fills else {}))
 
 
 if __name__ == '__main__':
@@ -137,9 +156,10 @@ if __name__ == '__main__':
     team = sys.argv[5] if len(sys.argv) > 5 else 'offhand'
     maxg = int(sys.argv[6]) if len(sys.argv) > 6 else 10 ** 6
     games = []
+    want = set(int(x) for x in open(os.environ["PIN_GIDS"]).read().split()) if os.environ.get("PIN_GIDS") else None
     for f in files:
         for i, d in enumerate(json.load(open(f, encoding='utf-8'))):
-            if team in d['info']['TeamNames']:
+            if team in d['info']['TeamNames'] and (want is None or d['id'] in want):
                 games.append((f, i))
     games = games[:maxg]
     jobs = [(f, i, team, c, S) for f, i in games for c in cands]

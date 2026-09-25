@@ -1,22 +1,31 @@
-gold/submit — takeover-controller builds (updated 24 Sep 2026, 23:00 UTC)
+gold/submit — takeover-controller builds (updated 25 Sep 2026)
 
-PRIMARY  main_ctl_adapt_m7.py   v64 controller on the main_7 chassis (other session's 6 retuned constants)
-SECOND   main_ctl_adapt_m8.py   v64 controller on the main_8 chassis (8 retuned constants)
+PRIMARY  main_ctl_rich_m7.py    v74 = v64 controller on the main_7 chassis + strawberry-rich towns (new today)
+SECOND   main_ctl_adapt_m7.py   v64m7 (submitted as v18): same build without the strawberry-rich rule
+         main_ctl_adapt_m8.py   v64 controller on the main_8 chassis
          main_ctl_adapt.py      v64 controller on the untuned v15a+ADAPT chassis (reference)
          main_ctl_adapt_d20.py  v62 (divergent rivals -> day 20) on the untuned chassis
 
-Adaptive takeover: chassis until day 24 vs a chassis copy, day 16 vs a divergent rival (ADAPT, steps 143/359).
+Adaptive takeover as in v18: chassis until day 24 vs a chassis copy, day 16 vs a divergent rival (ADAPT, steps 143/359).
+New in v74: at day 12, if >= 3 of the first 4 shops buy strawberries (brunch / ice cream / smoothie / farmers market),
+the controller prices the SE quadrant as a strawberry annex (forecast: town strawberry demand vs every visible
+strawberry plant on both farms, sold a day after each production, calibrated on the recorded games). Only when that
+pays (> $2,500 after land, seeds, inputs and labour) it takes over at day 12, buys SE and plants forecast-driven
+extra strawberries (typically 8-26) until day 17. Everywhere else v74 plays exactly like v18.
 
-Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= our live logic):
-                          wins  copies(171)  divergent(78)  opp>=2800(131)  margin    flips vs live
+Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live logic):
+                          wins  copies(171)  divergent(78)  opp>=2800(131)  margin
   live logic              125   111          14             38              +$1,463
-  main_7 alone            129   115          14             41              +$1,416   (retuning alone ~neutral here)
-  main_8 (their build)    150   133          17             58              +$2,141
-  main_ctl_adapt.py       173   144          29             69              +$3,095   +51/-3
-  main_ctl_adapt_m8.py    173   144          29             69              +$3,158   +53/-5
-  main_ctl_adapt_m7.py    175   146          29             69              +$3,162   +53/-3
-m7 vs untuned v64: +$66 +- 32 (z 2.1), flips +3/-1. Closed-loop mirror vs v15a (60 seeds): m7 +$1,239, m8 +$1,179,
-untuned +$970. 0 agent/controller errors in all runs; official runner verified in both seats.
+  v18 main_ctl_adapt_m7   175   146          29             69              +$3,162
+  v74 main_ctl_rich_m7    181   150          31             74              +$4,250
+v74 vs v18: +$1,088 +- 264 per game (z 4.1), flips +7/-1; the rule fired in 39 games: wins 27 -> 33, +$6,946 per game.
+84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
+Closed-loop mirror vs live v15a, 60 strawberry-rich seeds (decoupled engine): +$3,818 +- 1,004 per game (z 3.8),
+fired in 26/60 (+$8,810 each), non-firing seeds identical, 0 errors, max step 0.31 s.
+Official kaggle_environments runner: seed 6000 (seat 0, fired) 131,224 vs 126,060; seed 6011 (seat 1, fired)
+134,131 vs 118,058; seed 6007 (seat 1, not fired) 75,435 vs 74,702; all DONE, identical to lean.
+
+d4a84504d387745e399e34e3f52fe9f8bf63e0a24edaa074c5508270ee717033  submit/main_ctl_rich_m7.py
 670bcd33531d9874d1c95549a14fea2c40d5cbeb7bfcc6ff8de1db9c074e410d  submit/main_ctl_adapt_m7.py
 98477c7524533ca86fb335f3ef4a9ff206c11e8aaa01bab89bb989c2143035c1  submit/main_ctl_adapt_m8.py
 c453fef4851fb71d0d660dfb82ea94b5e9ccc5a76fa5260de172e80abed5094d  submit/main_ctl_adapt.py
