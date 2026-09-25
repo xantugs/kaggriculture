@@ -184,6 +184,8 @@ GC_P = dict(
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
     tick_last_day=29,
     tick_keep_due=True,
+    v219e=None,           # {'day':13,'min_dem':6,'sizes':{'6':10,'12':15,'18':20},'min_shops':1,'cash':9000,'min_price':55}: at step 288 move
+                          # the chassis's SE tomato block (V219, base_m7_t4) to that day, sized by tomato demand among the first four shops
     rich_tom_dem=0,       # > 0: take over at the rich check when the tomato demand of the first four shops (6 per pizza shop or
     rich_tom_dem_over={},  # farmers market) reaches this; no land is bought, the planner's tomato jobs use free/replant tiles
     rich_car_min=0,       # > 0: also take over at the rich check when the carrot demand of the first four shops
@@ -2828,10 +2830,29 @@ def agent(observation, configuration=None):
     if step == 0 and GC_P["ad_thresh"] and isinstance(globals().get("_AD_CFG"), dict):
         for kk, vv in GC_P["ad_thresh"].items():
             _AD_CFG["thresh"][int(kk)] = float(vv)
+    if GC_P["v219e"] and isinstance(globals().get("_V219_DAY"), list):
+        if step == 0:
+            _V219_DAY[0] = 18; _V219_MIN_SHOPS[0] = 2; _V219_CASH[0] = _K_V219_CASH; _V219_MIN_PRICE[0] = CROP_MIN_PRICE
+        elif step == 288:
+            e = GC_P["v219e"]
+            sh = list(_gc_get(observation["town"], "unlocked_shops", []) or [])[:4]
+            kd = sum(6 for s in sh if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
+            _GC_REPORT["gc_v219e_dem"] = kd
+            if kd >= e.get("min_dem", 6):
+                size = 10
+                for k, v in sorted(((int(k), v) for k, v in e.get("sizes", {}).items())):
+                    if kd >= k: size = v
+                _V219_DAY[0] = int(e.get("day", 13)); _V219_MIN_SHOPS[0] = int(e.get("min_shops", 1))
+                _V219_CASH[0] = float(e.get("cash", 9000)); _V219_MIN_PRICE[0] = float(e.get("min_price", 55))
+                if isinstance(globals().get("_V219_N"), list):
+                    _V219_N[0] = size
+                _GC_REPORT["gc_v219e"] = "d%d:%d" % (_V219_DAY[0], size)
+        if step >= 700 and isinstance(globals().get("_V219_REPORT"), dict):
+            _GC_REPORT["gc_v219_rep"] = " ".join("%s=%s" % (k[:12], v) for k, v in _V219_REPORT.items() if v)
     if step < start and GC_P["v219x"] and isinstance(globals().get("_V219_N"), list):
         if step == 0:
             _V219_N[0] = 10
-        elif step == 432:
+        elif step == 432 and not (isinstance(globals().get("_V219_DAY"), list) and _V219_DAY[0] != 18):
             try:
                 n, vals = _v219x_size(observation)
             except Exception as e:
