@@ -33,9 +33,15 @@ if __name__ == '__main__':
         if seats and len(d['acts']) == 720:
             jobs.append((d, seats, cand, slack_min))
     jobs = jobs[:maxg]
+    res = []
+    if os.environ.get('RESUME') and os.path.exists(out):
+        res = [json.loads(l) for l in open(out, encoding='utf-8') if l.strip()]
+        done = {r['gid'] for r in res}
+        jobs = [j for j in jobs if j[0]['id'] not in done]
+        print(f'resuming: {len(res)} rows kept, {len(jobs)} games left', flush=True)
     print(f'{len(jobs)} games, cand {cand}, slack_min {slack_min}', flush=True)
-    t0 = time.time(); res = []
-    with ProcessPoolExecutor(int(os.environ.get('NPROC', '4'))) as ex, open(out, 'w', encoding='utf-8') as fh:
+    t0 = time.time()
+    with ProcessPoolExecutor(int(os.environ.get('NPROC', '4'))) as ex, open(out, 'a' if res else 'w', encoding='utf-8') as fh:
         for rows in ex.map(job, jobs):
             for r in rows:
                 res.append(r); fh.write(json.dumps(r, ensure_ascii=False) + '\n')
