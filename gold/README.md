@@ -243,3 +243,14 @@ movable (`_V219_DAY`, falling back to day 18 when it does not qualify yet) and a
   thirst crews, one flip each); day 15 -$638 per block game; moving 15-plant blocks to day 17: -5 wins.
 - without the thirst crews a day-17 block set off a late doubled crew on day 18 (18 hires, Fibonacci wages +$6.2k).
 - v130: 185 wins, margin +$5,323 (v108 +$5,221). Closed loop neutral against live v15a / metav4 / smaller-shock.
+
+## 27 Sep: probes past v130
+- Melons on the block's free SE tiles (`base_m7_t5.py` + `v219x_melon`, forecast-sized, harvested at age 10 by the
+  controller): 53 block games -$819 +- 206 (up to 10 melons) / -$434 +- 165 (extra hand-day priced $800). Melon sales
+  +$2.1k per block game, but the fifth planting crew and the melon-only watering crews are the 15th-16th hires of the
+  day ($610-987 each, +$1.8k wages) and tomatoes lose a little. Needed fixes on the way (kept in t5, unused): melons
+  are thirsty every day of their yield window, V13V's skip days (19/21/23) count melons, the chassis never harvests an
+  unripe melon, a lone thirst crew tours only the thirsty tiles.
+- `visit_watered` (a mid-day re-plan of a plant watered today gains nothing from WATER, so no harvest one unit short):
+  -$300 and 6 fewer wins on the block games; not used.
+- 25-plant block option (margin 6000 / 9000): +$112 +- 95 / +$93 on the 53 block games (noise).

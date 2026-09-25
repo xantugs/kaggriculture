@@ -168,6 +168,15 @@ GC_P = dict(
     v219x_early_n=0,      # > 0: plant on v219x_early_day when that day's forecast already picks this many plants
     v219x_early_day=17,
     v219x_day=18,         # planting day of the block (base_m7_t4 moves V219 with it); a day before the copy's block
+    unit_floor_frac=0.0,  # > 0: never sell a unit whose marginal quote is below this share of the product's base price
+    unit_floor_items=("WOOL", "MILK", "STRAWBERRY", "MELON", "TOMATO", "EGG", "CARROT", "WHEAT"),
+    unit_floor_step=716,  # from this step on everything goes (the last town purchase is at step 716)
+    visit_watered=False,  # a re-planned visit of a plant watered today gains nothing more from WATER (no early harvest)
+    v219x_melon=0,        # base_m7_t5: up to this many melons on the block's free SE tiles, sized by a melon forecast
+    v219x_melon_age=10,   # harvest age of a block melon (6 units: planted at 1, watered at ages 6-10)
+    v219x_melon_cost=40.0,  # per plant: watering and harvest time beyond the extra hands
+    v219x_melon_margin=0.0,
+    v219x_melon_wc=None,  # cost of an extra hand-day for the melons (None: v219x_worker_cost)
                           # sells ahead of it      # units per plant and production day (fertilized)
     herd_on=False,        # buy extra sheep/cows/geese when a book forecast of their product pays (controller days)
     herd_first=12,
@@ -587,6 +596,9 @@ class GoldCtl:
                     k = min(n, take)
                     sell0.append(["SELL", p, k]); take -= k
         else:
+            if GC_P["unit_floor_frac"] > 0 and need_room <= 0:
+                sell0 = [["SELL", o[1], self._unit_cap(obs, o[1], int(o[2]))] for o in sell0]
+                sell0 = [o for o in sell0 if o[2] > 0]
             if final and GC_P["final_sell0"] > 0:
                 sell0 = sell0[:max(GC_P["final_sell0"], 1 if need_room > 0 else 0)]
             elif not final and day >= GC_P["late_sell0_day"] and GC_P["late_sell0"] > 0:
@@ -697,6 +709,8 @@ class GoldCtl:
                         acts.append(["FERTILIZE"]); fert = 1; gain["fert"] = fert_gain; value += fert_gain
                         fert_active = True
                 g = min(2 if fert_active else 1, cd["mx"] - yu)
+                if GC_P["visit_watered"] and t.get("watered_today"):
+                    g = 0   # a mid-day re-plan: today's watering is already in yield_units
                 acts.append(["WATER"]); value += g * pv; yu2 = yu + g
                 if cu >= 1:
                     must = True; value += (yu + g) * pv
@@ -2170,6 +2184,21 @@ class GoldCtl:
                 _GC_REPORT["gc_arb_bought"] = _GC_REPORT.get("gc_arb_bought", 0) + k
         return out
 
+    def _unit_cap(self, obs, p, n, before=0):
+        """Units of a lot of n whose own marginal quote stays at or above the unit floor (a glutted book recovers at
+        the town's next purchase; a unit sold at $1 is thrown away)."""
+        fr = GC_P["unit_floor_frac"]
+        if fr <= 0 or p not in GC_P["unit_floor_items"] or int(obs["step"]) >= GC_P["unit_floor_step"] or n <= 0:
+            return n
+        fl = fr * _GC_MKT[p][0]
+        i0 = int(obs["market"]["inventory"][p]) + before
+        k = 0
+        while k < n and _gc_price(p, i0 + k) >= fl:
+            k += 1
+        if k < n:
+            _GC_REPORT["gc_unit_floor"] = _GC_REPORT.get("gc_unit_floor", 0) + (n - k)
+        return k
+
     def _market(self, obs, shed, carried, hour, day):
         step = int(obs["step"])
         sells = self._sell_orders(obs, shed, carried, hour, day, step)
@@ -2272,6 +2301,13 @@ class GoldCtl:
                     continue
                 if w == 0:
                     self._due.add(p)
+            if GC_P["unit_floor_frac"] > 0:
+                k = self._unit_cap(obs, p, n)
+                if k < n:
+                    held[p] = held.get(p, 0) + (n - k)
+                    n = k
+                    if n <= 0:
+                        continue
             out.append(["SELL", p, n])
         # shed room: the end-of-day drop (and any drop) must fit; release held lots first when it would not
         if held:
@@ -2669,6 +2705,58 @@ def _v219x_size(obs):
     return best, vals
 
 
+def _v219x_melons(obs, n_tom):
+    """Melons for the block's free SE tiles: our 6 units a plant on the harvest day (age 10), sold on arrival into a
+    book the town centre drains one unit a day and every visible melon plot supplies, net of seeds, time and the
+    extra hands the bigger block needs."""
+    kmax = max(0, min(int(GC_P["v219x_melon"]), 25 - int(n_tom)))
+    if kmax <= 0 or n_tom <= 0:
+        return 0, {}
+    P = int(obs["step"]) // 24
+    age = int(GC_P["v219x_melon_age"])
+    hd = min(29, P + age)
+    sup = {}
+    for farm in obs["farms"]:
+        for row in farm["tiles"]:
+            for t in row:
+                if isinstance(t, dict) and t.get("crop") == "MELON":
+                    d = int(t["planted_day"]) + age
+                    if P <= d <= 29:
+                        sup[d] = sup.get(d, 0) + 6
+    def xd(n):
+        return max(0, -(-n // 5) - 2) + 3 * max(0, -(-n // 8) - 1)
+    vals = {}
+    for k in range(0, kmax + 1):
+        inv = float(obs["market"]["inventory"]["MELON"]); rev = 0.0
+        for d in range(P, 30):
+            inv -= 1.0
+            inv += sup.get(d, 0)
+            if d == hd and k > 0:
+                rev += sum(_gc_price("MELON", int(inv) + i) for i in range(6 * k))
+                inv += 6 * k
+        wc = GC_P["v219x_melon_wc"] if GC_P["v219x_melon_wc"] is not None else GC_P["v219x_worker_cost"]
+        vals[k] = rev - k * (80.0 + GC_P["v219x_melon_cost"]) - (xd(n_tom + k) - xd(n_tom)) * wc
+    best = max(vals, key=lambda k: vals[k])
+    if vals[best] < GC_P["v219x_melon_margin"]:
+        best = 0
+    return best, vals
+
+
+def _v219x_set_melons(obs, n):
+    if not isinstance(globals().get("_V219_MELON"), list):
+        return
+    k, mv = 0, {}
+    if GC_P["v219x_melon"] and n > 0:
+        try:
+            k, mv = _v219x_melons(obs, n)
+        except Exception as e:
+            _GC_REPORT["gc_v219x_merr"] = repr(e)[:120]
+    _V219_MELON[0] = k
+    _GC_REPORT["gc_v219x_melon"] = k
+    if mv:
+        _GC_REPORT["gc_v219x_mvals"] = " ".join("%d:%d" % (a, b) for a, b in sorted(mv.items()))
+
+
 def agent(observation, configuration=None):
     step = int(observation["step"])
     if step == 0:
@@ -2798,6 +2886,8 @@ def agent(observation, configuration=None):
                 _V219_DAY[0] = int(GC_P["v219x_day"])
             if isinstance(globals().get("_V219_THIRST"), list):
                 _V219_THIRST[0] = bool(GC_P["v219x_thirst"])
+            if isinstance(globals().get("_V219_MELON"), list):
+                _V219_MELON[0] = 0
         elif (GC_P["v219x_early_n"] and step == 24 * GC_P["v219x_early_day"]
               and isinstance(globals().get("_V219_DAY"), list) and _V219_DAY[0] == 18):
             # a big block planted a day before the copy's day-18 block sells ahead of it on days 25-28
@@ -2812,6 +2902,7 @@ def agent(observation, configuration=None):
                 _V219_N[0] = n
                 _GC_REPORT["gc_v219x_n"] = n
                 _GC_REPORT["gc_v219x_day"] = GC_P["v219x_early_day"]
+                _v219x_set_melons(observation, n)
         elif step == 24 * (_V219_DAY[0] if isinstance(globals().get("_V219_DAY"), list) else 18):
             try:
                 n, vals = _v219x_size(observation)
@@ -2821,6 +2912,7 @@ def agent(observation, configuration=None):
             _V219_N[0] = n
             _GC_REPORT["gc_v219x_n"] = n
             _GC_REPORT["gc_v219x_vals"] = " ".join("%d:%d" % (k, v) for k, v in sorted(vals.items()))
+            _v219x_set_melons(observation, n)
     if step < start:
         return _GC_PARENT(observation, configuration)
     if GC_P["arb_chassis"] and not _GC_RICH.get("arb_handed"):
