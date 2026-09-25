@@ -119,3 +119,16 @@ Tested today and rejected (pinned):
 Tools: `harness/pinned4.py` now takes `PIN_GIDS=file` (game subset) and `PIN_FILLS=1` (our fills, hires, h12 prices).
 Full-game pinned replays (S=0) reproduce the recorded margins (corr 0.996, 81/84 same winner), so day-0 changes can be
 evaluated against recorded rivals too.
+
+## 25 Sep (evening): v81 (`submit/main_ctl_rich2_m7.py`)
+- Chassis tomato block (V219) at >= 2 pizza/farmers-market shops (was 3), via `base_m7_t2.py`. Copy path +$288 +- 98
+  per game (26 of 171 copy games change, no flips); closed-loop mirror 44 -> 46 wins (+$488 +- 220).
+- `straw_replant=False`: the forecast's extra strawberries go only on free tiles (the SE annex), never on wheat replant
+  slots: +$395 +- 317 per fired game, and it halves the two bad fired games (-3,979 -> -1,349; -6,217 -> -2,020).
+- v81 vs v74 over 249 pinned games: +$194 +- 68, flips 0/0 (180 wins each).
+
+Rejected this evening (pinned):
+- cautious strawberry counts (future-shop weight 0 / 0.5): -$4,896 / -$1,434 per fired game;
+- planting carrots/wheat up to day 27: copy wins 149 -> 100 (late wages and crowded-out harvests);
+- copy takeover day 20/22/25/26: 126/139/131/113 copy wins vs 150 at day 24.
+Close copy losses are decided on day 29 afternoon: we lead at noon, the copy rival's final harvest overtakes us.

@@ -1,7 +1,9 @@
-gold/submit — takeover-controller builds (updated 25 Sep 2026)
+gold/submit — takeover-controller builds (updated 25 Sep 2026, evening)
 
-PRIMARY  main_ctl_rich_m7.py    v74 = v64 controller on the main_7 chassis + strawberry-rich towns (new today)
-SECOND   main_ctl_adapt_m7.py   v64m7 (submitted as v18): same build without the strawberry-rich rule
+PRIMARY  main_ctl_rich2_m7.py   v81 = v74 + extra strawberries only on the SE annex + chassis tomato block (V219) at >= 2
+                                pizza/farmers-market shops instead of 3
+SECOND   main_ctl_rich_m7.py    v74 = v18 + strawberry-rich towns
+         main_ctl_adapt_m7.py   v64m7 (submitted as v18)
          main_ctl_adapt_m8.py   v64 controller on the main_8 chassis
          main_ctl_adapt.py      v64 controller on the untuned v15a+ADAPT chassis (reference)
          main_ctl_adapt_d20.py  v62 (divergent rivals -> day 20) on the untuned chassis
@@ -18,9 +20,14 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
   live logic              125   111          14             38              +$1,463
   v18 main_ctl_adapt_m7   175   146          29             69              +$3,162
   v74 main_ctl_rich_m7    180   149          31             74              +$4,228
+  v81 main_ctl_rich2_m7   180   149          31             74              +$4,422
 v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
 (corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
+v81 vs v74: +$194 +- 68 per game (z 2.9), flips 0/0 (copy path +$288 +- 98 from the tomato block; fired strawberry games
++$395 +- 317 from keeping the extra strawberries off wheat land). Closed-loop mirror, seeds 6000-6059: v81 46-14 +$1,804,
+v74 44-16 +$1,316 (+$488 +- 220). Official runner: seed 6003 (seat 0, tomato block fired) 84,268 vs 78,600; seed 6011
+(seat 1, strawberry rule fired) 124,013 vs 109,088; both DONE.
 Closed-loop mirror vs live v15a, 60 strawberry-rich seeds (decoupled engine): +$3,818 +- 1,004 per game (z 3.8),
 fired in 26/60 (+$8,810 each), non-firing seeds identical, 0 errors, max step 0.31 s.
 Closed loop vs strong public agents (decoupled engine, seeds 6000-6039, seat 0):
@@ -29,6 +36,7 @@ Closed loop vs strong public agents (decoupled engine, seeds 6000-6039, seat 0):
 Official kaggle_environments runner: seed 6000 (seat 0, fired) 131,224 vs 126,060; seed 6011 (seat 1, fired)
 134,131 vs 118,058; seed 6007 (seat 1, not fired) 75,435 vs 74,702; all DONE, identical to lean.
 
+4b6ca9365c759999741949044b56111b733acf3e7f0ffc54357399c038afcd06  submit/main_ctl_rich2_m7.py
 d4a84504d387745e399e34e3f52fe9f8bf63e0a24edaa074c5508270ee717033  submit/main_ctl_rich_m7.py
 670bcd33531d9874d1c95549a14fea2c40d5cbeb7bfcc6ff8de1db9c074e410d  submit/main_ctl_adapt_m7.py
 98477c7524533ca86fb335f3ef4a9ff206c11e8aaa01bab89bb989c2143035c1  submit/main_ctl_adapt_m8.py

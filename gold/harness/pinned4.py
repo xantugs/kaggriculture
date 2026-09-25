@@ -110,19 +110,21 @@ def job(t):
         ok = oc(op, item, price, farm, private, market, cap)
         if ok and FARMS[0] is not None:
             i = 0 if farm is FARMS[0] else 1
-            if want_fills and i == P and op in ('SELL', 'BUY_PRODUCT'):
-                FILLS.append((STEP[0], op[0], item, price))
+            if want_fills and op in ('SELL', 'BUY_PRODUCT'):
+                FILLS.append((STEP[0], op[0] if i == P else 'r' + op[0], item, price))
             if op == 'SELL': led[i][item] += price
             elif op == 'BUY_PRODUCT': led[i][item] -= price
             elif op == 'BUY_SEED': led[i]['seed'] -= price
             elif op == 'BUY_ANIMAL': led[i]['anim'] -= price
         return ok
     PX = {}
+    MONEY = {}
     opm = K._process_market
     def pm(state, env):
         st0 = state[0].observation.step
         if want_fills and st0 % 24 == 12:
             PX[st0 // 24] = {p: int(v) for p, v in state[0].observation.market['prices'].items()}
+            MONEY[st0 // 24] = [float(state[0].observation.farms[P]['money']), float(state[0].observation.farms[O]['money'])]
         if state[0].observation.step >= S:
             FARMS[0], FARMS[1] = state[0].observation.farms[0], state[0].observation.farms[1]
         STEP[0] = state[0].observation.step
@@ -148,7 +150,7 @@ def job(t):
     tel = {k: v for k, v in tel.items() if isinstance(v, (int, float, str))} if isinstance(tel, dict) else None
     return dict(led_us=dict(led[P]), led_them=dict(led[O]), gid=d['id'], opp=names[O], cand=cand, S=S, rec=d['rewards'][P] - d['rewards'][O], rec_ok=rec_ok,
                 us=r['r'][P], them=r['r'][O], m=(r['r'][P] - r['r'][O]) if r['r'][P] is not None else None, err=r['err'], tel=tel,
-                **({'fills': FILLS, 'px12': PX} if want_fills else {}))
+                **({'fills': FILLS, 'px12': PX, 'money12': MONEY} if want_fills else {}))
 
 
 if __name__ == '__main__':
