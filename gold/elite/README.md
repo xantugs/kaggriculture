@@ -159,3 +159,17 @@ variables; `v219e` in the controller sets them at day 12 by tomato demand. Mirro
 
 e9 on the pinned 2800+ gate: divergent games +$24 +- 385 (flips +1/-3), copies unchanged by construction. The
 takeover-day curve against elites (16: 0, 18: +152, 20: +474, 22: +39, 24: -14) is a marginal effect at best.
+
+## 11. Rejected: strawberry planting cap (`straw_cap`), and what it taught
+
+Chassis days: from day 6, PLANT STRAWBERRY beyond a demand-keyed cap (18 at demand 0, 22 at demand 6) becomes PASS
+and further strawberry seed orders are dropped; positions are untouched. Mirror seeds: our cash +$0.7-1.8k where it
+fires, but the copy rival gains $1-10k because it keeps flooding the market we just vacated. Elite gate (128 seats
+before the run died of memory pressure, 57 fired): paired -$1,633 +- 787 in fired games, wins 3 vs 12; we gain
+$1,386, the elite gains $3,019 (DSM -$1.8k, Majkel1337 -$3.2k, UMG -$5.0k; only Sida Zuo/Yannik positive).
+
+The 33-tile strawberry flood is denial, not waste: the strawberry book is the shallowest in the game (100 units move
+the price by 160% of base), so whoever floods it destroys the rival's strawberry revenue. Elite winners hold 15-20
+tiles in poor towns because their rivals are elites who do not flood; against a flooding rival the best response is
+to flood back and sell first. The same logic protects our wool and milk positions. Do not cut supply in shallow
+markets.
