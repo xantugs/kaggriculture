@@ -164,6 +164,21 @@ GC_P = dict(
     v219x_skip_below=None,  # no block at all when the 10-plant forecast (net of seeds and fertilizer) is below this
     v219x_margins=None,   # per size: {15: 1250, 20: 3500} = the largest size whose forecast beats 10 plants by its margin
     v219x_units=2.0,      # units per plant and production day (fertilized)
+    herd_on=False,        # buy extra sheep/cows/geese when a book forecast of their product pays (controller days)
+    herd_first=12,
+    herd_last=18,
+    herd_kinds=("SHEEP", "COW", "GOOSE"),
+    herd_max=12,
+    herd_margin=1500.0,
+    herd_opp_rate=0.8,    # the rival's animals produce at this share of the cared rate
+    herd_labor=20.0,      # care/feed/collect labour per animal-day
+    herd_fert_w=0.8,      # fertilizer collected per animal-day, valued at this share of its price
+    herd_tile_cost=250.0, # opportunity cost of an empty tile given to a structure
+    herd_place_lag=0,     # days from purchase to placement
+    herd_keep_free=6,
+    herd_total_max=99,    # at most this many animals bought per game
+    herd_rich_margin=None, # rich check (day 12): take over when the herd forecast beats this (copy games' only chance)
+    herd_rich_over={},     # existing empty tiles stay for crops up to this many; the herd uses only the rest (or new SE)
     ad_thresh=None,       # override ADAPT's rival-similarity thresholds, e.g. {359: 0.7}
     tick_defer=False,     # no sells at hours 4, 8, ..., 20 (the town buys right after them): sell an hour later
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
@@ -299,6 +314,8 @@ class GoldCtl:
 
     def reset(self):
         self.me = None
+        self.herd_total = 0
+        self.herd_day = None
         self.day_plan = None
         self.queues = {}
         self.routes = []
@@ -419,11 +436,35 @@ class GoldCtl:
             if v is not None:
                 visits.append(v)
 
+        # ---- extra herd (forecast of the product's book)
+        herd_new = {}
+        if (GC_P["herd_on"] and not final and GC_P["herd_first"] <= day <= GC_P["herd_last"]
+                and getattr(self, "herd_day", None) != day):
+            self.herd_day = day
+            se_open = ("SE" not in owned and "NE" in owned and "SW" in owned and not new_quads)
+            spare_tiles = max(0, len(empties) - GC_P["herd_keep_free"]) if not new_quads else 0
+            try:
+                kind, k, hv, need_se = self._herd_plan(obs, day, shops, spare_tiles, se_open, money - spend - hire_budget)
+            except Exception as e:
+                kind, k, hv = None, 0, 0.0
+                _GC_REPORT["gc_herd_err"] = repr(e)[:120]
+            if kind and hv > GC_P["herd_margin"] and len(orders0) < 7:
+                if need_se:
+                    orders0.append(["BUY_LAND"]); spend += 4000; new_quads.append("SE"); owned.add("SE")
+                    se_tiles = [(xx, yy) for yy in range(5, 10) for xx in range(5, 10) if tiles[yy][xx] == "LOCKED"]
+                    self.herd_tiles = sorted(se_tiles, key=lambda p: _gc_dist(p, (4.5, 4.5)))[:k]
+                    for pp in se_tiles:
+                        empties.append(pp)
+                orders0.append(["BUY_ANIMAL", kind, k]); spend += k * _GC_ANIM[kind]["cost"]
+                herd_new[kind] = k
+                self.herd_total = getattr(self, "herd_total", 0) + k
+                _GC_REPORT["gc_herd"] = _GC_REPORT.get("gc_herd", "") + "d%d:%s%dx$%d " % (day, kind[0], k, int(hv))
+
         # ---- animals waiting in the shed
         free_struct = {"COOP": [p for p, k in structs if k == "COOP"], "PASTURE": [p for p, k in structs if k == "PASTURE"]}
         taken = set()
         for an in ("COW", "SHEEP", "GOOSE"):
-            for _ in range(shed.get(an, 0)):
+            for _ in range(shed.get(an, 0) + herd_new.get(an, 0)):
                 st = _GC_ANIM[an]["st"]
                 if free_struct[st]:
                     pos = free_struct[st].pop(0)
@@ -513,7 +554,7 @@ class GoldCtl:
         visits = [v for v in visits if v.acts]
 
         # ---- hour-0 sales: free shed room before the input purchases land (a full shed rejects them)
-        buys0 = [o for o in orders0 if o[0] == "BUY_PRODUCT"]
+        buys0 = [o for o in orders0 if o[0] in ("BUY_PRODUCT", "BUY_ANIMAL")]
         res_w = int(GC_P["feed_reserve"] * len(animals)) + 2
         sell0 = []
         for p in sorted(_GC_PRODUCTS, key=lambda p: -(shed.get(p, 0) * val.get(p, 0))):
@@ -554,8 +595,8 @@ class GoldCtl:
         self.hires_planned = hires
         self.last_hires = hires
         _GC_REPORT["gc_hires"] += hires
-        self.orders0 = list(self.sell0) + [o for o in orders0 if o[0] == "BUY_PRODUCT"]
-        self.orders1 = [o for o in orders0 if o[0] != "BUY_PRODUCT"]
+        self.orders0 = list(self.sell0) + [o for o in orders0 if o[0] in ("BUY_PRODUCT", "BUY_ANIMAL")]
+        self.orders1 = [o for o in orders0 if o[0] not in ("BUY_PRODUCT", "BUY_ANIMAL")]
         self.routes = routes
         self.spawns = spawns
         self.day = day
@@ -773,6 +814,67 @@ class GoldCtl:
         cd = _GC_CROPS[crop]
         units = {"WHEAT": 5.0, "CARROT": 3.5, "TOMATO": 7.0, "STRAWBERRY": 7.0, "MELON": 6.0}[crop]
         return units * val[crop] - cd["seed"]
+
+    def _herd_value(self, obs, day, kind, k, shops):
+        """Our revenue of kind's product with k extra animals placed today: every visible animal of the kind supplies
+        its cared rate (the rival's weighted), the town's shops (now and expected) drain the book, the new animals yield
+        min(held, fy) units fy days after placement, then 1 + iv every iv days; the day's lot sells together and we get
+        our share."""
+        a = _GC_ANIM[kind]; prod = a["prod"]
+        inv = float(obs["market"]["inventory"][prod])
+        drain_now = 1.0 + sum((12.0 if len(_GC_SHOPS.get(sh, [])) == 1 else 6.0) for sh in shops if prod in _GC_SHOPS.get(sh, []))
+        per_unlock = sum((12.0 if len(v) == 1 else 6.0) for v in _GC_SHOPS.values() if prod in v) / 8.0
+        rate = (1.0 + a["iv"]) / a["iv"]
+        ours = 0; theirs = 0
+        for side in (self.me, 1 - self.me):
+            for row in obs["farms"][side]["tiles"]:
+                for t in row:
+                    if isinstance(t, dict) and t.get("animal") == kind:
+                        if side == self.me: ours += 1
+                        else: theirs += 1
+        placed = day + GC_P["herd_place_lag"]
+        sched = {}
+        dd = placed + a["fy"]
+        if dd <= 29:
+            sched[dd] = min(a["held"], a["fy"])
+            dd += a["iv"]
+            while dd <= 29:
+                sched[dd] = min(a["held"], 1 + a["iv"]); dd += a["iv"]
+        n_shops = len(shops)
+        rev = 0.0
+        for d in range(day, 30):
+            unl = min(8, d // 3) - n_shops
+            inv -= drain_now + max(0, unl) * per_unlock * GC_P["future_shop_w"]
+            q_ours = ours * rate + k * sched.get(d, 0)
+            q_tot = q_ours + theirs * rate * GC_P["herd_opp_rate"]
+            n = int(round(q_tot))
+            if n > 0:
+                sm = sum(_gc_price(prod, inv + i) for i in range(n))
+                rev += sm * q_ours / q_tot
+            inv += q_tot
+        return rev
+
+    def _herd_plan(self, obs, day, shops, n_empty, se_open, money, kinds=None):
+        """Best (kind, k, value, needs_se) for extra animals bought now."""
+        pn = getattr(self, "pnow", None) or {}
+        wheat_px = pn.get("WHEAT", 40); fert_px = pn.get("FERTILIZER", 30)
+        best = (None, 0, 0.0, False)
+        days = 30 - (day + GC_P["herd_place_lag"])
+        for kind in (kinds or GC_P["herd_kinds"]):
+            a = _GC_ANIM[kind]
+            base = self._herd_value(obs, day, kind, 0, shops)
+            for k in range(1, min(GC_P["herd_max"], GC_P["herd_total_max"] - getattr(self, "herd_total", 0)) + 1):
+                need_se = k > n_empty
+                if need_se and not se_open:
+                    break
+                cost = k * (a["cost"] + days * (wheat_px + GC_P["herd_labor"] - GC_P["herd_fert_w"] * fert_px))
+                cost += min(k, n_empty) * GC_P["herd_tile_cost"] + (4000.0 if need_se else 0.0)
+                if cost + 500 > money:
+                    break
+                v = self._herd_value(obs, day, kind, k, shops) - base - cost
+                if v > best[2]:
+                    best = (kind, k, v, need_se)
+        return best
 
     def _tomato_value(self, obs, day, n, shops):
         """Forecast revenue of n tomato plots planted today (4 units at age 9 and 11 each), selling on arrival,
@@ -2624,8 +2726,31 @@ def agent(observation, configuration=None):
                     if kk not in _GC_DIV_SAVED:
                         _GC_DIV_SAVED[kk] = GC_P.get(kk)
                 GC_P.update(GC_P["rich_car_over"])
+        if not _GC_RICH["rich"] and GC_P["herd_rich_margin"] is not None:
+            try:
+                me = int(observation["player"]); _GC.me = me
+                farm = observation["farms"][me]
+                quads = list(farm["unlocked_quadrants"])
+                n_empty = sum(1 for row in farm["tiles"] for t in row if t is None)
+                se_open = "SE" not in quads and "NE" in quads and "SW" in quads
+                allshops = list(_gc_get(observation["town"], "unlocked_shops", []) or [])
+                hk, hn, hv, _hs = _GC._herd_plan(observation, step // 24, allshops, max(0, n_empty - GC_P["herd_keep_free"]),
+                                                   se_open, float(farm["money"]) - GC_P["rich_hire_budget"],
+                                                   kinds=GC_P["herd_rich_over"].get("herd_kinds"))
+            except Exception as e:
+                hk, hn, hv = None, 0, -1e9
+                _GC_REPORT["gc_rich_err"] = repr(e)[:120]
+            _GC_REPORT["gc_herd_rich_eval"] = "%s%d:%d" % ((hk or "-")[0], hn, int(hv)) if hv > -1e8 else None
+            if hk and hv > GC_P["herd_rich_margin"]:
+                _GC_RICH["rich"] = True
+                _GC_RICH["herd"] = True
+                _GC_REPORT["gc_rich_herd"] = 1
+                for kk, v in GC_P["herd_rich_over"].items():
+                    if kk not in _GC_DIV_SAVED:
+                        _GC_DIV_SAVED[kk] = GC_P.get(kk)
+                GC_P.update(GC_P["herd_rich_over"])
         _GC_REPORT["gc_rich"] = int(_GC_RICH["rich"])
-        if _GC_RICH["rich"] and GC_P["rich_over"] and not _GC_RICH.get("tom") and not _GC_RICH.get("car"):
+        if _GC_RICH["rich"] and GC_P["rich_over"] and not _GC_RICH.get("tom") and not _GC_RICH.get("car") and not _GC_RICH.get("herd"):
             for kk, v in GC_P["rich_over"].items():
                 if kk not in _GC_DIV_SAVED:
                     _GC_DIV_SAVED[kk] = GC_P.get(kk)
