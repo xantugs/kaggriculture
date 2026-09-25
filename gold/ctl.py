@@ -155,6 +155,14 @@ GC_P = dict(
     rich_tom_min=0,       # > 0: also take over at the rich check when >= this many tomato buyers among the first four
     rich_tom_margin=2500.0,  # shops and the SE tomato annex clears this margin
     rich_tom_over={},
+    v219x=False,          # size the chassis's day-18 SE tomato block (V219) by a tomato forecast (needs base_m7_t3)
+    v219x_sizes=(10, 15, 20, 25),
+    v219x_copy_n=10.0,    # tomato plants a rival without any yet is assumed to add on day 18 (a chassis copy's block)
+    v219x_opp_w=1.0,
+    v219x_worker_cost=300.0,  # one extra hand for a day (13th-14th hire)
+    v219x_margin=1000.0,  # a bigger block must beat the 10-plant block by this much
+    v219x_margins=None,   # per size: {15: 1250, 20: 3500} = the largest size whose forecast beats 10 plants by its margin
+    v219x_units=2.0,      # units per plant and production day (fertilized)
     tick_defer=False,     # no sells at hours 4, 8, ..., 20 (the town buys right after them): sell an hour later
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
     tick_last_day=29,
@@ -2494,6 +2502,59 @@ def agent(observation, configuration=None):
 _GC_PARENT = agent
 
 
+def _v219x_size(obs):
+    """Plants for the chassis's day-18 SE tomato block: our share of the proceeds of every tomato arriving on days
+    26-29 (2 a plant a day when fertilized, sold on arrival, lockstep with the rival's) against the town's drain
+    (tomato shops now and expected), net of seeds, fertilizer and the extra hands."""
+    me = int(obs["player"])
+    inv0 = float(obs["market"]["inventory"]["TOMATO"])
+    shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
+    k_now = sum(1 for sh in shops if sh in ("PIZZA_SHOP", "FARMERS_MARKET"))
+    n_shops = len(shops)
+    u = GC_P["v219x_units"]
+    rsup = {}
+    n_opp = 0
+    for row in obs["farms"][1 - me]["tiles"]:
+        for t in row:
+            if isinstance(t, dict) and t.get("crop") == "TOMATO":
+                n_opp += 1
+                pd = int(t["planted_day"])
+                for a in range(8, 12):
+                    if 18 <= pd + a <= 29:
+                        rsup[pd + a] = rsup.get(pd + a, 0.0) + u * GC_P["v219x_opp_w"]
+    if n_opp == 0 and GC_P["v219x_copy_n"] > 0:
+        for d in range(26, 30):
+            rsup[d] = rsup.get(d, 0.0) + u * GC_P["v219x_copy_n"]
+    fert = float(obs["market"]["prices"]["FERTILIZER"])
+    vals = {}
+    for n in GC_P["v219x_sizes"]:
+        inv = inv0; rev = 0.0
+        for d in range(18, 30):
+            unl = min(8, d // 3) - n_shops
+            inv -= 6.0 * (k_now + max(0, unl) * 0.25 * GC_P["future_shop_w"]) + 1.0
+            q_us = u * n if 26 <= d <= 29 else 0.0
+            q_r = rsup.get(d, 0.0)
+            tot = q_us + q_r
+            if tot <= 0:
+                continue
+            if q_us > 0:
+                sm = sum(_gc_price("TOMATO", inv + i) for i in range(int(round(tot))))
+                rev += sm * q_us / tot
+            inv += tot
+        extra_days = max(0, -(-n // 5) - 2) + 3 * max(0, -(-n // 8) - 1)
+        vals[n] = rev - n * (50.0 + 2.0 * fert) - extra_days * GC_P["v219x_worker_cost"]
+    if GC_P["v219x_margins"]:
+        best = 10
+        for n, m in sorted((int(k), float(v)) for k, v in GC_P["v219x_margins"].items()):
+            if n in vals and vals[n] - vals.get(10, 0.0) >= m:
+                best = n
+        return best, vals
+    best = max(vals, key=lambda n: vals[n])
+    if best != 10 and vals[best] - vals.get(10, 0.0) < GC_P["v219x_margin"]:
+        best = 10
+    return best, vals
+
+
 def agent(observation, configuration=None):
     step = int(observation["step"])
     if step == 0:
@@ -2582,6 +2643,18 @@ def agent(observation, configuration=None):
         _GC_REPORT["gc_start"] = start
     if step >= start:
         _GC_RICH["taken"] = True
+    if step < start and GC_P["v219x"] and isinstance(globals().get("_V219_N"), list):
+        if step == 0:
+            _V219_N[0] = 10
+        elif step == 432:
+            try:
+                n, vals = _v219x_size(observation)
+            except Exception as e:
+                n, vals = 10, {}
+                _GC_REPORT["gc_v219x_err"] = repr(e)[:120]
+            _V219_N[0] = n
+            _GC_REPORT["gc_v219x_n"] = n
+            _GC_REPORT["gc_v219x_vals"] = " ".join("%d:%d" % (k, v) for k, v in sorted(vals.items()))
     if step < start:
         return _GC_PARENT(observation, configuration)
     if GC_P["arb_chassis"] and not _GC_RICH.get("arb_handed"):
