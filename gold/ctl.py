@@ -207,6 +207,9 @@ GC_P = dict(
     sanx_reserve=3000.0,
     sanx_mask_adapt=True,
     arb_chassis=False,    # the same arbitrage while the chassis plays (days arb_first..), handed over at takeover
+    straw_cap=None,       # chassis days: cap the tape's strawberry plantings by strawberry demand among the shops known so far,
+                          # e.g. {"0": 18, "6": 22, "12": 26}: PLANT STRAWBERRY beyond the cap becomes PASS (positions unchanged) and
+                          # further BUY_SEED STRAWBERRY orders are dropped; tiles left empty go to the controller at takeover
     fert_idle=False,      # chassis days: a unit that would PASS while standing on an animal tile with fertilizer collects it (no move)
     fert_idle_room=95,    # only while shed + carried goods stay below this many units (end-of-day drops discard overflow)
     arb_first=8,
@@ -2614,6 +2617,54 @@ def agent(observation, configuration=None):
 _GC_PARENT = agent
 
 
+_STRAW_CAP_STATE = {}
+
+
+def _straw_cap(obs, action):
+    """Chassis days: skip strawberry plantings beyond a demand-keyed cap (lockstep-safe: PASS keeps the unit's position)."""
+    if not isinstance(action, dict):
+        return action
+    me = int(obs["player"]); step = int(obs["step"])
+    st = _STRAW_CAP_STATE.setdefault(me, {"skipped": 0, "seeds_dropped": 0, "step": -1})
+    if step == 0:
+        st.update(skipped=0, seeds_dropped=0)
+    shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
+    if step < 24 * int(GC_P["straw_cap"].get("from_day", 6)):
+        return action   # too few shops known to judge the strawberry market
+    dem = sum(6 for s in shops if s in ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET"))
+    cap = GC_P["straw_cap"].get(str(dem))
+    if cap is None:
+        return action   # no cap at this demand
+    farm = obs["farms"][me]
+    n = 0
+    for row in farm["tiles"]:
+        for t in row:
+            if isinstance(t, dict) and t.get("crop") == "STRAWBERRY":
+                n += 1
+    units = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
+    planting = sum(1 for u in units if isinstance(u, list) and len(u) >= 2 and u[0] == "PLANT" and u[1] == "STRAWBERRY")
+    room = max(0, cap - n)
+    changed = False
+    if planting > room:
+        keep = room
+        for i, u in enumerate(units):
+            if isinstance(u, list) and len(u) >= 2 and u[0] == "PLANT" and u[1] == "STRAWBERRY":
+                if keep > 0:
+                    keep -= 1
+                else:
+                    units[i] = ["PASS"]; st["skipped"] += 1; changed = True
+    market = list(action.get("market") or [])
+    if n + planting >= cap:
+        m2 = [o for o in market if not (isinstance(o, list) and len(o) >= 3 and o[0] == "BUY_SEED" and o[1] == "STRAWBERRY")]
+        if len(m2) != len(market):
+            st["seeds_dropped"] += sum(int(o[2]) for o in market if isinstance(o, list) and len(o) >= 3 and o[0] == "BUY_SEED" and o[1] == "STRAWBERRY")
+            market = m2; changed = True
+    if changed:
+        _GC_REPORT["gc_straw_cap_skipped"] = st["skipped"]; _GC_REPORT["gc_straw_cap_seeds"] = st["seeds_dropped"]; _GC_REPORT["gc_straw_cap"] = cap
+        return {"farmer": units[0], "hands": units[1:], "market": market}
+    return action
+
+
 def _fert_idle(obs, action):
     """Chassis days: idle units standing on an animal tile with fertilizer available collect it instead of PASSing.
     The unit does not move, so the scripted route stays in lockstep; the carried fertilizer drops into the shed at
@@ -2863,6 +2914,11 @@ def agent(observation, configuration=None):
             _GC_REPORT["gc_v219x_vals"] = " ".join("%d:%d" % (k, v) for k, v in sorted(vals.items()))
     if step < start:
         action = _GC_PARENT(observation, configuration)
+        if GC_P["straw_cap"]:
+            try:
+                action = _straw_cap(observation, action)
+            except Exception as e:
+                _GC_REPORT["gc_straw_cap_err"] = repr(e)[:120]
         if GC_P["fert_idle"]:
             try:
                 action = _fert_idle(observation, action)
