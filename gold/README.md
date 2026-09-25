@@ -132,3 +132,15 @@ Rejected this evening (pinned):
 - planting carrots/wheat up to day 27: copy wins 149 -> 100 (late wages and crowded-out harvests);
 - copy takeover day 20/22/25/26: 126/139/131/113 copy wins vs 150 at day 24.
 Close copy losses are decided on day 29 afternoon: we lead at noon, the copy rival's final harvest overtakes us.
+
+## 25 Sep (night): v86a (`submit/main_ctl_rich3_m7.py`)
+Close copy losses were decided on day 29 afternoon: we lead at noon, then the copy rival dumps carrots (h19-20) and milk
+(h21) and we delivered our final harvest into those prices (h21-22).
+- `final_cap=19`: every day-29 route's final delivery lands by hour 19. Copy +$209 +- 19 (hour 20: +142, 18: +129,
+  17: +127), divergent +$56 +- 29.
+- `final_sell0=3`: sell the top three shed lots at hour 0 of day 29 (ahead of the rival's hour-1 dump): +$31 +- 11
+  (6 lots costs too many hour-0 hires: -$16).
+- v86a: 182/249 pinned wins (copy 151, divergent 31, opp>=2800 75), +$192 +- 19 over v81, +$1,452 over v18.
+
+Rejected: timing carrots/wheat/eggs like premium goods (copy -$194 +- 48); glut arbitrage (the engine only fills
+BUY_PRODUCT for WHEAT and FERTILIZER, so bought wool/milk/strawberry never arrive).
