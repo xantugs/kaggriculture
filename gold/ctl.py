@@ -99,7 +99,9 @@ GC_P = dict(
     multi_stop=True,      # a route may get several shed stops
     final_ret=False,      # day 29: plan routes including the return delivery against the hour-22 deadline
     final_cap=22,
-    final_sell0=0,        # day 29: sell this many top lots at hour 0 (ahead of the rival's hour-1 dump)         # day 29: hour by which every route's final delivery must land (earlier sells before the rival's dump)
+    final_sell0=0,        # day 29: sell this many top lots at hour 0 (ahead of the rival's hour-1 dump)
+    late_sell0_day=99,    # from this day on (before day 29) sell late_sell0 top lots at hour 0 as well
+    late_sell0=0,         # day 29: hour by which every route's final delivery must land (earlier sells before the rival's dump)
     final_by_value=False,  # day 29: routes/hires minimise the value left unserved (not the count of must visits)
     max_hands_final=15,
     d28_keep_carrots=False,  # day 28: leave age-2 carrots to grow into the final day
@@ -160,6 +162,14 @@ GC_P = dict(
     race_min=1,
     race_w=0.3,           # value per unit (x price) of taking a race product a day earlier
     race_min_price=20,    # only while the quote is worth racing for
+    sanx_on=False,        # strawberry annex run by hired workers while the chassis plays (replaces the day-12 takeover)
+    sanx_step=288,
+    sanx_plant_last=13,
+    sanx_per_worker=9,
+    sanx_max_workers=3,
+    sanx_fert=True,
+    sanx_reserve=3000.0,
+    sanx_mask_adapt=True,
     arb_chassis=False,    # the same arbitrage while the chassis plays (days arb_first..), handed over at takeover
     arb_first=8,
     arb_room_chassis=45,  # shed room the chassis keeps free after our purchases (its end-of-day drops must fit)
@@ -514,6 +524,8 @@ class GoldCtl:
         else:
             if final and GC_P["final_sell0"] > 0:
                 sell0 = sell0[:max(GC_P["final_sell0"], 1 if need_room > 0 else 0)]
+            elif not final and day >= GC_P["late_sell0_day"] and GC_P["late_sell0"] > 0:
+                sell0 = sell0[:max(GC_P["late_sell0"], 1 if need_room > 0 else 0)]
             else:
                 sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
         self.sell0 = sell0
@@ -2243,6 +2255,210 @@ def _arb_chassis(obs, action):
                 tot_held += k; room -= k
                 _GC_REPORT["gc_arbc_bought"] = _GC_REPORT.get("gc_arbc_bought", 0) + k
     action = dict(action); action["market"] = market
+    return action
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# SANX: strawberry annex while the chassis plays. In a strawberry-rich town (same trigger as the controller's rich
+# rule) buy the SE quadrant at day 12, hire dedicated workers after the tape's own hires (the V219 protocol) and let
+# them plant, water, fertilize and harvest SE strawberries; the chassis keeps the rest of the farm. The controller
+# inherits the plants at its usual takeover.
+_SANX = {}
+_SANX_TILES = sorted([(x, y) for y in range(5, 10) for x in range(5, 10)], key=lambda p: (abs(p[0] - 4.5) + abs(p[1] - 4.5), p[1], p[0]))
+
+
+def _sanx_walk(pos, tgt):
+    x, y = pos; tx, ty = tgt
+    if x != tx:
+        return ["EAST" if x < tx else "WEST"]
+    if y != ty:
+        return ["SOUTH" if y < ty else "NORTH"]
+    return None
+
+
+def _sanx_count(obs, day):
+    shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
+    _GC._values(obs)
+    fert = _GC.pnow.get("FERTILIZER", 50)
+    cost = 100 + 3 * fert + GC_P["straw_labor"]
+    base = _GC._straw_value(obs, day, 0, shops)
+    best_n, best_v = 0, 0.0
+    for n in range(2, 26):
+        v = _GC._straw_value(obs, day, n, shops) - base - n * cost
+        if v > best_v:
+            best_n, best_v = n, v
+    return best_n, best_v
+
+
+def _sanx_worker(obs, st, actor, role):
+    step = int(obs["step"]); day = step // 24
+    farm = obs["farms"][int(obs["player"])]
+    pos = tuple(farm["hands"][actor - 1]) if actor >= 1 else tuple(farm["farmer"])
+    inv = obs["private"]["inventories"][actor] if actor < len(obs["private"]["inventories"]) else {}
+    seeds = int(obs["private"]["seeds"].get("STRAWBERRY", 0))
+    home = min(((4, 4), (5, 4), (4, 5), (5, 5)), key=lambda p: abs(pos[0] - p[0]) + abs(pos[1] - p[1]))
+    if not role.get("loaded"):
+        role["loaded"] = True
+        want = len(role["targets"])
+        have = int(obs["private"]["shed"].get("FERTILIZER", 0))
+        if GC_P["sanx_fert"] and have > 0 and int(inv.get("FERTILIZER", 0)) < want:
+            role["pick"] = min(want, have)
+    if role.get("pick"):
+        w = _sanx_walk(pos, home)
+        if w:
+            return w
+        q = role.pop("pick")
+        return ["PICKUP", "FERTILIZER", q]
+    todo = []
+    for t in role["targets"]:
+        x, y = t
+        tile = farm["tiles"][y][x]
+        cmd = None
+        if tile is None:
+            if seeds > 0 and day <= GC_P["sanx_plant_last"]:
+                cmd = ["PLANT", "STRAWBERRY"]
+        elif isinstance(tile, dict) and tile.get("kind") == "WEED":
+            if day <= GC_P["sanx_plant_last"]:
+                cmd = ["DIG"]
+        elif isinstance(tile, dict) and tile.get("crop") == "STRAWBERRY":
+            if not tile.get("watered_today"):
+                cmd = ["WATER"]
+            elif int(tile.get("fertilized_until_day", -1)) < day and int(inv.get("FERTILIZER", 0)) > 0:
+                cmd = ["FERTILIZE"]
+            elif int(tile.get("yield_units", 0) or 0) > 0:
+                cmd = ["HARVEST"]
+        if cmd:
+            todo.append((t, cmd))
+    carrying = int(inv.get("STRAWBERRY", 0))
+    hour = step % 24
+    dist_home = abs(pos[0] - home[0]) + abs(pos[1] - home[1])
+    if carrying and (not todo or hour + dist_home >= 22):
+        w = _sanx_walk(pos, home)
+        if w:
+            return w
+        st["drops"] = st.get("drops", 0) + carrying
+        return ["DROP"]
+    if todo:
+        t, cmd = min(todo, key=lambda v: (abs(pos[0] - v[0][0]) + abs(pos[1] - v[0][1]), role["targets"].index(v[0])))
+        return _sanx_walk(pos, t) or cmd
+    return ["PASS"]
+
+
+def _sanx(obs, action):
+    step = int(obs["step"]); day = step // 24; hour = step % 24
+    me = int(obs["player"])
+    st = _SANX.get(me)
+    if st is None or step <= st.get("step", -1):
+        st = _SANX[me] = {"step": -1, "committed": False, "workers": {}, "pending": None, "req_day": -1, "day": -1}
+        _SANX_MASK["on"] = False
+    st["step"] = step
+    farm = obs["farms"][me]
+    if step == GC_P["sanx_step"] and not st["committed"] and not st.get("checked"):
+        st["checked"] = True
+        shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])[:4]
+        k = sum(1 for s in shops if s in ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET"))
+        quads = set(farm["unlocked_quadrants"])
+        if k >= GC_P["rich_min"] and "SE" not in quads and {"NE", "SW"} <= quads:
+            _GC.me = me
+            ev = _GC.rich_eval(obs)
+            _GC_REPORT["gc_sanx_eval"] = int(ev) if ev > -1e8 else None
+            if ev > GC_P["se_straw_margin"]:
+                n, v = _sanx_count(obs, day)
+                if n >= 4:
+                    st.update(committed=True, n=n, targets=_SANX_TILES[:n], bought=False)
+                    _SANX_MASK["on"] = True
+                    _GC_REPORT["gc_sanx_n"] = n
+    if not st["committed"]:
+        return action
+    if st["day"] != day:
+        st["day"] = day; st["workers"] = {}
+    native = _IMPL.chassis.players.get(me)
+    if not native or native.get("route") not in _IMPL.chassis.routes:
+        return action
+    tape = _IMPL.chassis.routes[native["route"]]
+    planned = tape[day * 24:min((day + 1) * 24, len(tape))]
+    market = [list(o) for o in (action.get("market") or [])]
+    # confirm yesterday's (this morning's) hire request
+    pend = st.get("pending")
+    if pend and step == pend["step"] + 1:
+        st["pending"] = None
+        if len(farm["hands"]) + 1 >= pend["first"] + pend["count"] and "SE" in farm["unlocked_quadrants"]:
+            groups = [st["targets"][i::pend["count"]] for i in range(pend["count"])]
+            for i in range(pend["count"]):
+                st["workers"][pend["first"] + i] = {"targets": sorted(groups[i], key=lambda p: (p[1], p[0]))}
+            _GC_REPORT["gc_sanx_workers"] = _GC_REPORT.get("gc_sanx_workers", 0) + pend["count"]
+        else:
+            _GC_REPORT["gc_sanx_short"] = _GC_REPORT.get("gc_sanx_short", 0) + 1
+    # request today's workers once the tape's own hires are done
+    if st["req_day"] != day and hour <= 6:
+        latest = max((i for i, a in enumerate(planned) if any(o and o[0] == "HIRE" for o in a.get("market", []))), default=-1)
+        remaining = planned[hour + 1:]
+        more = any(o and o[0] == "HIRE" for a in remaining for o in a.get("market", []))
+        parent_hires = sum(1 for o in market if o and o[0] == "HIRE")
+        expected = max((len(a.get("hands", [])) for a in planned), default=0)
+        if not more and len(farm["hands"]) + parent_hires == expected and hour >= max(0, latest):
+            alive = sum(1 for (x, y) in st["targets"] if isinstance(farm["tiles"][y][x], dict) and farm["tiles"][y][x].get("crop") == "STRAWBERRY")
+            need = alive if st.get("bought") else st["n"]
+            count = min(GC_P["sanx_max_workers"], max(1, -(-need // GC_P["sanx_per_worker"])))
+            extra = []
+            if not st.get("bought"):
+                extra += [["BUY_LAND"], ["BUY_SEED", "STRAWBERRY", st["n"]]]
+            extra += [["HIRE"]] * count
+            wage = sum(_gc_fib(k) for k in range(int(farm.get("hires_today", 0)) + parent_hires, int(farm.get("hires_today", 0)) + parent_hires + count))
+            budget = wage + (4000 + 100 * st["n"] if not st.get("bought") else 0)
+            if len(market) + len(extra) <= 10 and float(farm["money"]) >= budget + GC_P["sanx_reserve"] and (need > 0):
+                market += extra
+                st["bought"] = True
+                st["req_day"] = day
+                st["pending"] = {"step": step, "first": expected + 1, "count": count}
+            elif hour >= 6:
+                st["req_day"] = day
+    # drive the workers
+    if st["workers"]:
+        commands = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
+        commands += [["PASS"] for _ in range(len(farm["hands"]) + 1 - len(commands))]
+        for actor, role in st["workers"].items():
+            if actor >= len(commands):
+                continue
+            commands[actor] = _sanx_worker(obs, st, actor, role)
+        action = dict(action); action["farmer"], action["hands"] = commands[0], commands[1:]
+    # sell what the workers delivered
+    d = st.pop("drops", 0)
+    st["to_sell"] = st.get("to_sell", 0) + d
+    if st.get("to_sell", 0) > 0 and len(market) < 10:
+        market.append(["SELL", "STRAWBERRY", st["to_sell"]])
+        st["to_sell"] = 0
+    action = dict(action); action["market"] = market
+    return action
+
+
+_SANX_MASK = {"on": False}
+_AD_SIG_ORIG = globals().get("_ad_sig")
+
+
+def _ad_sig(farm):
+    """ADAPT's farm signature with the SE quadrant masked while our strawberry annex runs (the annex must not read
+    as a divergent rival)."""
+    out = _AD_SIG_ORIG(farm)
+    if _SANX_MASK["on"] and GC_P["sanx_mask_adapt"] and len(out) == 100:
+        out = list(out)
+        for y in range(5, 10):
+            for x in range(5, 10):
+                out[y * 10 + x] = "#"
+    return out
+
+
+_SANX_PARENT = agent
+
+
+def agent(observation, configuration=None):
+    action = _SANX_PARENT(observation, configuration)
+    if GC_P["sanx_on"]:
+        try:
+            action = _sanx(observation, action)
+        except Exception as e:
+            _GC_REPORT["gc_sanx_errors"] = _GC_REPORT.get("gc_sanx_errors", 0) + 1
+            _GC_REPORT["gc_sanx_last_error"] = repr(e)[:160]
     return action
 
 

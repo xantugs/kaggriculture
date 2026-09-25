@@ -144,3 +144,13 @@ Close copy losses were decided on day 29 afternoon: we lead at noon, then the co
 
 Rejected: timing carrots/wheat/eggs like premium goods (copy -$194 +- 48); glut arbitrage (the engine only fills
 BUY_PRODUCT for WHEAT and FERTILIZER, so bought wool/milk/strawberry never arrive).
+
+Also rejected (25 Sep, night; pinned, vs v86a unless noted):
+- hour-0 top-lot sales on days 26-28 (not only day 29): -$590 / -$204 (hour-0 slots are worth more as hires);
+- rival-timing for carrots/wheat/eggs on the divergent path only: +$107 +- 105 (noise);
+- divergent takeover day 15 / 17: -$557 (6 wins lost) / +$176 +- 255;
+- wheat planting through day 26: copy -$339 +- 47;
+- SANX (strawberry annex worked by hired hands while the chassis keeps playing, ADAPT signature masked): far worse than
+  the day-12 takeover in the fired games (e.g. +15.5k -> -3.2k); the controller runs the annex labour much cheaper.
+Endgame note: against copies the rival sells ~290 wheat on days 24-29 vs our ~175, but it also buys ~110; net wheat
+revenue is within $300.
