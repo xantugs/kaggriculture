@@ -155,6 +155,10 @@ GC_P = dict(
     rich_tom_min=0,       # > 0: also take over at the rich check when >= this many tomato buyers among the first four
     rich_tom_margin=2500.0,  # shops and the SE tomato annex clears this margin
     rich_tom_over={},
+    tick_defer=False,     # no sells at hours 4, 8, ..., 20 (the town buys right after them): sell an hour later
+    tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
+    tick_last_day=29,
+    tick_keep_due=True,
     rich_car_min=0,       # > 0: also take over at the rich check when the carrot demand of the first four shops
     rich_car_over={},     # (pet cafe 2, farmers market 1) reaches this
     rich_over={},
@@ -2050,6 +2054,12 @@ class GoldCtl:
     def _market(self, obs, shed, carried, hour, day):
         step = int(obs["step"])
         sells = self._sell_orders(obs, shed, carried, hour, day, step)
+        if GC_P["tick_defer"] and hour % 4 == 0 and hour > 0 and day < GC_P["tick_last_day"]:
+            # the town buys right after the market at hours 0, 4, ..., 20: a lot sold an hour later meets the
+            # restocked book and goes first in the next window
+            # (lots due now to go one turn ahead of the rival's predicted sale stay: beating the rival's lot is
+            # worth more than the town's restock)
+            sells = [o for o in sells if o[0] != "SELL" or (GC_P["tick_keep_due"] and o[1] in self._due)]
         if GC_P["arb_on"]:
             buys = self._arb_buys(obs, shed, carried, hour, day, sells)
             if buys:
@@ -2061,7 +2071,7 @@ class GoldCtl:
             h0 = max(0, min(self.hires_planned, 10 - len(fixed)))
             self.hires_left = self.hires_planned - h0
             orders = fixed + [["HIRE"]] * h0
-            if GC_P["sell_timing"]:
+            if GC_P["sell_timing"] and not (GC_P["tick_defer0"] and day < GC_P["tick_last_day"]):
                 have = {o[1] for o in fixed if o and o[0] == "SELL"}
                 orders += [o for o in prem if o[1] not in have and o[1] in self._due]
             return orders[:10]
