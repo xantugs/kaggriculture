@@ -203,6 +203,8 @@ GC_P = dict(
     sanx_reserve=3000.0,
     sanx_mask_adapt=True,
     arb_chassis=False,    # the same arbitrage while the chassis plays (days arb_first..), handed over at takeover
+    fert_idle=False,      # chassis days: a unit that would PASS while standing on an animal tile with fertilizer collects it (no move)
+    fert_idle_room=95,    # only while shed + carried goods stay below this many units (end-of-day drops discard overflow)
     arb_first=8,
     arb_room_chassis=45,  # shed room the chassis keeps free after our purchases (its end-of-day drops must fit)
     arb_on=False,         # glut arbitrage: buy a crashed product the town will drain back, sell it after it recovers
@@ -2608,6 +2610,42 @@ def agent(observation, configuration=None):
 _GC_PARENT = agent
 
 
+def _fert_idle(obs, action):
+    """Chassis days: idle units standing on an animal tile with fertilizer available collect it instead of PASSing.
+    The unit does not move, so the scripted route stays in lockstep; the carried fertilizer drops into the shed at
+    the end of the day (or is used by a scripted FERTILIZE)."""
+    if not isinstance(action, dict):
+        return action
+    me = int(obs["player"])
+    farm = obs["farms"][me]
+    priv = obs["private"]
+    shed = priv.get("shed") or {}
+    load = sum(int(v) for v in shed.values()) + sum(int(n) for inv in (priv.get("inventories") or []) for n in inv.values())
+    if load >= GC_P["fert_idle_room"]:
+        return action
+    tiles = farm["tiles"]
+    positions = [farm["farmer"]] + list(farm.get("hands") or [])
+    units = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
+    changed = 0
+    for i, pos in enumerate(positions):
+        if i >= len(units):
+            break
+        a = units[i]
+        if not (isinstance(a, list) and a and a[0] == "PASS"):
+            continue
+        x, y = int(pos[0]), int(pos[1])
+        t = tiles[y][x] if 0 <= y < len(tiles) and 0 <= x < len(tiles[y]) else None
+        if isinstance(t, dict) and t.get("animal") and t.get("fertilizer_available"):
+            units[i] = ["COLLECT_FERTILIZER"]; changed += 1
+            load += 1
+            if load >= GC_P["fert_idle_room"]:
+                break
+    if changed:
+        _GC_REPORT["gc_fert_idle"] = _GC_REPORT.get("gc_fert_idle", 0) + changed
+        return {"farmer": units[0], "hands": units[1:], "market": action.get("market") or []}
+    return action
+
+
 def _v219x_size(obs):
     """Plants for the chassis's day-18 SE tomato block: our share of the proceeds of every tomato arriving on days
     26-29 (2 a plant a day when fertilized, sold on arrival, lockstep with the rival's) against the town's drain
@@ -2790,7 +2828,13 @@ def agent(observation, configuration=None):
             _GC_REPORT["gc_v219x_n"] = n
             _GC_REPORT["gc_v219x_vals"] = " ".join("%d:%d" % (k, v) for k, v in sorted(vals.items()))
     if step < start:
-        return _GC_PARENT(observation, configuration)
+        action = _GC_PARENT(observation, configuration)
+        if GC_P["fert_idle"]:
+            try:
+                action = _fert_idle(observation, action)
+            except Exception as e:
+                _GC_REPORT["gc_fert_idle_err"] = repr(e)[:120]
+        return action
     if GC_P["arb_chassis"] and not _GC_RICH.get("arb_handed"):
         _GC_RICH["arb_handed"] = True
         st = _ARB_STATE.get(int(observation["player"]))

@@ -104,3 +104,19 @@ Elite cash rises with tomato demand known at day 12 ($110.7k at 0, $115.9k at 18
 in every town; 26% of towns have strawberry demand 0-6 at day 12, where the winners hold 15-20. Day 6: winners
 already have 9.2 strawberries (ours 4.3). Winners hold 25 locked tiles at day 24 (three quadrants); we buy the
 fourth in a fifth of games.
+
+## 7. Rejected: idle fertilizer collection on chassis days (`fert_idle`, off)
+
+A unit whose scripted action is PASS while standing on an animal tile with fertilizer available collects it (no
+move, so the route stays in lockstep). Fires 29-50 times a game and changes final cash by exactly $0 on seeds
+6003/6011/6042: `fertilizer_available` resets daily and the route already collects those animals later, so the
+scripted collect becomes the no-op. The 48 extra units the 2800+ copies sell come from animals the tape never
+visits, which a position-safe layer cannot reach.
+
+## 8. Gates for the 2800+ population
+
+- `gold/harness/pinned4.py moon/strong2800.json,moon/strong_new.json 288 cand1,cand2 out.jsonl offhand`: the 179
+  recorded games vs 2800+ rivals (61 copies, 55 elites, 15 near in the first file), our prefix to step 288.
+- `gold/elite/elite_gate.py build|run`: a candidate vs repaired elite recordings in their own towns (7 teams x 30
+  seats cached in `elite_gate_refs.jsonl`).
+- `gold/harness/batch4.py cand arena/cand/omw_v15a.py 6000-6059 out.jsonl 0`: closed-loop mirror.
