@@ -173,3 +173,23 @@ the price by 160% of base), so whoever floods it destroys the rival's strawberry
 tiles in poor towns because their rivals are elites who do not flood; against a flooding rival the best response is
 to flood back and sell first. The same logic protects our wool and milk positions. Do not cut supply in shallow
 markets.
+
+## 12. Rejected: SE tomato block at day 15 against ADAPT-divergent rivals only (`v219e` + `div_only`, e23)
+
+Elite gate, paired vs v108: -$161 +- 106 overall; in the 25 games where it fired -$1,352 +- 851 (us -$2,440, the
+elite -$1,089). Per product in those games: our tomatoes +$1,064, and the controller later grew wheat +$2,217 and
+carrots +$2,261 on the SE tiles; the elite's tomatoes -$880 (denial works); but wages -$3,921, seeds -$855 and the
+$4,000 quadrant outweigh it. Hands hired on top of the tape's roster cost fib(11..14) = $89-377 a day each.
+
+## 13. Where v108 loses against elite routes in their own towns (210 seats, ledger delta us - elite)
+
+wheat -$3,582, strawberry -$2,915, tomato -$1,840, carrot -$1,514, wool -$381, egg -$376;
+melon +$4,855, fertilizer +$1,498, milk +$1,243, hires +$1,099 (we spend less).
+
+## Bottom line (26 Sep)
+
+Fifteen candidates against v108 on the elite gate, paired on identical seats: none beats it beyond noise. The
+controller matches the tape from day 16 but is far weaker before; every earlier hand-over loses. Extra labour on top
+of the tape's roster is priced out by the Fibonacci wage. Cutting supply in a shallow market hands revenue to the
+rival. What remains is the tape's fixed days 0-16 (the elites' early wheat, tomatoes on existing tiles, geese), which
+cannot be tuned from outside the route. v108 is at the frontier of the chassis-plus-controller design against elites.
