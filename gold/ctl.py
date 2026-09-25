@@ -184,6 +184,8 @@ GC_P = dict(
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
     tick_last_day=29,
     tick_keep_due=True,
+    rich_tom_dem=0,       # > 0: take over at the rich check when the tomato demand of the first four shops (6 per pizza shop or
+    rich_tom_dem_over={},  # farmers market) reaches this; no land is bought, the planner's tomato jobs use free/replant tiles
     rich_car_min=0,       # > 0: also take over at the rich check when the carrot demand of the first four shops
     rich_car_over={},     # (pet cafe 2, farmers market 1) reaches this
     rich_over={},
@@ -2754,6 +2756,17 @@ def agent(observation, configuration=None):
                         if kk not in _GC_DIV_SAVED:
                             _GC_DIV_SAVED[kk] = GC_P.get(kk)
                     GC_P.update(GC_P["rich_tom_over"])
+        if not _GC_RICH["rich"] and GC_P["rich_tom_dem"] > 0:
+            kd = sum(6 for s in shops[:4] if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
+            _GC_REPORT["gc_tom_dem"] = kd
+            if kd >= GC_P["rich_tom_dem"]:
+                _GC_RICH["rich"] = True
+                _GC_RICH["tomdem"] = True
+                _GC_REPORT["gc_rich_tomdem"] = 1
+                for kk, v in GC_P["rich_tom_dem_over"].items():
+                    if kk not in _GC_DIV_SAVED:
+                        _GC_DIV_SAVED[kk] = GC_P.get(kk)
+                GC_P.update(GC_P["rich_tom_dem_over"])
         if not _GC_RICH["rich"] and GC_P["rich_car_min"] > 0:
             kc = sum(2 if s == "PET_CAFE" else (1 if s == "FARMERS_MARKET" else 0) for s in shops[:4])
             if kc >= GC_P["rich_car_min"]:
@@ -2788,7 +2801,7 @@ def agent(observation, configuration=None):
                         _GC_DIV_SAVED[kk] = GC_P.get(kk)
                 GC_P.update(GC_P["herd_rich_over"])
         _GC_REPORT["gc_rich"] = int(_GC_RICH["rich"])
-        if _GC_RICH["rich"] and GC_P["rich_over"] and not _GC_RICH.get("tom") and not _GC_RICH.get("car") and not _GC_RICH.get("herd"):
+        if _GC_RICH["rich"] and GC_P["rich_over"] and not _GC_RICH.get("tom") and not _GC_RICH.get("car") and not _GC_RICH.get("herd") and not _GC_RICH.get("tomdem"):
             for kk, v in GC_P["rich_over"].items():
                 if kk not in _GC_DIV_SAVED:
                     _GC_DIV_SAVED[kk] = GC_P.get(kk)
