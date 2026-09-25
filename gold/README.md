@@ -232,3 +232,14 @@ against the two strongest). metav4 v13 is classified a chassis copy by ADAPT (da
 - Divergent footprint slack 5 / 8 / off: +$132 +- 160 / +$19 / -$769; divergent wheat until day 26 / 27: -$227 / -$29;
   no strawberry-rich rule against flagged rivals: -$3,550 (margin 5000: -$254); herd margin 2000 / 9 animals /
   labour 45: +$56 / +$16 / +$40 (noise).
+
+## 26 Sep: v130 (`submit/main_ctl_rich6_m7.py`) = v108 + big tomato block two days ahead of the copy
+Copies plant their tomato block on day 18 and sell days 26-29; in rich towns both farms then dump 60-80 units on day 29
+at ~$110 while the copy took the day-26 top of the book ($290-318). `base_m7_t4.py` makes the block's planting day
+movable (`_V219_DAY`, falling back to day 18 when it does not qualify yet) and adds thirst-only growth crews
+(`_V219_THIRST`: a crew only on days some plant needs water, sized to those plants, never doubled for a late request).
+`v219x_early_n=20, v219x_early_day=16`: on day 16 price the block; when it already picks 20 plants, plant then.
+- copy games: day 16 +$149 +- 76, no flips (14 blocks moved: 12 better, +$25.5k); day 17 +$89 +- 61 / +$142 (without
+  thirst crews, one flip each); day 15 -$638 per block game; moving 15-plant blocks to day 17: -5 wins.
+- without the thirst crews a day-17 block set off a late doubled crew on day 18 (18 hires, Fibonacci wages +$6.2k).
+- v130: 185 wins, margin +$5,323 (v108 +$5,221). Closed loop neutral against live v15a / metav4 / smaller-shock.

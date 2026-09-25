@@ -164,6 +164,7 @@ GC_P = dict(
     v219x_skip_below=None,  # no block at all when the 10-plant forecast (net of seeds and fertilizer) is below this
     v219x_margins=None,   # per size: {15: 1250, 20: 3500} = the largest size whose forecast beats 10 plants by its margin
     v219x_units=2.0,
+    v219x_thirst=False,   # base_m7_t4: growth-day crews water only the thirsty plants (none the day after a watering)
     v219x_early_n=0,      # > 0: plant on v219x_early_day when that day's forecast already picks this many plants
     v219x_early_day=17,
     v219x_day=18,         # planting day of the block (base_m7_t4 moves V219 with it); a day before the copy's block
@@ -2795,6 +2796,8 @@ def agent(observation, configuration=None):
             _V219_N[0] = 10
             if isinstance(globals().get("_V219_DAY"), list):
                 _V219_DAY[0] = int(GC_P["v219x_day"])
+            if isinstance(globals().get("_V219_THIRST"), list):
+                _V219_THIRST[0] = bool(GC_P["v219x_thirst"])
         elif (GC_P["v219x_early_n"] and step == 24 * GC_P["v219x_early_day"]
               and isinstance(globals().get("_V219_DAY"), list) and _V219_DAY[0] == 18):
             # a big block planted a day before the copy's day-18 block sells ahead of it on days 25-28
