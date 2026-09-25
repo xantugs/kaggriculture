@@ -158,3 +158,32 @@ revenue is within $300.
   must-water visits on day 28 that cannot all be served, and the hire search buys hands at steep Fibonacci wages;
 - a day-28 delivery deadline (hour 20/21, like day 29): copy -$1,074 / -$719.
 v86a closed-loop mirror (60 seeds): 48-12, +$384 +- 46 over v81.
+
+## 25-26 Sep: v100 (`submit/main_ctl_rich4_m7.py`)
+- Day-18 tomato block sized by forecast (V219X, `base_m7_t3.py` + `v219x`): the chassis always planted 10 SE tomatoes
+  on day 18. In tomato-rich copy towns the book reaches $250-480 on days 26-28 (hinge scarcity: 4-5 tomato shops drain
+  25-31 a day) and copies with a 20-plant block beat us (112251252: -4,344; 111972195: -1,748). At step 432 the
+  controller prices 10/15/20 plants (our share of every tomato arriving on days 26-29 against the town's drain, the
+  rival's visible or assumed 10-plant block, seeds, fertilizer, extra hands) and picks 20 when it beats 10 by >= $3,500,
+  15 when by >= $1,250. The block gets one planting hand a row and one watering hand per 8 plants (a tomato needs
+  water every other day until it bears; a tile missed on a watering day dies). Calibrated on the 53 copy games where
+  the block fires (forced 15: +$1,406 +- 318, forced 20: +$1,261 +- 590, the rule about +$1,800; 25 plants always
+  worse than 20).
+- Tick timing, divergent games only (`tick_defer` in div_over): the town buys every 4 turns right after the market
+  (hours 0, 4, ..., 20), so a lot sold at hour 20 meets the book before the restock. Plain lots wait an hour; lots due
+  one turn ahead of the rival's predicted sale still go (beating the rival's lot is worth more than the restock:
+  without that exemption -$419). Divergent +$184 +- 67; everywhere +$100 +- 31 but two copy wins flip.
+- v100: 185/249 pinned wins (copy 154, divergent 31, opp>=2800 78), +$438 +- 127 over v86a (flips +4/-1).
+  Closed-loop mirror vs live v15a (60 seeds, seat 0): 51-9 +$2,805 (v86a 48-12). Official runner DONE in both seats.
+
+Rejected (pinned, 25-26 Sep):
+- carrot-rich towns (>= 3 PET_CAFE/FM demand points among the first four shops) taking over on day 12 with carrots
+  first: -$3,075 / -$4,020 per game, 20-22 wins lost;
+- day-29 variants: max_hands_final 18 (no effect), divergent final_cap 17 / 21 (-$171 / +$9);
+- rival timing knobs on divergent games: hold_max 8 -$509, rival_days 3 -$47, timed melons 0;
+- the controller's own SE tomato annex on divergent games (se_on, days 16-18): -$928 (bought in 26/78, lost money in
+  nearly all, even at forecast +$32k);
+- a day-10 melon front-run against copies: impossible (hands respawn at the shed; the tape's h9-h15 deliveries are the
+  earliest the geometry allows).
+Where the rest is: divergent losses (47) are mostly elite rivals ahead by > $5k on every product (their opening builds
+tomatoes, melons, geese and earlier strawberries by day 12); copy losses (17) are within $2.5k except one.
