@@ -98,6 +98,8 @@ GC_P = dict(
     labor_one=4.2,
     multi_stop=True,      # a route may get several shed stops
     final_ret=False,      # day 29: plan routes including the return delivery against the hour-22 deadline
+    final_cap=22,
+    final_sell0=0,        # day 29: sell this many top lots at hour 0 (ahead of the rival's hour-1 dump)         # day 29: hour by which every route's final delivery must land (earlier sells before the rival's dump)
     final_by_value=False,  # day 29: routes/hires minimise the value left unserved (not the count of must visits)
     max_hands_final=15,
     d28_keep_carrots=False,  # day 28: leave age-2 carrots to grow into the final day
@@ -158,6 +160,18 @@ GC_P = dict(
     race_min=1,
     race_w=0.3,           # value per unit (x price) of taking a race product a day earlier
     race_min_price=20,    # only while the quote is worth racing for
+    arb_chassis=False,    # the same arbitrage while the chassis plays (days arb_first..), handed over at takeover
+    arb_first=8,
+    arb_room_chassis=45,  # shed room the chassis keeps free after our purchases (its end-of-day drops must fit)
+    arb_on=False,         # glut arbitrage: buy a crashed product the town will drain back, sell it after it recovers
+    arb_prods=("WOOL", "MILK", "STRAWBERRY"),
+    arb_buy_max=8,        # buy while the next unit's quote is at or below this
+    arb_target={"WOOL": 150, "MILK": 120, "STRAWBERRY": 120},  # bought units are held until the quote reaches this
+    arb_cap=40,           # bought units held at most (all products)
+    arb_room=35,          # shed room kept free after buying
+    arb_last_day=25,
+    arb_step_max=10,
+    arb_recover_frac=0.5,  # the town's drain must bring the book back to the target within this share of the days left
     room_v3=False,        # courier/stop planning count the lots held in the shed (floors, timing) as tonight's load;
                           # room releases go unit by unit to the smallest loss vs each product's floor
     room_v3_min=40,       # never plan with less than this end-of-day room for carried goods         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
@@ -266,6 +280,7 @@ class GoldCtl:
         self.orders1 = []
         self.hires_planned = 0; self.hires_left = 0
         self.reserve = {}
+        self.arb = {}
         self._held_now = {}
         self.fp_bonus = 0
         self._straw_path = None
@@ -497,7 +512,10 @@ class GoldCtl:
                     k = min(n, take)
                     sell0.append(["SELL", p, k]); take -= k
         else:
-            sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
+            if final and GC_P["final_sell0"] > 0:
+                sell0 = sell0[:max(GC_P["final_sell0"], 1 if need_room > 0 else 0)]
+            else:
+                sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
         self.sell0 = sell0
         self.n0_hires = 10 - len(buys0) - len(sell0)
         import time as _t
@@ -1134,7 +1152,8 @@ class GoldCtl:
         n0 = getattr(self, "n0_hires", 9)
         if fr:
             # final day: every route ends with a delivery that must land by hour 22 (the last processed step)
-            caps = [22] + [(22 if i < n0 else 21) for i in range(h)]
+            fc = GC_P["final_cap"]
+            caps = [fc] + [(fc if i < n0 else fc - 1) for i in range(h)]
         else:
             caps = [23 - s] + [(23 if i < n0 else 22) - s for i in range(h)]
         ret = self._ret
@@ -1971,9 +1990,53 @@ class GoldCtl:
         return max(0, min(cands) - 1 - cur)
 
     # ------------------------------------------------------------------ market
+    def _arb_buys(self, obs, shed, carried, hour, day, sells):
+        """Glut arbitrage: buy units of a crashed product while the next unit's quote is <= arb_buy_max, provided
+        the town's drain of that product brings the book back to the target quote well before the end."""
+        if not GC_P["arb_on"] or day > GC_P["arb_last_day"] or hour < 1 or hour > 20:
+            return []
+        inv = obs["market"]["inventory"]
+        shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
+        held = sum(int(v) for v in self.arb.values())
+        total = sum(int(v) for v in shed.values()) - sum(int(o[2]) for o in sells) + (carried if hour >= 18 else 0)
+        room = 100 - total - GC_P["arb_room"]
+        out = []
+        for p in GC_P["arb_prods"]:
+            if held >= GC_P["arb_cap"] or room <= 0:
+                break
+            i0 = int(inv[p])
+            if _gc_price(p, i0) > GC_P["arb_buy_max"]:
+                continue
+            drain = 1.0
+            for sh in shops:
+                items = _GC_SHOPS.get(sh, [])
+                if p in items:
+                    drain += 6.0 * (2 if len(items) == 1 else 1)
+            tgt = GC_P["arb_target"].get(p, 150)
+            k_t = 0
+            while k_t < 600 and _gc_price(p, i0 - k_t) < tgt:
+                k_t += 1
+            days_left = 28 - day
+            if drain <= 1.0 or k_t / drain > GC_P["arb_recover_frac"] * days_left:
+                continue
+            k = 0
+            while (k < GC_P["arb_step_max"] and held + k < GC_P["arb_cap"] and k < room
+                   and _gc_price(p, i0 - k) <= GC_P["arb_buy_max"]):
+                k += 1
+            if k > 0:
+                out.append(["BUY_PRODUCT", p, k])
+                self.arb[p] = self.arb.get(p, 0) + k
+                held += k; room -= k
+                _GC_REPORT["gc_arb_bought"] = _GC_REPORT.get("gc_arb_bought", 0) + k
+        return out
+
     def _market(self, obs, shed, carried, hour, day):
         step = int(obs["step"])
         sells = self._sell_orders(obs, shed, carried, hour, day, step)
+        if GC_P["arb_on"]:
+            buys = self._arb_buys(obs, shed, carried, hour, day, sells)
+            if buys:
+                sells = sells + buys
         prem = [o for o in sells if o[1] in _GC_PREMIUM]
         rest = [o for o in sells if o[1] not in _GC_PREMIUM]
         if hour == 0:
@@ -2008,6 +2071,15 @@ class GoldCtl:
         val_now = {q: _gc_price(q, inv[q]) for q in _GC_PRODUCTS}
         for p in _GC_PRODUCTS:
             n = int(shed.get(p, 0))
+            a = int(self.arb.get(p, 0)) if (GC_P["arb_on"] or GC_P["arb_chassis"]) else 0
+            if a > 0:
+                a = min(a, n)
+                if last or val_now.get(p, 0) >= GC_P["arb_target"].get(p, 150):
+                    # the bought lot is released at its target (or at the end): stop tracking it
+                    self.arb[p] = 0
+                    _GC_REPORT["gc_arb_sold"] = _GC_REPORT.get("gc_arb_sold", 0) + a
+                else:
+                    n -= a
             if not last:
                 keep = int(reserve.get(p, 0))
                 if hour >= GC_P["reserve_release_hour"]:
@@ -2107,6 +2179,87 @@ class GoldCtl:
 _GC = GoldCtl()
 _GC_DIV_SAVED = {}
 _GC_RICH = {}
+# ---------------------------------------------------------------------------------------------------------------
+# Chassis-phase glut arbitrage (arb_chassis): while the chassis plays, buy a crashed product the town will drain back
+# (wool at $1 after the early sheep glut, milk, strawberry), keep the chassis from selling the bought units, and let
+# them go once the quote is back at the target. The controller inherits the position at takeover (GoldCtl.arb).
+_ARB_STATE = {}
+
+
+def _arb_chassis(obs, action):
+    step = int(obs["step"]); day = step // 24; hour = step % 24
+    me = int(obs["player"])
+    st = _ARB_STATE.get(me)
+    if st is None or step <= st.get("step", -1):
+        st = _ARB_STATE[me] = {"held": {}, "step": -1}
+    st["step"] = step
+    inv = obs["market"]["inventory"]
+    shed = {k: int(v) for k, v in dict(obs["private"]["shed"]).items()}
+    market = [list(o) for o in (action.get("market") or [])]
+    held = st["held"]
+    # release lots whose quote is back at the target; protect the rest from the chassis's own sell orders
+    for p in list(held):
+        if held[p] <= 0 or _gc_price(p, int(inv[p])) >= GC_P["arb_target"].get(p, 150) or step >= 700:
+            _GC_REPORT["gc_arbc_released"] = _GC_REPORT.get("gc_arbc_released", 0) + held.pop(p)
+    for p, h in held.items():
+        free = max(0, shed.get(p, 0) - h)
+        for o in market:
+            if o and o[0] == "SELL" and len(o) >= 3 and o[1] == p:
+                q = min(int(o[2]), free)
+                free -= q
+                o[2] = q
+        market = [o for o in market if not (o and o[0] == "SELL" and len(o) >= 3 and int(o[2]) <= 0)]
+    # buy
+    if GC_P["arb_first"] <= day <= GC_P["arb_last_day"] and 1 <= hour <= 20 and len(market) < 10:
+        shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
+        carried = sum(int(n) for inv_u in obs["private"]["inventories"] for n in inv_u.values())
+        total = sum(shed.values()) + carried
+        room = 100 - total - GC_P["arb_room_chassis"]
+        tot_held = sum(held.values())
+        for p in GC_P["arb_prods"]:
+            if room <= 0 or tot_held >= GC_P["arb_cap"] or len(market) >= 10:
+                break
+            i0 = int(inv[p])
+            if _gc_price(p, i0) > GC_P["arb_buy_max"]:
+                continue
+            drain = 1.0
+            for sh in shops:
+                items = _GC_SHOPS.get(sh, [])
+                if p in items:
+                    drain += 6.0 * (2 if len(items) == 1 else 1)
+            tgt = GC_P["arb_target"].get(p, 150)
+            k_t = 0
+            while k_t < 600 and _gc_price(p, i0 - k_t) < tgt:
+                k_t += 1
+            if drain <= 1.0 or k_t / drain > GC_P["arb_recover_frac"] * (28 - day):
+                continue
+            k = 0
+            while (k < GC_P["arb_step_max"] and tot_held + k < GC_P["arb_cap"] and k < room
+                   and _gc_price(p, i0 - k) <= GC_P["arb_buy_max"]):
+                k += 1
+            if k > 0:
+                market.append(["BUY_PRODUCT", p, k])
+                held[p] = held.get(p, 0) + k
+                tot_held += k; room -= k
+                _GC_REPORT["gc_arbc_bought"] = _GC_REPORT.get("gc_arbc_bought", 0) + k
+    action = dict(action); action["market"] = market
+    return action
+
+
+_ARB_PARENT = agent
+
+
+def agent(observation, configuration=None):
+    action = _ARB_PARENT(observation, configuration)
+    if GC_P["arb_chassis"]:
+        try:
+            action = _arb_chassis(observation, action)
+        except Exception as e:
+            _GC_REPORT["gc_arbc_errors"] = _GC_REPORT.get("gc_arbc_errors", 0) + 1
+            _GC_REPORT["gc_arbc_last_error"] = repr(e)[:160]
+    return action
+
+
 _GC_PARENT = agent
 
 
@@ -2190,6 +2343,13 @@ def agent(observation, configuration=None):
         _GC_RICH["taken"] = True
     if step < start:
         return _GC_PARENT(observation, configuration)
+    if GC_P["arb_chassis"] and not _GC_RICH.get("arb_handed"):
+        _GC_RICH["arb_handed"] = True
+        st = _ARB_STATE.get(int(observation["player"]))
+        if st:
+            for p, h in st.get("held", {}).items():
+                _GC.arb[p] = _GC.arb.get(p, 0) + h
+            st["held"] = {}
     try:
         return _GC.act(observation)
     except Exception as e:  # never forfeit a turn
