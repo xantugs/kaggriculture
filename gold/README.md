@@ -254,3 +254,20 @@ movable (`_V219_DAY`, falling back to day 18 when it does not qualify yet) and a
 - `visit_watered` (a mid-day re-plan of a plant watered today gains nothing from WATER, so no harvest one unit short):
   -$300 and 6 fewer wins on the block games; not used.
 - 25-plant block option (margin 6000 / 9000): +$112 +- 95 / +$93 on the 53 block games (noise).
+- Unit floor (`unit_floor_frac`): the controller sold glutted lots whole (112178518: 20 wool on day 26 at $49 down to
+  twelve units at $1, 26 more at hour 0 of day 29, 23 of them at $1, while the rival sold after each town purchase at
+  ~$30). Cap every lot where the next unit's quote falls below a share of the base price, until step 716 (the last
+  town purchase), holding the rest for the next purchase. All 249 games vs v130: 5% of base +$81 +- 40 (copy +$125 +-
+  52, flips +1/-0; divergent -$14, one flip lost), 10% +$31 (-2 wins), 20% -$111 (-2 wins): a higher floor only lets
+  the rival sell into the recovery first.
+
+## v136 (`submit/main_ctl_rich7_m7.py`) = v130 + unit floor on copy games
+- `unit_floor_frac` 0.03 (top level; `div_over` sets 0): copy games +$150 +- 50 (flips +1/-0; 2% +$71, 5% +$125),
+  divergent unchanged (-$10 +- 37). About +$100 per game over all 249, 186 wins. The gain is mostly the rival's loss
+  (rival wool -$157, milk -$41, strawberries -$46 per copy game): our held units meet the recovered book first.
+- Chassis-phase floor (`chassis_unit_floor`, days 12-23, keeps 20 shed units free): 5% +$125 on copy games but flips
+  +3/-5; with the controller floor, 3% +$250 but flips +2/-5 (154 -> 151 wins). Not used: the chassis's own sell
+  schedule meets the held units again later and a few close wins turn.
+- Tick-aware selling on copy games (`tick_defer` at top level): +$36 +- 27, one win lost (divergent-only stays).
+- Closed loop, seeds 6000-6059 seat 0: live v15a 52-8, metav4 v13 55-5, a-smaller-market-shock 56-4 (v130: 51-9, 53-7,
+  55-5). Official runner seeds 6042 (seat 0) and 6046 (seat 1 vs metav4) DONE, both won.

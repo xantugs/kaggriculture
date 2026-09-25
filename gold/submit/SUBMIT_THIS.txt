@@ -1,8 +1,10 @@
-gold/submit — takeover-controller builds (updated 26 Sep 2026, v130)
+gold/submit — takeover-controller builds (updated 25 Sep 2026 22:30 UTC, v136)
 
-PRIMARY  main_ctl_rich6_m7.py   v130 = v108 + the big (20-plant) tomato block planted on day 16, two days ahead of the
+PRIMARY  main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never sells a unit quoted below 3% of the
+                                product's base price before the town's last purchase (no more $1 wool/milk dumps)
+SECOND   main_ctl_rich6_m7.py   v130 = v108 + the big (20-plant) tomato block planted on day 16, two days ahead of the
                                 copy rival's day-18 block, watered only when thirsty
-SECOND   main_ctl_rich5_m7.py   v108 = v100 + herd expansion: extra cows/sheep bought when a milk/wool book forecast
+         main_ctl_rich5_m7.py   v108 = v100 + herd expansion: extra cows/sheep bought when a milk/wool book forecast
                                 pays (controller days; a day-12 takeover for cows when the forecast is large)
          main_ctl_rich4_m7.py   v100 = v86a + day-18 SE tomato block sized by a tomato forecast (10/15/20 plants)
                                 + divergent games: plain sells move off the hour right before the town's purchase
@@ -33,6 +35,7 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
   v100 main_ctl_rich4_m7  185   154          31             78              +$5,051
   v108 main_ctl_rich5_m7  185   154          31             78              +$5,221
   v130 main_ctl_rich6_m7  185   154          31             78              +$5,323
+  v136 main_ctl_rich7_m7  186   155          31                             +$5,423
 v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
 (corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
@@ -96,6 +99,20 @@ Closed loop (seeds 6000-6059): vs live v15a 51-9 +$2,869, metav4 v13 53-7 +$3,38
 +$3,673 (neutral vs v108). Official runner: seeds 6022 (seat 1), 6042 (seat 0), 6046 (seat 1 vs metav4) all DONE
 and won.
 
+v136 vs v130: copy games +$150 +- 50 per game (flips +1/-0), divergent games unchanged (-$10 +- 37, no flips);
+over all 249 about +$100 per game, 186 wins. The controller sold glutted lots whole: in 112178518 twenty wool on day 26
+at $49 falling to twelve units at $1, and at hour 0 of day 29 twenty-six more, 23 of them at $1, while the rival sold
+a few units after each 4-hourly town purchase at ~$30. Now each lot stops where the next unit's quote would fall below
+3% of the base price (wool $6, milk $4.80, strawberry $3.60) until step 716, the town's last purchase; the rest waits
+for the next purchase (the shed-room release still sells when room is needed). The gain is mostly the rival's: our
+held units meet the recovered book first (rival wool -$157, milk -$41, strawberries -$46 per copy game). 2% / 5%:
++$71 / +$125 on copy games; on divergent games 3% / 5%: -$27 / -$14 (one flip lost), so copy games only. The same
+floor on the chassis's own sells before the takeover: +$250 per copy game but wins 154 -> 151 (not used).
+Closed loop (seeds 6000-6059, seat 0): vs live v15a 52-8 +$2,856 (v130 51-9), metav4 v13 55-5 +$3,585 (53-7),
+a-smaller-market-shock 56-4 +$3,972 (55-5); 0 errors, max step 0.38 s under load. Official runner: seed 6042 (seat 0 vs
+live v15a) 120,620 vs 113,406; seed 6046 (seat 1 vs metav4 v13) 88,136 vs 85,779; both DONE.
+
+a4ebfe004fb59843de12659aa47f8f7828872414dfef5cf64f78270d1b073dbd  submit/main_ctl_rich7_m7.py
 5bd6c3fbc74a5038dd85dad083e453defff85f219ba9c603ca151ae677767634  submit/main_ctl_rich6_m7.py
 10141c6fa605caf8ec426d7cc62a9d147db34f6024b053c400c671d9509fafe4  submit/main_ctl_rich5_m7.py
 19d93b9b5041cef3f9d05bfdd41237e86d079a3dd9f30bfad84e3772c8228f5b  submit/main_ctl_rich4_m7.py

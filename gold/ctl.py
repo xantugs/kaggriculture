@@ -171,6 +171,9 @@ GC_P = dict(
     unit_floor_frac=0.0,  # > 0: never sell a unit whose marginal quote is below this share of the product's base price
     unit_floor_items=("WOOL", "MILK", "STRAWBERRY", "MELON", "TOMATO", "EGG", "CARROT", "WHEAT"),
     unit_floor_step=716,  # from this step on everything goes (the last town purchase is at step 716)
+    chassis_unit_floor=0.0,  # the same floor on the chassis's SELL lots before the takeover
+    chassis_floor_from=12,
+    chassis_floor_room=20,   # shed units kept free for the night's drop
     visit_watered=False,  # a re-planned visit of a plant watered today gains nothing more from WATER (no early harvest)
     v219x_melon=0,        # base_m7_t5: up to this many melons on the block's free SE tiles, sized by a melon forecast
     v219x_melon_age=10,   # harvest age of a block melon (6 units: planted at 1, watered at ages 6-10)
@@ -2705,6 +2708,38 @@ def _v219x_size(obs):
     return best, vals
 
 
+def _gc_chassis_floor(obs, act):
+    """Chassis phase: cut each SELL lot where the next unit would sell below chassis_unit_floor of the base price,
+    while the shed keeps room for tonight's drop (units carry plus a margin)."""
+    if not isinstance(act, dict) or not act.get("market"):
+        return act
+    priv = obs["private"]
+    shed_tot = sum(int(v) for v in dict(priv["shed"]).values())
+    carried = sum(int(v) for inv in priv.get("inventories", []) for v in dict(inv).values())
+    sold = sum(int(o[2]) for o in act["market"] if o and o[0] == "SELL" and len(o) > 2)
+    room = 100 - GC_P["chassis_floor_room"] - (shed_tot - sold + carried)
+    if room <= 0:
+        return act
+    fr = GC_P["chassis_unit_floor"]
+    out = []
+    for o in act["market"]:
+        if o and o[0] == "SELL" and len(o) > 2 and o[1] in GC_P["unit_floor_items"] and room > 0:
+            p, n = o[1], int(o[2])
+            i0 = int(obs["market"]["inventory"][p]); k = 0
+            while k < n and _gc_price(p, i0 + k) >= fr * _GC_MKT[p][0]:
+                k += 1
+            k = max(k, n - room)
+            if k < n:
+                room -= n - k
+                _GC_REPORT["gc_cfloor"] = _GC_REPORT.get("gc_cfloor", 0) + (n - k)
+                if k <= 0:
+                    continue
+                o = ["SELL", p, k]
+        out.append(o)
+    act = dict(act); act["market"] = out
+    return act
+
+
 def _v219x_melons(obs, n_tom):
     """Melons for the block's free SE tiles: our 6 units a plant on the harvest day (age 10), sold on arrival into a
     book the town centre drains one unit a day and every visible melon plot supplies, net of seeds, time and the
@@ -2914,7 +2949,13 @@ def agent(observation, configuration=None):
             _GC_REPORT["gc_v219x_vals"] = " ".join("%d:%d" % (k, v) for k, v in sorted(vals.items()))
             _v219x_set_melons(observation, n)
     if step < start:
-        return _GC_PARENT(observation, configuration)
+        act = _GC_PARENT(observation, configuration)
+        if GC_P["chassis_unit_floor"] > 0 and step >= 24 * GC_P["chassis_floor_from"]:
+            try:
+                act = _gc_chassis_floor(observation, act)
+            except Exception as e:
+                _GC_REPORT["gc_cfloor_err"] = repr(e)[:120]
+        return act
     if GC_P["arb_chassis"] and not _GC_RICH.get("arb_handed"):
         _GC_RICH["arb_handed"] = True
         st = _ARB_STATE.get(int(observation["player"]))
