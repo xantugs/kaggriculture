@@ -149,3 +149,5 @@ variables; `v219e` in the controller sets them at day 12 by tomato demand. Mirro
   tape's roster); our own ADAPT then misread the copy rival as divergent (the block lands before the day-15 check).
   -$11.2k; day-15 block -$11.6k (seed 6042), -$11.0k (6046). The late block's hinge prices are the whole value of
   V219 in copy games; an earlier block trades them for volume and wages. Not pursued.
+| e11 | `hire_cost_w` 0.3 (cheaper hiring in controller days) | -$104 +- 71 | +3/-5 |
+| e12 | e11 + 18 hands | -$239 +- 90 | +3/-6 |

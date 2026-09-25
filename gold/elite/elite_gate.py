@@ -23,15 +23,38 @@ def _play(t):
     s = ref['seat']
     rr = dict(hands=ref['hands'], money=ref['money'], outcomes={int(k): v for k, v in ref['outcomes'].items()}, shops=ref['shops'])
     orig = install_town(ref['shops'])
+    led = [collections.Counter(), collections.Counter()]; FARMS = [None, None]
+    oc = K._commit_unit
+    def commit(op, item, price, farm, private, market, cap=100):
+        ok = oc(op, item, price, farm, private, market, cap)
+        if ok and FARMS[0] is not None:
+            i = 0 if farm is FARMS[0] else 1
+            if op == 'SELL': led[i][item] += price
+            elif op == 'BUY_PRODUCT': led[i][item] -= price
+            elif op == 'BUY_SEED': led[i]['seed'] -= price
+            elif op == 'BUY_ANIMAL': led[i]['anim'] -= price
+        return ok
+    opm = K._process_market
+    def pm(state, env):
+        FARMS[0], FARMS[1] = state[0].observation.farms[0], state[0].observation.farms[1]
+        return opm(state, env)
+    oh = K._do_hire
+    def hire(farm, private, bs, mult=1):
+        m0 = farm['money']; oh(farm, private, bs, mult)
+        if FARMS[0] is not None: led[0 if farm is FARMS[0] else 1]['hire'] += farm['money'] - m0
+    K._commit_unit = commit; K._process_market = pm; K._do_hire = hire
     t0 = time.time()
     try:
-        ag = [None, None]; ag[s] = build_agent(d['acts'], s, rr, slack_min=20); ag[1 - s] = lean.load(cand)
+        ag = [None, None]; ag[s] = build_agent(d['acts'], s, rr, slack_min=20); A = lean.load(cand); ag[1 - s] = A
         r = lean.play(None, None, ref['seed'], agent_objs=ag)
     finally:
-        K._end_of_day = orig
+        K._end_of_day = orig; K._commit_unit = oc; K._process_market = opm; K._do_hire = oh
     tape, cd = r['r'][s], r['r'][1 - s]
+    tel = getattr(A, 'telemetry', None)
+    tel = {k: v for k, v in tel.items() if isinstance(v, (int, float, str))} if isinstance(tel, dict) else None
     return dict(gid=ref['gid'], seat=s, team=ref['team'], cand=cand, tape=tape, us=cd, m=(cd - tape) if tape is not None and cd is not None else None,
-                err=r['err'], tmax=r['tmax'], rec_tape=ref['rec_tape'], wall=round(time.time() - t0, 1))
+                err=r['err'], tmax=r['tmax'], rec_tape=ref['rec_tape'], wall=round(time.time() - t0, 1),
+                led_us=dict(led[1 - s]), led_elite=dict(led[s]), tel=tel)
 
 if __name__ == '__main__':
     from eval_elite_routes import load_games
