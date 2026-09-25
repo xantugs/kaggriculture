@@ -120,3 +120,17 @@ visits, which a position-safe layer cannot reach.
 - `gold/elite/elite_gate.py build|run`: a candidate vs repaired elite recordings in their own towns (7 teams x 30
   seats cached in `elite_gate_refs.jsonl`).
 - `gold/harness/batch4.py cand arena/cand/omw_v15a.py 6000-6059 out.jsonl 0`: closed-loop mirror.
+
+## 9. Rejected: earlier controller takeovers against elites (elite gate, 210 seats, paired vs v108)
+
+v108 on the elite gate: 60-150 (29%), -$3,204 (DSM -$6.2k, Yannik -$5.2k, M & M & P & Q -$3.8k, UMG -$3.7k).
+
+| candidate | change | paired delta | flips |
+|---|---|---:|---|
+| e1 | takeover at day 12 everywhere | -$1,694 +- 190 | 0/-13 |
+| e2 | e1 + tomato allowance 20/day to day 20 | identical to e1 | |
+| e5 | day-12 takeover when tomato demand >= 12 among the first four shops (`rich_tom_dem`) | -$660 +- 154 | 0/-6 |
+| e6 | the same at demand >= 6 | -$1,624 +- 185 | 0/-12 |
+
+The controller's execution from day 12 costs more than any production package it plants, even in tomato towns
+against elites. The production-mix gap in section 1 cannot be closed by handing the farm to the controller earlier.
