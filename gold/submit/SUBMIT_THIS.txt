@@ -74,7 +74,10 @@ v108 vs v100: +$170 +- 63 per game (copy +$178 +- 78, divergent +$152 +- 105), f
   via a day-12 takeover when the cow forecast beats $4,000 (sheep excluded: wool's glut side is quadratic).
   Fired in 13/249 games: 11 better (+$0.5k to +$8.6k), 2 slightly worse (-$3.7k, -$0.1k).
 Closed-loop mirror (seeds 6000-6059, seat 0): 51-9 +$2,867 (v100 +$2,805), 0 errors, max step 0.22 s. Public agents:
-pipe16 40-0 +$21,666, ahmed v47 39-1 +$6,501. Official runner: seed 6043 (seat 0, cow takeover) 120,404 vs 113,984;
+pipe16 40-0 +$21,666, ahmed v47 39-1 +$6,501. Newest public top agents (Sep 20 bundle, seeds 6000-6039):
+  metav4 v13 (Tschinkel, 2945 Farm; = master-engine-v3)  36-4 +$3,137 (v86a 37-3 +$2,788; per seed +$349)
+  a-smaller-market-shock (dmitriigluzdov)                37-3 +$3,580 (v86a 37-3 +$3,099; per seed +$480)
+  one-more-wheat 40-0 +$21,465; demand-preserving-turn-sale-timing, v54 idle workers, farmer-john 40-0 +$21,666. Official runner: seed 6043 (seat 0, cow takeover) 120,404 vs 113,984;
 seed 6029 (seat 1) 79,703 vs 77,358; both DONE.
 
 10141c6fa605caf8ec426d7cc62a9d147db34f6024b053c400c671d9509fafe4  submit/main_ctl_rich5_m7.py
