@@ -111,6 +111,7 @@ GC_P = dict(
     courier_margin=2,
     courier_max_detour=8,
     sell_timing=False,    # hold premium lots and sell one turn before the rival's predicted sale
+    timing_from_day=0,    # the timing hold applies from this day on (earlier days sell on arrival)
     timed=("STRAWBERRY", "MILK", "WOOL", "TOMATO"),
     rival_min_lot=2,
     rival_days=2,
@@ -142,6 +143,10 @@ GC_P = dict(
     se_straw_margin=2500.0,
     rich_start=None,      # take over at this step when the town is strawberry-rich (>= rich_min strawberry shops)
     rich_min=3,
+    rich_steps=None,
+    rich_tom_min=0,       # > 0: also take over at the rich check when >= this many tomato buyers among the first four
+    rich_tom_margin=2500.0,  # shops and the SE tomato annex clears this margin
+    rich_tom_over={},      # e.g. (288, 312, 336): re-check the rich rule at these steps until it fires
     rich_over={},
     rich_eval=False,
     rich_hire_budget=1500.0,      # take over only when today's SE strawberry annex evaluation clears se_straw_margin
@@ -827,6 +832,23 @@ class GoldCtl:
             _GC_REPORT["gc_straw_plants"] = " ".join(pl)
             _GC_REPORT["gc_straw_shops"] = ",".join(shops)
         return gain - (4000 + n_se * (100 + 3 * fert + GC_P["straw_labor"]))
+
+    def rich_eval_tom(self, obs):
+        """Value of the SE quadrant as a tomato annex today (the controller's own se_on pricing)."""
+        farm = obs["farms"][self.me]
+        quads = list(farm["unlocked_quadrants"])
+        if "SE" in quads or "NE" not in quads or "SW" not in quads:
+            return -1e9
+        money = float(farm["money"])
+        if money < 4000 + GC_P["se_reserve"] + GC_P["rich_hire_budget"]:
+            return -1e9
+        day = int(obs["step"]) // 24
+        self._values(obs)
+        shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
+        n_se = GC_P["se_plots"]
+        fert = self.pnow.get("FERTILIZER", 50)
+        gain = self._tomato_value(obs, day, n_se, shops) - self._tomato_value(obs, day, 0, shops)
+        return gain - (4000 + n_se * (50 + 2 * fert + GC_P["tomato_labor"]))
 
     def _straw_count(self, obs, day, n_free, shops):
         if not GC_P["straw_fc"] or day > GC_P["straw_fc_last"] or n_free <= 0:
@@ -2020,7 +2042,7 @@ class GoldCtl:
                     held[p] = held.get(p, 0) + (n - k)
                     _GC_REPORT["gc_lot_cut"] = _GC_REPORT.get("gc_lot_cut", 0) + (n - k)
                     n = k
-            if GC_P["sell_timing"] and p in GC_P["timed"] and not last:
+            if GC_P["sell_timing"] and p in GC_P["timed"] and not last and day >= GC_P["timing_from_day"]:
                 w = self._rival_wait(p, day, hour)
                 if w is not None and 0 < w <= GC_P["hold_max"]:
                     held[p] = held.get(p, 0) + n
@@ -2094,9 +2116,22 @@ def agent(observation, configuration=None):
     if step == 0:
         _GC_RICH.clear()
     start = GC_P["start"]
-    if GC_P["rich_start"] is not None and step >= GC_P["rich_start"] and not _GC_RICH.get("checked"):
+    if GC_P.get("tom_debug") and step == 288 and not _GC_RICH.get("tdbg"):
+        _GC_RICH["tdbg"] = True
+        pl = []
+        for side in (_GC.me, 1 - _GC.me):
+            for row in observation["farms"][side]["tiles"]:
+                for t in row:
+                    if isinstance(t, dict) and t.get("crop") == "TOMATO":
+                        pl.append("%s%d/%d" % ("u" if side == _GC.me else "r", int(t["planted_day"]), int(t.get("yield_units", 0) or 0)))
+        _GC_REPORT["gc_tom_plants"] = " ".join(pl)
+        _GC_REPORT["gc_tom_inv0"] = int(observation["market"]["inventory"]["TOMATO"])
+    steps = GC_P["rich_steps"] or ((GC_P["rich_start"],) if GC_P["rich_start"] is not None else ())
+    due = [s for s in steps if s <= step and s not in _GC_RICH.get("done", ())]
+    if due and not _GC_RICH.get("rich") and not _GC_RICH.get("taken"):
+        _GC_RICH.setdefault("done", set()).update(due)
         _GC_RICH["checked"] = True
-        shops = list(_gc_get(observation["town"], "unlocked_shops", []) or [])[:4]
+        shops = list(_gc_get(observation["town"], "unlocked_shops", []) or [])[:max(4, len(_gc_get(observation["town"], "unlocked_shops", []) or [])) if GC_P["rich_steps"] else 4]
         k = sum(1 for s in shops if s in ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET"))
         _GC_RICH["rich"] = k >= GC_P["rich_min"]
         if _GC_RICH["rich"] and GC_P["rich_eval"]:
@@ -2107,8 +2142,25 @@ def agent(observation, configuration=None):
                 _GC_REPORT["gc_rich_err"] = repr(e)[:120]
             _GC_REPORT["gc_rich_eval"] = int(ev) if ev > -1e8 else None
             _GC_RICH["rich"] = ev > GC_P["se_straw_margin"]
+        if not _GC_RICH["rich"] and GC_P["rich_tom_min"] > 0:
+            kt = sum(1 for s in shops[:4] if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
+            if kt >= GC_P["rich_tom_min"]:
+                try:
+                    evt = _GC.rich_eval_tom(observation)
+                except Exception as e:
+                    evt = -1e9
+                    _GC_REPORT["gc_rich_err"] = repr(e)[:120]
+                _GC_REPORT["gc_rich_tom_eval"] = int(evt) if evt > -1e8 else None
+                if evt > GC_P["rich_tom_margin"]:
+                    _GC_RICH["rich"] = True
+                    _GC_RICH["tom"] = True
+                    _GC_REPORT["gc_rich_tom"] = 1
+                    for kk, v in GC_P["rich_tom_over"].items():
+                        if kk not in _GC_DIV_SAVED:
+                            _GC_DIV_SAVED[kk] = GC_P.get(kk)
+                    GC_P.update(GC_P["rich_tom_over"])
         _GC_REPORT["gc_rich"] = int(_GC_RICH["rich"])
-        if _GC_RICH["rich"] and GC_P["rich_over"]:
+        if _GC_RICH["rich"] and GC_P["rich_over"] and not _GC_RICH.get("tom"):
             for kk, v in GC_P["rich_over"].items():
                 if kk not in _GC_DIV_SAVED:
                     _GC_DIV_SAVED[kk] = GC_P.get(kk)
@@ -2126,8 +2178,12 @@ def agent(observation, configuration=None):
                         _GC_DIV_SAVED[k] = GC_P.get(k)
                 GC_P.update(GC_P["div_over"])
     if _GC_RICH.get("rich"):
-        start = min(start, GC_P["rich_start"])
+        if "at" not in _GC_RICH:
+            _GC_RICH["at"] = step
+        start = min(start, _GC_RICH["at"])
         _GC_REPORT["gc_start"] = start
+    if step >= start:
+        _GC_RICH["taken"] = True
     if step < start:
         return _GC_PARENT(observation, configuration)
     try:
