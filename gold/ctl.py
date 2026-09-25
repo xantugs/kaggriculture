@@ -151,10 +151,12 @@ GC_P = dict(
     se_straw_margin=2500.0,
     rich_start=None,      # take over at this step when the town is strawberry-rich (>= rich_min strawberry shops)
     rich_min=3,
-    rich_steps=None,
+    rich_steps=None,      # e.g. (288, 312, 336): re-check the rich rule at these steps until it fires
     rich_tom_min=0,       # > 0: also take over at the rich check when >= this many tomato buyers among the first four
     rich_tom_margin=2500.0,  # shops and the SE tomato annex clears this margin
-    rich_tom_over={},      # e.g. (288, 312, 336): re-check the rich rule at these steps until it fires
+    rich_tom_over={},
+    rich_car_min=0,       # > 0: also take over at the rich check when the carrot demand of the first four shops
+    rich_car_over={},     # (pet cafe 2, farmers market 1) reaches this
     rich_over={},
     rich_eval=False,
     rich_hire_budget=1500.0,      # take over only when today's SE strawberry annex evaluation clears se_straw_margin
@@ -2535,8 +2537,18 @@ def agent(observation, configuration=None):
                         if kk not in _GC_DIV_SAVED:
                             _GC_DIV_SAVED[kk] = GC_P.get(kk)
                     GC_P.update(GC_P["rich_tom_over"])
+        if not _GC_RICH["rich"] and GC_P["rich_car_min"] > 0:
+            kc = sum(2 if s == "PET_CAFE" else (1 if s == "FARMERS_MARKET" else 0) for s in shops[:4])
+            if kc >= GC_P["rich_car_min"]:
+                _GC_RICH["rich"] = True
+                _GC_RICH["car"] = True
+                _GC_REPORT["gc_rich_car"] = 1
+                for kk, v in GC_P["rich_car_over"].items():
+                    if kk not in _GC_DIV_SAVED:
+                        _GC_DIV_SAVED[kk] = GC_P.get(kk)
+                GC_P.update(GC_P["rich_car_over"])
         _GC_REPORT["gc_rich"] = int(_GC_RICH["rich"])
-        if _GC_RICH["rich"] and GC_P["rich_over"] and not _GC_RICH.get("tom"):
+        if _GC_RICH["rich"] and GC_P["rich_over"] and not _GC_RICH.get("tom") and not _GC_RICH.get("car"):
             for kk, v in GC_P["rich_over"].items():
                 if kk not in _GC_DIV_SAVED:
                     _GC_DIV_SAVED[kk] = GC_P.get(kk)
