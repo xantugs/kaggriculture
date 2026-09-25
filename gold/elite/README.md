@@ -49,9 +49,19 @@ seed late on day 0 only when the recording reached its day-1 hires with less tha
 observed below the recorded trajectory. Emergency sells before purchases were destructive and are off.
 
 Robust routes are unchanged (0.99 of recorded, identical to plain); collapsed routes go from 0.29 to 0.98.
-`eval_repaired_own.py` on the adaptive teams in their own towns vs v100 (partial, 351 seats): DSM 81% wins +$6,842,
-Unknown Mother-Goose 69% +$4,291, Majkel1337 69% +$2,068, QQ 63% +$2,199, M & M & P & Q 9/9 +$12,146,
-THIRD FARM CLUB 55% -$185; overall 67%, +$3,148, mean ratio 0.98.
+`eval_repaired_own.py` on the adaptive teams in their own towns vs v100 (786 seats, `repaired_own_vs_v100.jsonl`):
+
+| team | seats | robust | ratio | wins vs v100 | margin |
+|---|---:|---:|---:|---:|---:|
+| DSM | 166 | 84% | 0.98 | 86% | +$7,536 |
+| M & M & P & Q | 55 | 82% | 0.97 | 76% | +$4,956 |
+| Unknown Mother-Goose | 93 | 80% | 0.97 | 73% | +$4,714 |
+| Majkel1337 | 158 | 92% | 1.01 | 66% | +$2,071 |
+| Vadim Vasilenko | 23 | 78% | 0.94 | 61% | +$580 |
+| QQ | 91 | 92% | 1.01 | 59% | +$1,618 |
+| THIRD FARM CLUB | 152 | 86% | 0.98 | 49% | -$952 |
+| Orbital Terraformer | 48 | 85% | 0.98 | 44% | -$949 |
+| all | 786 | | 0.99 | 66% | +$2,875 |
 
 **This is an elite-strength gate**: a candidate can now be played against DSM's recorded play in DSM's town.
 
