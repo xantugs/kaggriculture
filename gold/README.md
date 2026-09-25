@@ -220,3 +220,15 @@ against the two strongest). metav4 v13 is classified a chassis copy by ADAPT (da
 - geese allowed in the day-12 herd takeover: never fire (identical); hire_cost_w 0.5 / 0.7: -$28 / -$15 on ~127 games
   (0.6 stays); against metav4 v13 in closed loop a day-22 copy takeover gains $272 per game but day 22 lost copy wins
   on the recorded games, day 25 is worse (33-7): day 24 stays.
+
+## 26 Sep: pushing past v108
+- Early controller takeover against rivals ADAPT flags divergent on day 5 (S=144 pinned, 38 games): day 6 -$62k,
+  day 10 -$20k, day 12 -$2.5k per game. The controller cannot run an opening (it skips the chassis's planned animal,
+  seed and land investments and hires half the hands); the elite rivals' edge (SW land on day 9, 15-27 wheat the same
+  day, strawberries from day 2, staggered melons, 4-7 cows / 5-6 sheep on day 6) has to come from a scripted opening.
+- Chassis constants tuned by the public authors on mirrors (`chassis_globals` knob): V9_HERD species rules, V9_RACE
+  margin 8/16 and horizon 32/44, V9_CARROT ratio 1.5/2.2, V9_COURIER hour 8/16, V219 cash 12000 / tomato price 60:
+  flat on the recorded field (few games change, net ~0).
+- Divergent footprint slack 5 / 8 / off: +$132 +- 160 / +$19 / -$769; divergent wheat until day 26 / 27: -$227 / -$29;
+  no strawberry-rich rule against flagged rivals: -$3,550 (margin 5000: -$254); herd margin 2000 / 9 animals /
+  labour 45: +$56 / +$16 / +$40 (noise).

@@ -163,7 +163,11 @@ GC_P = dict(
     v219x_margin=1000.0,  # a bigger block must beat the 10-plant block by this much
     v219x_skip_below=None,  # no block at all when the 10-plant forecast (net of seeds and fertilizer) is below this
     v219x_margins=None,   # per size: {15: 1250, 20: 3500} = the largest size whose forecast beats 10 plants by its margin
-    v219x_units=2.0,      # units per plant and production day (fertilized)
+    v219x_units=2.0,
+    v219x_early_n=0,      # > 0: plant on v219x_early_day when that day's forecast already picks this many plants
+    v219x_early_day=17,
+    v219x_day=18,         # planting day of the block (base_m7_t4 moves V219 with it); a day before the copy's block
+                          # sells ahead of it      # units per plant and production day (fertilized)
     herd_on=False,        # buy extra sheep/cows/geese when a book forecast of their product pays (controller days)
     herd_first=12,
     herd_last=18,
@@ -179,6 +183,8 @@ GC_P = dict(
     herd_total_max=99,    # at most this many animals bought per game
     herd_rich_margin=None, # rich check (day 12): take over when the herd forecast beats this (copy games' only chance)
     herd_rich_over={},     # existing empty tiles stay for crops up to this many; the herd uses only the rest (or new SE)
+    rich_div_margin=None, # strawberry-rich check against a rival ADAPT already flagged divergent: this margin instead
+    chassis_globals=None, # override chassis module constants at step 0, e.g. {"V9_HERD_MIN_MILK_SHOPS": 2}
     ad_thresh=None,       # override ADAPT's rival-similarity thresholds, e.g. {359: 0.7}
     tick_defer=False,     # no sells at hours 4, 8, ..., 20 (the town buys right after them): sell an hour later
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
@@ -2631,12 +2637,13 @@ def _v219x_size(obs):
             rsup[d] = rsup.get(d, 0.0) + u * GC_P["v219x_copy_n"]
     fert = float(obs["market"]["prices"]["FERTILIZER"])
     vals = {}
+    P = int(obs["step"]) // 24
     for n in GC_P["v219x_sizes"]:
         inv = inv0; rev = 0.0
-        for d in range(18, 30):
+        for d in range(P, 30):
             unl = min(8, d // 3) - n_shops
             inv -= 6.0 * (k_now + max(0, unl) * 0.25 * GC_P["future_shop_w"]) + 1.0
-            q_us = u * n if 26 <= d <= 29 else 0.0
+            q_us = u * n if P + 8 <= d <= min(29, P + 11) else 0.0
             q_r = rsup.get(d, 0.0)
             tot = q_us + q_r
             if tot <= 0:
@@ -2696,7 +2703,11 @@ def agent(observation, configuration=None):
                 ev = -1e9
                 _GC_REPORT["gc_rich_err"] = repr(e)[:120]
             _GC_REPORT["gc_rich_eval"] = int(ev) if ev > -1e8 else None
-            _GC_RICH["rich"] = ev > GC_P["se_straw_margin"]
+            _mg = GC_P["se_straw_margin"]
+            _ad = globals().get("_AD_STATE")
+            if GC_P["rich_div_margin"] is not None and isinstance(_ad, dict) and _ad.get("off"):
+                _mg = GC_P["rich_div_margin"]
+            _GC_RICH["rich"] = ev > _mg
         if not _GC_RICH["rich"] and GC_P["rich_tom_min"] > 0:
             kt = sum(1 for s in shops[:4] if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
             if kt >= GC_P["rich_tom_min"]:
@@ -2772,13 +2783,33 @@ def agent(observation, configuration=None):
         _GC_REPORT["gc_start"] = start
     if step >= start:
         _GC_RICH["taken"] = True
+    if step == 0 and GC_P["chassis_globals"]:
+        for kk, vv in GC_P["chassis_globals"].items():
+            if kk in globals():
+                globals()[kk] = vv
     if step == 0 and GC_P["ad_thresh"] and isinstance(globals().get("_AD_CFG"), dict):
         for kk, vv in GC_P["ad_thresh"].items():
             _AD_CFG["thresh"][int(kk)] = float(vv)
     if step < start and GC_P["v219x"] and isinstance(globals().get("_V219_N"), list):
         if step == 0:
             _V219_N[0] = 10
-        elif step == 432:
+            if isinstance(globals().get("_V219_DAY"), list):
+                _V219_DAY[0] = int(GC_P["v219x_day"])
+        elif (GC_P["v219x_early_n"] and step == 24 * GC_P["v219x_early_day"]
+              and isinstance(globals().get("_V219_DAY"), list) and _V219_DAY[0] == 18):
+            # a big block planted a day before the copy's day-18 block sells ahead of it on days 25-28
+            try:
+                n, vals = _v219x_size(observation)
+            except Exception as e:
+                n, vals = 10, {}
+                _GC_REPORT["gc_v219x_err"] = repr(e)[:120]
+            _GC_REPORT["gc_v219x_early_vals"] = " ".join("%d:%d" % (k, v) for k, v in sorted(vals.items()))
+            if n >= GC_P["v219x_early_n"]:
+                _V219_DAY[0] = GC_P["v219x_early_day"]
+                _V219_N[0] = n
+                _GC_REPORT["gc_v219x_n"] = n
+                _GC_REPORT["gc_v219x_day"] = GC_P["v219x_early_day"]
+        elif step == 24 * (_V219_DAY[0] if isinstance(globals().get("_V219_DAY"), list) else 18):
             try:
                 n, vals = _v219x_size(observation)
             except Exception as e:
