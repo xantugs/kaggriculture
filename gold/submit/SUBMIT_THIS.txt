@@ -22,6 +22,9 @@ v74 vs v18: +$1,088 +- 264 per game (z 4.1), flips +7/-1; the rule fired in 39 g
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
 Closed-loop mirror vs live v15a, 60 strawberry-rich seeds (decoupled engine): +$3,818 +- 1,004 per game (z 3.8),
 fired in 26/60 (+$8,810 each), non-firing seeds identical, 0 errors, max step 0.31 s.
+Closed loop vs strong public agents (decoupled engine, seeds 6000-6039, seat 0):
+  pipe16 (Tschinkel v13 + HybridOpening, public 2755): v18 40-0 +$19,029 | v74 40-0 +$20,668 (12 fired, +$5,462 each)
+  ahmedberatozer v47 (public 2686):                    v18 38-2 +$5,100  | v74 37-3 +$5,323  (6 fired, +$1,484 each)
 Official kaggle_environments runner: seed 6000 (seat 0, fired) 131,224 vs 126,060; seed 6011 (seat 1, fired)
 134,131 vs 118,058; seed 6007 (seat 1, not fired) 75,435 vs 74,702; all DONE, identical to lean.
 
