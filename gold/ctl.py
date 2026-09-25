@@ -99,6 +99,7 @@ GC_P = dict(
     multi_stop=True,      # a route may get several shed stops
     final_ret=False,      # day 29: plan routes including the return delivery against the hour-22 deadline
     final_cap=22,
+    d28_cap=None,         # day 28: routes end with a delivery that lands by this hour (like day 29), else None
     final_sell0=0,        # day 29: sell this many top lots at hour 0 (ahead of the rival's hour-1 dump)
     late_sell0_day=99,    # from this day on (before day 29) sell late_sell0 top lots at hour 0 as well
     late_sell0=0,         # day 29: hour by which every route's final delivery must land (earlier sells before the rival's dump)
@@ -545,11 +546,12 @@ class GoldCtl:
         # shed stops: only as many as needed so the end-of-day drop fits in the shed
         if GC_P["stop_v2"]:
             self.drop_at = {}
-            if final and GC_P["final_ret"]:
+            d28r = GC_P["d28_cap"] is not None and day == 28 and not final
+            if (final and GC_P["final_ret"]) or d28r:
                 _ovf, _pv = 0, 0.0
             else:
                 _ovf, _pv = self._plan_stops(routes, spawns)
-            if final:
+            if final or d28r:
                 for u, r in enumerate(routes):
                     if r and r[-1].tag != "S":
                         r.append(self._stop_visit(r[-1].pos))
@@ -1159,12 +1161,13 @@ class GoldCtl:
     def _vrp1(self, visits, h, order_key):
         n_units = 1 + h
         spawns = [(4, 4)] + self._spawns(h, (4, 4))
-        fr = self.final and GC_P["final_ret"]
+        d28r = GC_P["d28_cap"] is not None and getattr(self, "day", 0) == 28 and not self.final
+        fr = (self.final and GC_P["final_ret"]) or d28r
         s = GC_P["drop_slack"] if not self.final else 5
         n0 = getattr(self, "n0_hires", 9)
         if fr:
             # final day: every route ends with a delivery that must land by hour 22 (the last processed step)
-            fc = GC_P["final_cap"]
+            fc = GC_P["d28_cap"] if d28r else GC_P["final_cap"]
             caps = [fc] + [(fc if i < n0 else fc - 1) for i in range(h)]
         else:
             caps = [23 - s] + [(23 if i < n0 else 22) - s for i in range(h)]

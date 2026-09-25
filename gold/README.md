@@ -154,3 +154,7 @@ Also rejected (25 Sep, night; pinned, vs v86a unless noted):
   the day-12 takeover in the fired games (e.g. +15.5k -> -3.2k); the controller runs the annex labour much cheaper.
 Endgame note: against copies the rival sells ~290 wheat on days 24-29 vs our ~175, but it also buys ~110; net wheat
 revenue is within $300.
+- carrots on day 27 as optional work (plant_must_last 26): copy -$2,758 (151 -> 91 wins): day-27 plantings create
+  must-water visits on day 28 that cannot all be served, and the hire search buys hands at steep Fibonacci wages;
+- a day-28 delivery deadline (hour 20/21, like day 29): copy -$1,074 / -$719.
+v86a closed-loop mirror (60 seeds): 48-12, +$384 +- 46 over v81.
