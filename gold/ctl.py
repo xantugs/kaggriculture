@@ -2893,7 +2893,9 @@ def agent(observation, configuration=None):
             sh = list(_gc_get(observation["town"], "unlocked_shops", []) or [])[:4]
             kd = sum(6 for s in sh if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
             _GC_REPORT["gc_v219e_dem"] = kd
-            if kd >= e.get("min_dem", 6):
+            ad = globals().get("_AD_STATE")
+            div_ok = (not e.get("div_only")) or (isinstance(ad, dict) and bool(ad.get("off")))
+            if kd >= e.get("min_dem", 6) and div_ok:
                 size = 10
                 for k, v in sorted(((int(k), v) for k, v in e.get("sizes", {}).items())):
                     if kd >= k: size = v
