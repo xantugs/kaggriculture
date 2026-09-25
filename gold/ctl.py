@@ -161,8 +161,10 @@ GC_P = dict(
     v219x_opp_w=1.0,
     v219x_worker_cost=300.0,  # one extra hand for a day (13th-14th hire)
     v219x_margin=1000.0,  # a bigger block must beat the 10-plant block by this much
+    v219x_skip_below=None,  # no block at all when the 10-plant forecast (net of seeds and fertilizer) is below this
     v219x_margins=None,   # per size: {15: 1250, 20: 3500} = the largest size whose forecast beats 10 plants by its margin
     v219x_units=2.0,      # units per plant and production day (fertilized)
+    ad_thresh=None,       # override ADAPT's rival-similarity thresholds, e.g. {359: 0.7}
     tick_defer=False,     # no sells at hours 4, 8, ..., 20 (the town buys right after them): sell an hour later
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
     tick_last_day=29,
@@ -2545,6 +2547,8 @@ def _v219x_size(obs):
         vals[n] = rev - n * (50.0 + 2.0 * fert) - extra_days * GC_P["v219x_worker_cost"]
     if GC_P["v219x_margins"]:
         best = 10
+        if GC_P["v219x_skip_below"] is not None and vals.get(10, 0.0) < GC_P["v219x_skip_below"]:
+            return 0, vals
         for n, m in sorted((int(k), float(v)) for k, v in GC_P["v219x_margins"].items()):
             if n in vals and vals[n] - vals.get(10, 0.0) >= m:
                 best = n
@@ -2643,6 +2647,9 @@ def agent(observation, configuration=None):
         _GC_REPORT["gc_start"] = start
     if step >= start:
         _GC_RICH["taken"] = True
+    if step == 0 and GC_P["ad_thresh"] and isinstance(globals().get("_AD_CFG"), dict):
+        for kk, vv in GC_P["ad_thresh"].items():
+            _AD_CFG["thresh"][int(kk)] = float(vv)
     if step < start and GC_P["v219x"] and isinstance(globals().get("_V219_N"), list):
         if step == 0:
             _V219_N[0] = 10

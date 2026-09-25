@@ -60,6 +60,8 @@ Closed-loop mirror vs live v15a (seeds 6000-6059, seat 0): v100 51-9 +$2,805 (v8
 0.25 s; the 20-plant block fired on 7 seeds, all better (6042: -3,512 -> +10,699; 6046: +3,945 -> +17,665).
 Official runner: seed 6003 (seat 0) 84,433 vs 80,382; seed 6011 (seat 1) 124,162 vs 108,641; seed 6042 (seat 0,
 20-plant block) 120,622 vs 113,396; all DONE.
+Closed loop vs strong public agents (seeds 6000-6039, seat 0): pipe16 40-0 +$21,262 (v74 +$20,668); ahmed v47 39-1
++$6,264 (v74 37-3 +$5,323); 0 errors, max step 0.23 s.
 
 19d93b9b5041cef3f9d05bfdd41237e86d079a3dd9f30bfad84e3772c8228f5b  submit/main_ctl_rich4_m7.py
 7171a3648d5e60eb80a58a4197e397e8c8984b00ef04043dcee7dc4143e466c4  submit/main_ctl_rich3_m7.py

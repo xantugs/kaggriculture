@@ -1443,7 +1443,7 @@ def agent(observation, configuration=None):
     state['last_step']=step
     native=_IMPL.chassis.players[player]
     if step==432:
-        state['eligible']=_v219_qualifies(observation,native)
+        state['eligible']=_v219_qualifies(observation,native) and _V219_N[0]>0
         if state['eligible'] and _V219_N[0]!=10:
             state['targets']=[(x,y) for y in range(5,5+_V219_N[0]//5) for x in range(5,10)]
     if not state.get('eligible') or day<18:return action
