@@ -221,6 +221,9 @@ GC_P = dict(
     mkt_dp_rival_days=2,
     mkt_dp_from_day=0,
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
+    s2t_days=(),          # chassis days: on these planting days, when the rival's cash at step 2 lies outside the band of
+    s2t_crop="TOMATO",    # chassis copies (div2_band), the tape's PLANT STRAWBERRY and its strawberry seed purchases become
+    div2_band=(1030, 1065),   # s2t_crop (the elites run ~16 strawberry tiles to the tape's 33; strawberries floor 75 over)
     lead2=False,          # chassis days: sell every premium lot the tape plans within the current town-tick window now
     lead2_items=("MILK", "WOOL", "STRAWBERRY", "MELON"),   # (the market settles order by order in lockstep and the
     lead2_min_price=5,    # copy's own one-step lead lands one step later, so ours goes first; no tick is ever crossed)
@@ -3086,6 +3089,44 @@ def _v219x_size(obs):
     return best, vals
 
 
+_DIV2 = {}
+
+
+def _div2_check(obs):
+    """Day-0 rival classification: a chassis copy runs the same opening and holds $1,034-1,059 at step 2; elites and
+    other divergent rivals hold something else (12 to 1,571 in the recordings)."""
+    step = int(obs["step"])
+    if step == 0:
+        _DIV2.clear()
+    if step == 2 and "on" not in _DIV2:
+        me = int(obs["player"]); rm = float(obs["farms"][1 - me]["money"])
+        lo, hi = GC_P["div2_band"]
+        _DIV2["on"] = not (lo <= rm <= hi)
+        _GC_REPORT["gc_div2"] = int(_DIV2["on"]); _GC_REPORT["gc_div2_money"] = int(rm)
+
+
+def _straw_to_tom(obs, action):
+    day = int(obs["step"]) // 24
+    if not _DIV2.get("on") or day not in GC_P["s2t_days"]:
+        return action
+    crop = GC_P["s2t_crop"]
+    cmds = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
+    changed = 0; new = []
+    for c in cmds:
+        if isinstance(c, list) and len(c) >= 2 and c[0] == "PLANT" and c[1] == "STRAWBERRY":
+            c = ["PLANT", crop]; changed += 1
+        new.append(c)
+    market = []
+    for o in action.get("market") or []:
+        if isinstance(o, list) and len(o) >= 3 and o[0] == "BUY_SEED" and o[1] == "STRAWBERRY":
+            o = ["BUY_SEED", crop, o[2]]; changed += 1
+        market.append(o)
+    if changed:
+        action = dict(action); action["farmer"] = new[0]; action["hands"] = new[1:]; action["market"] = market
+        _GC_REPORT["gc_s2t"] = _GC_REPORT.get("gc_s2t", 0) + changed
+    return action
+
+
 def _lead2(obs, action):
     """Chassis days: the market settles both players' order lists index by index in per-unit lockstep, and the town
     only drains after the market of steps 0 mod 4. The chassis (and every copy of it) already sells next step's
@@ -3432,6 +3473,12 @@ def agent(observation, configuration=None):
             _v219x_set_melons(observation, n)
     if step < start:
         action = _GC_PARENT(observation, configuration)
+        if GC_P["s2t_days"]:
+            try:
+                _div2_check(observation)
+                action = _straw_to_tom(observation, action)
+            except Exception as e:
+                _GC_REPORT["gc_s2t_err"] = repr(e)[:120]
         if GC_P["lead2"]:
             try:
                 action = _lead2(observation, action)
