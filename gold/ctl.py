@@ -226,6 +226,11 @@ GC_P = dict(
     mkt_dp_rival_days=2,
     mkt_dp_from_day=0,
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
+    es_days=(),           # chassis days on which the tape's wheat replants in NW become strawberries (early strawberries)
+    es_n=8,               # how many tiles to convert
+    es_skip_cows=(2, 3),  # chassis days whose cow purchases are dropped to fund the seeds
+    es_min_cash=105.0,    # a seed purchase is converted only with this much cash per seed
+    es_quads=("NW",),
     s2t_days=(),          # chassis days: on these planting days, when the rival's cash at step 2 lies outside the band of
     s2t_crop="TOMATO",    # chassis copies (div2_band), the tape's PLANT STRAWBERRY and its strawberry seed purchases become
     div2_band=(1000, 1070),   # s2t_crop (the elites run ~16 strawberry tiles to the tape's 33; strawberries floor 75 over)
@@ -3690,6 +3695,56 @@ def _div2_check(obs):
 _STRAW_SHOPS = ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET")
 
 
+_ES = {}
+
+
+def _early_straw(obs, action):
+    """Early strawberries on the tape: on es_days, the tape's PLANT WHEAT on an NW tile becomes PLANT STRAWBERRY (up to
+    es_n tiles) and its wheat seed purchases become strawberry seed purchases; the cow purchases of es_skip_cows are
+    dropped to pay for them. The tape keeps watering those tiles and harvests whatever they hold on its wheat cadence."""
+    step = int(obs["step"]); day = step // 24
+    if step == 0:
+        _ES.clear(); _ES["tiles"] = set(); _ES["n"] = 0
+    if day not in GC_P["es_days"] and day not in GC_P["es_skip_cows"]:
+        return action
+    me = int(obs["player"]); farm = obs["farms"][me]
+    money = float(farm["money"])
+    seeds = dict(obs["private"]["seeds"])
+    mk = list(action.get("market") or [])
+    out_mk = []
+    for o in mk:
+        if o and o[0] == "BUY_ANIMAL" and o[1] == "COW" and day in GC_P["es_skip_cows"]:
+            _GC_REPORT["gc_es_cows_skipped"] = _GC_REPORT.get("gc_es_cows_skipped", 0) + int(o[2])
+            continue
+        if o and o[0] == "BUY_SEED" and o[1] == "WHEAT" and day in GC_P["es_days"]:
+            # the wheat seeds stay (the tape's other replants need them); strawberry seeds are bought on top
+            k = int(o[2]); room = GC_P["es_n"] - _ES.get("n", 0) - int(seeds.get("STRAWBERRY", 0))
+            a = max(0, min(k, room, int((money - 10 * k) // GC_P["es_min_cash"])))
+            out_mk.append(o)
+            if a > 0:
+                out_mk.append(["BUY_SEED", "STRAWBERRY", a]); money -= 100 * a
+                _GC_REPORT["gc_es_seeds"] = _GC_REPORT.get("gc_es_seeds", 0) + a
+            continue
+        out_mk.append(o)
+    action["market"] = out_mk
+    if day in GC_P["es_days"]:
+        positions = [farm["farmer"]] + list(farm["hands"])
+        avail = int(seeds.get("STRAWBERRY", 0))
+        units = [action.get("farmer", ["PASS"])] + list(action.get("hands") or [])
+        for u, a in enumerate(units):
+            if not (isinstance(a, list) and len(a) >= 2 and a[0] == "PLANT" and a[1] == "WHEAT") or u >= len(positions):
+                continue
+            x, y = int(positions[u][0]), int(positions[u][1])
+            if _gc_quad(x, y) not in GC_P["es_quads"] or _ES.get("n", 0) >= GC_P["es_n"] or avail <= 0:
+                continue
+            if farm["tiles"][y][x] is not None:
+                continue
+            units[u] = ["PLANT", "STRAWBERRY"]; avail -= 1; _ES["n"] = _ES.get("n", 0) + 1; _ES["tiles"].add((x, y))
+            _GC_REPORT["gc_es_planted"] = _GC_REPORT.get("gc_es_planted", 0) + 1
+        action["farmer"] = units[0]; action["hands"] = units[1:]
+    return action
+
+
 def _straw_to_tom(obs, action):
     day = int(obs["step"]) // 24
     if day not in GC_P["s2t_days"] or not (_DIV2.get("on") or GC_P["s2t_all"]):
@@ -4021,6 +4076,9 @@ def agent(observation, configuration=None):
             _GC_RICH["at"] = step
         start = min(start, _GC_RICH["at"])
         _GC_REPORT["gc_start"] = start
+    if GC_P["open"] is not None:
+        od = GC_P["open"].get("from_day", _OPEN_DEFAULT["from_day"]) if isinstance(GC_P["open"], dict) else _OPEN_DEFAULT["from_day"]
+        start = min(start, 24 * int(od))   # the scheduled opening starts on its day whatever the rival is classed as
     if step >= start:
         _GC_RICH["taken"] = True
     if step == 0 and GC_P["chassis_globals"]:
@@ -4091,6 +4149,11 @@ def agent(observation, configuration=None):
             _v219x_set_melons(observation, n)
     if step < start:
         action = _GC_PARENT(observation, configuration)
+        if GC_P["es_days"]:
+            try:
+                action = _early_straw(observation, action)
+            except Exception as e:
+                _GC_REPORT["gc_es_err"] = repr(e)[:120]
         if GC_P["s2t_days"]:
             try:
                 _div2_check(observation)
