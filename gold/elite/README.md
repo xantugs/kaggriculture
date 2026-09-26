@@ -508,3 +508,16 @@ the day 6-7 cows when the cash is short). `carrot_first` 11 (e96): identical to 
 committed to the items that floor the milk and wool markets; every diversion tested (early strawberries, NE
 strawberries, cows bought back later) hands the elite $6-12k of milk.
 
+**First-mover sale** (`mkt_dp_fresh`: the programme sells at once while the rival has no sales pattern for the product,
+e100): -$77 +- 84. **Geese in the herd forecast** (`herd_kinds` with GOOSE, e101): identical to m4 (the forecast never
+picks them at $85 a day of feed and labour); with `herd_labor` 30 from day 12 (e102) -$86 +- 56. The elites keep 2.8-3.6
+geese from day 6 (M & M & P & Q none); ours are 2.2-3.8 from day 10.
+
+## Bottom line (27 Sep)
+
+Twenty-two candidates today, none beats m4 on the elite gate. What was learned: the gate margin is decided on the
+elite's side of the ledger as much as ours (its milk, wool and strawberries sell into the book our early volume leaves),
+the tape's cash before day 10 is entirely committed to the purchases that floor those markets, the controller cannot
+run the early game (-$18k to -$27k), and plots or deliveries added after the takeover pay the 12th-14th hand's wage.
+m4 (`submit/main_ctl_mkt4_m7.py`, m5 equivalent) stays the submission.
+
