@@ -292,3 +292,18 @@ Rejected:
 - carrots planted through day 27 (mandatory: -$3,942 on 16 games; optional, valued at the 2 units an age-2 carrot
   gives, `late_units`: -$3,574, 68 wins lost). The day-27 plots set off Fibonacci wages on days 27-29 (+$2.2k) and
   crowd out tomato and strawberry harvests; as recorded before, only the copy's pre-planned tape can do this cheaply.
+- Chassis-phase unit floor, milder variants (copy games vs v136): wool only 3% +$54 +- 45 (flips +1/-2), 2% all
+  +$95 +- 50 (+2/-4), premium goods 3% +$100 +- 57 (+1/-5), 3% all +$100 +- 57 (+1/-5).
+- Dig-up of live strawberries in a crashed book (`dig_glut`, days 16-24: remaining output at the current quote vs a
+  carrot plot per 3-day cycle left): 36% of copy towns quote strawberries under $15 on day 24 while we still hold ~13
+  plants. Margin 60: +$123 +- 95 over 249 (fired in 84: carrots +$1.3k, wheat +$1.1k, strawberries -$0.7k, wages
+  -$0.7k), flips +2/-6; margin 200: fires in 8, +$0.
+- Why "margin up, close wins down" keeps happening: v136 is favoured (copy mean +$6.6k), so its margins crowd just
+  above zero (28 copy wins under $1.5k vs 11 losses within $2k). A change that adds per-game noise loses more close
+  wins than it gains even at a positive mean: with the observed noise (sd $650-770 per game) and mean +$100 the
+  expected net is about -2.5 wins, which is what the floor variants show. Keep only changes whose mean gain clearly
+  exceeds their noise (the controller unit floor: +$150, sd ~$650, flips +1/-0).
+- Day-10 melon front-run revisited: both copies sell the same lots in the same hours (6, 24, 12, 6, 6, 6 from hour 9,
+  12 at hour 0 of day 11). A melon moved from our tail to hour 8-9 would swing ~$1.0k of margin, but the tape already
+  harvests 9 of 12 melons by hour 8; only 3 far melons (hour 14 and the two sold at hour 0 of day 11) are late, and
+  extra hands hired at hour 1 (hour 0 is full: 10 orders) reach them no earlier than hour 13.

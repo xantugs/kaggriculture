@@ -176,6 +176,14 @@ GC_P = dict(
     chassis_floor_from=12,
     chassis_floor_room=20,   # shed units kept free for the night's drop
     chassis_floor_items=None,  # products the chassis floor applies to (None: unit_floor_items)
+    dig_glut=False,       # dig live strawberries whose remaining output is worth less than a carrot plot there
+    dig_glut_crops=("STRAWBERRY",),
+    dig_first=16,
+    dig_last=24,
+    dig_units=1.5,        # units a production of an unfertilized plant is counted at
+    dig_carrot_units=3.0,
+    dig_labor=40.0,
+    dig_margin=60.0,
     late_units=None,      # e.g. {"CARROT": 2.0}: plots planted from late_day on are valued at these units (not must)
     late_day=27,
     late_labor=40.0,
@@ -777,6 +785,22 @@ class GoldCtl:
                 acts.append(["WATER"]); value += 4 * pv; must = True
         elif cu >= 1 and not done:
             acts.append(["WATER"]); value += 4 * pv; must = True
+        if (GC_P["dig_glut"] and not done and crop in GC_P["dig_glut_crops"] and GC_P["dig_first"] <= day <= GC_P["dig_last"]
+                and GC_P["replant_done"]):
+            # a live plant in a crashed book: its remaining output against a carrot plot on the same tile
+            pd_ = int(t["planted_day"]); left = 0
+            for dd in range(day, 29):
+                kk = dd + 1 - pd_ - cd["fy"]
+                if kk >= 0 and kk % cd["iv"] == 0 and kk // cd["iv"] + 1 <= cd["mx"]:
+                    left += 1
+            u_ = 2.0 if fert_active else GC_P["dig_units"]
+            rem = (yu + left * u_) * pv
+            cycles = max(0, (GC_P["carrot_last_plant"] - day) // 3 + 1)
+            alt = cycles * (GC_P["dig_carrot_units"] * self.pnow.get("CARROT", 40) - 20 - GC_P["dig_labor"])
+            if alt - rem > GC_P["dig_margin"]:
+                _GC_REPORT["gc_dig_glut"] = _GC_REPORT.get("gc_dig_glut", 0) + 1
+                acts = ([["HARVEST"]] if yu > 0 else []) + [["DIG"]]
+                return _GcVisit(pos, acts, value=yu * pv + 40.0, must=GC_P["plant_must"], tag="R", carry=yu)
         if done and day <= GC_P["carrot_last_plant"] and GC_P["replant_done"]:
             # no further production: take what is left, clear the plant and let the tile be replanted now
             acts = [a for a in acts if a[0] == "HARVEST"] + [["DIG"]]
