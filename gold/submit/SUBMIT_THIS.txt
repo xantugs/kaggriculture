@@ -24,13 +24,16 @@ SECOND   main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never s
          main_ctl_adapt_d20.py  v62 (divergent rivals -> day 20) on the untuned chassis
 
 MARKET PROGRAMME builds (session claude/adoring-sagan-kcq65p; elite/README.md sections 14-17). Paired on the same games:
-PRIMARY  main_ctl_mkt3_m7.py    m3 = v147 + the market programme on every rival (cfg/cfg_m3.json): submitted as v23.
+PRIMARY  main_ctl_mkt4_m7.py    m4 = m3 + against a divergent rival (its cash at step 2 outside $1,000-1,070 and its farm
+                                not tile-for-tile ours) in towns with no strawberry-buying shop known on days 8 and 11,
+                                the tape's strawberry batches of those days (4 + 13 plants) become tomatoes. cfg/cfg_m4.json.
+                                Elite gate vs v136: +$1,925 +- 241, wins 59 -> 80 (+25/-4); vs m3 +$659 +- 169, 72 -> 80.
+                                Pinned 2800+ replayed from day 6 (S = 144) vs m3: +$487 +- 169 (z 2.9), wins 100 -> 103
+                                (flips +3/-0); divergent +$1,209 +- 405; copies identical (no copy converts).
+                                Worst step 0.56 s, no errors on either gate.
+         main_ctl_mkt3_m7.py    m3 = v147 + the market programme on every rival (cfg/cfg_m3.json): submitted as v23.
                                 vs v136: pinned 2800+ +$791 +- 151 (z 5.3), wins 95 -> 102; elite gate +$1,266 +- 149,
                                 wins 59 -> 72 (+15/-2). vs v147: pinned +$609 +- 136, wins 95 -> 102.
-         main_ctl_mkt4_m7.py    m4 = m3 + against divergent rivals (rival cash at step 2 outside $1,000-1,070) in towns
-                                with no strawberry-buying shop known on days 8 and 11, the tape's strawberry batches of
-                                those days become tomatoes (cfg/cfg_m4.json). Elite gate (as e64) +$659 +- 169 vs m3,
-                                wins 72 -> 80; day-6 pinned run and the m4 gates in elite/README.md section 17.
          main_ctl_mkt5_m7.py    m5 = v149 (chassis floor 8%) + the m4 additions (cfg/cfg_m5.json): gates pending.
          main_ctl_mkt2_m7.py    m2 = v136 + the programme (cfg/cfg_m2.json); main_ctl_mkt1_m7.py m1 = divergent only.
 

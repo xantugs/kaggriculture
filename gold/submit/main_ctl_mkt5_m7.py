@@ -7896,6 +7896,8 @@ GC_P = dict(
     s2t_max_shops=None,   # convert a day's batch only when at most this many strawberry-buying shops are unlocked by then
                           # (e60 on the elite gate: 0 shops by day 9 +$6.7k a seat, 2+ shops -$5k to -$9k: the flood is a weapon)
     s2t_by_town=False,    # replacement crop from the town: tomato with a pizza/farmers market, carrot with a pet cafe, else wheat
+    s2t_max_sim=0.97,     # and only while the rival's farm differs from ours (tile kinds equal on at most this share: a
+                          # copy is at 1.00 through day 11, the elites at 0.74-0.86 on day 8)
     lead2=False,          # chassis days: sell every premium lot the tape plans within the current town-tick window now
     lead2_items=("MILK", "WOOL", "STRAWBERRY", "MELON"),   # (the market settles order by order in lockstep and the
     lead2_min_price=5,    # copy's own one-step lead lands one step later, so ours goes first; no tick is ever crossed)
@@ -7959,7 +7961,7 @@ GC_P = dict(
     room_v3_min=40,       # never plan with less than this end-of-day room for carried goods         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
 )
 
-GC_P.update({'start': 576, 'start_div': 384, 'div_over': {'floor_marginal': True, 'tomato_last': 20, 'melon_on': True, 'tick_defer': True, 'herd_first': 16, 'herd_last': 18, 'herd_on': True, 'herd_kinds': ['SHEEP', 'COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_margin': 3000.0, 'herd_max': 6, 'unit_floor_frac': 0.0, 'melon_last': 19, 'melon_age': 10}, 'max_hands': 15, 'drop_slack': 0, 'max_sell0': 0, 'hire_cost_w': 0.6, 'carrot_last_plant': 26, 'plant_must_last': 29, 'prem_drop': False, 'drip_on': False, 'ovf_value': 100.0, 'replant_done': True, 'sell_timing': True, 'sell_floor': {'STRAWBERRY': 30, 'MILK': 25, 'WOOL': 25}, 'final_ret': True, 'final_water': True, 'd28_keep_carrots': True, 'carrot_fc': True, 'carrot_edge': 0.85, 'rich_start': 288, 'rich_min': 3, 'rich_eval': True, 'straw_lag': 1, 'straw_our_w': 0.9, 'rich_over': {'straw_fc': True, 'se_straw': True, 'herd_first': 12, 'herd_last': 18, 'herd_on': True, 'herd_kinds': ['SHEEP', 'COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_margin': 3000.0, 'herd_max': 6}, 'straw_replant': False, 'final_cap': 19, 'final_sell0': 3, 'v219x': True, 'v219x_sizes': [10, 15, 20], 'v219x_margins': {'15': 1250, '20': 3500}, 'herd_kinds': ['COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_max': 6, 'herd_rich_margin': 4000.0, 'herd_rich_over': {'herd_on': True, 'herd_kinds': ['COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_margin': 3000.0, 'herd_max': 6, 'herd_first': 12, 'herd_last': 18}, 'herd_total_max': 6, 'v219x_thirst': True, 'v219x_early_n': 20, 'v219x_early_day': 16, 'unit_floor_frac': 0.03, 'chassis_unit_floor': 0.08, 'mkt_dp': True, 'mkt_dp_rival_w': 1.5, 'mkt_dp_room': 90, 'mkt_dp_every': True, 'mkt_dp_every_min': 3.0, 's2t_days': [8, 11], 's2t_max_shops': 0, 's2t_crop': 'TOMATO', 'div2_band': [1000, 1070]})
+GC_P.update({'start': 576, 'start_div': 384, 'div_over': {'floor_marginal': True, 'tomato_last': 20, 'melon_on': True, 'tick_defer': True, 'herd_first': 16, 'herd_last': 18, 'herd_on': True, 'herd_kinds': ['SHEEP', 'COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_margin': 3000.0, 'herd_max': 6, 'unit_floor_frac': 0.0, 'melon_last': 19, 'melon_age': 10}, 'max_hands': 15, 'drop_slack': 0, 'max_sell0': 0, 'hire_cost_w': 0.6, 'carrot_last_plant': 26, 'plant_must_last': 29, 'prem_drop': False, 'drip_on': False, 'ovf_value': 100.0, 'replant_done': True, 'sell_timing': True, 'sell_floor': {'STRAWBERRY': 30, 'MILK': 25, 'WOOL': 25}, 'final_ret': True, 'final_water': True, 'd28_keep_carrots': True, 'carrot_fc': True, 'carrot_edge': 0.85, 'rich_start': 288, 'rich_min': 3, 'rich_eval': True, 'straw_lag': 1, 'straw_our_w': 0.9, 'rich_over': {'straw_fc': True, 'se_straw': True, 'herd_first': 12, 'herd_last': 18, 'herd_on': True, 'herd_kinds': ['SHEEP', 'COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_margin': 3000.0, 'herd_max': 6}, 'straw_replant': False, 'final_cap': 19, 'final_sell0': 3, 'v219x': True, 'v219x_sizes': [10, 15, 20], 'v219x_margins': {'15': 1250, '20': 3500}, 'herd_kinds': ['COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_max': 6, 'herd_rich_margin': 4000.0, 'herd_rich_over': {'herd_on': True, 'herd_kinds': ['COW'], 'herd_labor': 60.0, 'herd_opp_rate': 1.0, 'herd_margin': 3000.0, 'herd_max': 6, 'herd_first': 12, 'herd_last': 18}, 'herd_total_max': 6, 'v219x_thirst': True, 'v219x_early_n': 20, 'v219x_early_day': 16, 'unit_floor_frac': 0.03, 'chassis_unit_floor': 0.08, 'mkt_dp': True, 'mkt_dp_rival_w': 1.5, 'mkt_dp_room': 90, 'mkt_dp_every': True, 'mkt_dp_every_min': 3.0, 's2t_days': [8, 11], 's2t_max_shops': 0, 's2t_crop': 'TOMATO', 'div2_band': [1000, 1070], 's2t_max_sim': 0.97})
 _GC_CROPS = {
     "WHEAT": dict(seed=10, fy=2, my=4, iv=0, mx=6, on=False),
     "CARROT": dict(seed=20, fy=2, my=3, iv=0, mx=4, on=False),
@@ -10788,6 +10790,17 @@ def _straw_to_tom(obs, action):
     shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
     if GC_P["s2t_max_shops"] is not None and sum(1 for s in shops if s in _STRAW_SHOPS) > GC_P["s2t_max_shops"]:
         return action
+    if GC_P["s2t_max_sim"] is not None:
+        me = int(obs["player"]); same = 0; n = 0
+        for ra, rb in zip(obs["farms"][me]["tiles"], obs["farms"][1 - me]["tiles"]):
+            for ta, tb in zip(ra, rb):
+                ka = ta if not isinstance(ta, dict) else (ta.get("crop") or ta.get("animal") or ta.get("kind"))
+                kb = tb if not isinstance(tb, dict) else (tb.get("crop") or tb.get("animal") or tb.get("kind"))
+                same += (ka == kb); n += 1
+        sim = same / float(max(1, n))
+        _GC_REPORT["gc_s2t_sim"] = round(sim, 3)
+        if sim > GC_P["s2t_max_sim"]:
+            return action
     crop = GC_P["s2t_crop"]
     if GC_P["s2t_by_town"]:
         crop = "TOMATO" if ("PIZZA_SHOP" in shops or "FARMERS_MARKET" in shops) else ("CARROT" if "PET_CAFE" in shops else "WHEAT")

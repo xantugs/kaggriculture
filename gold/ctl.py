@@ -227,6 +227,8 @@ GC_P = dict(
     s2t_max_shops=None,   # convert a day's batch only when at most this many strawberry-buying shops are unlocked by then
                           # (e60 on the elite gate: 0 shops by day 9 +$6.7k a seat, 2+ shops -$5k to -$9k: the flood is a weapon)
     s2t_by_town=False,    # replacement crop from the town: tomato with a pizza/farmers market, carrot with a pet cafe, else wheat
+    s2t_max_sim=0.97,     # and only while the rival's farm differs from ours (tile kinds equal on at most this share: a
+                          # copy is at 1.00 through day 11, the elites at 0.74-0.86 on day 8)
     lead2=False,          # chassis days: sell every premium lot the tape plans within the current town-tick window now
     lead2_items=("MILK", "WOOL", "STRAWBERRY", "MELON"),   # (the market settles order by order in lockstep and the
     lead2_min_price=5,    # copy's own one-step lead lands one step later, so ours goes first; no tick is ever crossed)
@@ -3118,6 +3120,17 @@ def _straw_to_tom(obs, action):
     shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
     if GC_P["s2t_max_shops"] is not None and sum(1 for s in shops if s in _STRAW_SHOPS) > GC_P["s2t_max_shops"]:
         return action
+    if GC_P["s2t_max_sim"] is not None:
+        me = int(obs["player"]); same = 0; n = 0
+        for ra, rb in zip(obs["farms"][me]["tiles"], obs["farms"][1 - me]["tiles"]):
+            for ta, tb in zip(ra, rb):
+                ka = ta if not isinstance(ta, dict) else (ta.get("crop") or ta.get("animal") or ta.get("kind"))
+                kb = tb if not isinstance(tb, dict) else (tb.get("crop") or tb.get("animal") or tb.get("kind"))
+                same += (ka == kb); n += 1
+        sim = same / float(max(1, n))
+        _GC_REPORT["gc_s2t_sim"] = round(sim, 3)
+        if sim > GC_P["s2t_max_sim"]:
+            return action
     crop = GC_P["s2t_crop"]
     if GC_P["s2t_by_town"]:
         crop = "TOMATO" if ("PIZZA_SHOP" in shops or "FARMERS_MARKET" in shops) else ("CARROT" if "PET_CAFE" in shops else "WHEAT")

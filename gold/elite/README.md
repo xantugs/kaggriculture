@@ -415,3 +415,11 @@ count by day 11 does not separate the cases.
 Tomatoes beat carrots and wheat as the replacement even without a tomato shop (the hinge keeps them scarce).
 Pinned 2800+ from day 6 (S = 144, both farms replayed to day 6, rival tape pinned): e63 vs m3 divergent +$1,105
 +- 418 (z 2.6), 22 -> 24 wins; 14 of the 73 live divergent games are 0-shop towns by day 9.
+
+**m4** (`submit/main_ctl_mkt4_m7.py`, `cfg/cfg_m4.json`) = m3 + the e64 conversion with two safeguards: the step-2 cash
+band widened to $1,000-1,070 (a $1,008 copy converted 4 plants and lost $32k: the chassis's day-16 tomato block went
+untended), and `s2t_max_sim` 0.97: a copy's farm equals ours tile for tile through day 11 (1.00 in every recorded copy
+game, the odd-opening ones included), the elites' sits at 0.74-0.86 on day 8. Elite gate: identical to e64 (+$1,925
++- 241 vs v136, 59 -> 80 wins, flips +25/-4; +$659 +- 169 vs m3). Pinned 2800+ from day 6: +$487 +- 169 vs m3
+(z 2.9), wins 100 -> 103 (+3/-0), divergent +$1,209 +- 405, copies untouched; 23 of 60 divergent games convert.
+Converting more batches loses: days 6-8 + 11 (e68) +$143, day 5 on (e70) -$861, day 11 alone (e69) +$456 / 77 wins.
