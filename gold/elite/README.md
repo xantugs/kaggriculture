@@ -231,6 +231,10 @@ Elite gate (210 seats, paired vs v136, controller from day 16):
 | e35 + decisions before a forecast rival sale (e42, `mkt_dp_every`) | +$1,200 +- 141 | +$1,868 | +$669 | +12/-1 |
 | w = 2, room 90 (e43) | +$1,032 +- 136 | +$1,703 | +$671 | +7/-1 |
 | w = 2.5, room 90 (e44) | +$999 +- 136 | +$1,537 | +$538 | +10/-1 |
+| v137 with the divergent takeover at day 14 (e47) | +$129 +- 172 | | | +6/-8 |
+| v137 with the divergent takeover at day 13 (e48) | -$57 +- 176 | | | +5/-8 |
+
+The programme does not make an earlier hand-over pay: day 16 stays.
 
 `mkt_dp_every` (sell ahead of the rival's forecast hour, not only after a tick) wins 70 seats to e35's 67 at the
 same margin, at 80 extra programme runs a game (worst step 0.48 s here against 0.27 s; the engine's actTimeout is
@@ -274,4 +278,19 @@ immediately; HARVEST needs age >= first_yield_day and units > 0. So a carrot pla
 `wheat_last_plant` 25 leave 28-44 tiles empty on days 28-29 (`farm_trace.py`, game 111749735).
 `late_plan` (ctl.py, off by default): from day 24 plant wheat or carrots by their exact remaining growth to day 29,
 whichever nets more after seed and fertilizer; `late_keep`: on day 28 keep any one-time crop that still gains from
-a day-29 watering. Pinned 2800+ gate (e45/e46): see below.
+a day-29 watering. Both lose on the pinned 2800+ gate (200 rows, paired vs v136): e45 -$264 +- 123 (copies -$554,
+flips 0/-7), e46 -$821 +- 126 (flips 0/-10). The controller's tuned endgame (carrots to day 26, harvest-all on
+day 28, cheap last-day labour) beats a horizon-exact crop rule that leaves more to the expensive final day; what the
+copy earns on day 29 it pays for in hands and in the day-29 carrot dump. The copy-game close losses stay open.
+
+## Bottom line (26 Sep, evening)
+
+v137 = v136 + the market programme on divergent games. Against elite routes it is the first change since v108 that
+moves the gate beyond noise (+$1,155 +- 132, 59 -> 67 wins of 210, no seat lost); on the live 2800+ population it
+adds $644 +- 270 on divergent games and nothing on copies (identical play, verified closed-loop). It does not flip
+many live games yet because the divergent losses are large. Tried and rejected on the way: rival weight 0-3 (1.5),
+tomatoes in the programme, holding caps 8/20, room_v3, room 80/100, an earlier divergent takeover, a horizon-exact
+late planting rule. Open: `mkt_dp_every` (+3 wins on the gate at 80 extra programme runs a game), the programme on
+copy games (+$108 +- 126 pinned), and a chassis-days programme, which is not worth building: before day 16 the
+chassis sells only ~70 premium units a game in divergent towns (`fills_ana.py`), a tenth of what the controller
+sells afterwards.
