@@ -271,3 +271,24 @@ movable (`_V219_DAY`, falling back to day 18 when it does not qualify yet) and a
 - Tick-aware selling on copy games (`tick_defer` at top level): +$36 +- 27, one win lost (divergent-only stays).
 - Closed loop, seeds 6000-6059 seat 0: live v15a 52-8, metav4 v13 55-5, a-smaller-market-shock 56-4 (v130: 51-9, 53-7,
   55-5). Official runner seeds 6042 (seat 0) and 6046 (seat 1 vs metav4) DONE, both won.
+
+## Early game / late game audit (after v136)
+Where the games are decided (recorded games replayed day by day, `traj.py`; v136 pinned with daily snapshots,
+`harness/pinned5.py` with `PIN_SNAP=1`):
+- Divergent losses: we hold $5-7k more cash on days 10-13 (the melon dump on day 10), the elite rival overtakes from
+  day ~20 and ends ~$10k ahead. They own the third quadrant on days 8-10 (we buy it on days 11-12), run twice our wheat
+  by day 10, more geese, staggered melons (sold after day 12) and 9-13 tomatoes by days 17-20 (ours ~5). v136's
+  divergent losses from day 12: tomatoes -$4.2k, melons -$3.1k, wheat -$2.9k, eggs -$2.3k, strawberries -$2.0k.
+- Copy games: identical openings (cash within $100 to day 9). The controller phase (days 24-29) gains in every group
+  (losses +$575, close wins +$2.7k, big wins +$7.7k); close losses are already behind ~$2.3k at day 23. Our per-unit
+  prices match or beat the copy's on every product; net wheat (sales - purchases) differs by ~$0.5k (the copy buys
+  ~110 wheat back on days 24-29).
+Rejected:
+- sale reservation (race) window from step 96 / 144 (`base_m7_t6.py`, `_R36_START`): identical, nothing to reserve
+  before day 8;
+- divergent takeover day 15: -$319 +- 342, 3 wins lost; geese in the divergent herd at margin 1500: +$1 (never fire);
+- early divergent takeover when ADAPT flags the rival at step 143 (`start_div143`): day 12 -$2,531 / day 14 -$1,048 per
+  flagged game (38 of 78), 2-3 wins lost; the chassis still runs days 12-16 better than the controller;
+- carrots planted through day 27 (mandatory: -$3,942 on 16 games; optional, valued at the 2 units an age-2 carrot
+  gives, `late_units`: -$3,574, 68 wins lost). The day-27 plots set off Fibonacci wages on days 27-29 (+$2.2k) and
+  crowd out tomato and strawberry harvests; as recorded before, only the copy's pre-planned tape can do this cheaply.
