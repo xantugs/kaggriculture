@@ -444,3 +444,9 @@ from 75 to 54). The conversion stays divergent-only. Tomatoes in the market prog
 wins, not adopted. Delivery timing measured (16 elite seats, days 16-28): elites drop 56% of premium units at the
 night boundary, we drop 75% (27 of 36 a day); on the first day of a rival's strawberries the programme held our
 8 strawberries, 8 milk and 12 wool from hour 1 to hour 23 for want of a rival pattern (DSM sold 36 that day).
+
+**Delivery and forecast variants on m4 (elite gate)**: farm-based rival forecast (e81, the ripe units on its tiles
+count as sales over the next 8 hours) -$597 +- 130 (66 wins); courier from hour 6 at room 40 (e80) -$805 +- 162
+(65); both (e82) -$1,392; shed stops down to an end-of-day room of 30 (e79) -$5,363 (32 wins: labour). Selling
+fresh harvests the same day is worth less than the turns it costs, and the programme's holds beat a forecast that
+sells into the rival's day. The night drop stays.
