@@ -333,3 +333,18 @@ Closed loop is the cleaner judge for copy-game changes (untuned seeds, reactive 
 | 3% + strawberry dig-up | 1,142 | +$184 +- 28 vs 3% |
 Pinned: copy 8% +$135 +- 63 vs v136 (153 wins; 5%: 150, 3%: 151), divergent 8% +$114 +- 111 vs v147 (32 wins; 5%: 33).
 Official runner: seeds 6042 / 6046 / 6135 all DONE and won.
+
+## The other session's builds on these gates (branch `claude/adoring-sagan-kcq65p`, 26 Sep)
+That session built a market programme (`mkt_dp`: per-product DP over the next post-tick turns on the exact price
+curve, the rival's sales forecast from its last two days charged at the book we leave, a night-room cap) and a day-0
+strawberry-to-tomato conversion of the tape's day-8/11 batches against rivals whose step-2 cash is outside the copy
+band ($1,000-1,070) in towns with no strawberry buyer known (`s2t_*`). Their m4 = v147 + both; m5 = v149 + both.
+Measured here on the files from that branch (`gold/submit/main_ctl_mkt4_m7.py` / `main_ctl_mkt5_m7.py`):
+- Closed loop, 1,200 paired games (seeds 6100-6299, both seats, vs live v15a / metav4 v13 / a-smaller-market-shock):
+  m5 vs v149 +$392 +- 38, wins 1,151 -> 1,162 (375 -> 375, 383 -> 397, 393 -> 390); m4 vs v149 +$321 +- 40
+  (1,159 wins); m5 vs m4 +$71 +- 24 (the 8% chassis floor). Worst step 0.26 s.
+- Pinned 249 (S = 288): m5 vs v149 +$512 +- 99, wins 185 -> 191 (flips +8/-2); copies +$296 +- 102 (153 -> 157),
+  divergent +$985 +- 216 (32 -> 34).
+m5 is the strongest build on every gate either session runs (their elite gate: 80 of 210 seats vs v136's 59).
+Also rejected here on v149 (closed loop, 1,200 games): takeover day 23 +$264 but 1,151 -> 1,140 wins; chassis
+floor from day 8: identical; tick-aware selling on copy games +$36, -7 wins; chassis floor room 10: -$47, -7 wins.
