@@ -368,3 +368,11 @@ v137 with the programme on every rival and step-level decisions before a forecas
 (`mkt_dp_every`, `mkt_dp_every_min`), keys at the top level. Elite gate: +$1,234 +- 141 paired vs v136, 59 -> 70
 wins, flips +12/-1, worst step 0.47 s, no errors. Pinned 2800+ (149 paired): +$535 +- 131 vs v136 (divergent
 +$1,014 +- 248, copies +$213 +- 132, flips +4/-3, wins 95 -> 96); +$276 +- 93 vs v137.
+
+## m3 (`submit/main_ctl_mkt3_m7.py`, `cfg/cfg_m3.json`) = their v147 + the market programme (26 Sep, merged)
+
+Their v147 (v136 + chassis unit floor + divergent melons through day 19) is neutral on the elite gate (-$123 +- 75,
+59 wins) and +$182 +- 100 pinned (95 wins). Adding the programme (m2's keys, top level): elite gate +$1,266 +- 149
+vs v136, wins 59 -> 72 (+15/-2); pinned 2800+ +$791 +- 151 vs v136, wins 95 -> 102 (copies 75 -> 80, divergent
+20 -> 22, flips +8/-1); +$609 +- 136 vs v147 (95 -> 102); +$256 +- 90 vs m2 (96 -> 102). Worst step 0.47 s.
+The two lines add: theirs lifts copies, the programme lifts divergent games and the copies' controller days.

@@ -1,6 +1,15 @@
-gold/submit — takeover-controller builds (updated 26 Sep 2026, v147)
+gold/submit — takeover-controller builds (updated 26 Sep 2026 10:30 UTC, m3 = v147 + market programme)
 
-PRIMARY  main_ctl_rich9_m7.py   v147 = v145 + divergent games: forecast melons may be planted through day 19
+PRIMARY  main_ctl_mkt3_m7.py    m3 = v147 + the market programme on every rival (cfg/cfg_m3.json; elite/README.md
+                                sections 14-16). Paired on the same games, pinned 2800+ (149) and elite gate (210):
+                                  vs v136: pinned +$791 +- 151 (z 5.3), wins 95 -> 102 (copies 75 -> 80, divergent
+                                           20 -> 22, flips +8/-1); elite gate +$1,266 +- 149, wins 59 -> 72 (+15/-2)
+                                  vs v147: pinned +$609 +- 136, wins 95 -> 102 (copies +$324, divergent +$1,032)
+                                  vs m2:   pinned +$256 +- 90, wins 96 -> 102
+                                Worst step 0.47 s, no errors on either gate.
+THEIR LINE (session zealous-volta), unchanged below except the heading:
+
+         main_ctl_rich9_m7.py   v147 = v145 + divergent games: forecast melons may be planted through day 19
                                 (harvested at age 10 on day 29)
          main_ctl_rich8_m7.py   v145 = v136 + the same 3% unit floor on the chassis's own sales before the takeover
                                 (days 12-23; keeps 20 shed units free for the night's drop)
