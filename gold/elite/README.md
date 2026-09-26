@@ -216,7 +216,27 @@ Elite gate (210 seats, paired vs v136, controller from day 16):
 | w = 0.5 | +$12 +- 145 | +$1,793 | +$1,782 | +9/-7 |
 | w = 1 (e24) | **+$433 +- 139** | +$1,706 | +$1,273 | +9/-7 |
 | w = 1, 12 periods (e27) | +$425 +- 139 | | | +9/-7 |
+| w = 1.5 (e29) | +$562 +- 128 | +$1,512 | +$950 | +10/-2 |
+| w = 2 (e30) | +$587 +- 130 | +$1,328 | +$741 | +12/-6 |
+| w = 3 (e31) | +$572 +- 129 | +$1,079 | +$507 | +10/-8 |
+| w = 1 + tomatoes (e32) | +$406 +- 139 | | | +9/-7 |
+| w = 1, cap 20 (e33) | +$110 +- 159 | | | +7/-7 |
+| **w = 1.5, night room cap 90 (e35)** | **+$1,155 +- 132** | +$1,954 | +$799 | **+8/-0** |
+| e35 + room_v3 (e36) | +$902 +- 139 | +$1,652 | +$750 | +7/-3 |
 
 Holding lifts the rival's prices too (the denial cost); charging the rival's sales at the book we leave is what
-turns revenue into margin. Mirror seeds (copy rival, controller only from day 24): our cash +$400-460 but margin
--$435, so the policy is for divergent games (`e28`: mkt_dp in `div_over` only).
+turns revenue into margin. The weight plateaus from 1.5. Tomatoes add nothing; a larger holding cap loses most of
+the gain. Mirror seeds (copy rival, controller only from day 24): our cash +$400-460 but margin -$435, so the
+policy is for divergent games (`e28`: mkt_dp in `div_over` only).
+
+**The night** (`mkt_dp_room`): the day plan carries up to `eod_room` (88) units into the night on purpose, so the
+shed is full every evening and lots the programme held across the boundary were dumped by the hour-20 room
+release (`gc_held_released`) or crowded out wheat and fertilizer (`gc_room_sells`); on big elite farms it also
+raised the planned overflow. The programme now caps the units it may hold across the day boundary at
+`mkt_dp_room` (90) minus tonight's load (reserves kept, goods each unit still carries after its last queued drop);
+within the day the cap stays `mkt_dp_cap`. That doubles the gain (e35, +$1,155, no seat flips down); reserving
+night room in the plan instead (`room_v3`, more shed stops) is worse (e36, e34).
+
+Pinned 2800+ live games (149 paired, S = 288, `pair_ana.py`): mkt_dp on all rivals (e27) costs $226 +- 126 on
+copies and gains $156 +- 295 on divergent rivals; the divergent-only build (e28) is +$221 +- 283 on divergent
+games, copies untouched.
