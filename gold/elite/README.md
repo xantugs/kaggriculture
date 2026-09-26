@@ -228,6 +228,11 @@ Elite gate (210 seats, paired vs v136, controller from day 16):
 | w = 1.5, cap 8, room 90 (e38) | +$839 +- 132 | | | +8/-7 |
 | w = 1.5, room 80 (e40) | +$1,114 +- 137 | +$1,954 | +$840 | +8/-1 |
 | w = 1.5, room 100 (e41) | +$813 +- 126 | +$1,652 | +$839 | +8/-1 |
+| e35 + decisions before a forecast rival sale (e42, `mkt_dp_every`) | +$1,200 +- 141 | +$1,868 | +$669 | +12/-1 |
+
+`mkt_dp_every` (sell ahead of the rival's forecast hour, not only after a tick) wins 70 seats to e35's 67 at the
+same margin, at 80 extra programme runs a game (worst step 0.48 s here against 0.27 s; the engine's actTimeout is
+1 s with a 60 s overage bank), so v137 stays with post-tick decisions; e42 is the next step if the budget allows.
 
 Holding lifts the rival's prices too (the denial cost); charging the rival's sales at the book we leave is what
 turns revenue into margin. The weight plateaus from 1.5. Tomatoes add nothing; a larger holding cap loses most of
@@ -250,3 +255,21 @@ costs $226 +- 126 on copies and gains $156 +- 295 on divergent rivals; the diver
 identical, 95 -> 95 wins overall (+1/-1). The margin moves; the wins barely do, because 36 of the 50 divergent
 losses are by more than $5k (`fills_ana.py`, `pin_fills_v136.jsonl`) and only 5 are within $2k. Copy losses are
 the opposite: 14 of 16 within $2k.
+
+## 15. The copy games' last two days (26 Sep, `fills_ana.py` on `pin_fills_v136.jsonl`)
+
+Pinned 2800+ population, v136, per game and day, our sales minus the rival's. Copy games (106, 90 wins, +$5,085):
+days 22-27 are ours (+$1,140, +$902, +$234, +$1,707, +$743, +$4,395), days 28-29 are the copy's (-$330, -$1,119).
+On day 29 the copy sells 83.5 carrots and 60.5 wheat a game to our 49.7 and 32.2, at the same prices. The 16 copy
+losses are close (14 within $2k); the divergent losses are not (36 of 50 beyond $5k). The wheat units gap over days
+16-29 (335 vs 735 sold) is a round trip: the copy buys 461 wheat a game for feed and sells its harvest, we keep
+harvested wheat as the feed reserve; net wheat revenue is equal.
+
+Engine facts for the endgame (kaggriculture.py): a one-time crop is planted with 1 yield unit; each WATER on a day
+in its window (ages (max_yield_day+1)//2 .. max_yield_day) adds 2 units fertilized, 1 not, capped at max_yield,
+immediately; HARVEST needs age >= first_yield_day and units > 0. So a carrot planted on day 27 gives 3 units
+(fertilized) on day 29 and wheat planted on day 26 gives 5; the controller's `carrot_last_plant` 26 and
+`wheat_last_plant` 25 leave 28-44 tiles empty on days 28-29 (`farm_trace.py`, game 111749735).
+`late_plan` (ctl.py, off by default): from day 24 plant wheat or carrots by their exact remaining growth to day 29,
+whichever nets more after seed and fertilizer; `late_keep`: on day 28 keep any one-time crop that still gains from
+a day-29 watering. Pinned 2800+ gate (e45/e46): see below.
