@@ -12,6 +12,7 @@ import math as _gc_math
 
 GC_P = dict(
     start=288,            # takeover step (must be hour 0)
+    start_div143=None,    # takeover step when ADAPT flagged the rival at step 143 already (else start_div)
     start_div=None,       # takeover step against a rival ADAPT classed as divergent (hour 0, >= 384)
     div_over={},          # GC_P overrides applied for a divergent rival (restored at the next game's step 0)
     max_hands=12,
@@ -175,6 +176,18 @@ GC_P = dict(
     chassis_unit_floor=0.0,  # the same floor on the chassis's SELL lots before the takeover
     chassis_floor_from=12,
     chassis_floor_room=20,   # shed units kept free for the night's drop
+    chassis_floor_items=None,  # products the chassis floor applies to (None: unit_floor_items)
+    dig_glut=False,       # dig live strawberries whose remaining output is worth less than a carrot plot there
+    dig_glut_crops=("STRAWBERRY",),
+    dig_first=16,
+    dig_last=24,
+    dig_units=1.5,        # units a production of an unfertilized plant is counted at
+    dig_carrot_units=3.0,
+    dig_labor=40.0,
+    dig_margin=60.0,
+    late_units=None,      # e.g. {"CARROT": 2.0}: plots planted from late_day on are valued at these units (not must)
+    late_day=27,
+    late_labor=40.0,
     visit_watered=False,  # a re-planned visit of a plant watered today gains nothing more from WATER (no early harvest)
     v219x_melon=0,        # base_m7_t5: up to this many melons on the block's free SE tiles, sized by a melon forecast
     v219x_melon_age=10,   # harvest age of a block melon (6 units: planted at 1, watered at ages 6-10)
@@ -565,7 +578,11 @@ class GoldCtl:
                 if not crop:
                     continue
                 acts = ([["DIG"]] if pos in weeds else []) + [["PLANT", crop], ["WATER"]]
-                visits.append(_GcVisit(pos, acts, value=GC_P["plant_defer"] * self._crop_value(crop, val), tag="P",
+                pv_ = self._crop_value(crop, val)
+                if GC_P["late_units"] and day >= GC_P["late_day"] and crop in GC_P["late_units"]:
+                    # a late plot only grows what the last day allows (a day-27 carrot: 2 units at age 2)
+                    pv_ = GC_P["late_units"][crop] * val[crop] - _GC_CROPS[crop]["seed"] - GC_P["late_labor"]
+                visits.append(_GcVisit(pos, acts, value=GC_P["plant_defer"] * pv_, tag="P",
                                        must=GC_P["plant_must"] and day <= GC_P["plant_must_last"]))
                 need_seeds[crop] = need_seeds.get(crop, 0) + 1
             for v in replant:
@@ -573,7 +590,10 @@ class GoldCtl:
                 if not crop:
                     continue
                 v.acts = v.acts + [["PLANT", crop], ["WATER"]]
-                v.value += GC_P["plant_defer"] * self._crop_value(crop, val)
+                pv_ = self._crop_value(crop, val)
+                if GC_P["late_units"] and day >= GC_P["late_day"] and crop in GC_P["late_units"]:
+                    pv_ = GC_P["late_units"][crop] * val[crop] - _GC_CROPS[crop]["seed"] - GC_P["late_labor"]
+                v.value += GC_P["plant_defer"] * pv_
                 need_seeds[crop] = need_seeds.get(crop, 0) + 1
             for crop, n in need_seeds.items():
                 buy = n - seeds.get(crop, 0)
@@ -807,6 +827,22 @@ class GoldCtl:
                 acts.append(["WATER"]); value += 4 * pv; must = True
         elif cu >= 1 and not done:
             acts.append(["WATER"]); value += 4 * pv; must = True
+        if (GC_P["dig_glut"] and not done and crop in GC_P["dig_glut_crops"] and GC_P["dig_first"] <= day <= GC_P["dig_last"]
+                and GC_P["replant_done"]):
+            # a live plant in a crashed book: its remaining output against a carrot plot on the same tile
+            pd_ = int(t["planted_day"]); left = 0
+            for dd in range(day, 29):
+                kk = dd + 1 - pd_ - cd["fy"]
+                if kk >= 0 and kk % cd["iv"] == 0 and kk // cd["iv"] + 1 <= cd["mx"]:
+                    left += 1
+            u_ = 2.0 if fert_active else GC_P["dig_units"]
+            rem = (yu + left * u_) * pv
+            cycles = max(0, (GC_P["carrot_last_plant"] - day) // 3 + 1)
+            alt = cycles * (GC_P["dig_carrot_units"] * self.pnow.get("CARROT", 40) - 20 - GC_P["dig_labor"])
+            if alt - rem > GC_P["dig_margin"]:
+                _GC_REPORT["gc_dig_glut"] = _GC_REPORT.get("gc_dig_glut", 0) + 1
+                acts = ([["HARVEST"]] if yu > 0 else []) + [["DIG"]]
+                return _GcVisit(pos, acts, value=yu * pv + 40.0, must=GC_P["plant_must"], tag="R", carry=yu)
         if done and day <= GC_P["carrot_last_plant"] and GC_P["replant_done"]:
             # no further production: take what is left, clear the plant and let the tile be replanted now
             acts = [a for a in acts if a[0] == "HARVEST"] + [["DIG"]]
@@ -3126,7 +3162,7 @@ def _gc_chassis_floor(obs, act):
     fr = GC_P["chassis_unit_floor"]
     out = []
     for o in act["market"]:
-        if o and o[0] == "SELL" and len(o) > 2 and o[1] in GC_P["unit_floor_items"] and room > 0:
+        if o and o[0] == "SELL" and len(o) > 2 and o[1] in (GC_P["chassis_floor_items"] or GC_P["unit_floor_items"]) and room > 0:
             p, n = o[1], int(o[2])
             i0 = int(obs["market"]["inventory"][p]); k = 0
             while k < n and _gc_price(p, i0 + k) >= fr * _GC_MKT[p][0]:
@@ -3307,7 +3343,12 @@ def agent(observation, configuration=None):
         ad = globals().get("_AD_STATE")
         if isinstance(ad, dict) and ad.get("off"):
             start = GC_P["start_div"]
+            adr = globals().get("_AD_REPORT") or {}
+            if GC_P["start_div143"] is not None and adr.get("ad_step") == 143:
+                # the rival had diverged by day 5 already: take over at start_div143 instead
+                start = GC_P["start_div143"]
             _GC_REPORT["gc_start"] = start
+            _GC_REPORT["gc_ad_step"] = adr.get("ad_step", -1)
             if GC_P["div_over"] and not _GC_RICH.get("div_applied"):
                 _GC_RICH["div_applied"] = True
                 for k, v in GC_P["div_over"].items():

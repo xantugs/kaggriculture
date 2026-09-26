@@ -271,3 +271,51 @@ movable (`_V219_DAY`, falling back to day 18 when it does not qualify yet) and a
 - Tick-aware selling on copy games (`tick_defer` at top level): +$36 +- 27, one win lost (divergent-only stays).
 - Closed loop, seeds 6000-6059 seat 0: live v15a 52-8, metav4 v13 55-5, a-smaller-market-shock 56-4 (v130: 51-9, 53-7,
   55-5). Official runner seeds 6042 (seat 0) and 6046 (seat 1 vs metav4) DONE, both won.
+
+## Early game / late game audit (after v136)
+Where the games are decided (recorded games replayed day by day, `traj.py`; v136 pinned with daily snapshots,
+`harness/pinned5.py` with `PIN_SNAP=1`):
+- Divergent losses: we hold $5-7k more cash on days 10-13 (the melon dump on day 10), the elite rival overtakes from
+  day ~20 and ends ~$10k ahead. They own the third quadrant on days 8-10 (we buy it on days 11-12), run twice our wheat
+  by day 10, more geese, staggered melons (sold after day 12) and 9-13 tomatoes by days 17-20 (ours ~5). v136's
+  divergent losses from day 12: tomatoes -$4.2k, melons -$3.1k, wheat -$2.9k, eggs -$2.3k, strawberries -$2.0k.
+- Copy games: identical openings (cash within $100 to day 9). The controller phase (days 24-29) gains in every group
+  (losses +$575, close wins +$2.7k, big wins +$7.7k); close losses are already behind ~$2.3k at day 23. Our per-unit
+  prices match or beat the copy's on every product; net wheat (sales - purchases) differs by ~$0.5k (the copy buys
+  ~110 wheat back on days 24-29).
+Rejected:
+- sale reservation (race) window from step 96 / 144 (`base_m7_t6.py`, `_R36_START`): identical, nothing to reserve
+  before day 8;
+- divergent takeover day 15: -$319 +- 342, 3 wins lost; geese in the divergent herd at margin 1500: +$1 (never fire);
+- early divergent takeover when ADAPT flags the rival at step 143 (`start_div143`): day 12 -$2,531 / day 14 -$1,048 per
+  flagged game (38 of 78), 2-3 wins lost; the chassis still runs days 12-16 better than the controller;
+- carrots planted through day 27 (mandatory: -$3,942 on 16 games; optional, valued at the 2 units an age-2 carrot
+  gives, `late_units`: -$3,574, 68 wins lost). The day-27 plots set off Fibonacci wages on days 27-29 (+$2.2k) and
+  crowd out tomato and strawberry harvests; as recorded before, only the copy's pre-planned tape can do this cheaply.
+- Chassis-phase unit floor, milder variants (copy games vs v136): wool only 3% +$54 +- 45 (flips +1/-2), 2% all
+  +$95 +- 50 (+2/-4), premium goods 3% +$100 +- 57 (+1/-5), 3% all +$100 +- 57 (+1/-5).
+- Dig-up of live strawberries in a crashed book (`dig_glut`, days 16-24: remaining output at the current quote vs a
+  carrot plot per 3-day cycle left): 36% of copy towns quote strawberries under $15 on day 24 while we still hold ~13
+  plants. Margin 60: +$123 +- 95 over 249 (fired in 84: carrots +$1.3k, wheat +$1.1k, strawberries -$0.7k, wages
+  -$0.7k), flips +2/-6; margin 200: fires in 8, +$0.
+- Why "margin up, close wins down" keeps happening: v136 is favoured (copy mean +$6.6k), so its margins crowd just
+  above zero (28 copy wins under $1.5k vs 11 losses within $2k). A change that adds per-game noise loses more close
+  wins than it gains even at a positive mean: with the observed noise (sd $650-770 per game) and mean +$100 the
+  expected net is about -2.5 wins, which is what the floor variants show. Keep only changes whose mean gain clearly
+  exceeds their noise (the controller unit floor: +$150, sd ~$650, flips +1/-0).
+- Day-10 melon front-run revisited: both copies sell the same lots in the same hours (6, 24, 12, 6, 6, 6 from hour 9,
+  12 at hour 0 of day 11). A melon moved from our tail to hour 8-9 would swing ~$1.0k of margin, but the tape already
+  harvests 9 of 12 melons by hour 8; only 3 far melons (hour 14 and the two sold at hour 0 of day 11) are late, and
+  extra hands hired at hour 1 (hour 0 is full: 10 orders) reach them no earlier than hour 13.
+
+## v145 (`submit/main_ctl_rich8_m7.py`) = v136 + the unit floor on the chassis's own sales
+- `chassis_unit_floor` 0.03 (days 12-23, `_gc_chassis_floor`: cut the chassis's SELL lots where the next unit's quote
+  falls below 3% of the base price while the shed keeps 20 units free for the night's drop).
+- Closed loop, 1,200 paired games (seeds 6100-6299, both seats, vs live v15a, metav4 v13, a-smaller-market-shock):
+  +$176 +- 27 per game, wins 1,134 -> 1,143 (flips +26/-17); v136 alone: 368-32, 382-18, 384-16, 0 errors.
+- Pinned: copy +$100 +- 57, wins 155 -> 151 (+1/-5); divergent -$37 +- 81, no flips. Kept v136 as the second
+  submission because the two evaluations disagree on wins.
+- Divergent knobs on v136: rival tomato weight 0.7 -$23; tomato alternative $25/day -$792 (3 wins lost); melons
+  until day 19 harvested at age 10 +$257 +- 169, wins 31 -> 33 (followed up on v145).
+- v147 (`submit/main_ctl_rich9_m7.py`) = v145 + `div_over` melon_last 19 / melon_age 10: divergent +$169 +- 167,
+  wins 31 -> 33 (+2/-0); melon_alt_day 30 +$141 (+1/-1); age 10 without day 19 +$5. Copy games identical.
