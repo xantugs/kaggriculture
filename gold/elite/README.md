@@ -381,3 +381,37 @@ Their v147 (v136 + chassis unit floor + divergent melons through day 19) is neut
 vs v136, wins 59 -> 72 (+15/-2); pinned 2800+ +$791 +- 151 vs v136, wins 95 -> 102 (copies 75 -> 80, divergent
 20 -> 22, flips +8/-1); +$609 +- 136 vs v147 (95 -> 102); +$256 +- 90 vs m2 (96 -> 102). Worst step 0.47 s.
 The two lines add: theirs lifts copies, the programme lifts divergent games and the copies' controller days.
+
+## 17. The tape's strawberries: a flood weapon, and towns where it misfires (26-27 Sep)
+
+Per-tile labour is the same as the elites' (they water and harvest more per plant than we do); the crop mix differs:
+in days 16-28 they run ~23 wheat, 9 tomato and 16 strawberry tiles to our 19 / 5 / 25, on the same ~72 tiles in
+use. Our 25 strawberry tiles are the tape's own 33 plants (days 5-11: 4, 8, 4, 4, 13), planted whatever the town.
+The strawberry price floors 75 units over and the drain is 6 a day per strawberry shop, so two farms of 30 plants
+floor it within days.
+
+**Rival classification on day 0**: a chassis copy runs the same opening and holds $1,000-1,070 at step 2 (`div2_band`);
+the seven elite teams hold 12-1,571 (584-588, 647, 736, 1,085, 1,569-1,571, 12-22); one near-copy classed divergent
+by ADAPT held 1,041 (missed, harmless). 50 of 60 divergent pinned games and 0 of 89 copies are flagged with the
+wide band (6 copies with the narrow one, and one of them, a $1,008 opening, cost $32k when the conversion fired).
+
+**Conversion** (`s2t_days`, `s2t_crop`, `s2t_max_shops`, `s2t_by_town`): against a flagged rival, the tape's PLANT
+STRAWBERRY and strawberry seed purchases on the given days become another crop. Unconditional (e60, days 8+11 to
+tomatoes): our cash +$2.4k but the elite's +$5.6k, its strawberry revenue +$7.1k: -$3.3k. Against a strawberry-heavy
+elite our flood is worth more to us than the tiles are: on Majkel1337's seat 111017922 the swap raised our cash $6.8k
+and the elite's strawberries from $12k to $27k. The split is the town's shops: 0 strawberry-buying shops among the
+first 3 (known by day 9): +$6.7k +- 1.2k, 3 -> 10 wins of 17; 2 or more: -$5k to -$9k. m3 itself is -$7.6k with 5
+wins of 36 against strawberry-light elites, which are exactly the strawberry-poor towns. The rival's own strawberry
+count by day 11 does not separate the cases.
+
+| variant (vs m3, elite gate) | margin | wins |
+|---|---:|---:|
+| e63 days 8+11, no strawberry shop known that day, crop by town | +$405 +- 151 | 72 -> 75 |
+| e64 same, always tomatoes | **+$659 +- 169** | **72 -> 80** (+10/-2) |
+| e65 one strawberry shop allowed | -$711 +- 435 | 68 |
+| e66 days 6-8 + 11 (crop by town) | -$519 +- 317 | 69 |
+| e67 day 11 only (crop by town) | +$377 +- 114 | 76 |
+
+Tomatoes beat carrots and wheat as the replacement even without a tomato shop (the hinge keeps them scarce).
+Pinned 2800+ from day 6 (S = 144, both farms replayed to day 6, rival tape pinned): e63 vs m3 divergent +$1,105
++- 418 (z 2.6), 22 -> 24 wins; 14 of the 73 live divergent games are 0-shop towns by day 9.
