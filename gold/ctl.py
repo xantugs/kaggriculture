@@ -14,6 +14,7 @@ GC_P = dict(
     start=288,            # takeover step (must be hour 0)
     start_div143=None,    # takeover step when ADAPT flagged the rival at step 143 already (else start_div)
     start_div=None,       # takeover step against a rival ADAPT classed as divergent (hour 0, >= 384)
+    start_div2=None,      # takeover step when the step-2 cash rule (div2_band) classed the rival divergent (hour 0)
     div_over={},          # GC_P overrides applied for a divergent rival (restored at the next game's step 0)
     max_hands=12,
     animals_must=True,
@@ -227,6 +228,7 @@ GC_P = dict(
     s2t_max_shops=None,   # convert a day's batch only when at most this many strawberry-buying shops are unlocked by then
                           # (e60 on the elite gate: 0 shops by day 9 +$6.7k a seat, 2+ shops -$5k to -$9k: the flood is a weapon)
     s2t_by_town=False,    # replacement crop from the town: tomato with a pizza/farmers market, carrot with a pet cafe, else wheat
+    s2t_all=False,        # convert against every rival (a copy's 33 plants floor a strawberry-poor town's book by themselves)
     s2t_max_sim=0.97,     # and only while the rival's farm differs from ours (tile kinds equal on at most this share: a
                           # copy is at 1.00 through day 11, the elites at 0.74-0.86 on day 8)
     lead2=False,          # chassis days: sell every premium lot the tape plans within the current town-tick window now
@@ -3115,12 +3117,12 @@ _STRAW_SHOPS = ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKE
 
 def _straw_to_tom(obs, action):
     day = int(obs["step"]) // 24
-    if not _DIV2.get("on") or day not in GC_P["s2t_days"]:
+    if day not in GC_P["s2t_days"] or not (_DIV2.get("on") or GC_P["s2t_all"]):
         return action
     shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
     if GC_P["s2t_max_shops"] is not None and sum(1 for s in shops if s in _STRAW_SHOPS) > GC_P["s2t_max_shops"]:
         return action
-    if GC_P["s2t_max_sim"] is not None:
+    if GC_P["s2t_max_sim"] is not None and not GC_P["s2t_all"]:
         me = int(obs["player"]); same = 0; n = 0
         for ra, rb in zip(obs["farms"][me]["tiles"], obs["farms"][1 - me]["tiles"]):
             for ta, tb in zip(ra, rb):
@@ -3406,11 +3408,27 @@ def agent(observation, configuration=None):
                 if kk not in _GC_DIV_SAVED:
                     _GC_DIV_SAVED[kk] = GC_P.get(kk)
             GC_P.update(GC_P["rich_over"])
+    if GC_P["start_div2"] is not None and step >= 2:
+        # the step-2 cash rule (see _div2_check) classed the rival divergent: take over at start_div2
+        if not _DIV2 and step <= 2:
+            try:
+                _div2_check(observation)
+            except Exception as e:
+                _GC_REPORT["gc_div2_err"] = repr(e)[:120]
+        if _DIV2.get("on"):
+            start = min(start, GC_P["start_div2"])
+            _GC_REPORT["gc_start"] = start
+            if GC_P["div_over"] and not _GC_RICH.get("div_applied"):
+                _GC_RICH["div_applied"] = True
+                for k, v in GC_P["div_over"].items():
+                    if k not in _GC_DIV_SAVED:
+                        _GC_DIV_SAVED[k] = GC_P.get(k)
+                GC_P.update(GC_P["div_over"])
     if GC_P["start_div"] is not None:
         # ADAPT (chassis layer) flags a rival whose farm diverged from ours by step 143/359: take over earlier
         ad = globals().get("_AD_STATE")
         if isinstance(ad, dict) and ad.get("off"):
-            start = GC_P["start_div"]
+            start = min(start, GC_P["start_div"]) if GC_P["start_div2"] is not None else GC_P["start_div"]
             adr = globals().get("_AD_REPORT") or {}
             if GC_P["start_div143"] is not None and adr.get("ad_step") == 143:
                 # the rival had diverged by day 5 already: take over at start_div143 instead
