@@ -351,7 +351,12 @@ whether the controller turns 25 tiles for $4,000 into money with its own crop ch
 +- 182 (67 -> 46 wins), e57 -$1,662 +- 174. With SE the controller hires fewer hands (9.7 a day against 10.9),
 leaves the far tiles unserved rather than pay the 11th-13th hand ($89-$233 a day), and the land idles. The
 elites' SE works because it is in their plan from day 8-9 with 20 days to pay for it and labour-light crops; a
-controller that farms 100 tiles with 11 hands is a different planner, not a knob.
+controller that farms 100 tiles with 11 hands is a different planner, not a knob. With the planting footprint raised
+too (`se_force_fp`, e58: the land is planted), the 161 seats that buy it plant 35 more plots, hire 35 more hands
+(the 12th-14th of the day), earn +$5.7k of wheat and pay $6.5k of wages plus the $4,000: -$5.5k a seat, -$3,005 +-
+352 over the gate, 70 -> 48 wins. e59 (max_hands 15, hire weight 0.4) is no better. The Fibonacci wage, not
+labour efficiency, is the wall: elites and our controller spend unit-turns the same way (42% walking, 17%
+watering, 10% harvesting, 278 vs 255 turns a day); they simply run 100 tiles on the hands we run 75 with.
 
 **Gate fidelity**: the repaired elite replays score a median 0.99 of their recorded games; 55 of 210 seats are
 below 0.95 and 24 below 0.90 (a recorded land purchase can fail on the replayed cash path: DSM 111016709 seat 1
