@@ -1,7 +1,7 @@
 # gold/lean — the m5 submission, shortened (27 Sep)
 
 `gold/submit/main_ctl_mkt5_lean.py` plays exactly like `gold/submit/main_ctl_mkt5_m7.py` (m5): 9,260 lines and
-1.19 MB instead of 11,216 lines and 1.21 MB. Every step's action stream was compared on 19 games against m4 (seeds
+1.11 MB instead of 11,216 lines and 1.24 MB. Every step's action stream was compared on 19 games against m4 (seeds
 6000-6017) and on 36 repaired elite seats in their towns (`harness/same_play.py`): identical on all 55.
 
 How it was made (all exact transformations):
