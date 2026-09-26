@@ -501,3 +501,10 @@ out-earns us on strawberry +$6.0k, wheat +$4.2k, carrot +$2.6k, wool +$2.2k, tom
 -$1.5k); the elite's strawberry revenue is $32k in every group (it sells first, at $190), ours is $26k in the big losses
 and $33k in the wins. Wheat is a log market: the elite's +$3-4k there is volume we never grow (its SW day 9), not denial.
 
+**Strawberries in NE instead of wheat on days 6-8** (`es_waves`: the tape's NE wheat replants become strawberries, seeds
+bought on top): e97b (8 plots) -$9,900 +- 463, e99b (5 plots on days 6-7) -$9,622 +- 439; in both the elite's milk
+is +$8.5k and we buy $760 less of animals: the seed money on days 6-7 is the tape's cow money (its budget guard drops
+the day 6-7 cows when the cash is short). `carrot_first` 11 (e96): identical to m4. The tape's cash before day 10 is
+committed to the items that floor the milk and wool markets; every diversion tested (early strawberries, NE
+strawberries, cows bought back later) hands the elite $6-12k of milk.
+

@@ -225,11 +225,12 @@ GC_P = dict(
     mkt_dp_cap=12,        # the rival's sales forecast (its hourly pattern over the last mkt_dp_rival_days days), tonight's carried
     mkt_dp_periods=6,     # units arriving; never holds more than mkt_dp_cap units of a product; decisions only right after a tick
     mkt_dp_rival_days=2,
+    mkt_dp_fresh=False,   # no rival sale of the product in the pattern window: sell now (its first lot would otherwise land first)
     mkt_dp_from_day=0,
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
     es_days=(),           # chassis days on which the tape's wheat replants in NW become strawberries (early strawberries)
     es_n=8,               # how many tiles to convert
-    es_skip_cows=(2, 3),  # chassis days whose cow purchases are dropped to fund the seeds
+    es_skip_cows=(),      # chassis days whose cow purchases are dropped to fund the seeds (costly: two early cows floor the milk market)
     es_min_cash=105.0,    # a seed purchase is converted only with this much cash per seed
     es_quads=("NW",),
     es_waves=(),          # more waves: dicts {days, quads, n}: the tape's wheat replants in those quadrants on those days become strawberries
@@ -2989,6 +2990,9 @@ class GoldCtl:
                 byh[h] = byh.get(h, 0.0) + q
         ndays = float(max(1, min(rd, day)))
         rival_h = {h: v / ndays for h, v in byh.items()}
+        if GC_P["mkt_dp_fresh"] and not byh:
+            _GC_REPORT["gc_dp_fresh"] = _GC_REPORT.get("gc_dp_fresh", 0) + n
+            return n
         rv = lambda s2: rival_h.get((s2 + 1) % 24, 0.0)   # forecast rival sales at the market of step s2 + 1
         if GC_P["mkt_dp_farm"]:
             ripe = 0
