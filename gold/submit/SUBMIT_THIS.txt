@@ -1,8 +1,10 @@
-gold/submit — takeover-controller builds (updated 25 Sep 2026 22:30 UTC, v136)
+gold/submit — takeover-controller builds (updated 26 Sep 2026, v145)
 
-PRIMARY  main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never sells a unit quoted below 3% of the
+PRIMARY  main_ctl_rich8_m7.py   v145 = v136 + the same 3% unit floor on the chassis's own sales before the takeover
+                                (days 12-23; keeps 20 shed units free for the night's drop)
+SECOND   main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never sells a unit quoted below 3% of the
                                 product's base price before the town's last purchase (no more $1 wool/milk dumps)
-SECOND   main_ctl_rich6_m7.py   v130 = v108 + the big (20-plant) tomato block planted on day 16, two days ahead of the
+         main_ctl_rich6_m7.py   v130 = v108 + the big (20-plant) tomato block planted on day 16, two days ahead of the
                                 copy rival's day-18 block, watered only when thirsty
          main_ctl_rich5_m7.py   v108 = v100 + herd expansion: extra cows/sheep bought when a milk/wool book forecast
                                 pays (controller days; a day-12 takeover for cows when the forecast is large)
@@ -36,6 +38,7 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
   v108 main_ctl_rich5_m7  185   154          31             78              +$5,221
   v130 main_ctl_rich6_m7  185   154          31             78              +$5,323
   v136 main_ctl_rich7_m7  186   155          31                             +$5,423
+  v145 main_ctl_rich8_m7  182   151          31                             +$5,480
 v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
 (corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
@@ -112,6 +115,17 @@ Closed loop (seeds 6000-6059, seat 0): vs live v15a 52-8 +$2,856 (v130 51-9), me
 a-smaller-market-shock 56-4 +$3,972 (55-5); 0 errors, max step 0.38 s under load. Official runner: seed 6042 (seat 0 vs
 live v15a) 120,620 vs 113,406; seed 6046 (seat 1 vs metav4 v13) 88,136 vs 85,779; both DONE.
 
+v145 vs v136: the chassis's own sells (days 12-23 in copy games) also stop where the next unit's quote falls below
+3% of the base price, as long as the shed keeps 20 units free for the night's drop. Closed loop, 1,200 paired games
+(seeds 6100-6299, both seats, vs live v15a / metav4 v13 / a-smaller-market-shock): +$176 +- 27 per game, wins
+1,134 -> 1,143 (flips +26/-17; vs live v15a 368 -> 378). Pinned (recorded games, the set v136 was tuned on): copy
++$100 +- 57 but wins 155 -> 151 (flips +1/-5), divergent -$37 +- 81 (no flips). The pinned flips are what a noisy
+change does to a favoured agent whose close games sit just above zero (expected about -2.5 at this noise), and the
+closed loop is 7x larger and untuned, so v145 leads with v136 kept as the second submission.
+Official runner: seed 6042 (seat 0 vs live v15a) 120,136 vs 112,781; seed 6046 (seat 1 vs metav4 v13) 87,349 vs
+84,772; both DONE.
+
+551a397c60b8a86a876ccd43699f1881027beddfec4280d86104a6f8751ae9bb  submit/main_ctl_rich8_m7.py
 a4ebfe004fb59843de12659aa47f8f7828872414dfef5cf64f78270d1b073dbd  submit/main_ctl_rich7_m7.py
 5bd6c3fbc74a5038dd85dad083e453defff85f219ba9c603ca151ae677767634  submit/main_ctl_rich6_m7.py
 10141c6fa605caf8ec426d7cc62a9d147db34f6024b053c400c671d9509fafe4  submit/main_ctl_rich5_m7.py

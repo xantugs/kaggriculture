@@ -307,3 +307,13 @@ Rejected:
   12 at hour 0 of day 11). A melon moved from our tail to hour 8-9 would swing ~$1.0k of margin, but the tape already
   harvests 9 of 12 melons by hour 8; only 3 far melons (hour 14 and the two sold at hour 0 of day 11) are late, and
   extra hands hired at hour 1 (hour 0 is full: 10 orders) reach them no earlier than hour 13.
+
+## v145 (`submit/main_ctl_rich8_m7.py`) = v136 + the unit floor on the chassis's own sales
+- `chassis_unit_floor` 0.03 (days 12-23, `_gc_chassis_floor`: cut the chassis's SELL lots where the next unit's quote
+  falls below 3% of the base price while the shed keeps 20 units free for the night's drop).
+- Closed loop, 1,200 paired games (seeds 6100-6299, both seats, vs live v15a, metav4 v13, a-smaller-market-shock):
+  +$176 +- 27 per game, wins 1,134 -> 1,143 (flips +26/-17); v136 alone: 368-32, 382-18, 384-16, 0 errors.
+- Pinned: copy +$100 +- 57, wins 155 -> 151 (+1/-5); divergent -$37 +- 81, no flips. Kept v136 as the second
+  submission because the two evaluations disagree on wins.
+- Divergent knobs on v136: rival tomato weight 0.7 -$23; tomato alternative $25/day -$792 (3 wins lost); melons
+  until day 19 harvested at age 10 +$257 +- 169, wins 31 -> 33 (followed up on v145).
