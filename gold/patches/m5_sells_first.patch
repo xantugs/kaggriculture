@@ -1,0 +1,202 @@
+--- ctl.py
++++ ctl.py
+@@ -180,6 +180,20 @@
+     unit_floor_items=("WOOL", "MILK", "STRAWBERRY", "MELON", "TOMATO", "EGG", "CARROT", "WHEAT"),
+     unit_floor_step=716,  # from this step on everything goes (the last town purchase is at step 716)
+     chassis_unit_floor=0.0,  # the same floor on the chassis's SELL lots before the takeover
++    sells_first=False,     # controller: our SELLs go ahead of HIREs and purchases in each turn's list (the engine runs
++                           # both farms' lists index by index: a lot at a lower index than the rival's sells first)
++    sells_first_chassis=False,  # the same reorder on the chassis's own lists before the takeover
++    sells_first_slots=False,    # hour 0: the programme's due premium lots outrank the day's last hires (they move to hour 1)
++    sells_first_sort=False,     # our SELLs ordered by the price drop their lot causes (the costliest contest goes first)
++    sells_first_slots1=False,   # hour 1: premium lots outrank the remaining hires as well (those move to hour 2)
++    sells_first_order=(),       # a fixed product order for our SELLs (the rivals' own typical order) instead of the impact sort
++    mkt_dp_d29=False,           # the programme also times day 29 (its last decision sells what is left; from step 716 all goes)
++    mkt_dp_d29_prods=(),        # products the programme times on day 29 only (on top of mkt_dp_prods)
++    sells_first_dp_due=False,   # a programme product the rival is forecast to sell this turn counts as due (sorted first)
++    sells_first_div_sort=False, # chassis phase against a rival ADAPT flagged divergent: the same impact order (a copy's
++                                # list mirrors ours, so against copies the tape's own order stays)
++    fert_h0=False,              # hour 0: sell the shed's fertilizer beyond today's pickups and tomorrow's reserve (the book
++                                # never drains, so a unit sold before the rival's morning lot is worth its lot x $0.20 more)
+     chassis_floor_from=12,
+     chassis_floor_room=20,   # shed units kept free for the night's drop
+     chassis_floor_items=None,  # products the chassis floor applies to (None: unit_floor_items)
+@@ -281,6 +295,8 @@
+     race_min=1,
+     race_w=0.3,           # value per unit (x price) of taking a race product a day earlier
+     race_min_price=20,    # only while the quote is worth racing for
++    race_from=0,          # race window: first day
++    race_to=99,           # race window: last day
+     sanx_on=False,        # strawberry annex run by hired workers while the chassis plays (replaces the day-12 takeover)
+     sanx_step=288,
+     sanx_plant_last=13,
+@@ -366,6 +382,41 @@
+     return max(1, int(round(p)))
+ 
+ 
++def _gc_sells_first(orders, inv=None, shed=None, due=None):
++    """SELL orders first (stable), then the rest in order; a SELL of an item stays behind a purchase of the same item
++    listed before it (a buy-then-sell pair keeps its meaning). With sells_first_sort and the town's book, the SELLs go
++    in order of the price drop each lot causes (what the rival loses when ours goes first, and we when it does)."""
++    orders = list(orders or [])
++    if len(orders) > 10:
++        # the engine reads the first ten orders only: reorder those, never pull a sell past a hire into the cut
++        return _gc_sells_first(orders[:10], inv, shed, due) + orders[10:]
++    front, rest, bought = [], [], set()
++    for o in orders:
++        if isinstance(o, list) and len(o) >= 2 and o[0] == "BUY_PRODUCT":
++            bought.add(o[1])
++        if isinstance(o, list) and len(o) >= 2 and o[0] == "SELL" and o[1] not in bought:
++            front.append(o)
++        else:
++            rest.append(o)
++    if GC_P["sells_first_order"] and inv is not None and len(front) > 1:
++        rank = {p: i for i, p in enumerate(GC_P["sells_first_order"])}
++        return sorted(front, key=lambda o: rank.get(o[1], 99)) + rest
++    if GC_P["sells_first_sort"] and inv is not None and len(front) > 1:
++        def impact(o):
++            try:
++                # the order's own quantity: units dropped this turn reach the shed before the market runs
++                p = o[1]; n = min(100, int(o[2]) if len(o) > 2 else 1)
++                if n <= 0 or p not in _GC_MKT:
++                    return 0.0
++                i0 = int(inv[p])
++                return float(n) * (_gc_price(p, i0) - _gc_price(p, i0 + n))
++            except Exception:
++                return 0.0
++        due = due or set()
++        front = sorted(front, key=lambda o: (0 if o[1] in due else 1, -impact(o)))
++    return front + rest
++
++
+ def _gc_fib(n):
+     a, b = 1, 1
+     for _ in range(n):
+@@ -869,6 +920,7 @@
+                 v.acts = [a for a in v.acts if a[0] != "FERTILIZE"]; v.fert = 0
+                 v.value -= v.gain.get("fert", 0.0)
+         visits = [v for v in visits if v.acts]
++        self._fert_need_day = sum(v.fert for v in visits)
+ 
+         # ---- hour-0 sales: free shed room before the input purchases land (a full shed rejects them)
+         buys0 = [o for o in orders0 if o[0] in ("BUY_PRODUCT", "BUY_ANIMAL")]
+@@ -1277,7 +1329,7 @@
+         if yu > 0:
+             over = max(0, yu + add - cd["mx"])
+             thr = GC_P["tomato_harvest_min"] if crop == "TOMATO" else 2
+-            race = GC_P["race_harvest"] and crop in GC_P["race_prods"] and pv >= GC_P["race_min_price"]
++            race = GC_P["race_harvest"] and crop in GC_P["race_prods"] and pv >= GC_P["race_min_price"] and GC_P["race_from"] <= day <= GC_P["race_to"]
+             if race:
+                 thr = min(thr, GC_P["race_min"])
+             if over > 0 or done or day >= 28 or yu >= thr:
+@@ -1371,7 +1423,7 @@
+         if yu > 0:
+             nxt = (1 + pend) if prod_tonight else 0
+             over = max(0, yu + nxt - a["held"])
+-            race = GC_P["race_harvest"] and a["prod"] in GC_P["race_prods"] and pv >= GC_P["race_min_price"]
++            race = GC_P["race_harvest"] and a["prod"] in GC_P["race_prods"] and pv >= GC_P["race_min_price"] and GC_P["race_from"] <= day <= GC_P["race_to"]
+             thr = min(3, GC_P["race_min"]) if race else 3
+             if (over > 0 or yu >= thr or day >= 27) and (pv >= GC_P["harvest_min_price"] or day >= 28):
+                 acts.append(["HARVEST"]); value += over * pv + yu * pv * 0.1; carry += yu
+@@ -2871,6 +2923,12 @@
+         return k
+ 
+     def _market(self, obs, shed, carried, hour, day):
++        orders = self._market0(obs, shed, carried, hour, day)
++        if GC_P["sells_first"]:
++            orders = _gc_sells_first(orders, obs["market"]["inventory"], shed, set(getattr(self, "_due", set()) or set()))
++        return orders
++
++    def _market0(self, obs, shed, carried, hour, day):
+         step = int(obs["step"])
+         sells = self._sell_orders(obs, shed, carried, hour, day, step)
+         if GC_P["tick_defer"] and hour % 4 == 0 and hour > 0 and day < GC_P["tick_last_day"]:
+@@ -2899,18 +2957,29 @@
+                     _GC_REPORT["gc_open_feedbuy"] = _GC_REPORT.get("gc_open_feedbuy", 0) + k
+         if hour == 0:
+             fixed = list(self.orders0)
+-            h0 = max(0, min(self.hires_planned, 10 - len(fixed)))
+-            self.hires_left = self.hires_planned - h0
+-            orders = fixed + [["HIRE"]] * h0
++            due = []
+             if GC_P["sell_timing"] and not (GC_P["tick_defer0"] and day < GC_P["tick_last_day"]):
+                 have = {o[1] for o in fixed if o and o[0] == "SELL"}
+-                orders += [o for o in prem if o[1] not in have and o[1] in self._due]
++                due = [o for o in prem if o[1] not in have and o[1] in self._due]
++            if GC_P["fert_h0"] and not any(o and o[0] == "SELL" and o[1] == "FERTILIZER" for o in fixed + due):
++                have = int(shed.get("FERTILIZER", 0)) + sum(int(o[2]) for o in fixed if o and o[0] == "BUY_PRODUCT" and o[1] == "FERTILIZER")
++                ex = have - int(getattr(self, "_fert_need_day", 0)) - int(self.reserve.get("FERTILIZER", 0))
++                if ex > 0 and not any(o and o[0] == "BUY_PRODUCT" and o[1] == "FERTILIZER" for o in fixed):
++                    due = due + [["SELL", "FERTILIZER", ex]]
++                    _GC_REPORT["gc_fert_h0"] = _GC_REPORT.get("gc_fert_h0", 0) + ex
++            room = 10 - len(fixed) - (len(due) if GC_P["sells_first_slots"] else 0)
++            h0 = max(0, min(self.hires_planned, room))
++            self.hires_left = self.hires_planned - h0
++            if GC_P["sells_first_slots"] and due:
++                _GC_REPORT["gc_due0"] = _GC_REPORT.get("gc_due0", 0) + len(due)
++            orders = fixed + [["HIRE"]] * h0 + due
+             return orders[:10]
+         mid = list(getattr(self, "_mid_orders", []) or [])
+         if mid:
+             return (mid + prem + rest)[:10]
+         if hour == 1:
+-            h1 = min(self.hires_left, 10 - len(self.orders1))
++            ps = [o for o in prem if o and o[0] == "SELL"] if GC_P["sells_first_slots1"] else []
++            h1 = max(0, min(self.hires_left, 10 - len(self.orders1) - len(ps)))
+             self.hires_left -= h1
+             return ([["HIRE"]] * h1 + list(self.orders1) + prem + rest)[:10]
+         if self.hires_left and hour == 2:
+@@ -3012,6 +3081,10 @@
+             if plan is not None:
+                 rv = lambda s2, _pl=plan: float(_pl.get(s2 + 1, 0))
+                 _GC_REPORT["gc_cp_used"] = _GC_REPORT.get("gc_cp_used", 0) + 1
++        try:
++            self._dp_rv_now[p] = float(rv(step - 1))
++        except Exception:
++            pass
+         if step % 4 != 1 and step > 0:
+             if not GC_P["mkt_dp_every"]:
+                 return None
+@@ -3112,6 +3185,7 @@
+             if dp_budget is not None:
+                 _GC_REPORT["gc_dp_room_min"] = min(_GC_REPORT.get("gc_dp_room_min", 999), dp_budget)
+         self._due = set()
++        self._dp_rv_now = {}
+         val_now = {q: _gc_price(q, inv[q]) for q in _GC_PRODUCTS}
+         urgent = self.open is not None and self._open_on(day) and bool(getattr(self, "_open_urgent", False))
+         for p in _GC_PRODUCTS:
+@@ -3141,12 +3215,16 @@
+                 _GC_REPORT["gc_open_urgent_sold"] = _GC_REPORT.get("gc_open_urgent_sold", 0) + n
+                 out.append(["SELL", p, n])
+                 continue
+-            if GC_P["mkt_dp"] and p in GC_P["mkt_dp_prods"] and not last and day <= 28 and day >= GC_P["mkt_dp_from_day"]:
++            d29 = GC_P["mkt_dp_d29"] and day == 29 and step < 716
++            if GC_P["mkt_dp"] and (p in GC_P["mkt_dp_prods"] or (d29 and p in GC_P["mkt_dp_d29_prods"])) and day >= GC_P["mkt_dp_from_day"] and (
++                    (not last and day <= 28) or d29):
+                 try:
+                     x = self._dp_sell(obs, p, n, step, day, hour, list(_gc_get(obs["town"], "unlocked_shops", []) or []),
+                                       cap_night=(None if dp_budget is None else max(0, dp_budget)))
+                 except Exception as e:
+                     x = n; _GC_REPORT["gc_mkt_dp_err"] = repr(e)[:120]
++                if GC_P["sells_first_dp_due"] and self._dp_rv_now.get(p, 0.0) >= 1.0:
++                    self._due.add(p)
+                 if x is None:
+                     held[p] = held.get(p, 0) + n; _GC_REPORT["gc_dp_wait"] = _GC_REPORT.get("gc_dp_wait", 0) + n
+                     continue
+@@ -4208,6 +4286,16 @@
+                 action = _lead2(observation, action)
+             except Exception as e:
+                 _GC_REPORT["gc_lead2_err"] = repr(e)[:120]
++        if GC_P["sells_first_chassis"] and isinstance(action, dict) and action.get("market"):
++            try:
++                action = dict(action)
++                ad = globals().get("_AD_STATE")
++                if GC_P["sells_first_div_sort"] and isinstance(ad, dict) and ad.get("off"):
++                    action["market"] = _gc_sells_first(action["market"], observation["market"]["inventory"])
++                else:
++                    action["market"] = _gc_sells_first(action["market"])   # a copy runs this same list: keep its sell order
++            except Exception as e:
++                _GC_REPORT["gc_sf_err"] = repr(e)[:120]
+         if GC_P["chassis_unit_floor"] > 0 and step >= 24 * GC_P["chassis_floor_from"]:
+             try:
+                 action = _gc_chassis_floor(observation, action)

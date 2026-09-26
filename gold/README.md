@@ -351,3 +351,59 @@ floor from day 8: identical; tick-aware selling on copy games +$36, -7 wins; cha
 - Robustness, 80 games per agent (seeds 6000-6039, both seats) vs pipe16, ahmed v47, farmer-john, one-more-wheat,
   master-v3, demand-timing, v54-idle: m5 560-0 (+$17,708 a game, 0 errors, max step 0.24 s); v149 554-6 (+$17,073;
   v47 78-2, master-v3 76-4).
+
+## 26 Sep (afternoon): the other session's ideas 1-30 on m5, and the order of our market list
+Base: m5 rebuilt from that branch's cleaned `gold/ctl.py` (sha 284cfde5) + `cfg_m5`; the rebuild plays m5's games
+exactly. Gates: closed loop 1,200 (as before), pinned 249, their elite gate (7 elite teams x 30 seats, repaired
+recordings in their own towns; my m5 run reproduces their per-seat numbers exactly, so candidates pair with
+`gold/elite/eg_m5_led.jsonl`), their 2800+ pinned gate (179 games, S = 144, pairs with `pinned2800_s144_m5.jsonl`).
+- **Lean m5** (`submit/main_ctl_mkt5_lean.py` on that branch, 9,260 lines): identical to m5 on all 1,200 closed-loop
+  and 249 pinned games here, 0 errors, max step 0.41 s. Safe to submit in m5's place.
+- **Market order index (new, `sells_first`)**: the engine runs both farms' order lists index by index (order i of
+  both farms, unit by unit at one quote, then order i+1), so a lot at a lower index than the rival's same-product lot
+  sells entirely first. m5's controller puts its HIREs first at hours 0-2 while copies and ~90% of elite lists (days
+  16+) start with SELLs: on every product both sell in those turns, the rival went first (day 24 h1 of a copy game:
+  its 12 strawberries at index 0, ours at index 2). The fix (`sf4`): our SELLs ahead of hires and purchases (a SELL
+  stays behind a purchase of the same item), the programme's due lots take hour-0 slots before the day's last hires,
+  and our SELLs ordered rival-due first, then by the price drop each lot causes. The chassis's own lists keep their
+  order (a copy's list mirrors ours: sorting there trades a tie for a win and a loss).
+  sf4 vs m5: closed loop **+$142 +- 7, wins 1,162 -> 1,168** (flips +9/-3); pinned 249 **+$165 +- 25, 191 -> 193**
+  (copies +$129 +- 15, divergent +$245 +- 73); elite gate **+$293 +- 37, 80 -> 81** (every team positive; our wool,
+  strawberry, milk +$51-67 each, the elite's -$35-47 each); 2800+ pinned (149 unique games) **+$246 +- 34,
+  101 -> 104**. Variants on the elite gate (vs sf4): no sort -$50 +- 15; the elites' typical product order instead
+  of the impact sort -$64 +- 15; sorting the chassis lists too -$4 +- 2; no hour-0 slots -$14 +- 22; hour-1 slots and
+  a chassis sort against divergent rivals: no change; a two-day programme horizon: -$8 +- 7; programme rival weight
+  1.0 / 2.0 instead of 1.5: -$130 / -$1.
+- **Day 29 on the divergent path (`sf5b`)**: letting the programme time day 29 too (`mkt_dp_d29`: its last decision
+  sells what is left, all goes from step 716) +$57 +- 10 on the elite gate; then no hour-0 top-3 dump
+  (`final_sell0` 0) +$70 +- 17 and the day's delivery deadline at hour 21 instead of 19 (`final_cap`) +$44 +- 11
+  (17: -$261, 22: -$33, 23: -$1,874). Together (`sf4f`) elite +$463 +- 46 vs m5 (80 -> 82), 2800+ +$346 +- 46; but on
+  the closed loop vs the live v15a copy -$112 +- 19 against sf4 (392 games): the copy dumps at hour 1 of day 29 and
+  m5's hour-0 lots beat it. ADAPT knows the rival type long before day 29 (it never flags the closed-loop copies), so
+  the three settings go into `div_over` only: **sf5b** = sf4 + `div_over` {mkt_dp_d29, final_sell0 0, final_cap 21}.
+  sf5b plays copy games exactly as sf4 (40 of 40 closed-loop games identical, no closed-loop game is ADAPT-flagged:
+  closed loop = sf4's +$142 +- 7); pinned 249 **+$190 +- 29 vs m5, 191 -> 193** (copies +$129 +- 15 identical to
+  sf4, divergent +$324 +- 86); elite gate **+$445 +- 45 vs m5, 80 -> 82 (+2/-0)**. Max CPU per step 0.16 s (m5
+  0.145 s, the day-24 plan). Lean sf5b (`patches/lean_patch.py` on the lean m5) = the full build on all 210 elite
+  seats and 40 closed-loop games.
+- Idea 3 `hire_compact` (hands with no planned work not hired): closed loop -$230 +- 30, wins 1,162 -> 1,142;
+  elite gate -$75 +- 91, 80 -> 72 wins. Rejected (the "idle" hands take dispatched and re-matched work later).
+- Idea 23 race harvest, days 15-20 only (new `race_from`/`race_to`): elite +$98 +- 111 but 80 -> 76 wins. Rejected.
+- Idea 26 `late_sell0` 3 lots at hour 0 every controller day: elite -$2,004 +- 174, 80 -> 51 wins (it overrides the
+  programme's holds). Rejected.
+- Idea 28 carrots in the programme (`mkt_dp_prods` + CARROT): elite -$19 +- 50, 80 -> 78. Rejected.
+- Idea 2 (geese -> sheep in yarn towns): already in the chassis (`_Y_CFG` yarngeese, days 9-12, seen swapping the
+  day-10/11 geese in seed 6134); yarn-first towns already get sheep-only tapes (17 sheep, $54k wool in seed 6103).
+  Only the day-6 geese, bought before any yarn store is visible, stay.
+- Idea 27 (fertilizer first-come): the book never drains ($0.20 a unit, only falls), but in the tape phase both copies
+  sell the night's collection in the same turn (ties), and after the takeover the controller is a net fertilizer
+  buyer (it keeps its shed for its own crops). Recorded games bound the controller-phase holding loss at $135-150 a
+  game; `fert_h0` (sell the excess at hour 0) fired only on day 29 in the probe game.
+- Idea 1 (melon/strawberry days, "first mover"): both copies sell the same lots in the same turns right after the
+  town's 4-hourly drain (tape phase ties by index as well); selling earlier in the day forfeits drains, so the
+  pool-math gain does not survive the drain schedule. The index fix is the part of it that is free.
+- Idea 23 race harvest on every controller day (`race_harvest`): elite -$122 +- 119, 80 -> 74. Rejected.
+- Idea 16 (a two-day programme horizon, `mkt_dp_periods` 12): -$8 +- 7 on the elite gate (9 seats change).
+- Idea 30 (terminal day): the day-29 programme above; tomatoes and carrots in the day-29 programme -$6 +- 3.
+- Idea 29 (second-seat asymmetry): m5 wins 581 of 600 closed-loop games in either seat, close games 132/151 (seat 0)
+  vs 126/144 (seat 1), paired seat-0 minus seat-1 margin -$144 +- 67: nothing for a seat-1 rule to fix.
