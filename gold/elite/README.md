@@ -234,7 +234,11 @@ Elite gate (210 seats, paired vs v136, controller from day 16):
 | v137 with the divergent takeover at day 14 (e47) | +$129 +- 172 | | | +6/-8 |
 | v137 with the divergent takeover at day 13 (e48) | -$57 +- 176 | | | +5/-8 |
 
-The programme does not make an earlier hand-over pay: day 16 stays.
+| v137 with a 1-day rival forecast window (e49) | +$657 +- 135 | | | +6/-6 |
+| v137 with a 3-day rival forecast window (e50) | +$989 +- 130 | | | +8/-2 |
+
+The programme does not make an earlier hand-over pay: day 16 stays. The rival's pattern over the last 2 days is
+the best forecast window (1 day is too noisy, 3 days too stale).
 
 `mkt_dp_every` (sell ahead of the rival's forecast hour, not only after a tick) wins 70 seats to e35's 67 at the
 same margin, at 80 extra programme runs a game (worst step 0.48 s here against 0.27 s; the engine's actTimeout is
