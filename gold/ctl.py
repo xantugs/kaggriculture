@@ -206,6 +206,7 @@ GC_P = dict(
     mkt_dp_rival_days=2,
     mkt_dp_from_day=0,
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
+    mkt_dp_every=False,   # also decide at the steps before a forecast rival sale (sell ahead of it), not only after a tick
     mkt_dp_room=0,        # >0: the units the programme may hold across the day boundary are capped by the shed room left
                           # after tonight's load (reserves kept, goods still carried after each unit's last queued drop);
                           # within the day it holds up to mkt_dp_cap as before; the night cap shrinks product by product
@@ -2264,9 +2265,6 @@ class GoldCtl:
         cap = int(GC_P["mkt_dp_cap"]); K = int(GC_P["mkt_dp_periods"])
         if n > cap + 30:
             return n - cap   # far beyond what the programme may hold: sell the excess now, plan the rest next turn
-        if step % 4 != 1 and step > 0:
-            return None
-        inv0 = int(obs["market"]["inventory"][p])
         rd = int(GC_P["mkt_dp_rival_days"])
         byh = {}
         for d, h, q in self.rival_sales.get(p, ()):
@@ -2274,6 +2272,14 @@ class GoldCtl:
                 byh[h] = byh.get(h, 0.0) + q
         ndays = float(max(1, min(rd, day)))
         rival_h = {h: v / ndays for h, v in byh.items()}
+        if step % 4 != 1 and step > 0:
+            if not GC_P["mkt_dp_every"]:
+                return None
+            nxt = step + ((1 - step) % 4)   # the next post-tick decision
+            if sum(rival_h.get((s2 + 1) % 24, 0.0) for s2 in range(step, nxt)) < 1.0:
+                return None
+            _GC_REPORT["gc_dp_ahead"] = _GC_REPORT.get("gc_dp_ahead", 0) + 1
+        inv0 = int(obs["market"]["inventory"][p])
         dsteps = [step + 4 * k for k in range(K + 1) if step + 4 * k <= 718]
         carried = int(getattr(self, "carried_items", {}).get(p, 0))
         exo = []; stock = []; rq = []; I = float(inv0); cum = n
