@@ -206,6 +206,10 @@ GC_P = dict(
     mkt_dp_rival_days=2,
     mkt_dp_from_day=0,
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
+    late_plan=False,      # from late_plan_from: plant wheat/carrots by their exact remaining growth (a one-time crop starts
+    late_plan_from=24,    # at 1 unit, each watering in its window on a day up to 29 adds 2 fertilized / 1 not, capped),
+    late_plan_min=15.0,   # whichever nets more after seed and fertilizer, when that is at least late_plan_min
+    late_keep=False,      # day 28: keep any one-time crop that still gains from a day-29 watering (as d28_keep_carrots)
     mkt_dp_every=False,   # also decide at the steps before a forecast rival sale (sell ahead of it), not only after a tick
     mkt_dp_room=0,        # >0: the units the programme may hold across the day boundary are capped by the shed room left
                           # after tonight's load (reserves kept, goods still carried after each unit's last queued drop);
@@ -743,7 +747,10 @@ class GoldCtl:
             if crop == "MELON":
                 harvest_now = age >= cd["fy"] and yu2 > 0 and (yu2 >= cd["mx"] or age >= cd["my"])
             if day >= 28 and ready and yu2 > 0 and (GC_P["d28_harvest_all"] or age >= cd["my"] or yu2 >= cd["mx"]):
-                if not (GC_P["d28_keep_carrots"] and crop == "CARROT" and age < cd["my"] and yu2 < cd["mx"]):
+                keep = GC_P["d28_keep_carrots"] and crop == "CARROT" and age < cd["my"] and yu2 < cd["mx"]
+                if GC_P["late_keep"] and day == 28 and age < cd["my"] and yu2 < cd["mx"] and age + 1 >= ws:
+                    keep = True
+                if not keep:
                     harvest_now = True
             if harvest_now:
                 acts.append(["HARVEST"]); value += yu2 * pv; must = True; carry = yu2
@@ -1179,8 +1186,19 @@ class GoldCtl:
         # carrot forecast: quote at harvest (day+3) after the town's drain and every visible carrot plot maturing by
         # then; the k-th new carrot plot sells 4 units into a book already holding the previous k-1 plots' units
         n_car = 0; car_inv = None
-        if GC_P["carrot_fc"] and day >= GC_P["carrot_first"] and day <= GC_P["carrot_last_plant"]:
+        late = GC_P["late_plan"] and day >= GC_P["late_plan_from"]
+        if GC_P["carrot_fc"] and day >= GC_P["carrot_first"] and (day <= GC_P["carrot_last_plant"] or late):
             car_inv = self._carrot_book_at_harvest(obs, day, shops)
+        if late:
+            def late_units(crop, bonus):
+                cd = _GC_CROPS[crop]; ws = (cd["my"] + 1) // 2
+                if day + cd["fy"] > 29:
+                    return 0
+                return min(cd["mx"], 1 + bonus * len([d for d in range(day + ws, day + cd["my"] + 1) if d <= 29]))
+            uw = late_units("WHEAT", 2); uc = late_units("CARROT", 2 if GC_P["fert_carrots"] else 1)
+            vw_late = uw * val["WHEAT"] - 10 - fert if uw else -1e9
+            if car_inv is None:
+                car_inv = float(obs["market"]["inventory"]["CARROT"])
         for pos in slots:
             if pos in feed_tiles:
                 out[pos] = "WHEAT"; continue
@@ -1190,6 +1208,15 @@ class GoldCtl:
                 out[pos] = "TOMATO"; placed_t += 1
             elif placed_m < n_mel:
                 out[pos] = "MELON"; placed_m += 1
+            elif late:
+                pc = _gc_price("CARROT", int(car_inv + uc * n_car + 2))
+                vc_late = uc * pc - 20 - (fert if GC_P["fert_carrots"] else 0) if uc else -1e9
+                if max(vc_late, vw_late) >= GC_P["late_plan_min"]:
+                    if vc_late >= vw_late:
+                        out[pos] = "CARROT"; n_car += 1
+                    else:
+                        out[pos] = "WHEAT"
+                        _GC_REPORT["gc_late_wheat"] = _GC_REPORT.get("gc_late_wheat", 0) + 1
             elif car_inv is not None:
                 q = car_inv + 4 * n_car + 2
                 pc = _gc_price("CARROT", int(q))
