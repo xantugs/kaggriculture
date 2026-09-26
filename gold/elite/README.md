@@ -486,3 +486,18 @@ e88/e89): +$0 / +$13 (the late herd rarely fires). Elite revenue by product in t
 $20.4k, milk $19.0k, melon $12.5k, fertilizer $11.5k, wheat $10.6k, carrot $6.2k, tomato $5.3k, egg $4.8k; ours:
 strawberry $29.3k, milk $20.4k, wool $20.4k, melon $17.6k, fertilizer $13.0k, wheat $7.5k.
 
+**Cows bought back** (`es_cow_days`: the skipped cows re-bought on days 7-10 when the cash is there, carried by the tape's
+own cow pickups and placed on its empty pastures by no-op visits): e90 -$16,535 (elite milk +$11.9k; only one cow comes
+back, the cash is not there before day 8-10); one cow skipped on day 3 and four early strawberries (e91): -$6,530
+(elite milk +$6.3k). The day 2-3 cows are what floors the milk market for the game; nothing bought later replaces them.
+
+**Same-day premium delivery on controller days** (`deliver_prem`, the opening's delivery rule applied from the takeover):
+800 (e92) -$1,766 +- 179 (hires -$2.0k), 1500 with weight 0.2 (e93) -$196 +- 128 (strawberry +$170 for us, -$278
+for the elite, hires -$560). The night drop stays. **Footprint**: slack 8 (e94) -$72 +- 129 (wheat +$706, hires -$676);
+off (e95) -$1,099 +- 215 (wheat +$1.2k, hires -$1.7k). More plots after the takeover buy wheat at the 12th-14th hand's wage.
+
+**Where m4 loses** (m4 gate): 78 of the 130 losses are by more than $5k, only 14 within $2k. In the big losses the elite
+out-earns us on strawberry +$6.0k, wheat +$4.2k, carrot +$2.6k, wool +$2.2k, tomato +$1.0k (melon -$5.4k, fertilizer
+-$1.5k); the elite's strawberry revenue is $32k in every group (it sells first, at $190), ours is $26k in the big losses
+and $33k in the wins. Wheat is a log market: the elite's +$3-4k there is volume we never grow (its SW day 9), not denial.
+
