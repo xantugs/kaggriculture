@@ -206,6 +206,9 @@ GC_P = dict(
     mkt_dp_rival_days=2,
     mkt_dp_from_day=0,
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
+    mkt_dp_room=0,        # >0: the units the programme may hold across the day boundary are capped by the shed room left
+                          # after tonight's load (reserves kept, goods still carried after each unit's last queued drop);
+                          # within the day it holds up to mkt_dp_cap as before; the night cap shrinks product by product
     tick_defer=False,     # no sells at hours 4, 8, ..., 20 (the town buys right after them): sell an hour later
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
     tick_last_day=29,
@@ -2254,7 +2257,7 @@ class GoldCtl:
             return ([["HIRE"]] * h2 + prem + rest)[:10]
         return prem + rest
 
-    def _dp_sell(self, obs, p, n, step, day, hour, shops):
+    def _dp_sell(self, obs, p, n, step, day, hour, shops, cap_night=None):
         """Units of p to sell this turn (None: not a decision turn, hold). A dynamic programme over the next post-tick
         turns on the exact price curve: exogenous inventory = now - town draws + the rival's forecast sales (its hourly
         pattern over the last days), our stock grows by tonight's carried units at the day boundary."""
@@ -2285,6 +2288,12 @@ class GoldCtl:
             # the rival's forecast sales in the period after this decision (priced at the book our decision leaves)
             rq.append(int(round(sum(rival_h.get((s2 + 1) % 24, 0.0) for s2 in range(t, min(t + 4, 719))))))
         U = stock[-1]
+        # the decision before the day boundary may hold only what the shed takes tonight
+        caps = [cap] * len(dsteps)
+        if cap_night is not None:
+            for k in range(len(dsteps) - 1):
+                if (dsteps[k] // 24) < (dsteps[k + 1] // 24):
+                    caps[k] = max(0, min(cap, int(cap_night)))
         rmax = max(rq) if rq else 0
         imin = int(min(exo)) - 2; imax = int(max(exo)) + U + rmax + 2
         pr = [0.0]
@@ -2298,7 +2307,7 @@ class GoldCtl:
             for c in range(min(stock[k], U) + 1):
                 avail = stock[k] - c
                 best = NEG; bx = 0
-                lo_x = avail if k == Kd - 1 else max(0, avail - cap)
+                lo_x = avail if k == Kd - 1 else max(0, avail - caps[k])
                 for x in range(lo_x, avail + 1):
                     a = base + c
                     v = pr[a + x] - pr[a] + V[c + x]
@@ -2312,6 +2321,33 @@ class GoldCtl:
             V = Vn
         return int(best0)
 
+    def _dp_room(self, obs, shed, carried):
+        """Shed room the market programme may fill with held lots tonight: mkt_dp_room minus what else lands in the
+        shed unsold by the end of the day: reserves kept, and per unit the goods it still carries after its last
+        queued drop (its load now when no drop is queued, plus harvests and collections queued after that drop)."""
+        tiles = obs["farms"][self.me]["tiles"]
+        invs = list(obs["private"].get("inventories", []) or [])
+        eod = 0
+        for u, q in self.queues.items():
+            q = q or []
+            last_drop = max((i for i, it in enumerate(q) if it[1][0] == "DROP"), default=-1)
+            if last_drop < 0 and u < len(invs):
+                eod += sum(int(x) for x in dict(invs[u]).values())
+            for i, (tgt, a, _v) in enumerate(q):
+                if i <= last_drop:
+                    continue
+                if a[0] == "HARVEST":
+                    t = tiles[tgt[1]][tgt[0]]
+                    eod += int(t.get("yield_units", 0) or 0) if isinstance(t, dict) else 0
+                elif a[0] == "COLLECT_FERTILIZER":
+                    eod += 1
+        for u in range(len(invs)):
+            if u not in self.queues:
+                eod += sum(int(x) for x in dict(invs[u]).values())
+        kept = sum(min(int(shed.get(p, 0)), int(self.reserve.get(p, 0))) for p in _GC_PRODUCTS if p not in GC_P["mkt_dp_prods"])
+        kept += sum(int(self.arb.get(p, 0)) for p in _GC_PRODUCTS) if (GC_P["arb_on"] or GC_P["arb_chassis"]) else 0
+        return int(GC_P["mkt_dp_room"]) - kept - eod
+
     def _sell_orders(self, obs, shed, carried, hour, day, step):
         inv = obs["market"]["inventory"]
         out = []
@@ -2321,6 +2357,14 @@ class GoldCtl:
         total_shed = sum(int(v) for v in shed.values())
         pressure = total_shed + carried > GC_P["drip_room"]
         held = {}
+        dp_budget = None
+        if GC_P["mkt_dp"] and GC_P["mkt_dp_room"] > 0 and not last:
+            try:
+                dp_budget = self._dp_room(obs, shed, carried)
+            except Exception as e:
+                dp_budget = None; _GC_REPORT["gc_mkt_dp_err"] = repr(e)[:120]
+            if dp_budget is not None:
+                _GC_REPORT["gc_dp_room_min"] = min(_GC_REPORT.get("gc_dp_room_min", 999), dp_budget)
         self._due = set()
         val_now = {q: _gc_price(q, inv[q]) for q in _GC_PRODUCTS}
         for p in _GC_PRODUCTS:
@@ -2347,7 +2391,8 @@ class GoldCtl:
                 n = min(n, lot)
             if GC_P["mkt_dp"] and p in GC_P["mkt_dp_prods"] and not last and day <= 28 and day >= GC_P["mkt_dp_from_day"]:
                 try:
-                    x = self._dp_sell(obs, p, n, step, day, hour, list(_gc_get(obs["town"], "unlocked_shops", []) or []))
+                    x = self._dp_sell(obs, p, n, step, day, hour, list(_gc_get(obs["town"], "unlocked_shops", []) or []),
+                                      cap_night=(None if dp_budget is None else max(0, dp_budget)))
                 except Exception as e:
                     x = n; _GC_REPORT["gc_mkt_dp_err"] = repr(e)[:120]
                 if x is None:
@@ -2355,6 +2400,8 @@ class GoldCtl:
                     continue
                 if x < n:
                     held[p] = held.get(p, 0) + (n - x); _GC_REPORT["gc_dp_held"] = _GC_REPORT.get("gc_dp_held", 0) + (n - x)
+                    if dp_budget is not None:
+                        dp_budget -= (n - x)
                     n = x
                 if n <= 0:
                     continue
