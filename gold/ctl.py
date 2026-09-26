@@ -238,6 +238,8 @@ GC_P = dict(
     late_plan_from=24,    # at 1 unit, each watering in its window on a day up to 29 adds 2 fertilized / 1 not, capped),
     late_plan_min=15.0,   # whichever nets more after seed and fertilizer, when that is at least late_plan_min
     late_keep=False,      # day 28: keep any one-time crop that still gains from a day-29 watering (as d28_keep_carrots)
+    mkt_dp_farm=False,    # rival forecast also from its farm: the ripe units of p visible on its tiles now are taken as
+    mkt_dp_farm_h=8,      # sales spread over the next mkt_dp_farm_h hours (per hour the larger of pattern and farm)
     mkt_dp_every=False,   # also decide at the steps before a forecast rival sale (sell ahead of it), not only after a tick
     mkt_dp_every_min=1.0, # ... when the forecast sale before the next post-tick decision is at least this many units
     mkt_dp_copy_plan=False,  # copy rival: forecast its sales from our own tape (same route), its one-step lead applied,
@@ -2420,6 +2422,17 @@ class GoldCtl:
         ndays = float(max(1, min(rd, day)))
         rival_h = {h: v / ndays for h, v in byh.items()}
         rv = lambda s2: rival_h.get((s2 + 1) % 24, 0.0)   # forecast rival sales at the market of step s2 + 1
+        if GC_P["mkt_dp_farm"]:
+            ripe = 0
+            for row in obs["farms"][1 - self.me]["tiles"]:
+                for t in row:
+                    if isinstance(t, dict) and (t.get("crop") == p or (t.get("animal") and _GC_ANIM.get(t["animal"], {}).get("prod") == p)):
+                        ripe += int(t.get("yield_units", 0) or 0)
+            if ripe > 0:
+                H = max(1, int(GC_P["mkt_dp_farm_h"])); per = ripe / float(H)
+                farm_fc = {s2: per for s2 in range(step, step + H)}
+                rv = lambda s2, _f=farm_fc, _h=rival_h: max(_h.get((s2 + 1) % 24, 0.0), _f.get(s2, 0.0))
+                _GC_REPORT["gc_dp_farm"] = _GC_REPORT.get("gc_dp_farm", 0) + 1
         ad = globals().get("_AD_STATE")
         if GC_P["mkt_dp_copy_plan"] and not (isinstance(ad, dict) and ad.get("off")) and self._copy_plan_ok(obs, p, step, day):
             K0 = int(GC_P["mkt_dp_periods"])
