@@ -319,3 +319,17 @@ Rejected:
   until day 19 harvested at age 10 +$257 +- 169, wins 31 -> 33 (followed up on v145).
 - v147 (`submit/main_ctl_rich9_m7.py`) = v145 + `div_over` melon_last 19 / melon_age 10: divergent +$169 +- 167,
   wins 31 -> 33 (+2/-0); melon_alt_day 30 +$141 (+1/-1); age 10 without day 19 +$5. Copy games identical.
+
+## v149 (`submit/main_ctl_rich10_m7.py`) = v147 with the chassis-phase floor at 8%
+Closed loop is the cleaner judge for copy-game changes (untuned seeds, reactive copies); 1,200 paired games per build
+(seeds 6100-6299, both seats, vs live v15a, metav4 v13, a-smaller-market-shock), wins (v136 = 1,134):
+| build | wins | margin vs v136 |
+|---|---|---|
+| chassis floor 3% (v145/v147) | 1,143 | +$176 +- 27 |
+| chassis floor 5% | 1,154 | +$244 +- 28 |
+| chassis floor 8% (v149) | 1,151 | +$264 +- 29 |
+| chassis floor 12% | 1,147 | +$305 +- 30 |
+| 5% + controller floor 5% / 8% | 1,149 / 1,134 | +$7 / -$14 vs 5% |
+| 3% + strawberry dig-up | 1,142 | +$184 +- 28 vs 3% |
+Pinned: copy 8% +$135 +- 63 vs v136 (153 wins; 5%: 150, 3%: 151), divergent 8% +$114 +- 111 vs v147 (32 wins; 5%: 33).
+Official runner: seeds 6042 / 6046 / 6135 all DONE and won.

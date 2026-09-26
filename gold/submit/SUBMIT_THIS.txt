@@ -1,6 +1,7 @@
-gold/submit — takeover-controller builds (updated 26 Sep 2026, v147)
+gold/submit — takeover-controller builds (updated 27 Sep 2026, v149)
 
-PRIMARY  main_ctl_rich9_m7.py   v147 = v145 + divergent games: forecast melons may be planted through day 19
+PRIMARY  main_ctl_rich10_m7.py  v149 = v147 with the chassis-phase unit floor at 8% of the base price (was 3%)
+         main_ctl_rich9_m7.py   v147 = v145 + divergent games: forecast melons may be planted through day 19
                                 (harvested at age 10 on day 29)
          main_ctl_rich8_m7.py   v145 = v136 + the same 3% unit floor on the chassis's own sales before the takeover
                                 (days 12-23; keeps 20 shed units free for the night's drop)
@@ -42,6 +43,7 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
   v136 main_ctl_rich7_m7  186   155          31                             +$5,423
   v145 main_ctl_rich8_m7  182   151          31                             +$5,480
   v147 main_ctl_rich9_m7  184   151          33                             +$5,533
+  v149 main_ctl_rich10_m7 185   153          32                             +$5,580
 v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
 (corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
@@ -132,6 +134,16 @@ v147 vs v145: divergent games only (the controller's melon forecast may plant th
 +$169 +- 167 per divergent game, wins 31 -> 33 (flips +2/-0); on v136 the same change gave +$257 +- 169 (+2/-0).
 Copy games identical. Official runner seeds 6042 / 6046 as v145, both DONE.
 
+v149 vs v147: the chassis-phase floor at 8% of the base price. Level sweep in the closed loop (1,200 paired games,
+seeds 6100-6299, both seats, vs live v15a / metav4 v13 / a-smaller-market-shock; wins with v136 = 1,134):
+  chassis floor 3% 1,143 wins (+$176 +- 27 vs v136) | 5% 1,154 (+$244 +- 28) | 8% 1,151 (+$264 +- 29) |
+  12% 1,147 (+$305 +- 30). Controller floor at 5% / 8% instead of 3%: -5 / -20 wins (3% stays).
+Pinned: copy games 8% +$135 +- 63 vs v136 (153 wins vs 5%'s 150), divergent +$114 +- 111 vs v147 (32 wins vs 33).
+Strawberry dig-up in the closed loop: +$184 +- 28 per game but wins 1,143 -> 1,142 (not used: rating counts wins).
+Official runner: seeds 6042 (seat 0) 120,165 vs 112,805; 6046 (seat 1 vs metav4 v13) 87,243 vs 84,711; 6135
+(seat 1 vs live v15a) 107,069 vs 104,834; all DONE.
+
+47a5cf6347bd238c45104a3d4ce79eca9dd3d4cbdc11c91f25da3bb4ccab5a56  submit/main_ctl_rich10_m7.py
 420cab6c7891941171c95da5d4ac15f61370b231a7d8ad5f72a1d49a7e76e2b3  submit/main_ctl_rich9_m7.py
 551a397c60b8a86a876ccd43699f1881027beddfec4280d86104a6f8751ae9bb  submit/main_ctl_rich8_m7.py
 a4ebfe004fb59843de12659aa47f8f7828872414dfef5cf64f78270d1b073dbd  submit/main_ctl_rich7_m7.py
