@@ -1,7 +1,7 @@
 """Build an m5 variant: base_m7_t4 + (local) ctl.py + cfg_m5 merged with overrides.
 usage: bm5.py out.py '{"hire_compact": true}' [ctl_file]"""
 import sys, json, os
-HERE = os.path.dirname(os.path.abspath(__file__))   # put base_m7_t4.py, cfg_m5.json and the patched ctl.py here (see README)
+HERE = os.path.dirname(os.path.abspath(__file__))
 out = sys.argv[1]
 over = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
 ctlf = sys.argv[3] if len(sys.argv) > 3 else os.path.join(HERE, 'ctl.py')
