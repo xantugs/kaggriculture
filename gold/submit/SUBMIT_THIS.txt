@@ -1,14 +1,6 @@
-gold/submit — takeover-controller builds (updated 26 Sep 2026 10:30 UTC, m3 = v147 + market programme)
+gold/submit — takeover-controller builds (updated 26 Sep 2026 07:30 UTC, v149)
 
-PRIMARY  main_ctl_mkt3_m7.py    m3 = v147 + the market programme on every rival (cfg/cfg_m3.json; elite/README.md
-                                sections 14-16). Paired on the same games, pinned 2800+ (149) and elite gate (210):
-                                  vs v136: pinned +$791 +- 151 (z 5.3), wins 95 -> 102 (copies 75 -> 80, divergent
-                                           20 -> 22, flips +8/-1); elite gate +$1,266 +- 149, wins 59 -> 72 (+15/-2)
-                                  vs v147: pinned +$609 +- 136, wins 95 -> 102 (copies +$324, divergent +$1,032)
-                                  vs m2:   pinned +$256 +- 90, wins 96 -> 102
-                                Worst step 0.47 s, no errors on either gate.
-THEIR LINE (session zealous-volta), unchanged below except the heading:
-
+PRIMARY  main_ctl_rich10_m7.py  v149 = v147 with the chassis-phase unit floor at 8% of the base price (was 3%)
          main_ctl_rich9_m7.py   v147 = v145 + divergent games: forecast melons may be planted through day 19
                                 (harvested at age 10 on day 29)
          main_ctl_rich8_m7.py   v145 = v136 + the same 3% unit floor on the chassis's own sales before the takeover
@@ -31,17 +23,16 @@ SECOND   main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never s
          main_ctl_adapt.py      v64 controller on the untuned v15a+ADAPT chassis (reference)
          main_ctl_adapt_d20.py  v62 (divergent rivals -> day 20) on the untuned chassis
 
-MARKET PROGRAMME builds (session claude/adoring-sagan-kcq65p; elite/README.md sections 14-16):
-         main_ctl_mkt2_m7.py    m2 = v136 + the market programme on every rival: strawberry/milk/wool sold by a dynamic
-                                programme on the exact price curve (town drain schedule, the rival's forecast hourly
-                                sales charged at the book we leave, weight 1.5, at most 12 units held, night cap by the
-                                shed room), decisions after every tick and right before a forecast rival sale of >= 3
-                                units. cfg/cfg_m2.json. Elite gate (210 seats vs repaired elite routes, paired vs v136):
-                                +$1,234 +- 141, wins 59 -> 70, flips +12/-1, worst step 0.47 s. Pinned 2800+ (149
-                                paired vs v136): +$535 +- 131; divergent +$1,014 +- 248, copies +$213 +- 132 (+2/-2).
-         main_ctl_mkt1_m7.py    m1 = v136 + the programme on divergent games only (post-tick decisions). cfg/cfg_m1.json.
-                                Elite gate +$1,155 +- 132 (67 wins); pinned divergent +$644 +- 270, copies identical.
-         main_ctl_mkt3_m7.py    m3 = v147 + the m2 programme keys (combined candidate; see elite/README.md for its gates).
+MARKET PROGRAMME builds (session claude/adoring-sagan-kcq65p; elite/README.md sections 14-17). Paired on the same games:
+PRIMARY  main_ctl_mkt3_m7.py    m3 = v147 + the market programme on every rival (cfg/cfg_m3.json): submitted as v23.
+                                vs v136: pinned 2800+ +$791 +- 151 (z 5.3), wins 95 -> 102; elite gate +$1,266 +- 149,
+                                wins 59 -> 72 (+15/-2). vs v147: pinned +$609 +- 136, wins 95 -> 102.
+         main_ctl_mkt4_m7.py    m4 = m3 + against divergent rivals (rival cash at step 2 outside $1,000-1,070) in towns
+                                with no strawberry-buying shop known on days 8 and 11, the tape's strawberry batches of
+                                those days become tomatoes (cfg/cfg_m4.json). Elite gate (as e64) +$659 +- 169 vs m3,
+                                wins 72 -> 80; day-6 pinned run and the m4 gates in elite/README.md section 17.
+         main_ctl_mkt5_m7.py    m5 = v149 (chassis floor 8%) + the m4 additions (cfg/cfg_m5.json): gates pending.
+         main_ctl_mkt2_m7.py    m2 = v136 + the programme (cfg/cfg_m2.json); main_ctl_mkt1_m7.py m1 = divergent only.
 
 Adaptive takeover as in v18: chassis until day 24 vs a chassis copy, day 16 vs a divergent rival (ADAPT, steps 143/359).
 New in v74: at day 12, if >= 3 of the first 4 shops buy strawberries (brunch / ice cream / smoothie / farmers market),
@@ -63,6 +54,7 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
   v136 main_ctl_rich7_m7  186   155          31                             +$5,423
   v145 main_ctl_rich8_m7  182   151          31                             +$5,480
   v147 main_ctl_rich9_m7  184   151          33                             +$5,533
+  v149 main_ctl_rich10_m7 185   153          32                             +$5,580
 v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
 (corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
@@ -153,6 +145,16 @@ v147 vs v145: divergent games only (the controller's melon forecast may plant th
 +$169 +- 167 per divergent game, wins 31 -> 33 (flips +2/-0); on v136 the same change gave +$257 +- 169 (+2/-0).
 Copy games identical. Official runner seeds 6042 / 6046 as v145, both DONE.
 
+v149 vs v147: the chassis-phase floor at 8% of the base price. Level sweep in the closed loop (1,200 paired games,
+seeds 6100-6299, both seats, vs live v15a / metav4 v13 / a-smaller-market-shock; wins with v136 = 1,134):
+  chassis floor 3% 1,143 wins (+$176 +- 27 vs v136) | 5% 1,154 (+$244 +- 28) | 8% 1,151 (+$264 +- 29) |
+  12% 1,147 (+$305 +- 30). Controller floor at 5% / 8% instead of 3%: -5 / -20 wins (3% stays).
+Pinned: copy games 8% +$135 +- 63 vs v136 (153 wins vs 5%'s 150), divergent +$114 +- 111 vs v147 (32 wins vs 33).
+Strawberry dig-up in the closed loop: +$184 +- 28 per game but wins 1,143 -> 1,142 (not used: rating counts wins).
+Official runner: seeds 6042 (seat 0) 120,165 vs 112,805; 6046 (seat 1 vs metav4 v13) 87,243 vs 84,711; 6135
+(seat 1 vs live v15a) 107,069 vs 104,834; all DONE.
+
+47a5cf6347bd238c45104a3d4ce79eca9dd3d4cbdc11c91f25da3bb4ccab5a56  submit/main_ctl_rich10_m7.py
 420cab6c7891941171c95da5d4ac15f61370b231a7d8ad5f72a1d49a7e76e2b3  submit/main_ctl_rich9_m7.py
 551a397c60b8a86a876ccd43699f1881027beddfec4280d86104a6f8751ae9bb  submit/main_ctl_rich8_m7.py
 a4ebfe004fb59843de12659aa47f8f7828872414dfef5cf64f78270d1b073dbd  submit/main_ctl_rich7_m7.py
