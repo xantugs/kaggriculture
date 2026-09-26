@@ -347,7 +347,11 @@ M & M & P & Q 98%, Yannik Schiffner 70%; QQ and Sida Zuo never), with the same 1
 buys SW on day 11 and SE only as a strawberry/tomato/herd annex (16% of gate seats, day 12+). The products they
 beat us on (wheat, carrots, tomatoes) are the ones whose markets take volume. `se_force_day` (ctl.py) buys SE as
 plain land at the first day plan on or after that day; e56 (day 16) and e57 (day 20) on the elite gate measure
-whether the controller turns 25 tiles for $4,000 into money with its own crop choice.
+whether the controller turns 25 tiles for $4,000 into money with its own crop choice. It does not: e56 -$1,168
++- 182 (67 -> 46 wins), e57 -$1,662 +- 174. With SE the controller hires fewer hands (9.7 a day against 10.9),
+leaves the far tiles unserved rather than pay the 11th-13th hand ($89-$233 a day), and the land idles. The
+elites' SE works because it is in their plan from day 8-9 with 20 days to pay for it and labour-light crops; a
+controller that farms 100 tiles with 11 hands is a different planner, not a knob.
 
 **Gate fidelity**: the repaired elite replays score a median 0.99 of their recorded games; 55 of 210 seats are
 below 0.95 and 24 below 0.90 (a recorded land purchase can fail on the replayed cash path: DSM 111016709 seat 1
