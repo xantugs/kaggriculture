@@ -1,8 +1,17 @@
-gold/submit — takeover-controller builds (updated 25 Sep 2026 22:30 UTC, v136)
+gold/submit — takeover-controller builds (updated 26 Sep 2026 05:00 UTC, v137)
 
-PRIMARY  main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never sells a unit quoted below 3% of the
+PRIMARY  main_ctl_rich8_m7.py   v137 = v136 + divergent games (controller from day 16): strawberry, milk and wool are
+                                sold by a dynamic programme on the exact price curve (town drain schedule, the rival's
+                                forecast hourly sales charged at the book we leave, weight 1.5, at most 12 units held,
+                                held lots capped at night by the shed room left after the day's carry). Copy games are
+                                untouched (mkt_dp only in div_over). cfg/cfg_v137.json; elite/README.md section 14.
+                                Elite gate (210 seats vs repaired elite routes, paired vs v136): +$1,155 +- 132, wins
+                                59 -> 67, no seat flips down. Pinned 2800+ live games (149 paired vs v136): divergent
+                                +$644 +- 270 (z 2.4), copies identical, wins 95 -> 95 (divergent losses are mostly
+                                > $5k, so the margin gain flips few of them yet).
+SECOND   main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never sells a unit quoted below 3% of the
                                 product's base price before the town's last purchase (no more $1 wool/milk dumps)
-SECOND   main_ctl_rich6_m7.py   v130 = v108 + the big (20-plant) tomato block planted on day 16, two days ahead of the
+         main_ctl_rich6_m7.py   v130 = v108 + the big (20-plant) tomato block planted on day 16, two days ahead of the
                                 copy rival's day-18 block, watered only when thirsty
          main_ctl_rich5_m7.py   v108 = v100 + herd expansion: extra cows/sheep bought when a milk/wool book forecast
                                 pays (controller days; a day-12 takeover for cows when the forecast is large)
