@@ -427,3 +427,14 @@ Converting more batches loses: days 6-8 + 11 (e68) +$143, day 5 on (e70) -$861, 
 vs v149 +$952 +- 219 (z 4.3), wins 96 -> 101, divergent +$2,057 +- 471; vs m4 -$13 +- 40 (103 -> 101 wins):
 the floor step from 3% to 8% is invisible on the pinned gate. m4 stays the primary; m5 is the same agent for anyone
 who prefers their closed-loop judgement of copy games.
+
+## 18. The early-game planner, tried the cheap way (27 Sep)
+
+`start_div2` hands the farm to the controller at day 6 against a step-2-flagged rival (the tape keeps the opening:
+melons, cows, sheep). With the elite land schedule (SW day 9, SE day 11, footprint +25) and optional planting the
+controller loses $15-18k a seat (e71 smoke: unserved value $4.5k, ten hires a day, land bought, nothing tended in
+time); the same at day 12 with SE (e75) -$6-14k; SE at day 16 with optional planting and the full wage weight (e74)
+still triples the hire bill (+$7k of wheat for +$7k of wages plus the land). A bug found on the way: an ADAPT flag at
+step 359 used to reset the takeover to day 16 after a day-6 hand-over, so the tape resumed on a farm it did not
+recognise (fixed with a min). Verdict: this controller cannot run 100 tiles; its routing over far tiles hires the
+12th-14th hands and leaves the work unserved. The elite early game needs a planner written for it, not a takeover.
