@@ -384,8 +384,11 @@ recordings in their own towns; my m5 run reproduces their per-seat numbers exact
   sf5b plays copy games exactly as sf4 (40 of 40 closed-loop games identical, no closed-loop game is ADAPT-flagged:
   closed loop = sf4's +$142 +- 7); pinned 249 **+$190 +- 29 vs m5, 191 -> 193** (copies +$129 +- 15 identical to
   sf4, divergent +$324 +- 86); elite gate **+$445 +- 45 vs m5, 80 -> 82 (+2/-0)**. Max CPU per step 0.16 s (m5
-  0.145 s, the day-24 plan). Lean sf5b (`patches/lean_patch.py` on the lean m5) = the full build on all 210 elite
-  seats and 40 closed-loop games.
+  0.145 s, the day-24 plan). 2800+ pinned (149 unique games) **+$318 +- 41 vs m5, 101 -> 104 (+3/-0)**, all 179
+  rows 125-54 (m5 122-57). Robustness vs the seven public agents: **560-0, 0 errors**, margin at or above m5's on
+  each. Lean sf5b (`patches/lean_patch.py` on the lean m5, 9,306 lines, sha256 e5529c7c...) plays identically to
+  the full build on all 249 pinned games, 210 elite seats and 40 closed-loop games, and runs under the official
+  `kaggle_environments` runner.
 - Idea 3 `hire_compact` (hands with no planned work not hired): closed loop -$230 +- 30, wins 1,162 -> 1,142;
   elite gate -$75 +- 91, 80 -> 72 wins. Rejected (the "idle" hands take dispatched and re-matched work later).
 - Idea 23 race harvest, days 15-20 only (new `race_from`/`race_to`): elite +$98 +- 111 but 80 -> 76 wins. Rejected.
