@@ -1,6 +1,8 @@
-gold/submit — takeover-controller builds (updated 26 Sep 2026, v145)
+gold/submit — takeover-controller builds (updated 26 Sep 2026, v147)
 
-PRIMARY  main_ctl_rich8_m7.py   v145 = v136 + the same 3% unit floor on the chassis's own sales before the takeover
+PRIMARY  main_ctl_rich9_m7.py   v147 = v145 + divergent games: forecast melons may be planted through day 19
+                                (harvested at age 10 on day 29)
+         main_ctl_rich8_m7.py   v145 = v136 + the same 3% unit floor on the chassis's own sales before the takeover
                                 (days 12-23; keeps 20 shed units free for the night's drop)
 SECOND   main_ctl_rich7_m7.py   v136 = v130 + copy games: the controller never sells a unit quoted below 3% of the
                                 product's base price before the town's last purchase (no more $1 wool/milk dumps)
@@ -39,6 +41,7 @@ Pinned, 249 recorded strong-team games, S=288, vs chassis+ADAPT (= the old live 
   v130 main_ctl_rich6_m7  185   154          31             78              +$5,323
   v136 main_ctl_rich7_m7  186   155          31                             +$5,423
   v145 main_ctl_rich8_m7  182   151          31                             +$5,480
+  v147 main_ctl_rich9_m7  184   151          33                             +$5,533
 v74 vs v18: +$1,066 +- 265 per game (z 4.0), flips +7/-2; the rule fired in 40 games: wins 28 -> 33, +$6,635 per game.
 (corrected 25 Sep: one fired game, 111854479, was missing from the first tally; it flips a v18 win to a loss)
 84 most recent games (opponents avg 2844): v18 40 wins, v74 43.
@@ -125,6 +128,11 @@ closed loop is 7x larger and untuned, so v145 leads with v136 kept as the second
 Official runner: seed 6042 (seat 0 vs live v15a) 120,136 vs 112,781; seed 6046 (seat 1 vs metav4 v13) 87,349 vs
 84,772; both DONE.
 
+v147 vs v145: divergent games only (the controller's melon forecast may plant through day 19, harvest age 10):
++$169 +- 167 per divergent game, wins 31 -> 33 (flips +2/-0); on v136 the same change gave +$257 +- 169 (+2/-0).
+Copy games identical. Official runner seeds 6042 / 6046 as v145, both DONE.
+
+420cab6c7891941171c95da5d4ac15f61370b231a7d8ad5f72a1d49a7e76e2b3  submit/main_ctl_rich9_m7.py
 551a397c60b8a86a876ccd43699f1881027beddfec4280d86104a6f8751ae9bb  submit/main_ctl_rich8_m7.py
 a4ebfe004fb59843de12659aa47f8f7828872414dfef5cf64f78270d1b073dbd  submit/main_ctl_rich7_m7.py
 5bd6c3fbc74a5038dd85dad083e453defff85f219ba9c603ca151ae677767634  submit/main_ctl_rich6_m7.py

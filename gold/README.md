@@ -317,3 +317,5 @@ Rejected:
   submission because the two evaluations disagree on wins.
 - Divergent knobs on v136: rival tomato weight 0.7 -$23; tomato alternative $25/day -$792 (3 wins lost); melons
   until day 19 harvested at age 10 +$257 +- 169, wins 31 -> 33 (followed up on v145).
+- v147 (`submit/main_ctl_rich9_m7.py`) = v145 + `div_over` melon_last 19 / melon_age 10: divergent +$169 +- 167,
+  wins 31 -> 33 (+2/-0); melon_alt_day 30 +$141 (+1/-1); age 10 without day 19 +$5. Copy games identical.
