@@ -223,7 +223,7 @@ GC_P = dict(
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
     s2t_days=(),          # chassis days: on these planting days, when the rival's cash at step 2 lies outside the band of
     s2t_crop="TOMATO",    # chassis copies (div2_band), the tape's PLANT STRAWBERRY and its strawberry seed purchases become
-    div2_band=(1030, 1065),   # s2t_crop (the elites run ~16 strawberry tiles to the tape's 33; strawberries floor 75 over)
+    div2_band=(1000, 1070),   # s2t_crop (the elites run ~16 strawberry tiles to the tape's 33; strawberries floor 75 over)
     s2t_max_shops=None,   # convert a day's batch only when at most this many strawberry-buying shops are unlocked by then
                           # (e60 on the elite gate: 0 shops by day 9 +$6.7k a seat, 2+ shops -$5k to -$9k: the flood is a weapon)
     s2t_by_town=False,    # replacement crop from the town: tomato with a pizza/farmers market, carrot with a pet cafe, else wheat
