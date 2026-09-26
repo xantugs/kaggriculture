@@ -450,3 +450,39 @@ count as sales over the next 8 hours) -$597 +- 130 (66 wins); courier from hour 
 (65); both (e82) -$1,392; shed stops down to an end-of-day room of 30 (e79) -$5,363 (32 wins: labour). Selling
 fresh harvests the same day is worth less than the turns it costs, and the programme's holds beat a forecast that
 sells into the rival's day. The night drop stays.
+
+## 19. The opening rebuilt by the controller, and what the elite gate says about it (27 Sep)
+
+`GC_P["open"]` (ctl.py) lets the controller play the early game from step 0, or from a takeover day, on a schedule:
+land days, cumulative animal targets, strawberry targets by the demand known (DSM's 8 plots on days 2-4, 12 in NE on
+day 6, SW on day 9), cash kept for the next morning's hires and feed, an evening feed purchase, urgent sales (no market
+holds) while a scheduled purchase is unfunded, mid-day purchases the moment the day's sales pay for them with incremental
+re-routing (new hands when they pay), premium loads delivered the same day (`deliver_prem`: the trip is reserved in the
+route cost, the stop lands right after the premium visits, which go first), melon window waters as must visits, hands the
+plan gives nothing to not hired. Tools: `harness/open_trace.py` (closed-loop per-day table of both farms),
+`elite/day_sched.py` (per-day schedule of a candidate and a repaired elite in its town). m4 (`open=None`) is unchanged.
+
+| elite gate, 210 seats | margin | wins | our cash vs m4 | elite cash vs m4 |
+|---|---:|---:|---:|---:|
+| m4 | -$1,315 | 80 | | |
+| o1: schedule from day 0, the tape's herd | -$27,306 | 3 | -$2,278 | +$23,712 |
+| o2: schedule from day 0, DSM's early strawberries, cows from day 6 | -$29,258 | 3 | -$3,933 | +$24,009 |
+| o4c: the tape to day 5, the schedule from day 6 | -$18,398 | 6 | -$4,792 | +$12,290 |
+
+Our own cash is within $2-5k of the tape's (hires +60 a game, tomatoes, melons a day late before the delivery fix); the
+margin is lost on the **elite's** side: it earns $12-24k more when our milk, wool and strawberries arrive later or in
+smaller volume (o1: elite strawberry +$10.7k, milk +$6.6k, wool +$4.2k). The tape's early herd and its strawberry
+batches floor the thin markets before the elite's recorded sales; the controller-run opening does not, and its own
+gains never cover that. Verdict: the tape's days 0-11 stay.
+
+**Early strawberries on the tape** (`es_days`, ctl.py): the tape's day 2-4 wheat replants in NW become strawberries
+(7 tiles), the seeds bought on top of the wheat seeds, the day 2-3 cow purchases dropped to pay ($800); the tape keeps
+watering the tiles and harvests them on its wheat cadence (4 units a plant, unfertilized, sold from day 14). e83:
+-$9,958 +- 504 (72 -> 13 wins, flips +1/-60): our cash unchanged (+$67: strawberry -$156, fertilizer -$2.0k, eggs
+-$0.7k, wheat +$1.6k), the elite +$10.0k, of it **milk +$9.9k**: two cows fewer on days 2-3 lift the elite's milk price for
+the whole game. e84 (the day-7 cows dropped too) -$11,350. Two early cows are worth $10k of denial; seven early
+strawberry plots earn nothing extra for us. Denial-weighted herd purchases on controller days (`herd_denial_w` 1.0,
+e88/e89): +$0 / +$13 (the late herd rarely fires). Elite revenue by product in the m4 gate: strawberry $32.4k, wool
+$20.4k, milk $19.0k, melon $12.5k, fertilizer $11.5k, wheat $10.6k, carrot $6.2k, tomato $5.3k, egg $4.8k; ours:
+strawberry $29.3k, milk $20.4k, wool $20.4k, melon $17.6k, fertilizer $13.0k, wheat $7.5k.
+

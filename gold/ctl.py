@@ -202,6 +202,7 @@ GC_P = dict(
     v219x_melon_wc=None,  # cost of an extra hand-day for the melons (None: v219x_worker_cost)
                           # sells ahead of it      # units per plant and production day (fertilized)
     herd_on=False,        # buy extra sheep/cows/geese when a book forecast of their product pays (controller days)
+    herd_denial_w=0.0,    # weight of the rival's forecast revenue of the product in the herd valuation (1: margin)
     herd_first=12,
     herd_last=18,
     herd_kinds=("SHEEP", "COW", "GOOSE"),
@@ -231,6 +232,8 @@ GC_P = dict(
     es_skip_cows=(2, 3),  # chassis days whose cow purchases are dropped to fund the seeds
     es_min_cash=105.0,    # a seed purchase is converted only with this much cash per seed
     es_quads=("NW",),
+    es_cow_days=(),       # days on which one skipped cow is bought back (hour 0, cash permitting); units that pick up
+    es_cow_reserve=300.0, # cows at the shed carry the extra ones and place them on the tape's empty pastures
     s2t_days=(),          # chassis days: on these planting days, when the rival's cash at step 2 lies outside the band of
     s2t_crop="TOMATO",    # chassis copies (div2_band), the tape's PLANT STRAWBERRY and its strawberry seed purchases become
     div2_band=(1000, 1070),   # s2t_crop (the elites run ~16 strawberry tiles to the tape's 33; strawberries floor 75 over)
@@ -1411,7 +1414,7 @@ class GoldCtl:
             while dd <= 29:
                 sched[dd] = min(a["held"], 1 + a["iv"]); dd += a["iv"]
         n_shops = len(shops)
-        rev = 0.0
+        rev = 0.0; rev_th = 0.0
         for d in range(day, 30):
             unl = min(8, d // 3) - n_shops
             inv -= drain_now + max(0, unl) * per_unlock * GC_P["future_shop_w"]
@@ -1421,8 +1424,10 @@ class GoldCtl:
             if n > 0:
                 sm = sum(_gc_price(prod, inv + i) for i in range(n))
                 rev += sm * q_ours / q_tot
+                rev_th += sm * (q_tot - q_ours) / q_tot
             inv += q_tot
-        return rev
+        # the margin view: what the rival's own animals earn in the book we leave them counts against us
+        return rev - float(GC_P["herd_denial_w"]) * rev_th
 
     def _herd_plan(self, obs, day, shops, n_empty, se_open, money, kinds=None):
         """Best (kind, k, value, needs_se) for extra animals bought now."""
@@ -3702,19 +3707,47 @@ def _early_straw(obs, action):
     """Early strawberries on the tape: on es_days, the tape's PLANT WHEAT on an NW tile becomes PLANT STRAWBERRY (up to
     es_n tiles) and its wheat seed purchases become strawberry seed purchases; the cow purchases of es_skip_cows are
     dropped to pay for them. The tape keeps watering those tiles and harvests whatever they hold on its wheat cadence."""
-    step = int(obs["step"]); day = step // 24
+    step = int(obs["step"]); day = step // 24; hour = step % 24
     if step == 0:
-        _ES.clear(); _ES["tiles"] = set(); _ES["n"] = 0
-    if day not in GC_P["es_days"] and day not in GC_P["es_skip_cows"]:
-        return action
+        _ES.clear(); _ES["tiles"] = set(); _ES["n"] = 0; _ES["owed"] = 0
     me = int(obs["player"]); farm = obs["farms"][me]
     money = float(farm["money"])
+    shed = dict(obs["private"]["shed"])
+    if _ES.get("owed", 0) > 0 or shed.get("COW", 0) > 0:
+        # cows bought back: one per listed day at hour 0 when the cash is there
+        if day in GC_P["es_cow_days"] and hour == 0 and _ES["owed"] > 0 and money >= 400 + GC_P["es_cow_reserve"]:
+            action["market"] = [["BUY_ANIMAL", "COW", 1]] + list(action.get("market") or [])
+            _ES["owed"] -= 1; money -= 400
+            _GC_REPORT["gc_es_cows_back"] = _GC_REPORT.get("gc_es_cows_back", 0) + 1
+        # a unit picking up cows takes the extra ones along; on an empty pasture where the tape's action is a no-op it places one
+        positions = [farm["farmer"]] + list(farm["hands"])
+        invs = list(obs["private"]["inventories"])
+        units = [action.get("farmer", ["PASS"])] + list(action.get("hands") or [])
+        extra = int(shed.get("COW", 0))
+        for u, a in enumerate(units):
+            if not isinstance(a, list) or not a or u >= len(positions):
+                continue
+            x, y = int(positions[u][0]), int(positions[u][1])
+            t = farm["tiles"][y][x]
+            inv = invs[u] if u < len(invs) else {}
+            if a[0] == "PICKUP" and len(a) >= 2 and a[1] == "COW" and extra > 0:
+                n0 = int(a[2]) if len(a) >= 3 else 1
+                units[u] = ["PICKUP", "COW", n0 + extra]; extra = 0
+                _GC_REPORT["gc_es_cow_carry"] = _GC_REPORT.get("gc_es_cow_carry", 0) + 1
+            elif (a[0] in ("FEED", "CARE", "COLLECT_FERTILIZER", "HARVEST", "PASS") and int(inv.get("COW", 0)) > 0
+                  and isinstance(t, dict) and t.get("kind") == "PASTURE" and "animal" not in t):
+                units[u] = ["PLACE", "COW"]
+                _GC_REPORT["gc_es_cow_placed"] = _GC_REPORT.get("gc_es_cow_placed", 0) + 1
+        action["farmer"] = units[0]; action["hands"] = units[1:]
+    if day not in GC_P["es_days"] and day not in GC_P["es_skip_cows"]:
+        return action
     seeds = dict(obs["private"]["seeds"])
     mk = list(action.get("market") or [])
     out_mk = []
     for o in mk:
         if o and o[0] == "BUY_ANIMAL" and o[1] == "COW" and day in GC_P["es_skip_cows"]:
             _GC_REPORT["gc_es_cows_skipped"] = _GC_REPORT.get("gc_es_cows_skipped", 0) + int(o[2])
+            _ES["owed"] = _ES.get("owed", 0) + int(o[2])
             continue
         if o and o[0] == "BUY_SEED" and o[1] == "WHEAT" and day in GC_P["es_days"]:
             # the wheat seeds stay (the tape's other replants need them); strawberry seeds are bought on top
