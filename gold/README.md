@@ -348,3 +348,6 @@ Measured here on the files from that branch (`gold/submit/main_ctl_mkt4_m7.py` /
 m5 is the strongest build on every gate either session runs (their elite gate: 80 of 210 seats vs v136's 59).
 Also rejected here on v149 (closed loop, 1,200 games): takeover day 23 +$264 but 1,151 -> 1,140 wins; chassis
 floor from day 8: identical; tick-aware selling on copy games +$36, -7 wins; chassis floor room 10: -$47, -7 wins.
+- Robustness, 80 games per agent (seeds 6000-6039, both seats) vs pipe16, ahmed v47, farmer-john, one-more-wheat,
+  master-v3, demand-timing, v54-idle: m5 560-0 (+$17,708 a game, 0 errors, max step 0.24 s); v149 554-6 (+$17,073;
+  v47 78-2, master-v3 76-4).
