@@ -124,6 +124,7 @@ GC_P = dict(
     hold_max=23,
     hold_room=80,
     se_force_day=None,    # buy the SE quadrant at the first day plan on/after this day when cash allows (as land, no annex)
+    se_force_fp=25,       # ... and raise the planting footprint by this many plots (else the new tiles stay unplanted)
     se_on=False,          # buy the SE quadrant as a tomato annex when the forecast pays for it
     se_first=12,
     se_last=17,
@@ -444,6 +445,7 @@ class GoldCtl:
                 and money - hire_budget >= 4000 + GC_P["se_reserve"]):
             orders0.append(["BUY_LAND"]); spend += 4000; new_quads.append("SE")
             self.se_day = day
+            self.fp_bonus = getattr(self, "fp_bonus", 0) + int(GC_P["se_force_fp"])
             _GC_REPORT["gc_se_bought"] = day
             _GC_REPORT["gc_se_forced"] = 1
         if (GC_P["se_on"] and not new_quads and not final and "NE" in quads and "SW" in quads and "SE" not in quads
