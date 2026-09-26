@@ -224,6 +224,9 @@ GC_P = dict(
     s2t_days=(),          # chassis days: on these planting days, when the rival's cash at step 2 lies outside the band of
     s2t_crop="TOMATO",    # chassis copies (div2_band), the tape's PLANT STRAWBERRY and its strawberry seed purchases become
     div2_band=(1030, 1065),   # s2t_crop (the elites run ~16 strawberry tiles to the tape's 33; strawberries floor 75 over)
+    s2t_max_shops=None,   # convert a day's batch only when at most this many strawberry-buying shops are unlocked by then
+                          # (e60 on the elite gate: 0 shops by day 9 +$6.7k a seat, 2+ shops -$5k to -$9k: the flood is a weapon)
+    s2t_by_town=False,    # replacement crop from the town: tomato with a pizza/farmers market, carrot with a pet cafe, else wheat
     lead2=False,          # chassis days: sell every premium lot the tape plans within the current town-tick window now
     lead2_items=("MILK", "WOOL", "STRAWBERRY", "MELON"),   # (the market settles order by order in lockstep and the
     lead2_min_price=5,    # copy's own one-step lead lands one step later, so ours goes first; no tick is ever crossed)
@@ -3105,11 +3108,20 @@ def _div2_check(obs):
         _GC_REPORT["gc_div2"] = int(_DIV2["on"]); _GC_REPORT["gc_div2_money"] = int(rm)
 
 
+_STRAW_SHOPS = ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET")
+
+
 def _straw_to_tom(obs, action):
     day = int(obs["step"]) // 24
     if not _DIV2.get("on") or day not in GC_P["s2t_days"]:
         return action
+    shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
+    if GC_P["s2t_max_shops"] is not None and sum(1 for s in shops if s in _STRAW_SHOPS) > GC_P["s2t_max_shops"]:
+        return action
     crop = GC_P["s2t_crop"]
+    if GC_P["s2t_by_town"]:
+        crop = "TOMATO" if ("PIZZA_SHOP" in shops or "FARMERS_MARKET" in shops) else ("CARROT" if "PET_CAFE" in shops else "WHEAT")
+        _GC_REPORT["gc_s2t_crop"] = crop
     cmds = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
     changed = 0; new = []
     for c in cmds:
