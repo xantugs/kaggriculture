@@ -193,3 +193,30 @@ controller matches the tape from day 16 but is far weaker before; every earlier 
 of the tape's roster is priced out by the Fibonacci wage. Cutting supply in a shallow market hands revenue to the
 rival. What remains is the tape's fixed days 0-16 (the elites' early wheat, tomatoes on existing tiles, geese), which
 cannot be tuned from outside the route. v108 is at the frontier of the chassis-plus-controller design against elites.
+
+## 14. The market as the optimization target (26 Sep)
+
+**Oracle** (`market_oracle.py`): replay pinned 2800+ games with v108, record our arrivals, the rival's sales and
+the inventory path, and solve the optimal sell schedule per product by dynamic programming on the exact price curve
+(12 games, from day 12). Perfect foresight, 10 units held per product: +$5,086 a game (strawberry +$1.7k, milk
++$2.3k, wool +$2.6k; wheat/fertilizer 0). A plan from the rival's previous-day pattern, evaluated on the true path,
+still gains $4.8k on those three goods. Our realized prices trail an optimal schedule by that much.
+
+**Policy** (`mkt_dp` in `ctl.py`): in controller days, for strawberry/milk/wool, after every town drain tick a
+dynamic programme over the next 6 post-tick turns chooses how many units to sell now: exogenous inventory = now -
+town draws (exact schedule) + the rival's forecast sales (its hourly pattern over the last 2 days); tonight's carried
+units arrive at the day boundary; at most `mkt_dp_cap` (12) units held; the rival's forecast sales in each period are
+charged at the book our decision leaves, weighted `mkt_dp_rival_w`. 3 s a game, worst step 0.4 s.
+
+Elite gate (210 seats, paired vs v136, controller from day 16):
+
+| variant | paired margin | our cash | elite cash | flips |
+|---|---:|---:|---:|---|
+| w = 0 (revenue only) | -$530 +- 150 | +$1,689 | +$2,219 | +4/-11 |
+| w = 0.5 | +$12 +- 145 | +$1,793 | +$1,782 | +9/-7 |
+| w = 1 (e24) | **+$433 +- 139** | +$1,706 | +$1,273 | +9/-7 |
+| w = 1, 12 periods (e27) | +$425 +- 139 | | | +9/-7 |
+
+Holding lifts the rival's prices too (the denial cost); charging the rival's sales at the book we leave is what
+turns revenue into margin. Mirror seeds (copy rival, controller only from day 24): our cash +$400-460 but margin
+-$435, so the policy is for divergent games (`e28`: mkt_dp in `div_over` only).
