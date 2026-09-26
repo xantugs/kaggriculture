@@ -206,11 +206,17 @@ GC_P = dict(
     mkt_dp_rival_days=2,
     mkt_dp_from_day=0,
     mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
+    lead2=False,          # chassis days: sell every premium lot the tape plans within the current town-tick window now
+    lead2_items=("MILK", "WOOL", "STRAWBERRY", "MELON"),   # (the market settles order by order in lockstep and the
+    lead2_min_price=5,    # copy's own one-step lead lands one step later, so ours goes first; no tick is ever crossed)
     late_plan=False,      # from late_plan_from: plant wheat/carrots by their exact remaining growth (a one-time crop starts
     late_plan_from=24,    # at 1 unit, each watering in its window on a day up to 29 adds 2 fertilized / 1 not, capped),
     late_plan_min=15.0,   # whichever nets more after seed and fertilizer, when that is at least late_plan_min
     late_keep=False,      # day 28: keep any one-time crop that still gains from a day-29 watering (as d28_keep_carrots)
     mkt_dp_every=False,   # also decide at the steps before a forecast rival sale (sell ahead of it), not only after a tick
+    mkt_dp_copy_plan=False,  # copy rival: forecast its sales from our own tape (same route), its one-step lead applied,
+    mkt_dp_copy_hit=0.5,     # capped by the ripe units on its farm; used only while >= this share of its planned sale
+                             # steps over the last day showed an observed sale (else the hourly pattern)
     mkt_dp_room=0,        # >0: the units the programme may hold across the day boundary are capped by the shed room left
                           # after tonight's load (reserves kept, goods still carried after each unit's last queued drop);
                           # within the day it holds up to mkt_dp_cap as before; the night cap shrinks product by product
@@ -2285,6 +2291,63 @@ class GoldCtl:
             return ([["HIRE"]] * h2 + prem + rest)[:10]
         return prem + rest
 
+    def _copy_plan(self, obs, p, step, last):
+        """A copy rival's planned sales of p at market steps step..last: our own tape's SELL orders (the copy runs the
+        same route), each moved a step early where the chassis's one-step lead applies (no tick crossed, no shop
+        unlock), capped in sequence by the ripe units of p visible on its farm now. Returns {step: units} or None."""
+        impl = globals().get("_IMPL"); ch = getattr(impl, "chassis", None)
+        if ch is None:
+            return None
+        st = ch.players.get(self.me)
+        if not st or st.get("route") not in ch.routes:
+            return None
+        tape = ch.routes[st["route"]]
+        rf = obs["farms"][1 - self.me]
+        ripe = 0
+        for row in rf["tiles"]:
+            for t in row:
+                if not isinstance(t, dict):
+                    continue
+                if t.get("crop") == p or (t.get("animal") and _GC_ANIM.get(t["animal"], {}).get("prod") == p):
+                    ripe += int(t.get("yield_units", 0) or 0)
+        plan = {}
+        for t in range(max(step, 1), min(last, len(tape) - 1) + 1):
+            a = tape[t]
+            if not isinstance(a, dict):
+                continue
+            q = sum(max(0, int(o[2])) for o in (a.get("market") or []) if isinstance(o, list) and len(o) >= 3 and o[0] == "SELL" and o[1] == p)
+            if q <= 0:
+                continue
+            u = t - 1
+            s_at = u if (u % 4 != 0 and t % 72 != 0 and u >= step) else t
+            plan[s_at] = plan.get(s_at, 0) + q
+        out = {}
+        for s_at in sorted(plan):
+            q = min(plan[s_at], ripe)
+            if q <= 0:
+                break
+            out[s_at] = q; ripe -= q
+        return out
+
+    def _copy_plan_ok(self, obs, p, step, day):
+        """Trust the tape forecast only while it explained the copy's sales over the last day."""
+        key = (p, day)
+        cache = getattr(self, "_cp_ok", None)
+        if cache is None:
+            cache = self._cp_ok = {}
+        if key in cache:
+            return cache[key]
+        plan = self._copy_plan(obs, p, max(0, step - 24), step - 1)
+        ok = False
+        if plan is not None:
+            seen = {(d * 24 + h) for d, h, q in self.rival_sales.get(p, ()) if d * 24 + h >= step - 24}
+            hit = sum(1 for s in plan if s in seen or (s + 1) in seen or (s - 1) in seen)
+            ok = len(plan) >= 2 and hit >= GC_P["mkt_dp_copy_hit"] * len(plan)
+            _GC_REPORT["gc_cp_planned"] = _GC_REPORT.get("gc_cp_planned", 0) + len(plan)
+            _GC_REPORT["gc_cp_hit"] = _GC_REPORT.get("gc_cp_hit", 0) + hit
+        cache[key] = ok
+        return ok
+
     def _dp_sell(self, obs, p, n, step, day, hour, shops, cap_night=None):
         """Units of p to sell this turn (None: not a decision turn, hold). A dynamic programme over the next post-tick
         turns on the exact price curve: exogenous inventory = now - town draws + the rival's forecast sales (its hourly
@@ -2299,11 +2362,19 @@ class GoldCtl:
                 byh[h] = byh.get(h, 0.0) + q
         ndays = float(max(1, min(rd, day)))
         rival_h = {h: v / ndays for h, v in byh.items()}
+        rv = lambda s2: rival_h.get((s2 + 1) % 24, 0.0)   # forecast rival sales at the market of step s2 + 1
+        ad = globals().get("_AD_STATE")
+        if GC_P["mkt_dp_copy_plan"] and not (isinstance(ad, dict) and ad.get("off")) and self._copy_plan_ok(obs, p, step, day):
+            K0 = int(GC_P["mkt_dp_periods"])
+            plan = self._copy_plan(obs, p, step, min(718, step + 4 * K0 + 4))
+            if plan is not None:
+                rv = lambda s2, _pl=plan: float(_pl.get(s2 + 1, 0))
+                _GC_REPORT["gc_cp_used"] = _GC_REPORT.get("gc_cp_used", 0) + 1
         if step % 4 != 1 and step > 0:
             if not GC_P["mkt_dp_every"]:
                 return None
             nxt = step + ((1 - step) % 4)   # the next post-tick decision
-            if sum(rival_h.get((s2 + 1) % 24, 0.0) for s2 in range(step, nxt)) < 1.0:
+            if sum(rv(s2) for s2 in range(step, nxt)) < 1.0:
                 return None
             _GC_REPORT["gc_dp_ahead"] = _GC_REPORT.get("gc_dp_ahead", 0) + 1
         inv0 = int(obs["market"]["inventory"][p])
@@ -2314,12 +2385,12 @@ class GoldCtl:
             if k > 0:
                 for s2 in range(dsteps[k - 1], t):
                     I -= self._town_draw(shops, s2).get(p, 0)
-                    I += rival_h.get((s2 + 1) % 24, 0.0)
+                    I += rv(s2)
                 if (dsteps[k - 1] // 24) < (t // 24):
                     cum += carried
             exo.append(I); stock.append(cum)
             # the rival's forecast sales in the period after this decision (priced at the book our decision leaves)
-            rq.append(int(round(sum(rival_h.get((s2 + 1) % 24, 0.0) for s2 in range(t, min(t + 4, 719))))))
+            rq.append(int(round(sum(rv(s2) for s2 in range(t, min(t + 4, 719))))))
         U = stock[-1]
         # the decision before the day boundary may hold only what the shed takes tonight
         caps = [cap] * len(dsteps)
@@ -2968,6 +3039,69 @@ def _v219x_size(obs):
     return best, vals
 
 
+def _lead2(obs, action):
+    """Chassis days: the market settles both players' order lists index by index in per-unit lockstep, and the town
+    only drains after the market of steps 0 mod 4. The chassis (and every copy of it) already sells next step's
+    lots one step early when that crosses no tick. Here every premium lot the tape plans at any later step inside
+    the current tick window (up to and including the next step 0 mod 4) is sold now, from what the shed holds after
+    this step's drops: a copy's lead of the same lot lands one step later, so ours is first, and against any rival
+    the book can only be worse later in the window."""
+    step = int(obs["step"]); r = step % 4
+    if r == 0 or step >= 716:
+        return action
+    impl = globals().get("_IMPL"); ch = getattr(impl, "chassis", None)
+    if ch is None:
+        return action
+    me = int(obs["player"]); st = ch.players.get(me)
+    if not st or st.get("route") not in ch.routes:
+        return action
+    tape = ch.routes[st["route"]]
+    last = step + (4 - r)          # the next step 0 mod 4: its sale precedes that tick, so it is inside the window
+    planned = {}
+    for t in range(step + 2, last + 1):
+        if t % 72 == 0 or t >= len(tape) or not isinstance(tape[t], dict):
+            continue
+        for o in tape[t].get("market") or []:
+            if isinstance(o, list) and len(o) >= 3 and o[0] == "SELL" and o[1] in GC_P["lead2_items"]:
+                planned[o[1]] = planned.get(o[1], 0) + max(0, int(o[2]))
+    if not planned:
+        return action
+    market = list(action.get("market") or [])
+    if len(market) >= 10:
+        return action
+    # what the shed holds after this step's drops, net of what this step already sells
+    shed = {k: int(v) for k, v in dict(obs["private"]["shed"]).items()}
+    positions = [obs["farms"][me]["farmer"]] + list(obs["farms"][me]["hands"])
+    invs = list(obs["private"].get("inventories", []) or [])
+    cmds = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
+    for i, cmd in enumerate(cmds):
+        if i < len(positions) and isinstance(cmd, list) and cmd and cmd[0] in ("DROP", "PLACE") and tuple(positions[i]) in _GC_ACCESS_SET and i < len(invs):
+            if cmd[0] == "DROP":
+                for k, v in dict(invs[i]).items():
+                    shed[k] = shed.get(k, 0) + int(v)
+            elif len(cmd) >= 2 and cmd[1] in _GC_PRODUCTS:
+                shed[cmd[1]] = shed.get(cmd[1], 0) + int(cmd[2]) if len(cmd) >= 3 else shed.get(cmd[1], 0) + 1
+    selling = {}
+    for o in market:
+        if isinstance(o, list) and len(o) >= 3 and o[0] == "SELL":
+            selling[o[1]] = selling.get(o[1], 0) + max(0, int(o[2]))
+    prices = obs["market"]["prices"]
+    added = 0
+    for item, q in planned.items():
+        avail = shed.get(item, 0) - selling.get(item, 0)
+        qty = min(avail, q)
+        if qty <= 0 or int(prices.get(item, 0)) < GC_P["lead2_min_price"]:
+            continue
+        if len(market) >= 10:
+            break
+        market.insert(0, ["SELL", item, int(qty)])   # first in the list: settles at index 0
+        added += qty
+    if added:
+        action = dict(action); action["market"] = market
+        _GC_REPORT["gc_lead2"] = _GC_REPORT.get("gc_lead2", 0) + added
+    return action
+
+
 def _gc_chassis_floor(obs, act):
     """Chassis phase: cut each SELL lot where the next unit would sell below chassis_unit_floor of the base price,
     while the shed keeps room for tonight's drop (units carry plus a margin)."""
@@ -3246,6 +3380,11 @@ def agent(observation, configuration=None):
             _v219x_set_melons(observation, n)
     if step < start:
         action = _GC_PARENT(observation, configuration)
+        if GC_P["lead2"]:
+            try:
+                action = _lead2(observation, action)
+            except Exception as e:
+                _GC_REPORT["gc_lead2_err"] = repr(e)[:120]
         if GC_P["chassis_unit_floor"] > 0 and step >= 24 * GC_P["chassis_floor_from"]:
             try:
                 action = _gc_chassis_floor(observation, action)
