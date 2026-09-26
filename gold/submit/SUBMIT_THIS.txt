@@ -1,6 +1,13 @@
-gold/submit — takeover-controller builds (updated 26 Sep 2026 05:00 UTC, v137)
+gold/submit — takeover-controller builds (updated 26 Sep 2026 08:30 UTC, v138)
 
-PRIMARY  main_ctl_rich8_m7.py   v137 = v136 + divergent games (controller from day 16): strawberry, milk and wool are
+PRIMARY  main_ctl_rich9_m7.py   v138 = v137 with the market programme on every rival (copies too, from their day-24
+                                takeover; rich-town day-12 takeovers too) and decisions also at the steps right before a
+                                forecast rival sale of >= 3 units (sell ahead of it). cfg/cfg_v138.json.
+                                Elite gate (210 seats, paired vs v136): +$1,234 +- 141, wins 59 -> 70, flips +12/-1,
+                                worst step 0.47 s. Pinned 2800+ live games (149 paired vs v136): +$535 +- 131 (z 4.1);
+                                divergent +$1,014 +- 248, copies +$213 +- 132 (flips +2/-2), wins 95 -> 96.
+                                Versus v137: +$276 +- 93 pinned, +3 wins on the elite gate.
+SECOND   main_ctl_rich8_m7.py   v137 = v136 + divergent games (controller from day 16): strawberry, milk and wool are
                                 sold by a dynamic programme on the exact price curve (town drain schedule, the rival's
                                 forecast hourly sales charged at the book we leave, weight 1.5, at most 12 units held,
                                 held lots capped at night by the shed room left after the day's carry). Copy games are

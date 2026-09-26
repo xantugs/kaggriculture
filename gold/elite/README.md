@@ -357,3 +357,10 @@ loses its SE). We win 30% of the intact seats and 38% of the weakened ones, so t
 sit in `div_over` instead of the top level: `div_over` is applied only once ADAPT flags the rival (step 143 or
 359), so a rich-town day-12 takeover runs without the programme until then. v138 puts the keys at the top level
 (e42's placement: +$1,200 / 70 wins vs e54's +$1,072 / 67 wins on the same seats).
+
+## v138 (`submit/main_ctl_rich9_m7.py`, `cfg/cfg_v138.json`)
+
+v137 with the programme on every rival and step-level decisions before a forecast rival sale of at least 3 units
+(`mkt_dp_every`, `mkt_dp_every_min`), keys at the top level. Elite gate: +$1,234 +- 141 paired vs v136, 59 -> 70
+wins, flips +12/-1, worst step 0.47 s, no errors. Pinned 2800+ (149 paired): +$535 +- 131 vs v136 (divergent
++$1,014 +- 248, copies +$213 +- 132, flips +4/-3, wins 95 -> 96); +$276 +- 93 vs v137.
