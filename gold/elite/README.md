@@ -229,6 +229,8 @@ Elite gate (210 seats, paired vs v136, controller from day 16):
 | w = 1.5, room 80 (e40) | +$1,114 +- 137 | +$1,954 | +$840 | +8/-1 |
 | w = 1.5, room 100 (e41) | +$813 +- 126 | +$1,652 | +$839 | +8/-1 |
 | e35 + decisions before a forecast rival sale (e42, `mkt_dp_every`) | +$1,200 +- 141 | +$1,868 | +$669 | +12/-1 |
+| w = 2, room 90 (e43) | +$1,032 +- 136 | +$1,703 | +$671 | +7/-1 |
+| w = 2.5, room 90 (e44) | +$999 +- 136 | +$1,537 | +$538 | +10/-1 |
 
 `mkt_dp_every` (sell ahead of the rival's forecast hour, not only after a tick) wins 70 seats to e35's 67 at the
 same margin, at 80 extra programme runs a game (worst step 0.48 s here against 0.27 s; the engine's actTimeout is
