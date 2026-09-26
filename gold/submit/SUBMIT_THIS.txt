@@ -1,4 +1,4 @@
-gold/submit — takeover-controller builds (updated 27 Sep 2026, v149)
+gold/submit — takeover-controller builds (updated 26 Sep 2026 07:30 UTC, v149)
 
 PRIMARY  main_ctl_rich10_m7.py  v149 = v147 with the chassis-phase unit floor at 8% of the base price (was 3%)
          main_ctl_rich9_m7.py   v147 = v145 + divergent games: forecast melons may be planted through day 19
