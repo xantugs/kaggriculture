@@ -122,6 +122,7 @@ GC_P = dict(
     rival_days=2,
     hold_max=23,
     hold_room=80,
+    se_force_day=None,    # buy the SE quadrant at the first day plan on/after this day when cash allows (as land, no annex)
     se_on=False,          # buy the SE quadrant as a tomato annex when the forecast pays for it
     se_first=12,
     se_last=17,
@@ -425,6 +426,13 @@ class GoldCtl:
                 orders0.append(["BUY_LAND"]); spend += 1000; new_quads.append("NE")
             elif "NE" in quads and "SW" not in quads and day >= GC_P["land_sw_day"] and money - hire_budget >= 2400:
                 orders0.append(["BUY_LAND"]); spend += 2000; new_quads.append("SW")
+        if (GC_P["se_force_day"] is not None and not new_quads and not final and "NE" in quads and "SW" in quads
+                and "SE" not in quads and day >= GC_P["se_force_day"] and day <= 24
+                and money - hire_budget >= 4000 + GC_P["se_reserve"]):
+            orders0.append(["BUY_LAND"]); spend += 4000; new_quads.append("SE")
+            self.se_day = day
+            _GC_REPORT["gc_se_bought"] = day
+            _GC_REPORT["gc_se_forced"] = 1
         if (GC_P["se_on"] and not new_quads and not final and "NE" in quads and "SW" in quads and "SE" not in quads
                 and GC_P["se_first"] <= day <= GC_P["se_last"] and money - hire_budget >= 4000 + GC_P["se_reserve"]):
             # the last quadrant pays only as a tomato annex: price the plots it would carry against land + inputs + labour
