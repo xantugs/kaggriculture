@@ -1255,6 +1255,7 @@ del agent
 _V219_FERTILIZE = True  # Builder changes only this flag for the ablation.
 _V219_STATES = {}
 _V219_THIRST = [False]  # V219X: growth-day crews only for the plants that need water today (every other day)
+_V219_MELON = [0]  # V219X: melons planted on the block's free SE tiles (the copy sells none after day 11)
 _V219_DAY = [18]  # V219X: planting day of the block (a later layer may move it); 18 keeps the original
 _V219_N = [10]   # V219X: block size in plants (10/15/20/25 = SE rows 5.., 5 plants a row); a later layer may resize it
                  # on day 18 before the request. 10 keeps the original V219 behaviour exactly.
@@ -1344,8 +1345,9 @@ def _v219_request(obs, action, state, native):
     thirsty=None
     if n_block>10 and _V219_THIRST[0] and _grow and day!=_V219_DAY[0] and day<24:
         _tl=farm['tiles']
-        thirsty=[p for p in state['targets'] if isinstance(_tl[p[1]][p[0]],dict) and _tl[p[1]][p[0]].get('crop')=='TOMATO'
-                 and int(_tl[p[1]][p[0]].get('consecutive_unwatered',0))>=1]
+        thirsty=[p for p in state['targets'] if isinstance(_tl[p[1]][p[0]],dict) and _tl[p[1]][p[0]].get('crop') in ('TOMATO','MELON')
+                 and (int(_tl[p[1]][p[0]].get('consecutive_unwatered',0))>=1
+                      or (_tl[p[1]][p[0]].get('crop')=='MELON' and 6<=day-int(_tl[p[1]][p[0]].get('planted_day',day))<=12))]
         if not thirsty:
             state['requested_day']=day
             return action
@@ -1355,7 +1357,8 @@ def _v219_request(obs, action, state, native):
     count=crop_workers+int(fertilizer and day==27 and labor is None)
     extra=[]
     if not state.get('committed'):
-        extra += [['BUY_LAND'],['BUY_SEED','TOMATO',n_block]]
+        n_mel=len(state.get('melon') or ())
+        extra += [['BUY_LAND'],['BUY_SEED','TOMATO',n_block-n_mel]]+([['BUY_SEED','MELON',n_mel]] if n_mel else [])
     fertilizer_quantity=_r70_parent_fert_qty(obs,action,planned,offset) if fertilizer else 0
     if fertilizer:extra.append(['BUY_PRODUCT','FERTILIZER',fertilizer_quantity])
     extra += [['HIRE'] for _ in range(count)]
@@ -1363,7 +1366,7 @@ def _v219_request(obs, action, state, native):
     # No assumed sale proceeds. Reserve 3,000 for parent obligations and price
     # movement; the qualification separately requires 12,000 initial liquidity.
     budget=sum(_v219_fib(n) for n in range(farm['hires_today'],farm['hires_today']+parent_hires+count))
-    if not state.get('committed'):budget+=4500+50*(n_block-10)
+    if not state.get('committed'):budget+=4500+50*(n_block-len(state.get('melon') or ())-10)+80*len(state.get('melon') or ())
     if fertilizer:budget+=fertilizer_quantity*(obs['market']['prices']['FERTILIZER']+5)
     for order in action['market']:
         if not order:continue
@@ -1406,17 +1409,18 @@ def _v219_worker(obs, state, actor, role):
     todo=[]
     for target in targets:
         x,y=target;tile=view.tiles[y][x]
-        tomato=isinstance(tile,dict) and tile.get('crop')=='TOMATO'
+        tomato=isinstance(tile,dict) and tile.get('crop') in ('TOMATO','MELON')
         if tomato and target not in state['seen_plants']:
             state['seen_plants'].add(target);_V219_REPORT['confirmed_plants']+=1
         if target in state['seen_plants'] and not tomato and target not in state['lost']:
             state['lost'].add(target);_V219_REPORT['lost_plants']+=1
         command=None
         if role['kind']=='fertilizer':
-            if tomato and tile.get('fertilized_until_day',-1)<day+2 and inv.get('FERTILIZER',0)>0:
+            if tomato and tile.get('crop')=='TOMATO' and tile.get('fertilized_until_day',-1)<day+2 and inv.get('FERTILIZER',0)>0:
                 command=['FERTILIZE']
         elif day==_V219_DAY[0] and not tomato:
-            if tile is None and obs['private']['seeds'].get('TOMATO',0)>0:command=['PLANT','TOMATO']
+            _crop='MELON' if target in (state.get('melon') or ()) else 'TOMATO'
+            if tile is None and obs['private']['seeds'].get(_crop,0)>0:command=['PLANT',_crop]
             elif isinstance(tile,dict) and tile.get('kind')=='WEED':command=['DIG']
         elif tomato:
             # No later production follows the final day, so watering then would
@@ -1424,7 +1428,7 @@ def _v219_worker(obs, state, actor, role):
             if day<29 and not tile.get('watered_today'):command=['WATER']
             elif role.get('needs_fertilizer') and tile.get('fertilized_until_day',-1)<day+2 and inv.get('FERTILIZER',0)>0:
                 command=['FERTILIZE']
-            elif tile.get('yield_units',0)>0:command=['HARVEST']
+            elif tile.get('yield_units',0)>0 and tile.get('crop')=='TOMATO':command=['HARVEST']
         if command:todo.append((target,command))
     # Final return has priority once only the exact distance plus DROP remains.
     home=_v219_home(pos);distance=abs(pos[0]-home[0])+abs(pos[1]-home[1])
@@ -1460,6 +1464,10 @@ def agent(observation, configuration=None):
             _V219_DAY[0]=18   # an early block that does not qualify yet falls back to the day-18 check
         if state['eligible'] and _V219_N[0]!=10:
             state['targets']=[(x,y) for y in range(5,5+_V219_N[0]//5) for x in range(5,10)]
+        if state['eligible'] and _V219_MELON[0]>0:
+            _free=[(x,y) for y in range(5+_V219_N[0]//5,10) for x in range(5,10)][:_V219_MELON[0]]
+            state['melon']=set(_free)
+            state['targets']=list(state['targets'])+_free
     if not state.get('eligible') or day<_V219_DAY[0]:return action
     if state['day']!=day:
         state['day']=day;state['workers']={};state['last_work']={}
@@ -1470,6 +1478,10 @@ def agent(observation, configuration=None):
             for index in range(pending['count']):
                 fertilizer_worker=index==pending['crop_workers']
                 if fertilizer_worker:targets=state['targets']
+                elif pending.get('thirsty') and state.get('melon'):
+                    # melons break the block's watering alternation: a lone crew tours only the thirsty tiles
+                    chunk=-(-len(pending['thirsty'])//pending['crop_workers'])
+                    targets=pending['thirsty'][index*chunk:(index+1)*chunk]
                 elif pending['crop_workers']==1:targets=state['targets']
                 elif pending.get('thirsty'):
                     chunk=-(-len(pending['thirsty'])//pending['crop_workers'])
@@ -6488,6 +6500,11 @@ def _v219_request(obs, action, state, native):
                 if isinstance(tile, dict) and tile.get("crop") == "TOMATO":
                     tomatoes += 1
                     if int(tile.get("consecutive_unwatered", 1)) != 0:
+                        safe = False
+                elif isinstance(tile, dict) and tile.get("crop") == "MELON":
+                    # a melon in its yield window gains a unit with every day's watering
+                    if (int(tile.get("consecutive_unwatered", 1)) != 0
+                            or 6 <= day - int(tile.get("planted_day", day)) <= 12):
                         safe = False
             if tomatoes and safe:
                 state["requested_day"] = day

@@ -206,3 +206,68 @@ and wool.
 - v108 vs v100: +$170 +- 63 per game (copy +$178, divergent +$152), no flips; fired in 13 games (11 better, +$0.5k to
   +$8.6k). Geese were never chosen. Mirror 51-9 +$2,867; pipe16 40-0, ahmed v47 39-1; official runner DONE.
 Also rejected: carrot_edge 0.7 / 1.0 / 1.2 on copy games (-$174 / -$59 / -$415; 0.85 stays), 0.7 on divergent (-$3).
+Rejected after v108 (pinned vs v108 unless noted):
+- copy takeover day 23: +$44 +- 118, wins 154 -> 152 (day 24 stays);
+- herd-rich margin 3000: identical (no cow forecast between 3000 and 4000); geese in the controller herd: never chosen;
+- strawberry-rich path: carrot_edge 1.0 -$95, carrot forecast off -$199; rich margin 1500 / 3500: -4 wins / -$135;
+- 15-plant tomato option, closed loop (200 games vs live v15a): +$64 +- 84 where chosen (neutral; pinned +$1.4k
+  per eligible game), kept.
+Robustness: 400 closed-loop games vs live v15a 371-29, 0 errors, max step 0.28 s; vs the newest public top agents
+metav4 v13 36-4, a-smaller-market-shock 37-3, one-more-wheat / pipe16 variants 40-0 (+$349 / +$480 per game over v86a
+against the two strongest). metav4 v13 is classified a chassis copy by ADAPT (day-24 takeover) and plays like live v15a.
+- tomato harvest threshold 2 / 1 (sell the day-26 production at the top of the book): -$226 / -$181 on tomato and
+  divergent games; day-26 sales only pull day-27 prices down, the day-29 dump (60-80 units at ~$110 in rich towns) stays.
+- geese allowed in the day-12 herd takeover: never fire (identical); hire_cost_w 0.5 / 0.7: -$28 / -$15 on ~127 games
+  (0.6 stays); against metav4 v13 in closed loop a day-22 copy takeover gains $272 per game but day 22 lost copy wins
+  on the recorded games, day 25 is worse (33-7): day 24 stays.
+
+## 26 Sep: pushing past v108
+- Early controller takeover against rivals ADAPT flags divergent on day 5 (S=144 pinned, 38 games): day 6 -$62k,
+  day 10 -$20k, day 12 -$2.5k per game. The controller cannot run an opening (it skips the chassis's planned animal,
+  seed and land investments and hires half the hands); the elite rivals' edge (SW land on day 9, 15-27 wheat the same
+  day, strawberries from day 2, staggered melons, 4-7 cows / 5-6 sheep on day 6) has to come from a scripted opening.
+- Chassis constants tuned by the public authors on mirrors (`chassis_globals` knob): V9_HERD species rules, V9_RACE
+  margin 8/16 and horizon 32/44, V9_CARROT ratio 1.5/2.2, V9_COURIER hour 8/16, V219 cash 12000 / tomato price 60:
+  flat on the recorded field (few games change, net ~0).
+- Divergent footprint slack 5 / 8 / off: +$132 +- 160 / +$19 / -$769; divergent wheat until day 26 / 27: -$227 / -$29;
+  no strawberry-rich rule against flagged rivals: -$3,550 (margin 5000: -$254); herd margin 2000 / 9 animals /
+  labour 45: +$56 / +$16 / +$40 (noise).
+
+## 26 Sep: v130 (`submit/main_ctl_rich6_m7.py`) = v108 + big tomato block two days ahead of the copy
+Copies plant their tomato block on day 18 and sell days 26-29; in rich towns both farms then dump 60-80 units on day 29
+at ~$110 while the copy took the day-26 top of the book ($290-318). `base_m7_t4.py` makes the block's planting day
+movable (`_V219_DAY`, falling back to day 18 when it does not qualify yet) and adds thirst-only growth crews
+(`_V219_THIRST`: a crew only on days some plant needs water, sized to those plants, never doubled for a late request).
+`v219x_early_n=20, v219x_early_day=16`: on day 16 price the block; when it already picks 20 plants, plant then.
+- copy games: day 16 +$149 +- 76, no flips (14 blocks moved: 12 better, +$25.5k); day 17 +$89 +- 61 / +$142 (without
+  thirst crews, one flip each); day 15 -$638 per block game; moving 15-plant blocks to day 17: -5 wins.
+- without the thirst crews a day-17 block set off a late doubled crew on day 18 (18 hires, Fibonacci wages +$6.2k).
+- v130: 185 wins, margin +$5,323 (v108 +$5,221). Closed loop neutral against live v15a / metav4 / smaller-shock.
+
+## Probes past v130
+- Melons on the block's free SE tiles (`base_m7_t5.py` + `v219x_melon`, forecast-sized, harvested at age 10 by the
+  controller): 53 block games -$819 +- 206 (up to 10 melons) / -$434 +- 165 (extra hand-day priced $800). Melon sales
+  +$2.1k per block game, but the fifth planting crew and the melon-only watering crews are the 15th-16th hires of the
+  day ($610-987 each, +$1.8k wages) and tomatoes lose a little. Needed fixes on the way (kept in t5, unused): melons
+  are thirsty every day of their yield window, V13V's skip days (19/21/23) count melons, the chassis never harvests an
+  unripe melon, a lone thirst crew tours only the thirsty tiles.
+- `visit_watered` (a mid-day re-plan of a plant watered today gains nothing from WATER, so no harvest one unit short):
+  -$300 and 6 fewer wins on the block games; not used.
+- 25-plant block option (margin 6000 / 9000): +$112 +- 95 / +$93 on the 53 block games (noise).
+- Unit floor (`unit_floor_frac`): the controller sold glutted lots whole (112178518: 20 wool on day 26 at $49 down to
+  twelve units at $1, 26 more at hour 0 of day 29, 23 of them at $1, while the rival sold after each town purchase at
+  ~$30). Cap every lot where the next unit's quote falls below a share of the base price, until step 716 (the last
+  town purchase), holding the rest for the next purchase. All 249 games vs v130: 5% of base +$81 +- 40 (copy +$125 +-
+  52, flips +1/-0; divergent -$14, one flip lost), 10% +$31 (-2 wins), 20% -$111 (-2 wins): a higher floor only lets
+  the rival sell into the recovery first.
+
+## v136 (`submit/main_ctl_rich7_m7.py`) = v130 + unit floor on copy games
+- `unit_floor_frac` 0.03 (top level; `div_over` sets 0): copy games +$150 +- 50 (flips +1/-0; 2% +$71, 5% +$125),
+  divergent unchanged (-$10 +- 37). About +$100 per game over all 249, 186 wins. The gain is mostly the rival's loss
+  (rival wool -$157, milk -$41, strawberries -$46 per copy game): our held units meet the recovered book first.
+- Chassis-phase floor (`chassis_unit_floor`, days 12-23, keeps 20 shed units free): 5% +$125 on copy games but flips
+  +3/-5; with the controller floor, 3% +$250 but flips +2/-5 (154 -> 151 wins). Not used: the chassis's own sell
+  schedule meets the held units again later and a few close wins turn.
+- Tick-aware selling on copy games (`tick_defer` at top level): +$36 +- 27, one win lost (divergent-only stays).
+- Closed loop, seeds 6000-6059 seat 0: live v15a 52-8, metav4 v13 55-5, a-smaller-market-shock 56-4 (v130: 51-9, 53-7,
+  55-5). Official runner seeds 6042 (seat 0) and 6046 (seat 1 vs metav4) DONE, both won.
