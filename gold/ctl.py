@@ -199,6 +199,13 @@ GC_P = dict(
     rich_div_margin=None, # strawberry-rich check against a rival ADAPT already flagged divergent: this margin instead
     chassis_globals=None, # override chassis module constants at step 0, e.g. {"V9_HERD_MIN_MILK_SHOPS": 2}
     ad_thresh=None,       # override ADAPT's rival-similarity thresholds, e.g. {359: 0.7}
+    mkt_dp=False,         # controller days: for mkt_dp_prods, a dynamic programme over the next mkt_dp_periods post-tick turns decides
+    mkt_dp_prods=("STRAWBERRY", "MILK", "WOOL"),   # how many units to sell now: exact price curve, the town's drain schedule,
+    mkt_dp_cap=12,        # the rival's sales forecast (its hourly pattern over the last mkt_dp_rival_days days), tonight's carried
+    mkt_dp_periods=6,     # units arriving; never holds more than mkt_dp_cap units of a product; decisions only right after a tick
+    mkt_dp_rival_days=2,
+    mkt_dp_from_day=0,
+    mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
     tick_defer=False,     # no sells at hours 4, 8, ..., 20 (the town buys right after them): sell an hour later
     tick_defer0=False,    # also keep the timed premium lots out of hour 0 (they go at hour 1)
     tick_last_day=29,
@@ -2247,6 +2254,64 @@ class GoldCtl:
             return ([["HIRE"]] * h2 + prem + rest)[:10]
         return prem + rest
 
+    def _dp_sell(self, obs, p, n, step, day, hour, shops):
+        """Units of p to sell this turn (None: not a decision turn, hold). A dynamic programme over the next post-tick
+        turns on the exact price curve: exogenous inventory = now - town draws + the rival's forecast sales (its hourly
+        pattern over the last days), our stock grows by tonight's carried units at the day boundary."""
+        cap = int(GC_P["mkt_dp_cap"]); K = int(GC_P["mkt_dp_periods"])
+        if n > cap + 30:
+            return n - cap   # far beyond what the programme may hold: sell the excess now, plan the rest next turn
+        if step % 4 != 1 and step > 0:
+            return None
+        inv0 = int(obs["market"]["inventory"][p])
+        rd = int(GC_P["mkt_dp_rival_days"])
+        byh = {}
+        for d, h, q in self.rival_sales.get(p, ()):
+            if day - rd <= d < day or (d == day and h < hour):
+                byh[h] = byh.get(h, 0.0) + q
+        ndays = float(max(1, min(rd, day)))
+        rival_h = {h: v / ndays for h, v in byh.items()}
+        dsteps = [step + 4 * k for k in range(K + 1) if step + 4 * k <= 718]
+        carried = int(getattr(self, "carried_items", {}).get(p, 0))
+        exo = []; stock = []; rq = []; I = float(inv0); cum = n
+        for k, t in enumerate(dsteps):
+            if k > 0:
+                for s2 in range(dsteps[k - 1], t):
+                    I -= self._town_draw(shops, s2).get(p, 0)
+                    I += rival_h.get((s2 + 1) % 24, 0.0)
+                if (dsteps[k - 1] // 24) < (t // 24):
+                    cum += carried
+            exo.append(I); stock.append(cum)
+            # the rival's forecast sales in the period after this decision (priced at the book our decision leaves)
+            rq.append(int(round(sum(rival_h.get((s2 + 1) % 24, 0.0) for s2 in range(t, min(t + 4, 719))))))
+        U = stock[-1]
+        rmax = max(rq) if rq else 0
+        imin = int(min(exo)) - 2; imax = int(max(exo)) + U + rmax + 2
+        pr = [0.0]
+        for i in range(imin, imax + 1):
+            pr.append(pr[-1] + _gc_price(p, i))
+        w = float(GC_P["mkt_dp_rival_w"])
+        NEG = -1e18; Kd = len(dsteps)
+        V = [0.0] * (U + 1); best0 = 0
+        for k in range(Kd - 1, -1, -1):
+            Vn = [NEG] * (U + 1); base = int(exo[k]) - imin; r = rq[k]
+            for c in range(min(stock[k], U) + 1):
+                avail = stock[k] - c
+                best = NEG; bx = 0
+                lo_x = avail if k == Kd - 1 else max(0, avail - cap)
+                for x in range(lo_x, avail + 1):
+                    a = base + c
+                    v = pr[a + x] - pr[a] + V[c + x]
+                    if w and r:
+                        v -= w * (pr[a + x + r] - pr[a + x])
+                    if v > best:
+                        best = v; bx = x
+                Vn[c] = best
+                if k == 0 and c == 0:
+                    best0 = bx
+            V = Vn
+        return int(best0)
+
     def _sell_orders(self, obs, shed, carried, hour, day, step):
         inv = obs["market"]["inventory"]
         out = []
@@ -2280,6 +2345,22 @@ class GoldCtl:
             lot = GC_P["drip"].get(p) if GC_P["drip_on"] else None
             if lot and not last and not pressure and day < 29:
                 n = min(n, lot)
+            if GC_P["mkt_dp"] and p in GC_P["mkt_dp_prods"] and not last and day <= 28 and day >= GC_P["mkt_dp_from_day"]:
+                try:
+                    x = self._dp_sell(obs, p, n, step, day, hour, list(_gc_get(obs["town"], "unlocked_shops", []) or []))
+                except Exception as e:
+                    x = n; _GC_REPORT["gc_mkt_dp_err"] = repr(e)[:120]
+                if x is None:
+                    held[p] = held.get(p, 0) + n; _GC_REPORT["gc_dp_wait"] = _GC_REPORT.get("gc_dp_wait", 0) + n
+                    continue
+                if x < n:
+                    held[p] = held.get(p, 0) + (n - x); _GC_REPORT["gc_dp_held"] = _GC_REPORT.get("gc_dp_held", 0) + (n - x)
+                    n = x
+                if n <= 0:
+                    continue
+                _GC_REPORT["gc_dp_sold"] = _GC_REPORT.get("gc_dp_sold", 0) + n
+                out.append(["SELL", p, n])
+                continue
             fl = GC_P["sell_floor"].get(p) if GC_P["sell_floor"] else None
             if fl and not last and day <= GC_P["floor_last_day"] and val_now.get(p, 0) < fl and self._floor_recovers(obs, p, fl, day):
                 held[p] = n
