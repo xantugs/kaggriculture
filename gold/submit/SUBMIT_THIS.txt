@@ -34,7 +34,10 @@ PRIMARY  main_ctl_mkt4_m7.py    m4 = m3 + against a divergent rival (its cash at
          main_ctl_mkt3_m7.py    m3 = v147 + the market programme on every rival (cfg/cfg_m3.json): submitted as v23.
                                 vs v136: pinned 2800+ +$791 +- 151 (z 5.3), wins 95 -> 102; elite gate +$1,266 +- 149,
                                 wins 59 -> 72 (+15/-2). vs v147: pinned +$609 +- 136, wins 95 -> 102.
-         main_ctl_mkt5_m7.py    m5 = v149 (chassis floor 8%) + the m4 additions (cfg/cfg_m5.json): gates pending.
+         main_ctl_mkt5_m7.py    m5 = v149 (chassis floor 8%) + the m4 additions (cfg/cfg_m5.json). Equivalent to m4 on
+                                both gates: elite +$1,911 +- 242 vs v136 (80 wins); day-6 pinned vs m4 -$13 +- 40,
+                                wins 103 -> 101 (noise). Use it instead of m4 if the other session's closed loop
+                                (which prefers the 8% floor by +$88 a game over 3%) is the judge for copy games.
          main_ctl_mkt2_m7.py    m2 = v136 + the programme (cfg/cfg_m2.json); main_ctl_mkt1_m7.py m1 = divergent only.
 
 Adaptive takeover as in v18: chassis until day 24 vs a chassis copy, day 16 vs a divergent rival (ADAPT, steps 143/359).

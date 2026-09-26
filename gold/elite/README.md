@@ -423,3 +423,7 @@ game, the odd-opening ones included), the elites' sits at 0.74-0.86 on day 8. El
 +- 241 vs v136, 59 -> 80 wins, flips +25/-4; +$659 +- 169 vs m3). Pinned 2800+ from day 6: +$487 +- 169 vs m3
 (z 2.9), wins 100 -> 103 (+3/-0), divergent +$1,209 +- 405, copies untouched; 23 of 60 divergent games convert.
 Converting more batches loses: days 6-8 + 11 (e68) +$143, day 5 on (e70) -$861, day 11 alone (e69) +$456 / 77 wins.
+**m5** = v149 (their chassis floor 8%) + the m4 additions: elite gate +$1,911 +- 242 vs v136 (80 wins); day-6 pinned
+vs v149 +$952 +- 219 (z 4.3), wins 96 -> 101, divergent +$2,057 +- 471; vs m4 -$13 +- 40 (103 -> 101 wins):
+the floor step from 3% to 8% is invisible on the pinned gate. m4 stays the primary; m5 is the same agent for anyone
+who prefers their closed-loop judgement of copy games.
