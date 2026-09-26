@@ -214,6 +214,7 @@ GC_P = dict(
     late_plan_min=15.0,   # whichever nets more after seed and fertilizer, when that is at least late_plan_min
     late_keep=False,      # day 28: keep any one-time crop that still gains from a day-29 watering (as d28_keep_carrots)
     mkt_dp_every=False,   # also decide at the steps before a forecast rival sale (sell ahead of it), not only after a tick
+    mkt_dp_every_min=1.0, # ... when the forecast sale before the next post-tick decision is at least this many units
     mkt_dp_copy_plan=False,  # copy rival: forecast its sales from our own tape (same route), its one-step lead applied,
     mkt_dp_copy_hit=0.5,     # capped by the ripe units on its farm; used only while >= this share of its planned sale
                              # steps over the last day showed an observed sale (else the hourly pattern)
@@ -2374,7 +2375,7 @@ class GoldCtl:
             if not GC_P["mkt_dp_every"]:
                 return None
             nxt = step + ((1 - step) % 4)   # the next post-tick decision
-            if sum(rv(s2) for s2 in range(step, nxt)) < 1.0:
+            if sum(rv(s2) for s2 in range(step, nxt)) < float(GC_P["mkt_dp_every_min"]):
                 return None
             _GC_REPORT["gc_dp_ahead"] = _GC_REPORT.get("gc_dp_ahead", 0) + 1
         inv0 = int(obs["market"]["inventory"][p])

@@ -298,3 +298,46 @@ late planting rule. Open: `mkt_dp_every` (+3 wins on the gate at 80 extra progra
 copy games (+$108 +- 126 pinned), and a chassis-days programme, which is not worth building: before day 16 the
 chassis sells only ~70 premium units a game in divergent towns (`fills_ana.py`), a tenth of what the controller
 sells afterwards.
+
+## 16. Engine mechanics mined for money (26 Sep, evening)
+
+Read straight from kaggriculture.py 1.32.7:
+
+- **Market settlement**: the two players' order lists are processed index by index; within an index, unit by unit
+  in lockstep, both quoted at the same pre-commit inventory. A lot at a later index than the rival's same-product
+  lot settles after their whole lot. Buys of wheat/fertilizer are quoted at the post-buy inventory, so a buy/sell
+  round trip nets zero. The town drains after the market of steps 0 mod 4; sales at $1 add no supply.
+- **Growth**: a one-time crop is planted with 1 unit and gains 1 (2 fertilized) per WATER on a day in its window,
+  immediately; ongoing crops gain 1 (2 if fertilized and watered) at the end of production days regardless of
+  watering. Two consecutive unwatered days kill a plant (the planting day counts as unwatered: water on day 0).
+  Animals produce at the end of production days regardless of feeding (the care bonus needs feeding); two unfed
+  days and they escape. The controller already feeds and waters by these rules.
+- **Hands** vanish every night; the n-th hire of a day costs fib(n) dollars (1, 1, 2, 3, 5, 8, 13, 21, 34, 55,
+  89, 144, 233, ...). Hands spawn at the shed at hour 1; the farmer respawns at (4, 4).
+- **Thin markets** (units over 10,000 to the $1 floor): strawberry 75, milk 80, wool 60, melon 160; fertilizer
+  495 (no shop buys it, linear, $0.20 a unit); eggs never crash (log, floor about $37).
+
+**Tick-window lead** (`lead2`, ctl.py): sell every premium lot the tape plans inside the current tick window now,
+ahead of a copy's own one-step lead. Inert: 2 units in 300 closed-loop steps, none in a pinned copy game; the
+tape's premium lots are dropped at the step they are sold. The copy tie prize would have been $1,257 a game
+(`pin_fills`, chassis days), so ties are decided by harvest logistics, not by the order list.
+
+**Copy forecast from the tape** (`mkt_dp_copy_plan`): the copy's planned sales from our own route, its lead
+applied, capped by the ripe units on its farm. Matches only 13-33% of its observed sale steps (copies run other
+versions and layers), so it stays off.
+
+**The melon race**: melons have no shop, the town centre takes one a day, and the price is 250 - 900 (x/300)^2:
+the first wave (day 10, 72 units from our 12 tiles vs the elites' ~80) is a one-shot pool of about $26k shared by
+lockstep. Simulated against the elites' recorded melon sales (672 seats): selling our 72 by hour 8 instead of
+hours 9-15 is +$3.5k margin, but delivery physics (hands spawn at the shed at hour 1, melon tiles are 3-5 steps
+away, water then harvest) already put the tape at the frontier (+$1k at best). Supply is the lever: 4 more tiles
+delivered on second trips are +$4.7k margin vs elites and +$2.5k vs copies, 8 tiles +$8k / +$3.5k, and the route
+has no room for them: day 0 spends the $3,000 on 2 cows, 2 sheep, 12 melons, 7 wheat and 5 hires, and NW's 24
+tiles are full from day 1; displacing the animals or the early wheat nets out negative. After day 11 nobody sells
+melons in copy games and the price crawls from $76 to $120 (one unit a day), but the room to the floor is only
+30-40 units, so a second wave is worth $2-3k gross for 5-6 tiles: strawberries beat it.
+
+**Programme on copy games with step-level decisions** (e52, pinned, 102 games so far): +$299 +- 184 on copies
+(0/-1 flips; one strawberry-rich copy game loses $4.5k when holds hand the copy the day-27 book), +$357 +- 119 on
+divergent games over v137. Step-level decisions go into the divergent build (e54/e55, elite gate running); the
+copy-game programme stays off.
