@@ -341,3 +341,19 @@ melons in copy games and the price crawls from $76 to $120 (one unit a day), but
 (0/-1 flips; one strawberry-rich copy game loses $4.5k when holds hand the copy the day-27 book), +$357 +- 119 on
 divergent games over v137. Step-level decisions go into the divergent build (e54/e55, elite gate running); the
 copy-game programme stays off.
+
+**Land**: the top elite teams buy SW on day 8-9 and SE on day 8-9 (DSM 77% of seats, Unknown Mother-Goose 89%,
+M & M & P & Q 98%, Yannik Schiffner 70%; QQ and Sida Zuo never), with the same 10-12 hires a day as us; our route
+buys SW on day 11 and SE only as a strawberry/tomato/herd annex (16% of gate seats, day 12+). The products they
+beat us on (wheat, carrots, tomatoes) are the ones whose markets take volume. `se_force_day` (ctl.py) buys SE as
+plain land at the first day plan on or after that day; e56 (day 16) and e57 (day 20) on the elite gate measure
+whether the controller turns 25 tiles for $4,000 into money with its own crop choice.
+
+**Gate fidelity**: the repaired elite replays score a median 0.99 of their recorded games; 55 of 210 seats are
+below 0.95 and 24 below 0.90 (a recorded land purchase can fail on the replayed cash path: DSM 111016709 seat 1
+loses its SE). We win 30% of the intact seats and 38% of the weakened ones, so the gate overstates us slightly.
+
+**Determinism**: two builds of the same effective configuration differ on 20 of 210 seats when the programme's keys
+sit in `div_over` instead of the top level: `div_over` is applied only once ADAPT flags the rival (step 143 or
+359), so a rich-town day-12 takeover runs without the programme until then. v138 puts the keys at the top level
+(e42's placement: +$1,200 / 70 wins vs e54's +$1,072 / 67 wins on the same seats).
