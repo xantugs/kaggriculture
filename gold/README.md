@@ -410,3 +410,29 @@ recordings in their own towns; my m5 run reproduces their per-seat numbers exact
 - Idea 30 (terminal day): the day-29 programme above; tomatoes and carrots in the day-29 programme -$6 +- 3.
 - Idea 29 (second-seat asymmetry): m5 wins 581 of 600 closed-loop games in either seat, close games 132/151 (seat 0)
   vs 126/144 (seat 1), paired seat-0 minus seat-1 margin -$144 +- 67: nothing for a seat-1 rule to fix.
+
+## 26 Sep (evening): the elite gap, measured (moonshot search on sf5b)
+Against divergent rivals sf5b wins 39% (2800+ games: 21 of 54; elite gate 82 of 210); its losses there are mostly
+large (elite gate: 10 within $1k, 32 within $3k, 96 beyond $3k: a uniform +$1k would add 10 wins, +$3k 32).
+Revenue per seat vs the elites: wheat -$3.5 to -4.5k, tomatoes -$2 to -2.7k, carrots -$1.5 to -2k; we win melons
+(+$4.5k), milk, fertilizer and pay ~$1k less in wages. A traced DSM game (seat 40) shows where it comes from:
+- DSM's opening is not the public route 0 (0.7% of its unit actions match; only a small copy team matches 100%),
+  although ADAPT only separates it at step 359.
+- By day 7 DSM holds $21 (we hold $1,108): it has already bought 4 cows and 7 sheep (ours 4/4). It buys SW on day 9
+  and places 5 more cows there; by day 16 it has 11 cows and 9 sheep to our 6 and 11. On day 11 we hold $18,045 of
+  idle cash (the day-10 melon money) against DSM's $4,472; its cash gains $31k from day 11 to 16, ours $17k; both
+  hold ~$35k on day 16, but DSM's farm is larger. A cow gives its first milk 8 days after purchase, so this
+  investment only pays in the day 6-10 window the tape owns (engine: fed + cared daily, a cow gives 3 milk every 2
+  days, a sheep 4 wool every 3, a goose 2 eggs a day, each animal 1 fertilizer a day; 2 unfed days and it escapes).
+- Days 16-28: DSM makes 134 wheat plantings to our 83 on the same 75 tiles (harvests at age 2-3, ours at 3-4) and
+  runs 10.9 hands a day to our 9.4; per unit-turn both farms are equally productive (55%).
+Rejected on the elite gate (all vs sf5b): a fixed divergent route at the day-6 pick when ADAPT flags at 143 (41
+routes x 88 seats: none beats the shop-based choice on wins; per-team signals within noise: route 110 vs M&M&P&Q
++$1,346 +- 467 is the best of 41); divergent takeover day 18 +$45 +- 169 (82 -> 80), day 20 -$505; takeover day 12 /
+14 for rivals flagged at 143 -$957 / -$376; programme holding cap 16/20/30 +$87/+$131/+$172 (+-57-74, no wins);
+programme decisions every turn (+$41) or at 1 unit (+$18); strawberry-to-tomato conversion in one-buyer towns -$668
+(82 -> 77), with the town's crop -$1,292, by-town crop in zero-buyer towns -$254; early wheat harvest (age 3 at 5
+units) +$66 +- 174 (wheat +$1,037 but wages -$1,504), with carrots -$622, at 4 units +$105 +- 180. A rival-holdings
+forecast (harvests from its tiles minus its sales) predicts its next-day sales worse than the 2-day hourly pattern.
+Every production lever runs into the Fibonacci wage (the day's 11th-14th hands cost $89-377); what the elites have is
+an integrated day 6-10 investment plan (land + herd + dense wheat), which is a planner, not a knob.
