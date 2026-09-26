@@ -438,3 +438,9 @@ still triples the hire bill (+$7k of wheat for +$7k of wages plus the land). A b
 step 359 used to reset the takeover to day 16 after a day-6 hand-over, so the tape resumed on a farm it did not
 recognise (fixed with a min). Verdict: this controller cannot run 100 tiles; its routing over far tiles hires the
 12th-14th hands and leaves the work unserved. The elite early game needs a planner written for it, not a takeover.
+**Copies too?** e78 converts against every rival: copies -$756 +- 397 (78 -> 72 wins, flips +1/-7) with two
+collapses (-$14k, -$32k: our day-16 tomato block goes untended once early tomatoes sit on the farm, hires drop
+from 75 to 54). The conversion stays divergent-only. Tomatoes in the market programme (e77): +$58 +- 36, 80 -> 77
+wins, not adopted. Delivery timing measured (16 elite seats, days 16-28): elites drop 56% of premium units at the
+night boundary, we drop 75% (27 of 36 a day); on the first day of a rival's strawberries the programme held our
+8 strawberries, 8 milk and 12 wool from hour 1 to hour 23 for want of a rival pattern (DSM sold 36 that day).
