@@ -9,3 +9,8 @@ gold/c_*.py
 # gold/elite built agents (elite bases and controller hybrids) are reproducible with gold/elite/build_elite.py + gold/build.py
 gold/elite/bases/
 gold/harness/pin_fills_*.jsonl
+# gold/top10: pinned gate inputs (rebuilt from replays/ by import_replays.py) and generated builds
+gold/top10/gates/*.json
+gold/top10/full/sf8_*.py
+gold/top10/lean_sf*.py
+gold/top10/full/base_m7_t4.py
