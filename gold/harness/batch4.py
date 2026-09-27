@@ -50,7 +50,7 @@ if __name__ == '__main__':
     seats = [int(c) for c in (sys.argv[5] if len(sys.argv) > 5 else '01')]
     jobs = [(a, b, s, st) for s in ss for st in seats]
     t = time.time(); res = []
-    with ProcessPoolExecutor(4) as ex, open(out, 'w') as fh:
+    with ProcessPoolExecutor(int(os.environ.get("NPROC", "4"))) as ex, open(out, 'w') as fh:
         for r in ex.map(job, jobs):
             res.append(r); fh.write(json.dumps(r) + '\n'); fh.flush()
     ok = [r for r in res if r['m'] is not None]

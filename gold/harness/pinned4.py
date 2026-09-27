@@ -160,9 +160,16 @@ if __name__ == '__main__':
     games = []
     want = set(int(x) for x in open(os.environ["PIN_GIDS"]).read().split()) if os.environ.get("PIN_GIDS") else None
     for f in files:
+        # one small file per game (<f>.d/<i>.json, a one-element list) so each worker loads only its own game;
+        # loading the whole corpus in every worker ran 15.6 GB out of memory at 12 workers
+        split = f + '.d'
+        os.makedirs(split, exist_ok=True)
         for i, d in enumerate(json.load(open(f, encoding='utf-8'))):
             if team in d['info']['TeamNames'] and (want is None or d['id'] in want):
-                games.append((f, i))
+                one = os.path.join(split, '%d.json' % i)
+                if not os.path.exists(one):
+                    json.dump([d], open(one, 'w', encoding='utf-8'))
+                games.append((one, 0))
     games = games[:maxg]
     jobs = [(f, i, team, c, S) for f, i in games for c in cands]
     t0 = time.time(); res = []

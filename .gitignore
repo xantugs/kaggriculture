@@ -14,3 +14,4 @@ gold/top10/gates/*.json
 gold/top10/full/sf8_*.py
 gold/top10/lean_sf*.py
 gold/top10/full/base_m7_t4.py
+*.json.d/
