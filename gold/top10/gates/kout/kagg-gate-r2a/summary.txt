@@ -1,0 +1,4 @@
+== goldg (base sf8: 111 rows, wins 41)
+  k_dp_egg               n  111      +57 +-   82  wins   41 ->   41 (+0/-0)
+  k_dp_tom               n  111     -146 +-   80  wins   41 ->   41 (+1/-1)
+  k_s2t_sh1              n  111     -569 +-  498  wins   41 ->   38 (+5/-8)

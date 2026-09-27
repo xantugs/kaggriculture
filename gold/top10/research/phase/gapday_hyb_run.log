@@ -1,0 +1,456 @@
+60 seats {'吃白饭的大肥鱼': 10, 'THIRD FARM CLUB': 10, 'mtmr_s1': 10, 'Kaggledew Valley 🏆': 10, 'TheEggman': 10, 'Yizhou': 10} D 16
+0 吃白饭的大肥鱼 113065970 1 m -10478.0 wall 6.4 T 9
+1 吃白饭的大肥鱼 113079212 0 m -915.0 wall 6.7 T 9
+2 吃白饭的大肥鱼 113091953 0 m -9301.0 wall 6.6 T 16
+3 吃白饭的大肥鱼 113093088 1 m 1948.0 wall 6.1 T 16
+4 吃白饭的大肥鱼 113103588 1 m -7436.0 wall 6.2 T 22
+5 吃白饭的大肥鱼 113125645 1 m -1489.0 wall 5.9 T 22
+6 吃白饭的大肥鱼 113138587 0 m -1081.0 wall 5.6 T 27
+7 吃白饭的大肥鱼 113175616 1 m -4796.0 wall 5.8 T 28
+8 吃白饭的大肥鱼 113184088 0 m 45106.0 wall 4.1 T 31
+9 吃白饭的大肥鱼 113188236 0 m 5800.0 wall 6.3 T 34
+10 THIRD FARM CLUB 113079221 1 m 4801.0 wall 6.0 T 37
+11 THIRD FARM CLUB 113097920 1 m 11240.0 wall 5.8 T 40
+12 THIRD FARM CLUB 113168578 1 m 1969.0 wall 6.8 T 44
+13 THIRD FARM CLUB 113193141 0 m 3246.0 wall 6.5 T 46
+14 THIRD FARM CLUB 113203809 0 m -1722.0 wall 6.0 T 50
+15 THIRD FARM CLUB 113215092 1 m 4080.0 wall 6.0 T 52
+16 THIRD FARM CLUB 113216231 0 m 1666.0 wall 6.4 T 57
+17 THIRD FARM CLUB 113229034 0 m 2921.0 wall 6.1 T 59
+18 THIRD FARM CLUB 113236533 1 m -9839.0 wall 6.2 T 63
+19 THIRD FARM CLUB 113252618 0 m -347.0 wall 6.6 T 65
+20 mtmr_s1 113065954 0 m -17565.0 wall 8.7 T 72
+21 mtmr_s1 113073288 0 m -8975.0 wall 7.6 T 73
+22 mtmr_s1 113080405 0 m -23408.0 wall 9.1 T 81
+23 mtmr_s1 113093036 0 m -23974.0 wall 9.4 T 82
+24 mtmr_s1 113103617 1 m -17176.0 wall 9.0 T 90
+25 mtmr_s1 113112818 1 m -13041.0 wall 8.7 T 91
+26 mtmr_s1 113125640 1 m -7775.0 wall 8.0 T 98
+27 mtmr_s1 113132789 0 m -12778.0 wall 8.3 T 100
+28 mtmr_s1 113153647 1 m -14682.0 wall 8.2 T 107
+29 mtmr_s1 113175616 0 m -23191.0 wall 8.0 T 108
+30 Kaggledew Valley 🏆 113073284 1 m -2501.0 wall 4.8 T 111
+31 Kaggledew Valley 🏆 113074365 0 m 5388.0 wall 5.2 T 113
+32 Kaggledew Valley 🏆 113087145 0 m 3924.0 wall 4.6 T 116
+33 Kaggledew Valley 🏆 113104360 0 m -2142.0 wall 4.5 T 117
+34 Kaggledew Valley 🏆 113135074 1 m 3645.0 wall 4.5 T 121
+35 Kaggledew Valley 🏆 113139777 1 m 275.0 wall 4.7 T 122
+36 Kaggledew Valley 🏆 113146625 1 m 4322.0 wall 4.4 T 125
+37 Kaggledew Valley 🏆 113160477 0 m -11021.0 wall 4.3 T 127
+38 Kaggledew Valley 🏆 113180524 0 m -11010.0 wall 4.6 T 130
+39 Kaggledew Valley 🏆 113197807 0 m -1910.0 wall 4.6 T 131
+40 TheEggman 113118870 1 m 21490.0 wall 4.2 T 134
+41 TheEggman 113142011 1 m -4478.0 wall 5.7 T 137
+42 TheEggman 113216186 1 m 1620.0 wall 5.5 T 140
+43 TheEggman 113333423 1 m -2437.0 wall 5.4 T 143
+44 TheEggman 113380121 1 m 8891.0 wall 4.3 T 144
+45 TheEggman 113389473 1 m 45.0 wall 6.0 T 149
+46 TheEggman 113390437 0 m -4277.0 wall 6.0 T 150
+47 TheEggman 113395632 0 m -7298.0 wall 6.0 T 155
+48 TheEggman 113492530 1 m -854.0 wall 6.2 T 156
+49 TheEggman 113537111 0 m 1394.0 wall 5.6 T 160
+50 Yizhou 113709444 1 m 11851.0 wall 4.6 T 161
+51 Yizhou 113740423 0 m -1036.0 wall 5.8 T 166
+52 Yizhou 113773025 1 m -15423.0 wall 5.9 T 167
+53 Yizhou 113781287 1 m 31711.0 wall 4.2 T 170
+54 Yizhou 113787172 1 m -6547.0 wall 6.4 T 173
+55 Yizhou 113788337 0 m 25279.0 wall 4.2 T 175
+56 Yizhou 113790698 0 m -7648.0 wall 4.4 T 178
+57 Yizhou 113803750 0 m -4136.0 wall 5.8 T 180
+58 Yizhou 113820729 0 m -11607.0 wall 6.2 T 184
+59 Yizhou 113830726 1 m 18142.0 wall 4.7 T 185
+72 seats {'DSM': 8, 'Boey': 8, 'Vadim Vasilenko': 8, 'M & M & P & Q': 8, 'Majkel1337': 8, 'DECEM': 8, 'Unknown Mother-Goose': 8, 'Fourth Quadrant': 8, 'Azat Akhtyamov': 8} D 16
+0 DSM 113067521 1 m -22758.0 wall 6.1 T 8
+1 DSM 113097911 0 m -5251.0 wall 5.8 T 8
+2 DSM 113125644 1 m -19123.0 wall 5.9 T 14
+3 DSM 113224254 1 m -20561.0 wall 5.7 T 14
+4 DSM 113236034 0 m -17671.0 wall 5.8 T 20
+5 DSM 113247647 1 m -25017.0 wall 6.1 T 20
+6 DSM 113273596 1 m -17412.0 wall 6.1 T 26
+7 DSM 113333418 0 m -23984.0 wall 6.1 T 26
+8 Boey 113065954 1 m 35863.0 wall 3.7 T 30
+9 Boey 113087145 1 m -4086.0 wall 4.3 T 30
+10 Boey 113112822 0 m -9254.0 wall 4.5 T 34
+11 Boey 113132794 1 m -3770.0 wall 4.6 T 35
+12 Boey 113153433 1 m -1501.0 wall 4.5 T 39
+13 Boey 113179000 1 m -12466.0 wall 4.5 T 40
+14 Boey 113207353 0 m -3360.0 wall 4.7 T 43
+15 Boey 113236034 1 m 191.0 wall 4.4 T 44
+16 Vadim Vasilenko 113067522 1 m 9969.0 wall 4.8 T 48
+17 Vadim Vasilenko 113096241 1 m -15132.0 wall 6.0 T 50
+18 Vadim Vasilenko 113109182 1 m -13727.0 wall 6.0 T 54
+19 Vadim Vasilenko 113132795 1 m -4510.0 wall 5.2 T 55
+20 Vadim Vasilenko 113159429 0 m -18761.0 wall 5.0 T 59
+21 Vadim Vasilenko 113180209 0 m -13905.0 wall 5.3 T 61
+22 Vadim Vasilenko 113207284 1 m 12408.0 wall 4.2 T 64
+23 Vadim Vasilenko 113233703 0 m -13028.0 wall 6.1 T 67
+24 M & M & P & Q 113067524 1 m -9369.0 wall 6.2 T 70
+25 M & M & P & Q 113109182 0 m -14292.0 wall 6.6 T 74
+26 M & M & P & Q 113153431 0 m 19850.0 wall 4.5 T 75
+27 M & M & P & Q 113195165 1 m -9414.0 wall 6.2 T 80
+28 M & M & P & Q 113229596 0 m -15179.0 wall 6.3 T 81
+29 M & M & P & Q 113284191 1 m 5663.0 wall 5.8 T 86
+30 M & M & P & Q 113308626 0 m -2874.0 wall 4.3 T 86
+31 M & M & P & Q 113342744 0 m 21487.0 wall 4.7 T 90
+32 Majkel1337 113067522 0 m -5305.0 wall 4.3 T 90
+33 Majkel1337 113092068 1 m 2684.0 wall 4.0 T 94
+34 Majkel1337 113097421 1 m -7861.0 wall 4.2 T 94
+35 Majkel1337 113183530 0 m -4592.0 wall 4.8 T 99
+36 Majkel1337 113189343 1 m -2879.0 wall 4.1 T 99
+37 Majkel1337 113196323 1 m -5439.0 wall 4.1 T 103
+38 Majkel1337 113202318 0 m -9342.0 wall 4.1 T 103
+39 Majkel1337 113214242 0 m -2516.0 wall 4.0 T 107
+40 DECEM 113067521 0 m -17697.0 wall 5.3 T 108
+41 DECEM 113083668 1 m 11169.0 wall 4.9 T 112
+42 DECEM 113097923 1 m -7304.0 wall 5.1 T 114
+43 DECEM 113118870 0 m -9794.0 wall 5.4 T 117
+44 DECEM 113145342 0 m 33324.0 wall 3.5 T 117
+45 DECEM 113168728 1 m -15517.0 wall 5.6 T 123
+46 DECEM 113221279 0 m -10058.0 wall 5.4 T 123
+47 DECEM 113246820 0 m -9763.0 wall 4.7 T 127
+48 Unknown Mother-Goose 113066303 1 m -12296.0 wall 5.5 T 128
+49 Unknown Mother-Goose 113083668 0 m -21443.0 wall 5.5 T 133
+50 Unknown Mother-Goose 113104649 1 m -17174.0 wall 5.1 T 133
+51 Unknown Mother-Goose 113118872 1 m -15897.0 wall 5.2 T 138
+52 Unknown Mother-Goose 113146627 1 m 5879.0 wall 3.7 T 138
+53 Unknown Mother-Goose 113181583 1 m 6867.0 wall 4.1 T 141
+54 Unknown Mother-Goose 113215092 0 m -13915.0 wall 5.0 T 143
+55 Unknown Mother-Goose 113237239 1 m -13759.0 wall 5.4 T 147
+56 Fourth Quadrant 113095439 0 m 4227.0 wall 5.0 T 148
+57 Fourth Quadrant 113124487 0 m -11614.0 wall 5.7 T 152
+58 Fourth Quadrant 113153445 1 m -13412.0 wall 6.0 T 154
+59 Fourth Quadrant 113180379 1 m -15843.0 wall 5.6 T 158
+60 Fourth Quadrant 113214242 1 m -2277.0 wall 5.3 T 160
+61 Fourth Quadrant 113237685 1 m 67674.0 wall 2.4 T 161
+62 Fourth Quadrant 113257456 0 m -10530.0 wall 5.1 T 165
+63 Fourth Quadrant 113276019 0 m 5432.0 wall 5.1 T 166
+64 Azat Akhtyamov 113532009 1 m 1876.0 wall 3.8 T 169
+65 Azat Akhtyamov 113537115 1 m -13135.0 wall 5.3 T 171
+66 Azat Akhtyamov 113543206 1 m -580.0 wall 3.7 T 173
+67 Azat Akhtyamov 113543803 0 m -19971.0 wall 5.2 T 176
+68 Azat Akhtyamov 113547380 1 m -15829.0 wall 5.3 T 178
+69 Azat Akhtyamov 113549871 0 m -2212.0 wall 4.0 T 180
+70 Azat Akhtyamov 113563715 1 m -11067.0 wall 5.6 T 184
+71 Azat Akhtyamov 113577176 1 m 2505.0 wall 3.7 T 184
+60 seats {'吃白饭的大肥鱼': 10, 'THIRD FARM CLUB': 10, 'mtmr_s1': 10, 'Kaggledew Valley 🏆': 10, 'TheEggman': 10, 'Yizhou': 10} D 22
+0 吃白饭的大肥鱼 113065970 1 m -4550.0 wall 3.8 T 5
+1 吃白饭的大肥鱼 113079212 0 m -7408.0 wall 3.8 T 5
+2 吃白饭的大肥鱼 113091953 0 m -9987.0 wall 3.2 T 9
+3 吃白饭的大肥鱼 113093088 1 m 4395.0 wall 3.5 T 9
+4 吃白饭的大肥鱼 113103588 1 m -4984.0 wall 3.5 T 12
+5 吃白饭的大肥鱼 113125645 1 m -5568.0 wall 3.4 T 12
+6 吃白饭的大肥鱼 113138587 0 m 2915.0 wall 3.4 T 16
+7 吃白饭的大肥鱼 113175616 1 m -6117.0 wall 3.2 T 16
+8 吃白饭的大肥鱼 113184088 0 m 14549.0 wall 2.3 T 18
+9 吃白饭的大肥鱼 113188236 0 m 6303.0 wall 3.2 T 19
+10 THIRD FARM CLUB 113079221 1 m 4153.0 wall 3.1 T 21
+11 THIRD FARM CLUB 113097920 1 m 4331.0 wall 3.3 T 22
+12 THIRD FARM CLUB 113168578 1 m 1791.0 wall 3.3 T 25
+13 THIRD FARM CLUB 113193141 0 m 3105.0 wall 3.4 T 26
+14 THIRD FARM CLUB 113203809 0 m 3128.0 wall 3.2 T 28
+15 THIRD FARM CLUB 113215092 1 m 7274.0 wall 3.3 T 29
+16 THIRD FARM CLUB 113216231 0 m 5783.0 wall 3.3 T 31
+17 THIRD FARM CLUB 113229034 0 m 2125.0 wall 3.6 T 33
+18 THIRD FARM CLUB 113236533 1 m -6000.0 wall 3.5 T 35
+19 THIRD FARM CLUB 113252618 0 m 7286.0 wall 3.5 T 36
+20 mtmr_s1 113065954 0 m -9920.0 wall 4.9 T 40
+21 mtmr_s1 113073288 0 m -5825.0 wall 4.6 T 41
+22 mtmr_s1 113080405 0 m -12920.0 wall 4.7 T 44
+23 mtmr_s1 113093036 0 m -9464.0 wall 4.8 T 46
+24 mtmr_s1 113103617 1 m -14040.0 wall 5.0 T 49
+25 mtmr_s1 113112818 1 m -5683.0 wall 4.7 T 51
+26 mtmr_s1 113125640 1 m -7793.0 wall 4.5 T 54
+27 mtmr_s1 113132789 0 m -4026.0 wall 4.4 T 55
+28 mtmr_s1 113153647 1 m -18646.0 wall 4.7 T 59
+29 mtmr_s1 113175616 0 m -15317.0 wall 4.4 T 59
+30 Kaggledew Valley 🏆 113073284 1 m -2692.0 wall 3.1 T 62
+31 Kaggledew Valley 🏆 113074365 0 m 1526.0 wall 3.2 T 63
+32 Kaggledew Valley 🏆 113087145 0 m 7086.0 wall 3.0 T 65
+33 Kaggledew Valley 🏆 113104360 0 m -2386.0 wall 3.1 T 66
+34 Kaggledew Valley 🏆 113135074 1 m 3606.0 wall 3.1 T 68
+35 Kaggledew Valley 🏆 113139777 1 m -1482.0 wall 2.8 T 69
+36 Kaggledew Valley 🏆 113146625 1 m 6585.0 wall 2.8 T 71
+37 Kaggledew Valley 🏆 113160477 0 m -6257.0 wall 3.0 T 72
+38 Kaggledew Valley 🏆 113180524 0 m -5464.0 wall 2.9 T 74
+39 Kaggledew Valley 🏆 113197807 0 m -1171.0 wall 2.9 T 75
+40 TheEggman 113118870 1 m 11219.0 wall 3.3 T 77
+41 TheEggman 113142011 1 m -2259.0 wall 4.8 T 80
+42 TheEggman 113216186 1 m 879.0 wall 4.8 T 82
+43 TheEggman 113333423 1 m -3016.0 wall 4.3 T 84
+44 TheEggman 113380121 1 m 6926.0 wall 3.3 T 85
+45 TheEggman 113389473 1 m 296.0 wall 4.0 T 88
+46 TheEggman 113390437 0 m -2890.0 wall 4.1 T 90
+47 TheEggman 113395632 0 m -3373.0 wall 4.8 T 93
+48 TheEggman 113492530 1 m -722.0 wall 4.5 T 94
+49 TheEggman 113537111 0 m -2814.0 wall 4.0 T 97
+50 Yizhou 113709444 1 m 5073.0 wall 3.1 T 97
+51 Yizhou 113740423 0 m -4124.0 wall 4.7 T 102
+52 Yizhou 113773025 1 m -4417.0 wall 4.3 T 102
+53 Yizhou 113781287 1 m 11842.0 wall 3.5 T 105
+54 Yizhou 113787172 1 m -4587.0 wall 4.8 T 107
+55 Yizhou 113788337 0 m 5314.0 wall 3.1 T 108
+56 Yizhou 113790698 0 m -3659.0 wall 3.3 T 110
+57 Yizhou 113803750 0 m 497.0 wall 4.2 T 113
+58 Yizhou 113820729 0 m -4961.0 wall 4.0 T 114
+59 Yizhou 113830726 1 m 11921.0 wall 3.2 T 116
+72 seats {'DSM': 8, 'Boey': 8, 'Vadim Vasilenko': 8, 'M & M & P & Q': 8, 'Majkel1337': 8, 'DECEM': 8, 'Unknown Mother-Goose': 8, 'Fourth Quadrant': 8, 'Azat Akhtyamov': 8} D 22
+0 DSM 113067521 1 m -9273.0 wall 4.3 T 6
+1 DSM 113097911 0 m -1162.0 wall 4.4 T 6
+2 DSM 113125644 1 m -8329.0 wall 4.3 T 10
+3 DSM 113224254 1 m -14074.0 wall 4.5 T 11
+4 DSM 113236034 0 m -8324.0 wall 3.9 T 14
+5 DSM 113247647 1 m -8927.0 wall 3.9 T 15
+6 DSM 113273596 1 m -8451.0 wall 4.7 T 19
+7 DSM 113333418 0 m -13287.0 wall 4.7 T 19
+8 Boey 113065954 1 m 6947.0 wall 2.7 T 22
+9 Boey 113087145 1 m -4203.0 wall 3.4 T 23
+10 Boey 113112822 0 m -1971.0 wall 3.4 T 25
+11 Boey 113132794 1 m -2663.0 wall 3.7 T 26
+12 Boey 113153433 1 m 1968.0 wall 3.6 T 29
+13 Boey 113179000 1 m -10709.0 wall 3.7 T 30
+14 Boey 113207353 0 m -1746.0 wall 3.5 T 32
+15 Boey 113236034 1 m -2137.0 wall 3.4 T 34
+16 Vadim Vasilenko 113067522 1 m 7630.0 wall 3.1 T 36
+17 Vadim Vasilenko 113096241 1 m -2575.0 wall 4.4 T 38
+18 Vadim Vasilenko 113109182 1 m -7365.0 wall 5.0 T 41
+19 Vadim Vasilenko 113132795 1 m -6306.0 wall 4.6 T 43
+20 Vadim Vasilenko 113159429 0 m -7935.0 wall 4.0 T 45
+21 Vadim Vasilenko 113180209 0 m -7101.0 wall 4.3 T 47
+22 Vadim Vasilenko 113207284 1 m 9309.0 wall 3.0 T 48
+23 Vadim Vasilenko 113233703 0 m -9309.0 wall 4.7 T 52
+24 M & M & P & Q 113067524 1 m -9798.0 wall 4.9 T 53
+25 M & M & P & Q 113109182 0 m -11747.0 wall 5.0 T 57
+26 M & M & P & Q 113153431 0 m 7547.0 wall 3.1 T 57
+27 M & M & P & Q 113195165 1 m -4077.0 wall 4.4 T 60
+28 M & M & P & Q 113229596 0 m -15144.0 wall 4.7 T 62
+29 M & M & P & Q 113284191 1 m -1030.0 wall 4.4 T 65
+30 M & M & P & Q 113308626 0 m -3126.0 wall 3.6 T 65
+31 M & M & P & Q 113342744 0 m -5021.0 wall 3.5 T 68
+32 Majkel1337 113067522 0 m 683.0 wall 3.3 T 69
+33 Majkel1337 113092068 1 m 1082.0 wall 3.2 T 72
+34 Majkel1337 113097421 1 m -8738.0 wall 3.2 T 72
+35 Majkel1337 113183530 0 m -762.0 wall 3.6 T 75
+36 Majkel1337 113189343 1 m 1658.0 wall 3.3 T 75
+37 Majkel1337 113196323 1 m -857.0 wall 3.3 T 78
+38 Majkel1337 113202318 0 m -1669.0 wall 3.2 T 79
+39 Majkel1337 113214242 0 m 3724.0 wall 3.1 T 82
+40 DECEM 113067521 0 m -3662.0 wall 3.8 T 82
+41 DECEM 113083668 1 m -1100.0 wall 4.8 T 86
+42 DECEM 113097923 1 m 712.0 wall 4.2 T 87
+43 DECEM 113118870 0 m -10445.0 wall 4.3 T 91
+44 DECEM 113145342 0 m 12234.0 wall 2.9 T 91
+45 DECEM 113168728 1 m -6362.0 wall 4.4 T 94
+46 DECEM 113221279 0 m -5884.0 wall 4.6 T 95
+47 DECEM 113246820 0 m -6191.0 wall 4.1 T 98
+48 Unknown Mother-Goose 113066303 1 m -6558.0 wall 4.5 T 100
+49 Unknown Mother-Goose 113083668 0 m -11624.0 wall 4.3 T 102
+50 Unknown Mother-Goose 113104649 1 m -6346.0 wall 4.4 T 104
+51 Unknown Mother-Goose 113118872 1 m -7885.0 wall 4.3 T 107
+52 Unknown Mother-Goose 113146627 1 m 8328.0 wall 3.4 T 108
+53 Unknown Mother-Goose 113181583 1 m 5984.0 wall 3.3 T 110
+54 Unknown Mother-Goose 113215092 0 m -3346.0 wall 4.5 T 112
+55 Unknown Mother-Goose 113237239 1 m -7417.0 wall 4.3 T 115
+56 Fourth Quadrant 113095439 0 m -3776.0 wall 4.2 T 117
+57 Fourth Quadrant 113124487 0 m -1737.0 wall 4.4 T 119
+58 Fourth Quadrant 113153445 1 m -4917.0 wall 4.2 T 121
+59 Fourth Quadrant 113180379 1 m -5206.0 wall 4.6 T 124
+60 Fourth Quadrant 113214242 1 m -564.0 wall 4.3 T 125
+61 Fourth Quadrant 113237685 1 m 18891.0 wall 2.1 T 126
+62 Fourth Quadrant 113257456 0 m -3697.0 wall 4.7 T 130
+63 Fourth Quadrant 113276019 0 m -2584.0 wall 4.6 T 131
+64 Azat Akhtyamov 113532009 1 m 7619.0 wall 3.4 T 134
+65 Azat Akhtyamov 113537115 1 m -5377.0 wall 3.8 T 134
+66 Azat Akhtyamov 113543206 1 m -2666.0 wall 3.1 T 137
+67 Azat Akhtyamov 113543803 0 m -5362.0 wall 4.1 T 139
+68 Azat Akhtyamov 113547380 1 m -4501.0 wall 4.2 T 141
+69 Azat Akhtyamov 113549871 0 m -490.0 wall 3.4 T 142
+70 Azat Akhtyamov 113563715 1 m -6288.0 wall 3.9 T 145
+71 Azat Akhtyamov 113577176 1 m 1574.0 wall 3.1 T 145
+24 seats {'吃白饭的大肥鱼': 4, 'THIRD FARM CLUB': 4, 'mtmr_s1': 4, 'Kaggledew Valley 🏆': 4, 'TheEggman': 4, 'Yizhou': 4} D 30
+0 吃白饭的大肥鱼 113065970 1 m 0.0 wall 2.0 T 3
+1 吃白饭的大肥鱼 113079212 0 m -5107.0 wall 1.8 T 3
+2 吃白饭的大肥鱼 113091953 0 m -11653.0 wall 1.9 T 5
+3 吃白饭的大肥鱼 113093088 1 m 2085.0 wall 1.9 T 5
+4 THIRD FARM CLUB 113079221 1 m 0.0 wall 2.0 T 7
+5 THIRD FARM CLUB 113097920 1 m 120.0 wall 1.9 T 7
+6 THIRD FARM CLUB 113168578 1 m 0.0 wall 1.9 T 9
+7 THIRD FARM CLUB 113193141 0 m 271.0 wall 1.9 T 9
+8 mtmr_s1 113065954 0 m -525.0 wall 2.2 T 11
+9 mtmr_s1 113073288 0 m 0.0 wall 2.2 T 11
+10 mtmr_s1 113080405 0 m 0.0 wall 2.1 T 13
+11 mtmr_s1 113093036 0 m -244.0 wall 2.1 T 13
+12 Kaggledew Valley 🏆 113073284 1 m 0.0 wall 1.8 T 15
+13 Kaggledew Valley 🏆 113074365 0 m 2977.0 wall 1.8 T 15
+14 Kaggledew Valley 🏆 113087145 0 m 2781.0 wall 1.8 T 17
+15 Kaggledew Valley 🏆 113104360 0 m 0.0 wall 1.8 T 17
+16 TheEggman 113118870 1 m 1294.0 wall 1.8 T 19
+17 TheEggman 113142011 1 m 2135.0 wall 1.9 T 19
+18 TheEggman 113216186 1 m -466.0 wall 2.0 T 21
+19 TheEggman 113333423 1 m 0.0 wall 2.0 T 21
+20 Yizhou 113709444 1 m 0.0 wall 1.7 T 22
+21 Yizhou 113740423 0 m 0.0 wall 2.1 T 23
+22 Yizhou 113773025 1 m 763.0 wall 2.1 T 25
+23 Yizhou 113781287 1 m 0.0 wall 1.7 T 25
+27 seats {'DSM': 3, 'Boey': 3, 'Vadim Vasilenko': 3, 'M & M & P & Q': 3, 'Majkel1337': 3, 'DECEM': 3, 'Unknown Mother-Goose': 3, 'Fourth Quadrant': 3, 'Azat Akhtyamov': 3} D 30
+0 DSM 113067521 1 m -537.0 wall 2.2 T 3
+1 DSM 113097911 0 m -1319.0 wall 2.0 T 3
+2 DSM 113125644 1 m 182.0 wall 2.1 T 5
+3 Boey 113065954 1 m 0.0 wall 1.7 T 5
+4 Boey 113087145 1 m 0.0 wall 1.9 T 7
+5 Boey 113112822 0 m 0.0 wall 2.0 T 7
+6 Vadim Vasilenko 113067522 1 m 0.0 wall 1.8 T 9
+7 Vadim Vasilenko 113096241 1 m 53.0 wall 2.1 T 9
+8 Vadim Vasilenko 113109182 1 m 0.0 wall 2.1 T 11
+9 M & M & P & Q 113067524 1 m 0.0 wall 2.1 T 12
+10 M & M & P & Q 113109182 0 m 0.0 wall 2.1 T 13
+11 M & M & P & Q 113153431 0 m -3129.0 wall 1.6 T 13
+12 Majkel1337 113067522 0 m 0.0 wall 1.8 T 15
+13 Majkel1337 113092068 1 m 0.0 wall 1.8 T 15
+14 Majkel1337 113097421 1 m 0.0 wall 1.9 T 17
+15 DECEM 113067521 0 m 494.0 wall 2.0 T 17
+16 DECEM 113083668 1 m -829.0 wall 2.1 T 19
+17 DECEM 113097923 1 m 0.0 wall 2.0 T 19
+18 Unknown Mother-Goose 113066303 1 m -1488.0 wall 2.1 T 21
+19 Unknown Mother-Goose 113083668 0 m 992.0 wall 2.1 T 21
+20 Unknown Mother-Goose 113104649 1 m -592.0 wall 2.1 T 23
+21 Fourth Quadrant 113095439 0 m 0.0 wall 2.1 T 24
+22 Fourth Quadrant 113124487 0 m 0.0 wall 1.8 T 25
+23 Fourth Quadrant 113153445 1 m 0.0 wall 1.8 T 25
+24 Azat Akhtyamov 113532009 1 m 3583.0 wall 1.5 T 27
+25 Azat Akhtyamov 113537115 1 m 0.0 wall 1.6 T 27
+26 Azat Akhtyamov 113543206 1 m 0.0 wall 1.3 T 28
+60 seats {'吃白饭的大肥鱼': 10, 'THIRD FARM CLUB': 10, 'mtmr_s1': 10, 'Kaggledew Valley 🏆': 10, 'TheEggman': 10, 'Yizhou': 10} D 12
+0 吃白饭的大肥鱼 113065970 1 m -26280.0 wall 2.8 T 4
+1 吃白饭的大肥鱼 113079212 0 m -17768.0 wall 2.8 T 4
+2 吃白饭的大肥鱼 113091953 0 m -11913.0 wall 3.1 T 7
+3 吃白饭的大肥鱼 113093088 1 m 6139.0 wall 2.6 T 7
+4 吃白饭的大肥鱼 113103588 1 m -21969.0 wall 2.8 T 9
+5 吃白饭的大肥鱼 113125645 1 m -10702.0 wall 2.8 T 9
+6 吃白饭的大肥鱼 113138587 0 m -4323.0 wall 2.7 T 12
+7 吃白饭的大肥鱼 113175616 1 m -12428.0 wall 2.7 T 12
+8 吃白饭的大肥鱼 113184088 0 m 72758.0 wall 1.9 T 14
+9 吃白饭的大肥鱼 113188236 0 m 203.0 wall 2.4 T 15
+10 THIRD FARM CLUB 113079221 1 m -4954.0 wall 2.9 T 17
+11 THIRD FARM CLUB 113097920 1 m 9895.0 wall 2.8 T 17
+12 THIRD FARM CLUB 113168578 1 m -2979.0 wall 2.8 T 19
+13 THIRD FARM CLUB 113193141 0 m -11198.0 wall 2.8 T 20
+14 THIRD FARM CLUB 113203809 0 m 221.0 wall 2.7 T 22
+15 THIRD FARM CLUB 113215092 1 m -16770.0 wall 2.7 T 23
+16 THIRD FARM CLUB 113216231 0 m 3961.0 wall 2.7 T 25
+17 THIRD FARM CLUB 113229034 0 m 848.0 wall 2.8 T 26
+18 THIRD FARM CLUB 113236533 1 m -13307.0 wall 2.7 T 28
+19 THIRD FARM CLUB 113252618 0 m -24604.0 wall 3.0 T 29
+20 mtmr_s1 113065954 0 m -34020.0 wall 3.8 T 31
+21 mtmr_s1 113073288 0 m -18051.0 wall 3.8 T 33
+22 mtmr_s1 113080405 0 m -29265.0 wall 3.4 T 35
+23 mtmr_s1 113093036 0 m -31071.0 wall 4.3 T 37
+24 mtmr_s1 113103617 1 m -27887.0 wall 4.1 T 39
+25 mtmr_s1 113112818 1 m -24396.0 wall 4.0 T 41
+26 mtmr_s1 113125640 1 m -12959.0 wall 3.8 T 43
+27 mtmr_s1 113132789 0 m -23803.0 wall 3.8 T 45
+28 mtmr_s1 113153647 1 m -30039.0 wall 3.9 T 47
+29 mtmr_s1 113175616 0 m -37235.0 wall 3.8 T 49
+30 Kaggledew Valley 🏆 113073284 1 m -5538.0 wall 2.8 T 50
+31 Kaggledew Valley 🏆 113074365 0 m 5764.0 wall 2.8 T 52
+32 Kaggledew Valley 🏆 113087145 0 m 684.0 wall 2.6 T 52
+33 Kaggledew Valley 🏆 113104360 0 m -4706.0 wall 2.6 T 54
+34 Kaggledew Valley 🏆 113135074 1 m -2524.0 wall 2.6 T 55
+35 Kaggledew Valley 🏆 113139777 1 m -10083.0 wall 2.4 T 57
+36 Kaggledew Valley 🏆 113146625 1 m 195.0 wall 2.4 T 57
+37 Kaggledew Valley 🏆 113160477 0 m -8970.0 wall 2.8 T 59
+38 Kaggledew Valley 🏆 113180524 0 m -11740.0 wall 2.7 T 60
+39 Kaggledew Valley 🏆 113197807 0 m 242.0 wall 2.6 T 62
+40 TheEggman 113118870 1 m 21878.0 wall 2.7 T 63
+41 TheEggman 113142011 1 m -8284.0 wall 3.2 T 65
+42 TheEggman 113216186 1 m 5606.0 wall 3.1 T 66
+43 TheEggman 113333423 1 m -11736.0 wall 3.7 T 69
+44 TheEggman 113380121 1 m 7975.0 wall 2.7 T 69
+45 TheEggman 113389473 1 m 2476.0 wall 3.0 T 72
+46 TheEggman 113390437 0 m -3075.0 wall 3.3 T 72
+47 TheEggman 113395632 0 m -9054.0 wall 3.3 T 75
+48 TheEggman 113492530 1 m -2837.0 wall 3.5 T 76
+49 TheEggman 113537111 0 m -8298.0 wall 2.9 T 78
+50 Yizhou 113709444 1 m 6603.0 wall 2.7 T 79
+51 Yizhou 113740423 0 m -6799.0 wall 3.2 T 81
+52 Yizhou 113773025 1 m -22796.0 wall 3.2 T 82
+53 Yizhou 113781287 1 m 34462.0 wall 2.6 T 84
+54 Yizhou 113787172 1 m -1967.0 wall 3.3 T 85
+55 Yizhou 113788337 0 m 26883.0 wall 2.5 T 86
+56 Yizhou 113790698 0 m -10617.0 wall 2.6 T 88
+57 Yizhou 113803750 0 m -15048.0 wall 3.3 T 90
+58 Yizhou 113820729 0 m -20635.0 wall 3.5 T 91
+59 Yizhou 113830726 1 m 9803.0 wall 2.6 T 92
+72 seats {'DSM': 8, 'Boey': 8, 'Vadim Vasilenko': 8, 'M & M & P & Q': 8, 'Majkel1337': 8, 'DECEM': 8, 'Unknown Mother-Goose': 8, 'Fourth Quadrant': 8, 'Azat Akhtyamov': 8} D 12
+0 DSM 113067521 1 m -29555.0 wall 3.2 T 4
+1 DSM 113097911 0 m -6843.0 wall 2.9 T 4
+2 DSM 113125644 1 m -32591.0 wall 3.8 T 7
+3 DSM 113224254 1 m -27294.0 wall 3.6 T 8
+4 DSM 113236034 0 m -20932.0 wall 3.2 T 11
+5 DSM 113247647 1 m -37919.0 wall 3.5 T 11
+6 DSM 113273596 1 m -19637.0 wall 3.4 T 14
+7 DSM 113333418 0 m -24968.0 wall 3.5 T 15
+8 Boey 113065954 1 m 32340.0 wall 2.1 T 16
+9 Boey 113087145 1 m -10680.0 wall 2.5 T 17
+10 Boey 113112822 0 m -11817.0 wall 2.7 T 19
+11 Boey 113132794 1 m -10771.0 wall 2.8 T 20
+12 Boey 113153433 1 m -8932.0 wall 2.7 T 22
+13 Boey 113179000 1 m -16895.0 wall 2.8 T 23
+14 Boey 113207353 0 m -9073.0 wall 2.6 T 24
+15 Boey 113236034 1 m -8099.0 wall 2.6 T 26
+16 Vadim Vasilenko 113067522 1 m 10568.0 wall 2.7 T 27
+17 Vadim Vasilenko 113096241 1 m -20416.0 wall 3.0 T 29
+18 Vadim Vasilenko 113109182 1 m -14862.0 wall 3.3 T 30
+19 Vadim Vasilenko 113132795 1 m -9171.0 wall 3.1 T 32
+20 Vadim Vasilenko 113159429 0 m -12754.0 wall 3.0 T 33
+21 Vadim Vasilenko 113180209 0 m -17662.0 wall 3.4 T 35
+22 Vadim Vasilenko 113207284 1 m 6433.0 wall 2.6 T 36
+23 Vadim Vasilenko 113233703 0 m -16599.0 wall 3.3 T 39
+24 M & M & P & Q 113067524 1 m 6467.0 wall 2.6 T 39
+25 M & M & P & Q 113109182 0 m -6012.0 wall 2.9 T 41
+26 M & M & P & Q 113153431 0 m 17138.0 wall 2.1 T 41
+27 M & M & P & Q 113195165 1 m -98856.0 wall 3.1 T 44
+28 M & M & P & Q 113229596 0 m -16753.0 wall 2.7 T 44
+29 M & M & P & Q 113284191 1 m 14842.0 wall 2.7 T 47
+30 M & M & P & Q 113308626 0 m -12932.0 wall 2.6 T 47
+31 M & M & P & Q 113342744 0 m -4333.0 wall 2.7 T 49
+32 Majkel1337 113067522 0 m -12857.0 wall 2.7 T 50
+33 Majkel1337 113092068 1 m 1590.0 wall 2.6 T 52
+34 Majkel1337 113097421 1 m -6194.0 wall 2.6 T 52
+35 Majkel1337 113183530 0 m 649.0 wall 3.0 T 55
+36 Majkel1337 113189343 1 m -3567.0 wall 2.5 T 55
+37 Majkel1337 113196323 1 m -11795.0 wall 2.7 T 57
+38 Majkel1337 113202318 0 m -8696.0 wall 2.7 T 58
+39 Majkel1337 113214242 0 m -8128.0 wall 2.3 T 60
+40 DECEM 113067521 0 m -24442.0 wall 3.4 T 61
+41 DECEM 113083668 1 m 3481.0 wall 3.1 T 63
+42 DECEM 113097923 1 m -9767.0 wall 3.1 T 64
+43 DECEM 113118870 0 m -15417.0 wall 3.3 T 66
+44 DECEM 113145342 0 m 42952.0 wall 1.9 T 66
+45 DECEM 113168728 1 m -16252.0 wall 3.6 T 70
+46 DECEM 113221279 0 m -24771.0 wall 3.6 T 70
+47 DECEM 113246820 0 m -13462.0 wall 3.5 T 73
+48 Unknown Mother-Goose 113066303 1 m -20315.0 wall 3.2 T 73
+49 Unknown Mother-Goose 113083668 0 m -13149.0 wall 3.2 T 76
+50 Unknown Mother-Goose 113104649 1 m -18811.0 wall 3.4 T 77
+51 Unknown Mother-Goose 113118872 1 m -37002.0 wall 3.4 T 80
+52 Unknown Mother-Goose 113146627 1 m 768.0 wall 2.7 T 80
+53 Unknown Mother-Goose 113181583 1 m 7914.0 wall 2.6 T 82
+54 Unknown Mother-Goose 113215092 0 m -21823.0 wall 3.3 T 83
+55 Unknown Mother-Goose 113237239 1 m -32535.0 wall 3.3 T 85
+56 Fourth Quadrant 113095439 0 m -16646.0 wall 3.6 T 87
+57 Fourth Quadrant 113124487 0 m -19204.0 wall 3.9 T 89
+58 Fourth Quadrant 113153445 1 m -19549.0 wall 3.9 T 91
+59 Fourth Quadrant 113180379 1 m -16145.0 wall 3.5 T 93
+60 Fourth Quadrant 113214242 1 m -8004.0 wall 3.5 T 94
+61 Fourth Quadrant 113237685 1 m 89560.0 wall 1.8 T 95
+62 Fourth Quadrant 113257456 0 m -10867.0 wall 3.5 T 98
+63 Fourth Quadrant 113276019 0 m -7634.0 wall 3.9 T 99
+64 Azat Akhtyamov 113532009 1 m -8731.0 wall 2.5 T 100
+65 Azat Akhtyamov 113537115 1 m -10874.0 wall 2.9 T 102
+66 Azat Akhtyamov 113543206 1 m -4686.0 wall 2.5 T 103
+67 Azat Akhtyamov 113543803 0 m -21903.0 wall 2.9 T 104
+68 Azat Akhtyamov 113547380 1 m -20618.0 wall 2.8 T 106
+69 Azat Akhtyamov 113549871 0 m -11598.0 wall 2.8 T 107
+70 Azat Akhtyamov 113563715 1 m -10559.0 wall 2.9 T 109
+71 Azat Akhtyamov 113577176 1 m -3715.0 wall 2.2 T 110
+ALLDONE

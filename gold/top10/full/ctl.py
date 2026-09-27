@@ -28,6 +28,9 @@ GC_P = dict(
     straw_last_plant=12,
     straw_target=33,      # strawberry plants to hold while planting them is allowed
     feed_reserve=1.0,     # wheat kept per animal for the next morning
+    drop_refill=False,    # a unit that DROPs mid-queue (shed stop, courier) re-picks the wheat/fertilizer/animals the rest
+                          # of its queue feeds/fertilizes/places (the engine's DROP empties the whole inventory: sf8 then
+                          # skipped those FEEDs, and animals placed the day before escaped)
     fert_keep=6,
     fert_carrots=True,
     carrot_fert_gain=25.0,
@@ -75,6 +78,8 @@ GC_P = dict(
     max_sell0=3,
     fert_buy_margin=20.0,
     trim_hour=10,
+    trim_fix=False,       # _trim_queue gets the turns really left (hours h..23 = 24 - h; day 29 ends at hour 22): sf8 passed
+                          # 23 - h and cut one planned visit from every full route that was exactly on time
     reserve_release_hour=18,
     care_min_price=12,
     anim_fwd_days=0.0,    # >0: care/harvest decisions price animal goods at the book after this many days of town drain (no sales)
@@ -336,6 +341,19 @@ GC_P = dict(
     room_v3=False,        # courier/stop planning count the lots held in the shed (floors, timing) as tonight's load;
                           # room releases go unit by unit to the smallest loss vs each product's floor
     room_v3_min=40,       # never plan with less than this end-of-day room for carried goods         # at hour 2, give the hour-1 hires the queues that fit their actual spawn tiles         # shed stops are route visits; a stop that does not fit moves visits to other routes
+    shed_skip=False,      # night drop: while tonight's projected shed load (reserves kept + goods carried into the night +
+                          # harvests queued after each unit's last drop) exceeds the shed, a HARVEST after the unit's last
+                          # queued drop is skipped when the tile keeps its units for tomorrow without loss (shed_skip_cls)
+    shed_skip_cls=("A", "O", "G"),  # A: animal whose product stays under max_held after tonight's production; O: ongoing
+                          # crop under max_yield after tonight, not decaying tomorrow; G: one-time crop before its last
+                          # window day (watered or not thirsty: it keeps its units and may still grow)
+    shed_skip_hour=0,     # skip only from this hour on
+    shed_skip_d28=True,   # also on day 28 (the final day harvests and delivers what is left)
+    shed_skip_margin=0,   # skip only while the projected load exceeds the shed by more than this many units
+    shed_perm=False,      # night drop order: the engine fills the shed from the farmer, then hand 1, 2, ... and discards
+                          # the rest; among units with the same spawn tile and turn cap (interchangeable routes) the routes
+                          # whose goods reach the night drop with the highest value go to the lowest unit indices
+    shed_perm_min=60,     # only on days whose planned night load (units carried after each route's last stop) is this big
 )
 
 _GC_CROPS = {
@@ -1086,6 +1104,8 @@ class GoldCtl:
                 if extra <= GC_P["prem_drop_max"] and self._rcost(spawns[u], r) + extra <= cap:
                     self.drop_at[u] = k
                     _GC_REPORT["gc_prem_drops"] = _GC_REPORT.get("gc_prem_drops", 0) + 1
+        if GC_P.get("shed_perm") and not final:
+            self._shed_perm(routes, spawns)
         if final and not GC_P["stop_v2"]:
             for u, r in enumerate(routes):
                 if r:
@@ -2733,10 +2753,109 @@ class GoldCtl:
             total -= c
             _GC_REPORT["gc_courier"] = _GC_REPORT.get("gc_courier", 0) + 1
 
+    def _shed_perm(self, routes, spawns):
+        """shed_perm: permute interchangeable routes (same spawn tile, same turn cap) so that the goods carried into the
+        night drop are worth more on lower unit indices (the engine discards the tail of farmer, hand 1, 2, ...)."""
+        val = getattr(self, "val", None) or {}
+        fert = float(self.pnow.get("FERTILIZER", 0)) if getattr(self, "pnow", None) else 0.0
+        eod = []
+        for u, r in enumerate(routes):
+            k0 = max((i for i, v in enumerate(r) if v.tag == "S"), default=-1)
+            if self.drop_at.get(u) is not None:
+                k0 = max(k0, self.drop_at[u])
+            units = 0; value = 0.0
+            for v in r[k0 + 1:]:
+                c = int(v.carry or 0)
+                if c <= 0:
+                    continue
+                g = v.gain or {}
+                p = g.get("prod")
+                pv = float(g.get("pv", val.get(p, 0.0))) if p else 0.0
+                if v.tag == "A":
+                    k = int(g.get("units", 0) or 0) if p else 0
+                    value += k * pv + (c - k) * fert
+                else:
+                    value += c * pv
+                units += c
+            eod.append((units, value))
+        if sum(x[0] for x in eod) < GC_P.get("shed_perm_min", 60):
+            return
+        groups = {}
+        for u in range(len(routes)):
+            groups.setdefault((tuple(spawns[u]), self._cap(u)), []).append(u)
+        new = list(routes); new_da = {}; moved = 0
+        for key, us in groups.items():
+            order = sorted(us, key=lambda u: (-eod[u][1], u))
+            for dst, src in zip(sorted(us), order):
+                new[dst] = routes[src]
+                if src in self.drop_at:
+                    new_da[dst] = self.drop_at[src]
+                moved += dst != src
+        if moved:
+            routes[:] = new
+            self.drop_at = new_da
+            _GC_REPORT["gc_shed_perm"] = _GC_REPORT.get("gc_shed_perm", 0) + 1
+
+    def _shed_over(self, positions, invs, tiles, shed):
+        """shed_skip: tonight's projected shed load minus the shed capacity. Goods carried into the night: the inventory of
+        each unit with no drop left in its queue (less the wheat/fertilizer/animals the queue still uses) plus the harvests
+        and fertilizer collects queued after its last drop. Kept in the shed: per product, the reserve not covered by
+        those goods (from reserve_release_hour the market sells the reserve that the night's goods replace)."""
+        carry = {}
+        for u, pos in enumerate(positions):
+            inv = invs[u] if u < len(invs) else {}
+            q = self.queues.get(u) or []
+            last_drop = max((i for i, it in enumerate(q) if it[1][0] == "DROP"), default=-1)
+            if last_drop < 0:
+                use = {}
+                for _t, a, _v in q:
+                    it = "WHEAT" if a[0] == "FEED" else ("FERTILIZER" if a[0] == "FERTILIZE" else (a[1] if a[0] == "PLACE" and len(a) > 1 else None))
+                    if it:
+                        use[it] = use.get(it, 0) + 1
+                for k, x in inv.items():
+                    carry[k] = carry.get(k, 0) + max(0, int(x) - use.get(k, 0))
+            for i, (tgt, a, v) in enumerate(q):
+                if i <= last_drop:
+                    continue
+                if a[0] == "HARVEST":
+                    t = tiles[tgt[1]][tgt[0]]
+                    if isinstance(t, dict) and int(t.get("yield_units", 0) or 0) > 0:
+                        p = _GC_ANIM[t["animal"]]["prod"] if "animal" in t else t.get("crop")
+                        carry[p] = carry.get(p, 0) + int(t["yield_units"])
+                elif a[0] == "COLLECT_FERTILIZER":
+                    carry["FERTILIZER"] = carry.get("FERTILIZER", 0) + 1
+        kept = sum(min(int(shed.get(p, 0)), max(0, int(r) - carry.get(p, 0))) for p, r in self.reserve.items())
+        return kept + sum(carry.values()) - 100
+
+    def _shed_keeps(self, t, day):
+        """shed_skip: True when the tile keeps its harvestable units until tomorrow without losing any (engine rules:
+        animal production is capped at max_held, ongoing crops at max_yield, finished plants decay from
+        max_lifespan_step, a plant unwatered two nights running becomes a weed)."""
+        if not isinstance(t, dict) or int(t.get("yield_units", 0) or 0) <= 0:
+            return False
+        y = int(t["yield_units"]); cls = GC_P.get("shed_skip_cls", ("A", "O", "G"))
+        if "animal" in t:
+            a = _GC_ANIM[t["animal"]]
+            k = day + 1 - int(t.get("placed_day", 0)) - a["fy"]
+            add = (1 + (int(t.get("pending_care_bonus", 0) or 0) if t.get("fed_today") else 0)) if (k >= 0 and k % a["iv"] == 0) else 0
+            return "A" in cls and y + add <= a["held"]
+        if t.get("kind") != "PLANT" or t.get("crop") not in _GC_CROPS:
+            return False
+        cd = _GC_CROPS[t["crop"]]; age = day - int(t["planted_day"])
+        if age < cd["fy"] or not (t.get("watered_today") or int(t.get("consecutive_unwatered", 1)) == 0):
+            return False
+        if cd["on"]:
+            k = age + 1 - cd["fy"]
+            eve = k >= 0 and k % cd["iv"] == 0 and k // cd["iv"] + 1 <= cd["mx"]
+            add = (2 if (t.get("watered_today") and int(t.get("fertilized_until_day", -1)) >= day) else 1) if eve else 0
+            mls = int(t.get("max_lifespan_step", -1))
+            return "O" in cls and y + add <= cd["mx"] and (mls < 0 or mls >= (day + 2) * 24)
+        return "G" in cls and age < cd["my"]
+
     def _step_unit(self, u, pos, tiles, inv, seeds, planting, sim, shed, room, hour=0):
         q = self.queues.get(u)
         if q and hour >= GC_P["trim_hour"]:
-            self._trim_queue(q, pos, 23 - hour)
+            self._trim_queue(q, pos, (24 - hour) if (GC_P.get("trim_fix") and not self.final) else (23 - hour))
         while q:
             tgt, act, _v = q[0]
             if GC_P["shed_any"] and act[0] in ("PICKUP", "DROP"):
@@ -2753,6 +2872,16 @@ class GoldCtl:
                 # the shed cannot take the load yet: wait a turn for the sale that makes room
                 self._drop_wait = getattr(self, "_drop_wait", 0) + sum(int(x) for x in inv.values())
                 return ["PASS"]
+            if (act[0] == "HARVEST" and getattr(self, "_skip_over", 0) > GC_P.get("shed_skip_margin", 0)
+                    and not any(a2[0] == "DROP" or (a2[0] in ("PLANT", "DIG") and tuple(t2) == tuple(tgt)) for t2, a2, _v2 in q[1:])
+                    and self._shed_keeps(tile, self.day)):
+                # shed_skip: tonight's drop would discard units; this tile keeps them for tomorrow (not when the same
+                # visit replants or digs the tile: the harvest frees it)
+                q.pop(0)
+                self._skip_over -= int(tile.get("yield_units", 0) or 0)
+                _GC_REPORT["gc_shed_skip"] = _GC_REPORT.get("gc_shed_skip", 0) + 1
+                _GC_REPORT["gc_shed_skip_u"] = _GC_REPORT.get("gc_shed_skip_u", 0) + int(tile.get("yield_units", 0) or 0)
+                continue
             if self._useful(act, tile, inv, seeds, planting, shed, room):
                 q.pop(0)
                 if act[0] == "PLANT":
@@ -2765,10 +2894,30 @@ class GoldCtl:
                     room[0] -= n
                     for k2, n2 in inv.items():
                         shed[k2] = shed.get(k2, 0) + int(n2)
+                    if GC_P.get("drop_refill") and q:
+                        self._drop_refill(q, pos, inv)
                 return act
             q.pop(0)
             _GC_REPORT["gc_noops"] += 1
         return ["PASS"]
+
+    @staticmethod
+    def _drop_refill(q, pos, inv):
+        """drop_refill: after a DROP, queue PICKUPs (same shed tile, next turns) of the inputs just dropped that the
+        rest of the queue still uses: WHEAT per FEED, FERTILIZER per FERTILIZE, the animal per PLACE, less any PICKUP
+        already queued, at most what the unit held."""
+        need = {}
+        for _t, a, _v in q:
+            it = "WHEAT" if a[0] == "FEED" else ("FERTILIZER" if a[0] == "FERTILIZE" else (a[1] if a[0] == "PLACE" and len(a) > 1 else None))
+            if it:
+                need[it] = need.get(it, 0) + 1
+            elif a[0] == "PICKUP" and len(a) > 1:
+                need[a[1]] = need.get(a[1], 0) - (int(a[2]) if len(a) >= 3 else 1)
+        for it in ("GOOSE", "SHEEP", "COW", "FERTILIZER", "WHEAT"):
+            k = min(need.get(it, 0), int(inv.get(it, 0)))
+            if k > 0:
+                q.insert(0, (tuple(pos), ["PICKUP", it, k], None))
+                _GC_REPORT["gc_refill"] = _GC_REPORT.get("gc_refill", 0) + k
 
     def act(self, obs):
         hour = int(obs["hour"]); day = int(obs["day"])
@@ -2804,6 +2953,9 @@ class GoldCtl:
         positions = [farm["farmer"]] + list(farm["hands"])
         if GC_P["courier"] and hour >= GC_P["courier_hour"] and not self.final:
             self._courier(positions, invs, tiles, shed, hour)
+        self._skip_over = 0
+        if GC_P.get("shed_skip") and not self.final and hour >= GC_P.get("shed_skip_hour", 0) and (day < 28 or GC_P.get("shed_skip_d28", True)):
+            self._skip_over = self._shed_over(positions, invs, tiles, shed)
         units = []
         claimed = {tgt for qq in self.queues.values() for tgt, _a, _v in (qq or [])}
         for u, pos in enumerate(positions):

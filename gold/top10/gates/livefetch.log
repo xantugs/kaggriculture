@@ -1,0 +1,3 @@
+16:58:17 fetched 42 new of 42 total 42
+failed 114102301 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+18:06:35 fetched 40 new of 41 total 82

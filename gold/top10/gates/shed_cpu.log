@@ -1,0 +1,6 @@
+113702310 gold/top10/lean_sf8.py                   m    44866  cpu/step max 1.016 s  p99 0.391  total 6.59 s  (wall tmax 1.184)
+113702310 gold/top10/cands/lean_sf8_shed.py        m    51141  cpu/step max 0.891 s  p99 0.375  total 6.11 s  (wall tmax 1.126)
+113676198 gold/top10/lean_sf8.py                   m    52765  cpu/step max 0.484 s  p99 0.359  total 5.05 s  (wall tmax 0.706)
+113676198 gold/top10/cands/lean_sf8_shed.py        m    58957  cpu/step max 0.719 s  p99 0.375  total 6.02 s  (wall tmax 0.738)
+113633403 gold/top10/lean_sf8.py                   m    -5806  cpu/step max 0.953 s  p99 0.359  total 6.33 s  (wall tmax 1.104)
+113633403 gold/top10/cands/lean_sf8_shed.py        m    -4290  cpu/step max 1.078 s  p99 0.297  total 6.03 s  (wall tmax 1.192)

@@ -1,0 +1,16 @@
+{
+ "base": "sf8",
+ "cands": {
+  "sf8": "gold/top10/lean_sf8.py",
+  "k_s2t_d6": "gold/top10/cands/full_k_s2t_d6.py",
+  "k_s2t_d7": "gold/top10/cands/full_k_s2t_d7.py",
+  "k_s2t_town": "gold/top10/cands/full_k_s2t_town.py"
+ },
+ "gates": {
+  "goldg": [
+   "k_s2t_d6",
+   "k_s2t_d7",
+   "k_s2t_town"
+  ]
+ }
+}

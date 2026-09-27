@@ -1,0 +1,14 @@
+{
+ "base": "sf8",
+ "cands": {
+  "sf8": "gold/top10/lean_sf8.py",
+  "k_dp_egg": "gold/top10/cands/full_k_dp_egg.py",
+  "k_dp_tom": "gold/top10/cands/full_k_dp_tom.py"
+ },
+ "gates": {
+  "top10g": [
+   "k_dp_egg",
+   "k_dp_tom"
+  ]
+ }
+}

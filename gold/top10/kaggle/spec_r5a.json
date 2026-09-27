@@ -1,0 +1,15 @@
+{
+ "base": "sf8",
+ "cands": {
+  "sf8": "gold/top10/lean_sf8.py",
+  "esc": "gold/top10/cands/lean_sf8_escapes.py"
+ },
+ "gates": {
+  "goldg": [
+   "esc"
+  ],
+  "top10g": [
+   "esc"
+  ]
+ }
+}

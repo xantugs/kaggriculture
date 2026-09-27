@@ -1,0 +1,429 @@
+113620813 codex是我的鲸鱼 m -10269.0 wall 80s
+113624741 Ryui68925 m -29535.0 wall 81s
+113629510 QQ Farming m -857.0 wall 73s
+113633403 d_tree_love m -5799.0 wall 85s
+113634243 lumen m -870.0 wall 83s
+113638947 Pico m -11524.0 wall 74s
+113640096 Yizhou m -5734.0 wall 31s
+113642495 Civitasmass m -271.0 wall 39s
+113646140 Yoshiki_Nakamura m 2977.0 wall 46s
+113647238 Zain96 m -12536.0 wall 36s
+113649337 in blue m 979.0 wall 42s
+113650805 emreaydin m 624.0 wall 47s
+113653439 Grim Reaper m -619.0 wall 39s
+113657899 ra5anchor m 165.0 wall 37s
+113660258 Ebi m 2083.0 wall 38s
+113663761 URAD m -2015.0 wall 35s
+113668421 Civitasmass m -12.0 wall 35s
+113669672 istinetz m -13073.0 wall 34s
+113670847 xi luo m -2181.0 wall 37s
+113673212 len8487 m -751.0 wall 40s
+113675477 forever young m -7344.0 wall 42s
+113675563 Gleb Tumanov m -3243.0 wall 33s
+113701612 Dipam Chakraborty m -2050.0 wall 40s
+113708152 Smackaveli m -9040.0 wall 39s
+113708805 ActiveMusyoku m -2639.0 wall 40s
+113720356 SJY321 m 33.0 wall 42s
+113723941 Breaking1800 m -3537.0 wall 44s
+113726249 fasith 007 m -1531.0 wall 36s
+113737446 Aaweg m -19273.0 wall 41s
+113740109 3정훈 m -11720.0 wall 35s
+113745971 emreaydin m -2866.0 wall 33s
+113745999 len8487 m -33.0 wall 45s
+113752335 摆烂小分队 🏆 m -10780.0 wall 39s
+113770998 Lucien de Rubempre m 1500.0 wall 35s
+113595000 Victor Carriço m 121977.0 wall 31s
+113596171 suminshim m 49478.0 wall 32s
+113597343 kanchana's m 47880.0 wall 25s
+113598481 Llin Ding m 28403.0 wall 30s
+113599643 Junbeom Lee23 m 31480.0 wall 38s
+113600807 Jaivardhan Raahi m 27903.0 wall 30s
+113601979 MD Zeeshan m 42017.0 wall 39s
+113603120 JZ m 18788.0 wall 38s
+113604281 MJVinay m 24591.0 wall 41s
+113605451 Tian hao Qing Nano7ko m 12850.0 wall 51s
+113606620 Ozi m 16822.0 wall 38s
+113607794 Pengfei Yan  m 7140.0 wall 34s
+113608282 Winter01 m 25338.0 wall 95s
+113608948 Ni123456& m 1397.0 wall 35s
+113610121 htech5 m 21905.0 wall 35s
+113611289 oni chan arigato m 12206.0 wall 26s
+113612468 Iwa Iwa m 34862.0 wall 24s
+113613636 Rotation Theory m 1511.0 wall 37s
+113614841 Peihao Chen Caesar m 11410.0 wall 42s
+113616014 uns.t m 1801.0 wall 50s
+113617246 cha7ura m 23473.0 wall 33s
+113618628 extra eclaire m 14073.0 wall 27s
+113619657 Pilea55 m 5890.0 wall 26s
+113620462 Seyit kaan Gunes m 5541.0 wall 25s
+113622060 pengurei m 16587.0 wall 25s
+113622399 Dhruvik Chauhan m 335.0 wall 22s
+113623571 shikaikaikaikai m 2738.0 wall 20s
+113625918 goonew m 4466.0 wall 21s
+113627102 JianYuan Deng m 6859.0 wall 20s
+113627394 carbonapi m 3187.0 wall 18s
+113628315 sdy623 m 2161.0 wall 19s
+113630690 mikelou1 m 7385.0 wall 20s
+113631852 Akhil Chinta m -6.0 wall 19s
+113633038 Reinforcement Larping m 1926.0 wall 19s
+113635298 Le Viet m 5279.0 wall 20s
+113636579 Phi m 870.0 wall 21s
+113637757 lingxiaojun m 1863.0 wall 22s
+113641317 yjshyfy m 3223.0 wall 23s
+113643600 Mengfei Li m 13480.0 wall 22s
+113644871 Bohann Wang m 6968.0 wall 172s
+113646027 redblackbst m 767.0 wall 170s
+113648427 Joseph Adamski m None wall 154s EXC
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\process.py", line 263, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\process.py", line 212, in _process_chunk
+    return [fn(*args) for args in chunk]
+            ^^^^^^^^^
+  File "C:\Users\khant\OneDrive\Documents\ChatGPT\2027\kaggriculture_review\kg\gold\top10\tools\scan.py", line 393, in job
+    d = json.load(open(path, encoding='utf-8'))[idx]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+                 ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\khant\OneDrive\Documents\ChatGPT\2027\kaggriculture_review\kg\gold\top10\tools\scan.py", line 437, in <module>
+    for r in ex.map(job, jobs):
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\process.py", line 642, in _chain_from_iterable_of_lists
+    for element in iterable:
+                   ^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+MemoryError
+=== resume Sun Sep 27 15:46:17 UST 2026 NPROC=6 (one-game files, resume)
+games 191  rows kept 75  dropped 1  jobs to run 116  NPROC 6
+113648427 Joseph Adamski m 11790.0 wall 20s  [76/191, 34s]
+113654286 Arman Tuganbaev m -3446.0 wall 24s  [77/191, 39s]
+113652147 Bohann Wang m 9125.0 wall 30s  [78/191, 45s]
+113655516 d_tree_love m 2909.0 wall 31s  [79/191, 46s]
+113656698 emreaydin m 21767.0 wall 29s  [80/191, 47s]
+113650919 Thai m 11431.0 wall 33s  [81/191, 50s]
+113659069 Zyy7390 m 2853.0 wall 28s  [82/191, 61s]
+113661429 sissoko cheick m 2675.0 wall 26s  [83/191, 65s]
+113666109 Lucas Boesen m 97.0 wall 22s  [84/191, 69s]
+113662619 Akhil Chinta m 16069.0 wall 29s  [85/191, 74s]
+113667301 Chaoqi Luo m 5867.0 wall 27s  [86/191, 76s]
+113664946 Thai m 726.0 wall 32s  [87/191, 79s]
+113672032 Breaking1800 m 4092.0 wall 25s  [88/191, 87s]
+113674419 mikelou1 m 915.0 wall 22s  [89/191, 87s]
+113676743 Matt Motoki m 8314.0 wall 24s  [90/191, 93s]
+113680669 yumizu m 1751.0 wall 20s  [91/191, 99s]
+113679102 loxigicck m 6937.0 wall 27s  [92/191, 103s]
+113677936 Gleb Tumanov m 10944.0 wall 31s  [93/191, 105s]
+113687700 摆烂小分队 🏆 m 2804.0 wall 20s  [94/191, 107s]
+113695790 fuxi m 6749.0 wall 20s  [95/191, 107s]
+113711146 chungkuangwen m 4072.0 wall 29s  [96/191, 122s]
+113719228 Pico m 8495.0 wall 24s  [97/191, 123s]
+113726483 Navier-stokes m 8527.0 wall 24s  [98/191, 127s]
+113735903 QQ Farming m 3658.0 wall 23s  [99/191, 130s]
+113744024 QQ Farming m 265.0 wall 23s  [100/191, 130s]
+113728318 chocolat m 1422.0 wall 30s  [101/191, 134s]
+113753488 Kaggriculture Agent m 1432.0 wall 25s  [102/191, 148s]
+113761474 Lucien de Rubempre m 7712.0 wall 28s  [103/191, 151s]
+113772943 Grim Reaper m 15686.0 wall 26s  [104/191, 153s]
+113672631 Shs123 m 10597.0 wall 25s  [105/191, 155s]
+113696377 unreal m -5161.0 wall 27s  [106/191, 162s]
+113679638 Shawn404 m -185.0 wall 35s  [107/191, 165s]
+113738072 Alperen Söylen m -751.0 wall 19s  [108/191, 170s]
+113663377 levr hang m 84453.0 wall 20s  [109/191, 172s]
+113703531 先过我的Gemini m -122.0 wall 30s  [110/191, 178s]
+113664496 Faris Abqari m 38419.0 wall 25s  [111/191, 180s]
+113665665 RLMAX m 60147.0 wall 20s  [112/191, 182s]
+113666897 炫酷的小克里斯 m 26646.0 wall 19s  [113/191, 183s]
+113667973 lty m 38253.0 wall 22s  [114/191, 192s]
+113670301 chris m 24499.0 wall 17s  [115/191, 195s]
+113669130 kaneko takafumi m 29430.0 wall 25s  [116/191, 197s]
+113671458 ChrisXie m 24345.0 wall 25s  [117/191, 204s]
+113672619 SixGODD m 10770.0 wall 26s  [118/191, 207s]
+113673822 M4nd4l0r14n m 25049.0 wall 30s  [119/191, 214s]
+113674999 shawnYiB m 1825.0 wall 30s  [120/191, 222s]
+113676198 XJHya233 m 52798.0 wall 28s  [121/191, 223s]
+113677394 shawnYiB m 8426.0 wall 32s  [122/191, 230s]
+113678685 Keside Onyeocha m 3740.0 wall 30s  [123/191, 234s]
+113679763 Sophie555 m 10187.0 wall 27s  [124/191, 235s]
+113682140 minoneru m 2761.0 wall 23s  [125/191, 245s]
+113680983 LoveLetter m 24237.0 wall 31s  [126/191, 245s]
+113683345 LittleScottyy m 5962.0 wall 25s  [127/191, 248s]
+113684725 Oliver #2 m 11553.0 wall 28s  [128/191, 258s]
+113685763 KoshinM m 2485.0 wall 25s  [129/191, 260s]
+113685635 m_meles m 3367.0 wall 31s  [130/191, 265s]
+113686911 Kim Jinseo m 23387.0 wall 24s  [131/191, 268s]
+113688090 Kashyapsinh gohil m 14723.0 wall 22s  [132/191, 270s]
+113687103 Harm Buisman m 26009.0 wall 27s  [133/191, 273s]
+113689280 Vsevolod Rakita m 26220.0 wall 25s  [134/191, 283s]
+113690454 Ian Wang m 2930.0 wall 25s  [135/191, 285s]
+113692779 Cherie01 m 11640.0 wall 19s  [136/191, 288s]
+113691638 tablecables m 15609.0 wall 24s  [137/191, 289s]
+113692826 IamDiganta.7 m 142.0 wall 25s  [138/191, 295s]
+113694016 DeeSaa m 4248.0 wall 26s  [139/191, 299s]
+113697495 Ayodeji m 483.0 wall 22s  [140/191, 310s]
+113696313 Ayodeji m 3155.0 wall 27s  [141/191, 312s]
+113695298 kou m 19721.0 wall 29s  [142/191, 313s]
+113697572 lihaha.36 m 17076.0 wall 25s  [143/191, 314s]
+113698761 Benjamin H Pepper m 4970.0 wall 25s  [144/191, 320s]
+113699895 We Forgot To Water m 5128.0 wall 31s  [145/191, 330s]
+113701124 渡邊征央 m 2442.0 wall 20s  [146/191, 332s]
+113699947 RAVEN m 48563.0 wall 29s  [147/191, 338s]
+113703060 cocoaAI m 5209.0 wall 26s  [148/191, 340s]
+113702310 Inzilbêth m 50476.0 wall 34s  [149/191, 347s]
+113703487 neuro168 m 22218.0 wall 31s  [150/191, 352s]
+113705891 Sam-wiz m 18378.0 wall 24s  [151/191, 356s]
+113704678 wuyan-nox m 20068.0 wall 27s  [152/191, 357s]
+113708263 NIklitaCheporev m 15769.0 wall 26s  [153/191, 366s]
+113709455 Tariq Alyami m 4364.0 wall 21s  [154/191, 368s]
+113707176 jiangnanxn m 6272.0 wall 31s  [155/191, 370s]
+113710667 tera358 m 22459.0 wall 25s  [156/191, 376s]
+113711821 Jet m 25144.0 wall 21s  [157/191, 377s]
+113714206 MKhlystun m 7080.0 wall 21s  [158/191, 387s]
+113713019 7day-enough m 1144.0 wall 33s  [159/191, 390s]
+113714752 Xiangyu Liu m 3932.0 wall 28s  [160/191, 395s]
+113715217 ekkkcz m 3380.0 wall 26s  [161/191, 395s]
+113716576 xthixsl_ml m 3855.0 wall 20s  [162/191, 397s]
+113715372 lamb Liu m 2301.0 wall 31s  [163/191, 407s]
+113717775 Zhu Liang m 21287.0 wall 25s  [164/191, 412s]
+113718950 H IMedit m 20258.0 wall 24s  [165/191, 413s]
+113720132 kirito83 m 23800.0 wall 24s  [166/191, 420s]
+113721336 zy m 1879.0 wall 27s  [167/191, 422s]
+113722524 r2singh m 6985.0 wall 26s  [168/191, 423s]
+113723682 Kyle m 1322.0 wall 26s  [169/191, 433s]
+113725036 Szymon Miłosz m 7191.0 wall 24s  [170/191, 438s]
+113724932 TY0912 m 24414.0 wall 28s  [171/191, 440s]
+113726066 Bruce m 1004.0 wall 22s  [172/191, 441s]
+113727264 Hozuma ITOBAYASHI m 2750.0 wall 27s  [173/191, 449s]
+113728185 JAZ COLD HORN m 25575.0 wall 28s  [174/191, 451s]
+113728679 arumajiro m 3169.0 wall 22s  [175/191, 455s]
+113730844 Ethereal49 m 951.0 wall 22s  [176/191, 462s]
+113729658 HUNGRED XYIS m 7347.0 wall 25s  [177/191, 463s]
+113735364 mitomeat823 m 2368.0 wall 23s  [178/191, 465s]
+113738657 Hawksartelier m 24506.0 wall 20s  [179/191, 469s]
+113744984 Pand m 2010.0 wall 18s  [180/191, 473s]
+113738813 Xiangjiang Zhou m 13149.0 wall 22s  [181/191, 473s]
+113746326 dev.asad67 m 5373.0 wall 19s  [182/191, 481s]
+113749087 kentaro_kato m 5562.0 wall 20s  [183/191, 483s]
+113749810  Master Bob111 m 1660.0 wall 22s  [184/191, 487s]
+113759237 BAHUMANYA R G m 1952.0 wall 22s  [185/191, 495s]
+113757826 kitano0104 m 5671.0 wall 26s  [186/191, 495s]
+113758176 zeyu lau m 1514.0 wall 26s  [187/191, 498s]
+113765278 jiatu.l m 1297.0 wall 25s  [188/191, 508s]
+113762115 track m 3273.0 wall 32s  [189/191, 513s]
+113766410 edchax m 2255.0 wall 27s  [190/191, 514s]
+113772937 dddmd m 2933.0 wall 29s  [191/191, 524s]
+gold/top10/lean_sf8.py: 158-33 of 191  margin +9604  us 104562  them 94957  rec +8804  wall 525s  failed 0
+=== full rerun Sun Sep 27 16:04:07 UST 2026 NPROC=6 (hooks + mwwh, carelc)
+games 191  rows kept 0  dropped 0  jobs to run 191  NPROC 6
+113634243 lumen m -870.0 wall 22s  [1/191, 40s]
+113638947 Pico m -11524.0 wall 22s  [2/191, 42s]
+113629510 QQ Farming m -857.0 wall 28s  [3/191, 48s]
+113624741 Ryui68925 m -29535.0 wall 30s  [4/191, 49s]
+113620813 codex是我的鲸鱼 m -10269.0 wall 35s  [5/191, 52s]
+113633403 d_tree_love m -5799.0 wall 33s  [6/191, 52s]
+113640096 Yizhou m -5734.0 wall 26s  [7/191, 65s]
+113642495 Civitasmass m -271.0 wall 25s  [8/191, 67s]
+113650805 emreaydin m 624.0 wall 24s  [9/191, 76s]
+113647238 Zain96 m -12536.0 wall 28s  [10/191, 77s]
+113646140 Yoshiki_Nakamura m 2977.0 wall 32s  [11/191, 80s]
+113649337 in blue m 979.0 wall 28s  [12/191, 80s]
+113653439 Grim Reaper m -619.0 wall 24s  [13/191, 90s]
+113657899 ra5anchor m 165.0 wall 28s  [14/191, 94s]
+113669672 istinetz m -13073.0 wall 18s  [15/191, 98s]
+113663761 URAD m -2015.0 wall 25s  [16/191, 102s]
+113660258 Ebi m 2083.0 wall 29s  [17/191, 105s]
+113668421 Civitasmass m -12.0 wall 32s  [18/191, 112s]
+113670847 xi luo m -2181.0 wall 23s  [19/191, 113s]
+113673212 len8487 m -751.0 wall 22s  [20/191, 117s]
+113701612 Dipam Chakraborty m -2050.0 wall 19s  [21/191, 124s]
+113675563 Gleb Tumanov m -3243.0 wall 23s  [22/191, 125s]
+113675477 forever young m -7344.0 wall 29s  [23/191, 127s]
+113708152 Smackaveli m -9040.0 wall 24s  [24/191, 136s]
+113708805 ActiveMusyoku m -2639.0 wall 25s  [25/191, 138s]
+113720356 SJY321 m 33.0 wall 23s  [26/191, 139s]
+113723941 Breaking1800 m -3537.0 wall 26s  [27/191, 150s]
+113737446 Aaweg m -19273.0 wall 23s  [28/191, 151s]
+113726249 fasith 007 m -1531.0 wall 29s  [29/191, 154s]
+113745971 emreaydin m -2866.0 wall 23s  [30/191, 161s]
+113740109 3정훈 m -11720.0 wall 29s  [31/191, 165s]
+113745999 len8487 m -33.0 wall 34s  [32/191, 174s]
+113752335 摆烂小分队 🏆 m -10780.0 wall 26s  [33/191, 176s]
+113595000 Victor Carriço m 121977.0 wall 24s  [34/191, 179s]
+113596171 suminshim m 49478.0 wall 23s  [35/191, 184s]
+113770998 Lucien de Rubempre m 1500.0 wall 34s  [36/191, 184s]
+113598481 Llin Ding m 28403.0 wall 16s  [37/191, 190s]
+113597343 kanchana's m 47880.0 wall 26s  [38/191, 191s]
+113600807 Jaivardhan Raahi m 27903.0 wall 18s  [39/191, 197s]
+113599643 Junbeom Lee23 m 31480.0 wall 24s  [40/191, 200s]
+113601979 MD Zeeshan m 42017.0 wall 17s  [41/191, 201s]
+113603120 JZ m 18788.0 wall 19s  [42/191, 203s]
+113604281 MJVinay m 24591.0 wall 21s  [43/191, 211s]
+113605451 Tian hao Qing Nano7ko m 12850.0 wall 21s  [44/191, 212s]
+113606620 Ozi m 16822.0 wall 21s  [45/191, 218s]
+113607794 Pengfei Yan  m 7140.0 wall 22s  [46/191, 222s]
+113608282 Winter01 m 25338.0 wall 21s  [47/191, 222s]
+113608948 Ni123456& m 1397.0 wall 22s  [48/191, 225s]
+113610121 htech5 m 21905.0 wall 23s  [49/191, 234s]
+113611289 oni chan arigato m 12206.0 wall 22s  [50/191, 234s]
+113614841 Peihao Chen Caesar m 11410.0 wall 22s  [51/191, 244s]
+113612468 Iwa Iwa m 34862.0 wall 28s  [52/191, 245s]
+113613636 Rotation Theory m 1511.0 wall 28s  [53/191, 250s]
+113616014 uns.t m 1801.0 wall 27s  [54/191, 252s]
+113618628 extra eclaire m 14073.0 wall 24s  [55/191, 258s]
+113617246 cha7ura m 23473.0 wall 30s  [56/191, 264s]
+113619657 Pilea55 m 5890.0 wall 24s  [57/191, 268s]
+113622399 Dhruvik Chauhan m 335.0 wall 21s  [58/191, 273s]
+113620462 Seyit kaan Gunes m 5541.0 wall 34s  [59/191, 279s]
+113622060 pengurei m 16587.0 wall 32s  [60/191, 282s]
+113623571 shikaikaikaikai m 2738.0 wall 28s  [61/191, 287s]
+113627102 JianYuan Deng m 6859.0 wall 25s  [62/191, 294s]
+113627394 carbonapi m 3187.0 wall 25s  [63/191, 298s]
+113625918 goonew m 4466.0 wall 38s  [64/191, 302s]
+113628315 sdy623 m 2161.0 wall 25s  [65/191, 305s]
+113630690 mikelou1 m 7385.0 wall 32s  [66/191, 314s]
+113633038 Reinforcement Larping m 1926.0 wall 26s  [67/191, 320s]
+113631852 Akhil Chinta m -6.0 wall 34s  [68/191, 321s]
+113635298 Le Viet m 5279.0 wall 24s  [69/191, 322s]
+113637757 lingxiaojun m 1863.0 wall 18s  [70/191, 322s]
+113636579 Phi m 870.0 wall 26s  [71/191, 328s]
+113648427 Joseph Adamski m 11790.0 wall 18s  [72/191, 340s]
+113641317 yjshyfy m 3223.0 wall 27s  [73/191, 341s]
+113644871 Bohann Wang m 6968.0 wall 21s  [74/191, 342s]
+113643600 Mengfei Li m 13480.0 wall 29s  [75/191, 349s]
+113650919 Thai m 11431.0 wall 30s  [76/191, 357s]
+113646027 redblackbst m 767.0 wall 36s  [77/191, 357s]
+113654286 Arman Tuganbaev m -3446.0 wall 28s  [78/191, 369s]
+113652147 Bohann Wang m 9125.0 wall 31s  [79/191, 372s]
+113656698 emreaydin m 21767.0 wall 25s  [80/191, 374s]
+113655516 d_tree_love m 2909.0 wall 34s  [81/191, 376s]
+113659069 Zyy7390 m 2853.0 wall 28s  [82/191, 386s]
+113661429 sissoko cheick m 2675.0 wall 31s  [83/191, 388s]
+113662619 Akhil Chinta m 16069.0 wall 25s  [84/191, 394s]
+113666109 Lucas Boesen m 97.0 wall 22s  [85/191, 396s]
+113664946 Thai m 726.0 wall 30s  [86/191, 402s]
+113667301 Chaoqi Luo m 5867.0 wall 33s  [87/191, 409s]
+113674419 mikelou1 m 915.0 wall 27s  [88/191, 416s]
+113676743 Matt Motoki m 8314.0 wall 23s  [89/191, 417s]
+113672032 Breaking1800 m 4092.0 wall 32s  [90/191, 418s]
+113677936 Gleb Tumanov m 10944.0 wall 28s  [91/191, 424s]
+113680669 yumizu m 1751.0 wall 27s  [92/191, 436s]
+113679102 loxigicck m 6937.0 wall 37s  [93/191, 439s]
+113687700 摆烂小分队 🏆 m 2804.0 wall 26s  [94/191, 442s]
+113711146 chungkuangwen m 4072.0 wall 30s  [95/191, 447s]
+113719228 Pico m 8495.0 wall 25s  [96/191, 449s]
+113695790 fuxi m 6749.0 wall 33s  [97/191, 451s]
+113735903 QQ Farming m 3658.0 wall 19s  [98/191, 461s]
+113726483 Navier-stokes m 8527.0 wall 30s  [99/191, 466s]
+113728318 chocolat m 1422.0 wall 30s  [100/191, 469s]
+113753488 Kaggriculture Agent m 1432.0 wall 28s  [101/191, 477s]
+113761474 Lucien de Rubempre m 7712.0 wall 28s  [102/191, 479s]
+113744024 QQ Farming m 265.0 wall 34s  [103/191, 481s]
+113772943 Grim Reaper m 15686.0 wall 34s  [104/191, 495s]
+113672631 Shs123 m 10597.0 wall 32s  [105/191, 498s]
+113679638 Shawn404 m -185.0 wall 33s  [106/191, 502s]
+113738072 Alperen Söylen m -751.0 wall 21s  [107/191, 503s]
+113703531 先过我的Gemini m -122.0 wall 25s  [108/191, 504s]
+113663377 levr hang m 84453.0 wall 16s  [109/191, 511s]
+113696377 unreal m -5161.0 wall 37s  [110/191, 513s]
+113666897 炫酷的小克里斯 m 26646.0 wall 20s  [111/191, 522s]
+113664496 Faris Abqari m 38419.0 wall 25s  [112/191, 524s]
+113665665 RLMAX m 60147.0 wall 25s  [113/191, 527s]
+113667973 lty m 38253.0 wall 26s  [114/191, 530s]
+113670301 chris m 24499.0 wall 23s  [115/191, 537s]
+113669130 kaneko takafumi m 29430.0 wall 26s  [116/191, 537s]
+113671458 ChrisXie m 24345.0 wall 25s  [117/191, 547s]
+113672619 SixGODD m 10770.0 wall 24s  [118/191, 548s]
+113674999 shawnYiB m 1825.0 wall 29s  [119/191, 559s]
+113673822 M4nd4l0r14n m 25049.0 wall 35s  [120/191, 562s]
+113677394 shawnYiB m 8426.0 wall 26s  [121/191, 564s]
+113676198 XJHya233 m 52798.0 wall 34s  [122/191, 571s]
+113678685 Keside Onyeocha m 3740.0 wall 25s  [123/191, 573s]
+113679763 Sophie555 m 10187.0 wall 32s  [124/191, 580s]
+113682140 minoneru m 2761.0 wall 22s  [125/191, 584s]
+113680983 LoveLetter m 24237.0 wall 26s  [126/191, 585s]
+113683345 LittleScottyy m 5962.0 wall 28s  [127/191, 591s]
+113685635 m_meles m 3367.0 wall 29s  [128/191, 602s]
+113684725 Oliver #2 m 11553.0 wall 34s  [129/191, 605s]
+113685763 KoshinM m 2485.0 wall 26s  [130/191, 606s]
+113687103 Harm Buisman m 26009.0 wall 26s  [131/191, 610s]
+113686911 Kim Jinseo m 23387.0 wall 32s  [132/191, 616s]
+113688090 Kashyapsinh gohil m 14723.0 wall 28s  [133/191, 619s]
+113692779 Cherie01 m 11640.0 wall 18s  [134/191, 629s]
+113691638 tablecables m 15609.0 wall 24s  [135/191, 629s]
+113690454 Ian Wang m 2930.0 wall 28s  [136/191, 633s]
+113689280 Vsevolod Rakita m 26220.0 wall 33s  [137/191, 634s]
+113692826 IamDiganta.7 m 142.0 wall 29s  [138/191, 645s]
+113694016 DeeSaa m 4248.0 wall 32s  [139/191, 651s]
+113696313 Ayodeji m 3155.0 wall 28s  [140/191, 658s]
+113697495 Ayodeji m 483.0 wall 25s  [141/191, 658s]
+113697572 lihaha.36 m 17076.0 wall 26s  [142/191, 660s]
+113695298 kou m 19721.0 wall 38s  [143/191, 666s]
+113698761 Benjamin H Pepper m 4970.0 wall 26s  [144/191, 671s]
+113699895 We Forgot To Water m 5128.0 wall 34s  [145/191, 686s]
+113699947 RAVEN m 48563.0 wall 29s  [146/191, 687s]
+113701124 渡邊征央 m 2442.0 wall 31s  [147/191, 689s]
+113702310 Inzilbêth m 50476.0 wall 29s  [148/191, 689s]
+113703060 cocoaAI m 5209.0 wall 27s  [149/191, 694s]
+113703487 neuro168 m 22218.0 wall 25s  [150/191, 696s]
+113704678 wuyan-nox m 20068.0 wall 20s  [151/191, 706s]
+113705891 Sam-wiz m 18378.0 wall 19s  [152/191, 706s]
+113707176 jiangnanxn m 6272.0 wall 22s  [153/191, 711s]
+113708263 NIklitaCheporev m 15769.0 wall 23s  [154/191, 712s]
+113709455 Tariq Alyami m 4364.0 wall 18s  [155/191, 712s]
+113710667 tera358 m 22459.0 wall 20s  [156/191, 716s]
+113711821 Jet m 25144.0 wall 18s  [157/191, 724s]
+113713019 7day-enough m 1144.0 wall 18s  [158/191, 724s]
+113714752 Xiangyu Liu m 3932.0 wall 18s  [159/191, 730s]
+113715217 ekkkcz m 3380.0 wall 20s  [160/191, 732s]
+113714206 MKhlystun m 7080.0 wall 23s  [161/191, 734s]
+113715372 lamb Liu m 2301.0 wall 18s  [162/191, 734s]
+113716576 xthixsl_ml m 3855.0 wall 19s  [163/191, 743s]
+113717775 Zhu Liang m 21287.0 wall 22s  [164/191, 746s]
+113718950 H IMedit m 20258.0 wall 17s  [165/191, 747s]
+113720132 kirito83 m 23800.0 wall 16s  [166/191, 749s]
+113721336 zy m 1879.0 wall 17s  [167/191, 751s]
+113722524 r2singh m 6985.0 wall 17s  [168/191, 751s]
+113723682 Kyle m 1322.0 wall 16s  [169/191, 759s]
+113724932 TY0912 m 24414.0 wall 15s  [170/191, 762s]
+113726066 Bruce m 1004.0 wall 16s  [171/191, 764s]
+113725036 Szymon Miłosz m 7191.0 wall 18s  [172/191, 765s]
+113728185 JAZ COLD HORN m 25575.0 wall 15s  [173/191, 766s]
+113727264 Hozuma ITOBAYASHI m 2750.0 wall 19s  [174/191, 770s]
+113728679 arumajiro m 3169.0 wall 15s  [175/191, 774s]
+113729658 HUNGRED XYIS m 7347.0 wall 19s  [176/191, 781s]
+113730844 Ethereal49 m 951.0 wall 16s  [177/191, 781s]
+113735364 mitomeat823 m 2368.0 wall 19s  [178/191, 785s]
+113738657 Hawksartelier m 24506.0 wall 20s  [179/191, 786s]
+113744984 Pand m 2010.0 wall 18s  [180/191, 793s]
+113738813 Xiangjiang Zhou m 13149.0 wall 23s  [181/191, 793s]
+113746326 dev.asad67 m 5373.0 wall 20s  [182/191, 801s]
+113749087 kentaro_kato m 5562.0 wall 21s  [183/191, 802s]
+113749810  Master Bob111 m 1660.0 wall 20s  [184/191, 805s]
+113757826 kitano0104 m 5671.0 wall 21s  [185/191, 807s]
+113759237 BAHUMANYA R G m 1952.0 wall 18s  [186/191, 811s]
+113758176 zeyu lau m 1514.0 wall 22s  [187/191, 815s]
+113762115 track m 3273.0 wall 21s  [188/191, 822s]
+113765278 jiatu.l m 1297.0 wall 20s  [189/191, 822s]
+113766410 edchax m 2255.0 wall 19s  [190/191, 824s]
+113772937 dddmd m 2933.0 wall 21s  [191/191, 828s]
+gold/top10/lean_sf8.py: 158-33 of 191  margin +9604  us 104562  them 94957  rec +8804  wall 828s  failed 0

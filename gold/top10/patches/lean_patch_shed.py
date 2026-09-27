@@ -1,5 +1,6 @@
-"""Add shed_skip (night-drop overflow: harvests the tile keeps for tomorrow are skipped while tonight's projected shed
-load exceeds the shed) to a lean build and turn it ON.
+"""Add the night-drop features to a lean build: shed_skip (harvests the tile keeps for tomorrow are skipped while tonight's
+projected shed load exceeds the shed) and shed_perm (interchangeable routes re-assigned so the engine's night drop,
+which fills the shed from the farmer, then hand 1, 2, ..., discards the cheapest goods). Knobs set by the JSON argument.
 
 usage: lean_patch_shed.py in.py out.py ['{"shed_skip_cls": ["A","O","G"], ...}']
 default: gold/top10/lean_sf8.py -> gold/top10/cands/lean_sf8_shed.py with shed_skip=True and the code's default classes.
@@ -15,7 +16,7 @@ src = open(src_path, encoding='utf-8').read()
 
 knobs = {'shed_skip': True}
 knobs.update(over)
-edits = [
+edits = [   # applied in order (the shed_perm method is anchored on _shed_over, which the METHODS edit inserts)
     # knobs ON (the lean GC_P has no shed_* keys: the code's GC_P.get() defaults apply to anything not set here)
     ("GC_P.update({'mkt_dp_d29': False, 'final_sell0': 3, 'final_cap': 19})\n",
      "GC_P.update({'mkt_dp_d29': False, 'final_sell0': 3, 'final_cap': 19})\n" + 'GC_P.update(%r)\n' % (knobs,)),
@@ -25,6 +26,11 @@ edits = [
     # the skip itself, before the unit executes a useful action
     ("            if self._useful(act, tile, inv, seeds, planting, shed, room):\n",
      C.STEP_SKIP + "            if self._useful(act, tile, inv, seeds, planting, shed, room):\n"),
+    # shed_perm: interchangeable routes re-assigned by the value they carry into the night drop (end of plan_day)
+    ("        if final and (not GC_P['stop_v2']):\n",
+     C.PERM_CALL + "        if final and (not GC_P['stop_v2']):\n"),
+    ("    def _shed_over(self, positions, invs, tiles, shed):\n",
+     C.PERM_METHOD + "    def _shed_over(self, positions, invs, tiles, shed):\n"),
     # tonight's projected overflow, once per step after the courier
     ("            self._courier(positions, invs, tiles, shed, hour)\n        units = []\n",
      "            self._courier(positions, invs, tiles, shed, hour)\n" + C.ACT_OVER + "        units = []\n"),

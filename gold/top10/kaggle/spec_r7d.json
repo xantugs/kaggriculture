@@ -1,0 +1,16 @@
+{
+ "base": "c22f_top",
+ "cands": {
+  "c22f_top": "gold/top10/cands/full_c22f_top.py",
+  "T5": "gold/top10/cands/full_T5.py",
+  "sf8": "gold/top10/lean_sf8.py"
+ },
+ "gates": {
+  "s2800": [
+   "T5"
+  ],
+  "eg0920": [
+   "T5"
+  ]
+ }
+}

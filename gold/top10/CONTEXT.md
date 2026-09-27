@@ -64,6 +64,24 @@ Submitted: v23 = m3, v24 = m5 (`gold/submit/main_ctl_mkt5_m7.py`), **v25 = sf8**
 Current top 10 (27 Sep): DSM 3102, Boey 3029, Vadim Vasilenko 2994, M & M & P & Q 2985, Majkel1337 2969, DECEM 2949,
 KawattaTaido 2922, Unknown Mother-Goose 2921, Fourth Quadrant 2906, Azat Akhtyamov 2897. Full LB: scratchpad lb.csv.
 
+## Results log (27 Sep)
+- v26 = sf8 + copy takeover day 22 (`gold/submit/main_ctl_sf8c22_lean.py`, submission 56603319). Day 22 vs sf8: live191
+  +$412 +- 96 (154 -> 157), 2800+ +$263 +- 91, pin249 +$299 +- 85 (195 -> 198); closed loop +$477 / +$132 but -9 net close
+  wins in 400 games vs old public agents. Day 23: live +7 wins, 2800+ -2, pin249 0, closed loop 0.
+- sf8 on the new gates: goldg 37% (-$2,271 a seat), top10g 23% (-$7,327). Gap per seat vs gold zone: tomato -$5.1k, egg
+  -$4.7k, wheat -$2.3k; vs top 10: wheat -$7.4k, egg -$4.8k, carrot -$2.1k. Melons +$5.6-6.3k for us.
+- Ablations on goldg (Kaggle, rows in gates/kout/): market programme off -$1,867, s2t off -$1,129, melons off -$523, herd off
+  -$386, takeover d15 -$341, d18 +$212 (wins flat), care floor 8 / rival weight 2 / tick defer: 0. Everything we have pays.
+- Round 2 (goldg/top10g): s2t on days 6/7 or by town or one-buyer towns: -$131 to -$569; eggs / tomatoes in the market
+  programme: +$57 / -$146 (goldg), -$26 / +$66 (top10g); herd margin 1500: +$128 goldg, +$7 top10g, -$7 eg0920.
+  Knob tuning is saturated.
+- Egg gap is structural (elites ~5.5 geese by day 12, bought days 2-11; controller-day geese lose on wages and $40 wheat).
+- Leak scan of sf8 (191 live games, S=0): night-drop discards ~$988/game, missed water bonus $380, capped animal product $289,
+  care bonus lost $348, thirst/rot ~$200. Fix `drop_refill` (mid-route shed drops no longer empty the wheat a hand still
+  needs for later FEEDs): live191 +$273 +- 103 (154 -> 158), pin249 -$11 +- 85; `gold/top10/cands/lean_sf8_escapes.py`.
+- Kaggle compute: `gold/top10/kaggle/` (pack_gates, mkkernel, kqueue + kinbox.txt). Kaggle rows are bit-identical to local.
+  Max 5 concurrent batch CPU sessions (4 cores each); the TPU queue did not start in 2+ hours.
+
 ## Leads open on 27 Sep (from the other session's last hours, code lost with its container)
 - Copy takeover day 22 instead of 24: +$760 +- 163 a game on the 105 live copy games (93 -> 96 wins), measured on sf6.
   Being re-measured on sf8 (days 21/22/23) by the main session.

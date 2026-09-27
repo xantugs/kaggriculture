@@ -165,7 +165,7 @@ if __name__ == '__main__':
     del data
     if os.environ.get('MAXTASK'):
         tasks = tasks[:int(os.environ['MAXTASK'])]
-    nproc = int(os.environ.get('NPROC', max(2, (os.cpu_count() or 4) - 2)))
+    nproc = int(os.environ.get('NPROC', (os.cpu_count() or 4) if (os.cpu_count() or 4) <= 8 else (os.cpu_count() - 2)))
     print('tasks', len(tasks), 'procs', nproc, 'setup', round(time.time() - t0), 's', flush=True)
     import multiprocessing as mp
     rows = collections.defaultdict(list); fh = {}

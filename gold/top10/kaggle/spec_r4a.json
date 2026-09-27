@@ -1,0 +1,17 @@
+{
+ "base": "c22f",
+ "cands": {
+  "c22f": "gold/top10/cands/full_c22f.py",
+  "c22_nodp": "gold/top10/cands/full_c22_nodp.py",
+  "c22_d29": "gold/top10/cands/full_c22_d29.py",
+  "c22_car27": "gold/top10/cands/full_c22_car27.py"
+ },
+ "gates": {
+  "live191": [
+   "c22f",
+   "c22_nodp",
+   "c22_d29",
+   "c22_car27"
+  ]
+ }
+}

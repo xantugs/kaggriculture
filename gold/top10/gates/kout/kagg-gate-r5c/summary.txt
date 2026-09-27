@@ -1,0 +1,4 @@
+== cl_omw_v15a (base c22: 100 rows, wins 96)
+  c22esc                 n  100      -85 +-  122  wins   96 ->   96 (+0/-0)
+== cl_pub_metav4v13 (base c22: 100 rows, wins 98)
+  c22esc                 n  100      +56 +-  113  wins   98 ->   98 (+0/-0)

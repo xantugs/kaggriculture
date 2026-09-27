@@ -1,0 +1,18 @@
+{
+ "base": "sf8",
+ "cands": {
+  "sf8": "gold/top10/lean_sf8.py",
+  "k_dp_egg": "gold/top10/cands/full_k_dp_egg.py",
+  "k_dp_tom": "gold/top10/cands/full_k_dp_tom.py",
+  "k_s2t_sh1": "gold/top10/cands/full_k_s2t_sh1.py",
+  "k_herd_m15": "gold/top10/cands/full_k_herd_m15.py"
+ },
+ "gates": {
+  "live191": [
+   "k_dp_egg",
+   "k_dp_tom",
+   "k_s2t_sh1",
+   "k_herd_m15"
+  ]
+ }
+}

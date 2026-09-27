@@ -1,0 +1,25 @@
+{
+ "base": "sf8",
+ "cands": {
+  "sf8": "gold/top10/lean_sf8.py",
+  "c22": "gold/top10/cands/lean_sf8_c22.py",
+  "c23": "gold/top10/cands/lean_sf8_c23.py"
+ },
+ "gates": {
+  "cl": [
+   "sf8",
+   "c22",
+   "c23"
+  ]
+ },
+ "cl": {
+  "opps": [
+   "pub_smallershock"
+  ],
+  "seeds": [
+   6100,
+   6199
+  ],
+  "seats": "01"
+ }
+}
