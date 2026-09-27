@@ -510,6 +510,7 @@ round is done (the fertilizer follows; `_SL_WORKER` rebound in ctl.py, `patches/
   the official kaggle_environments runner (seed 6042, both seats: DONE, 120,197 vs 113,131 either way).
 
 Also measured on the elite gate (vs sf6): divergent footprint slack 5 +$98 +- 103 (82 -> 81); programme rival
-forecast over 3 days (`mkt_dp_rival_days` 3) -$73 +- 88 but **82 -> 86 wins (+4/-0)**; `mkt_dp_every_min` 2 +$30 +- 32
+forecast over 3 days (`mkt_dp_rival_days` 3) -$73 +- 88 but 82 -> 86 wins (+4/-0), not confirmed elsewhere: 2800+
+-$112 +- 61 (105 -> 106, +2/-1), pinned 249 -$69 +- 59 (195 -> 194, +1/-2), so the 2-day window stays; `mkt_dp_every_min` 2 +$30 +- 32
 (82 -> 83). Copy-game variants still open when the container restarted: no market programme on copies, copy
 takeover on day 22 / 20.
