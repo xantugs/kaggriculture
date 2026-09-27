@@ -1,6 +1,7 @@
 """Summarize a pinned results file split by opponent class (gameclass.json: gid -> sim359). usage: splitsum.py results.jsonl [thr]"""
 import sys, json, collections, statistics as st
-cls = json.load(open('gameclass.json')); thr = float(sys.argv[2]) if len(sys.argv) > 2 else 0.8
+import os
+cls = json.load(open(os.environ.get('GCLASS', 'gameclass.json'))); thr = float(sys.argv[2]) if len(sys.argv) > 2 else 0.8
 by = collections.defaultdict(dict)
 for l in open(sys.argv[1], encoding='utf-8'):
     r = json.loads(l)

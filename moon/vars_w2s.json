@@ -1,0 +1,6 @@
+[["w2s_5_8_m3", "omw_w2s_a", {}],
+ ["w2s_5_8_m5", "omw_w2s_a", {"_W2S_CFG": {"d0": 5, "d1": 8, "max": 5, "reserve": 600, "spend_h": 0, "harvest_at": 3, "feed_days": 2, "gap": 1, "pool": 1}}],
+ ["w2s_3_8_m3_r400", "omw_w2s_a", {"_W2S_CFG": {"d0": 3, "d1": 8, "max": 3, "reserve": 400, "spend_h": 0, "harvest_at": 3, "feed_days": 2, "gap": 1, "pool": 1}}],
+ ["w2s_5_10_m4_r800", "omw_w2s_a", {"_W2S_CFG": {"d0": 5, "d1": 10, "max": 4, "reserve": 800, "spend_h": 0, "harvest_at": 3, "feed_days": 2, "gap": 1, "pool": 1}}],
+ ["w2s_5_8_m3_f1", "omw_w2s_a", {"_W2S_CFG": {"d0": 5, "d1": 8, "max": 3, "reserve": 600, "spend_h": 0, "harvest_at": 3, "feed_days": 1, "gap": 1, "pool": 1}}],
+ ["w2s_9_10_m4_r1000", "omw_w2s_a", {"_W2S_CFG": {"d0": 9, "d1": 10, "max": 4, "reserve": 1000, "spend_h": 0, "harvest_at": 3, "feed_days": 2, "gap": 1, "pool": 1}}]]

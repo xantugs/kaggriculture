@@ -1,49 +1,54 @@
-"""Revenue/cost ledger per product for both seats of recorded offhand games vs given teams (tape replay, real seed).
-usage: topledger.py team1,team2,...  -> mean (them - us) per ledger key, plus final cash"""
-import sys, os, json, collections
+"""Full-game money flows (recorded replays) of us vs opponents in a rank band. usage: topledger.py maxrank"""
+import sys, os, json, collections, urllib.request, zipfile, io, csv
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', 'arena'))
-import lean, pinned
-from kaggle_environments.envs.kaggriculture import kaggriculture as K
-FILES = ['loss_0922b.json', 'loss_0922c.json', 'v10v11_top_0922.json', 'v12_all_0922.json', 'strong_new.json', 'recent_loss.json',
-         'v1011_losses_b.json', 'strong_v9.json']
-teams = sys.argv[1].split(',')
-games = {}
-for f in FILES:
-    for d in json.load(open(os.path.join(HERE, f), encoding='utf-8')):
-        n = d['info'].get('TeamNames') or []
-        if 'offhand' in n and n[1 - n.index('offhand')] in teams:
-            games[d['id']] = d
-tot = collections.Counter(); cnt = 0
-for d in games.values():
-    n = d['info']['TeamNames']; P = n.index('offhand'); O = 1 - P
-    led = [collections.Counter(), collections.Counter()]; FARMS = [None, None]
-    oc, oh, opm = K._commit_unit, K._do_hire, K._process_market
-    def commit(op, item, price, farm, private, market, cap=100):
-        ok = oc(op, item, price, farm, private, market, cap)
-        k = 0 if farm is FARMS[0] else 1
-        if ok and op == 'SELL': led[k][item] += price
-        elif ok and op == 'BUY_PRODUCT': led[k]['buy_' + item] -= price
-        elif ok and op == 'BUY_SEED': led[k]['seed'] -= price
-        elif ok and op == 'BUY_ANIMAL': led[k]['anim'] -= price
-        elif ok: led[k][op.lower()] -= price
+from concurrent.futures import ProcessPoolExecutor
+def job(fn):
+    import lean, pinned
+    from kaggle_environments.envs.kaggriculture import kaggriculture as K
+    d = json.load(open(fn, encoding='utf-8'))[0]
+    P = d['info']['TeamNames'].index('offhand')
+    led = [collections.Counter(), collections.Counter()]; units = [collections.Counter(), collections.Counter()]; F = [None, None]
+    oc, opm, ohire, oland = K._commit_unit, K._process_market, K._do_hire, K._do_buy_land
+    def who(farm): return 0 if farm is F[P] else 1
+    def commit(op, it, price, farm, private, market, cap=100):
+        ok = oc(op, it, price, farm, private, market, cap)
+        if ok:
+            w = who(farm)
+            if op == 'SELL': led[w][it] += price; units[w][it] += 1
+            elif op == 'BUY_PRODUCT': led[w]['buy_' + it] -= price
+            elif op == 'BUY_SEED': led[w]['seed_' + it] -= price; units[w]['seed_' + it] += 1
+            elif op == 'BUY_ANIMAL': led[w]['anim_' + it] -= price; units[w]['anim_' + it] += 1
         return ok
     def hire(farm, private, bs, mult=1):
-        m0 = farm['money']; oh(farm, private, bs, mult); led[0 if farm is FARMS[0] else 1]['hire'] += farm['money'] - m0
+        m0 = farm['money']; r = ohire(farm, private, bs, mult); led[who(farm)]['hire'] += farm['money'] - m0; return r
+    def land(farm, bs):
+        m0 = farm['money']; r = oland(farm, bs); led[who(farm)]['land'] += farm['money'] - m0; return r
     def pm(state, env):
-        FARMS[0], FARMS[1] = state[0].observation.farms[0], state[0].observation.farms[1]
+        F[0], F[1] = state[0].observation.farms[0], state[0].observation.farms[1]
         return opm(state, env)
-    K._commit_unit, K._do_hire, K._process_market = commit, hire, pm
+    K._commit_unit, K._process_market, K._do_hire, K._do_buy_land = commit, pm, hire, land
     try:
-        r = lean.play(None, None, d['info']['seed'], agent_objs=[pinned._tape(d['acts'], 0), pinned._tape(d['acts'], 1)])
+        lean.play(None, None, d['info']['seed'], agent_objs=[pinned._tape(d['acts'], 0), pinned._tape(d['acts'], 1)])
     finally:
-        K._commit_unit, K._do_hire, K._process_market = oc, oh, opm
-    ok = [int(x) for x in r['r']] == [int(x) for x in d['rewards']]
-    if not ok:
-        print('replay mismatch', d['id']); continue
-    cnt += 1
-    for k in set(led[0]) | set(led[1]):
-        tot[k] += led[O][k] - led[P][k]
-    tot['CASH'] += d['rewards'][O] - d['rewards'][P]
-print('games', cnt, 'of', len(games))
-for k, v in sorted(tot.items(), key=lambda kv: -abs(kv[1])):
-    print(f"  {k:18s} them-us {v / max(1, cnt):+9.0f}")
+        K._commit_unit, K._process_market, K._do_hire, K._do_buy_land = oc, opm, ohire, oland
+    return d['info']['TeamNames'][1 - P], [dict(l) for l in led], [dict(u) for u in units], d['rewards'][P] - d['rewards'][1 - P]
+if __name__ == '__main__':
+    maxrank = int(sys.argv[1]); minrank = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+    tok = open(os.path.expanduser('~/.kaggle/access_token')).read().strip()
+    req = urllib.request.Request('https://www.kaggle.com/api/v1/competitions/kaggriculture/leaderboard/download', headers={'Authorization': 'Bearer ' + tok})
+    z = zipfile.ZipFile(io.BytesIO(urllib.request.urlopen(req, timeout=120).read()))
+    rows = list(csv.DictReader(io.TextIOWrapper(z.open(z.namelist()[0]), encoding='utf-8')))
+    rank = {r['TeamName']: i + 1 for i, r in enumerate(rows)}
+    files = []
+    for f in json.load(open(os.path.join(HERE, 'g2800_list.json'))):
+        d = json.load(open(f, encoding='utf-8'))[0]; n = d['info']['TeamNames']
+        if minrank <= rank.get(n[1 - n.index('offhand')], 999) <= maxrank: files.append(f)
+    L = [collections.Counter(), collections.Counter()]; U = [collections.Counter(), collections.Counter()]; M = []
+    with ProcessPoolExecutor(12) as ex:
+        for opp, led, un, m in ex.map(job, files):
+            for w in (0, 1): L[w].update(led[w]); U[w].update(un[w])
+            M.append(m)
+    g = len(files)
+    print(f'ranks {minrank}-{maxrank}: games {g}, mean recorded margin {sum(M)/g:+.0f}')
+    for k in sorted(set(L[0]) | set(L[1]), key=lambda k: -abs(L[1][k] - L[0][k])):
+        print(f'  {k:18s} us {L[0][k]/g:8.0f} ({U[0][k]/g:6.1f})   them {L[1][k]/g:8.0f} ({U[1][k]/g:6.1f})   them-us {(L[1][k]-L[0][k])/g:+7.0f}')

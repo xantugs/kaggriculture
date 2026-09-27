@@ -1,0 +1,20 @@
+MIRROR: games 71
+   base             wins  33/71  margin     +460  vs base      +0 ±     0
+   hl_p20           wins  28/71  margin    -1622  vs base   -2082 ±   634
+   hl_p40           wins  25/71  margin    -3878  vs base   -4338 ±   933
+   hl_p70           wins  21/71  margin    -6043  vs base   -6503 ±  1132
+   hl_sm40          wins  18/71  margin    -3938  vs base   -4399 ±   792
+   sn_h0            wins  31/71  margin     +404  vs base     -56 ±    28
+   sn_h12           wins  31/71  margin     +385  vs base     -75 ±    41
+   sn_h23           wins  33/71  margin     +460  vs base      +0 ±     0
+   snm_h23          wins  33/71  margin     +460  vs base      -0 ±     0
+DIVERGENT: games 60
+   base             wins   5/60  margin    -8006  vs base      +0 ±     0
+   hl_p20           wins   5/60  margin    -9764  vs base   -1758 ±   564
+   hl_p40           wins   6/60  margin   -10657  vs base   -2650 ±   681
+   hl_p70           wins   5/60  margin   -11650  vs base   -3644 ±   768
+   hl_sm40          wins   4/60  margin   -11609  vs base   -3602 ±   658
+   sn_h0            wins   5/60  margin    -8129  vs base    -122 ±    42
+   sn_h12           wins   5/60  margin    -8340  vs base    -334 ±    49
+   sn_h23           wins   5/60  margin    -8008  vs base      -1 ±     1
+   snm_h23          wins   5/60  margin    -8008  vs base      -1 ±     9

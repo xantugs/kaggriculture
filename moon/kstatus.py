@@ -28,4 +28,5 @@ elif cmd in ('log', 'output'):
         os.makedirs('kout', exist_ok=True)
         for f in d.get('files') or []:
             name = f.get('fileName') or f.get('fileNameNullable'); url = f.get('url') or f.get('urlNullable')
+            if '/' in name or not (name.endswith('.jsonl') or name.endswith('.txt') or name.endswith('.json')): continue
             data = get(url); open(os.path.join('kout', name), 'wb').write(data); print('saved', name, len(data))

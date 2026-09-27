@@ -1,0 +1,6 @@
+[["sn_s18", "omw_sn_a", {}],
+ ["sn_s15", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY"], "d0": 15, "last_step": 695, "min_price": 2, "keep": 0, "hours": null, "front": true}}],
+ ["sn_s21", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY"], "d0": 21, "last_step": 695, "min_price": 2, "keep": 0, "hours": null, "front": true}}],
+ ["sn_sm18", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY", "MILK"], "d0": 18, "last_step": 695, "min_price": 2, "keep": 0, "hours": null, "front": true}}],
+ ["sn_s18_back", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY"], "d0": 18, "last_step": 695, "min_price": 2, "keep": 0, "hours": null, "front": false}}],
+ ["sn_s18_p60", "omw_sn_a", {"_SN_CFG": {"items": ["STRAWBERRY"], "d0": 18, "last_step": 695, "min_price": 60, "keep": 0, "hours": null, "front": true}}]]

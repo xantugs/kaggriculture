@@ -1,0 +1,7 @@
+[["k3", "ses_b", {"_SES_CFG.kmax": 3}],
+ ["k3n20", "ses_b", {"_SES_CFG.kmax": 3, "_SES_CFG.n": 20}],
+ ["k3d13", "ses_b", {"_SES_CFG.kmax": 3, "_SES_CFG.day": 13, "_SES_CFG.plant_last": 14}],
+ ["k3s1", "ses_b", {"_SES_CFG.kmax": 3, "_SES_CFG.slack": 1.0}],
+ ["k2", "ses_b", {"_SES_CFG.kmax": 2}],
+ ["k3n20d13", "ses_b", {"_SES_CFG.kmax": 3, "_SES_CFG.n": 20, "_SES_CFG.day": 13, "_SES_CFG.plant_last": 14}],
+ ["k3pl12", "ses_b", {"_SES_CFG.kmax": 3, "_SES_CFG.plant_last": 12}]]

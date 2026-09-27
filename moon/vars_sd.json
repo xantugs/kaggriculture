@@ -1,0 +1,5 @@
+[["sd288", "adapt", {"GC_P.start_div": 288}],
+ ["sd336", "adapt", {"GC_P.start_div": 336}],
+ ["sd360", "adapt", {"GC_P.start_div": 360}],
+ ["sd408", "adapt", {"GC_P.start_div": 408}],
+ ["sd432", "adapt", {"GC_P.start_div": 432}]]

@@ -1,0 +1,34 @@
+wrote C:\Users\khant\OneDrive\Documents\ChatGPT\2027\kaggriculture_review\kaggriculture\moon\..\arena\cand\adapt.py section lines 1939 start step 576
+["GC_P.update({'start': 576, 'start_div': 384, 'div_over': {'floor_marginal': True, 'tomato_last': 20, 'melon_on': True}, 'max_hands': 15, 'drop_slack': 0, 'max_sell0': 0, 'hire_cost_w': 0.6, 'carrot_last_plant': 26, 'plant_must_last': 29, 'prem_drop': False, 'drip_on': False, 'ovf_value': 100.0, 'replant_done': True, 'sell_timing': True, 'sell_floor': {'STRAWBERRY': 30, 'MILK': 25, 'WOOL': 25}, 'final_ret': True, 'final_water': True, 'd28_keep_carrots': True, 'carrot_fc': True, 'carrot_edge': 0.85})"]
+GC_P changes vs omw_ad_a5gc (old, new): {'start_div': (None, 384), 'div_over': (None, {'floor_marginal': True, 'tomato_last': 20, 'melon_on': True}), 'carrot_fert_gain': (None, 25.0), 'fert_res_extra': (None, 2), 'final_water': (False, True), 'carrot_edge': (1.0, 0.85), 'lot_frac': (None, 0.0), 'room0_v2': (None, False), 'melon_on': (None, False), 'melon_last': (None, 18), 'melon_age': (None, 11), 'melon_max_day': (None, 10), 'melon_alt_day': (None, 40.0), 'melon_labor': (None, 60.0), 'carrot_fc': (None, True), 'carrot_fc_units': (None, 3.5), 'final_ret': (None, True), 'final_by_value': (None, False), 'max_hands_final': (None, 15), 'd28_keep_carrots': (None, True), 'final_flush': (None, True), 'd28_harvest_all': (None, True), 'floor_marginal': (None, False), 'floor_drain_aware': (None, False), 'floor_rival_aware': (None, False), 'floor_wait_days': (None, 1.5)}
+== 1 official runner
+self status ['DONE', 'DONE'] rewards [59825.0, 59825.0] max step s 0.078 0.077 mean ms 1.4 wall 7
+vs_opp status ['DONE', 'DONE'] rewards [75183.0, 73493.0] max step s 0.121 0.13 mean ms 1.5 wall 8
+opp_first status ['DONE', 'DONE'] rewards [96378.0, 97559.0] max step s 0.077 0.124 mean ms 1.3 wall 7
+self status ['DONE', 'DONE'] rewards [132879.0, 132879.0] max step s 0.093 0.094 mean ms 1.3 wall 7
+vs_opp status ['DONE', 'DONE'] rewards [92718.0, 92047.0] max step s 0.083 0.085 mean ms 1.3 wall 7
+opp_first status ['DONE', 'DONE'] rewards [90965.0, 90167.0] max step s 0.153 0.101 mean ms 1.7 wall 8
+== 2 fresh set (base v16d)
+adapt_raw                                MIR   +605 ± 285 dW  +9 | DIV  +3540 ±1678 dW  +0 | all   +797
+adapt                                    MIR  +1199 ± 220 dW +11 | DIV  +2214 ± 769 dW  +0 | all  +1265
+v17                                      MIR   +788 ± 269 dW  +8 | DIV   +137 ±  24 dW  +0 | all   +746
+base                                     MIR     +0 ±   0 dW  +0 | DIV     +0 ±   0 dW  +0 | all     +0
+games 46  opp mean 2646  our live rating mean 2640
+recorded    23/46 wins -> 2645 ± 20
+adapt       36/46 wins -> 2734 ± 24  (vs recorded +89)
+adapt_raw   34/46 wins -> 2718 ± 23  (vs recorded +73)
+v17         33/46 wins -> 2710 ± 22  (vs recorded +65)
+base        25/46 wins -> 2658 ± 20  (vs recorded +12)
+== 3 train / holdout pinned (base v17)
+adapt                                    MIR   +333 ± 125 dW  +2 | DIV  +2180 ± 455 dW +10 | all  +1179
+adapt_raw                                MIR    +68 ± 182 dW  +4 | DIV  +1980 ± 512 dW +10 | all   +944
+base                                     MIR     +0 ±   0 dW  +0 | DIV     +0 ±   0 dW  +0 | all     +0
+v17                                      MIR     +0 ±   0 dW  +0 | DIV     +0 ±   0 dW  +0 | all     +0
+adapt                                    MIR   +266 ± 112 dW  +6 | DIV  +2080 ± 720 dW  +1 | all   +647
+adapt_raw                                MIR    -21 ± 181 dW  +3 | DIV  +1536 ± 681 dW  +1 | all   +306
+base                                     MIR     +0 ±   0 dW  +0 | DIV     +0 ±   0 dW  +0 | all     +0
+v17                                      MIR     +0 ±   0 dW  +0 | DIV     +0 ±   0 dW  +0 | all     +0
+== 4 closed loop vs v17
+../arena/cand/adapt_raw.py vs ../arena/cand/omw_ad_a5gc.py: 99-101-0 of 200  margin -164  us 98900  them 99064  errs 0  tmax 0.669  wall 163s
+../arena/cand/adapt.py vs ../arena/cand/omw_ad_a5gc.py: 129-71-0 of 200  margin +573  us 99208  them 98636  errs 0  tmax 0.936  wall 169s
+done

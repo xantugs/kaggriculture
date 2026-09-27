@@ -1,0 +1,6 @@
+[["ses_a", "ses_a", {}],
+ ["ses_s4", "ses_a", {"_SES_CFG.min_shops": 4}],
+ ["ses_s2", "ses_a", {"_SES_CFG.min_shops": 2}],
+ ["ses_n15", "ses_n15", {}],
+ ["ses_d11", "ses_a", {"_SES_CFG.day": 11, "_SES_CFG.last_hour": 20}],
+ ["ses_d13", "ses_a", {"_SES_CFG.day": 13, "_SES_CFG.plant_last": 14}]]

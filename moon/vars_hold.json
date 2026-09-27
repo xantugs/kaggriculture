@@ -1,0 +1,5 @@
+[["v13", "omw_v13f", {}],
+ ["v15b", "omw_v15b", {}],
+ ["k_combo", "omw_ad_a1", {"_SR_MARGIN": 24, "_OR2_SLOT_MARGIN": 10.0, "_CA_MARGIN": -7.0}],
+ ["k_combo_hd", "omw_ad_a1", {"_SR_MARGIN": 24, "_OR2_SLOT_MARGIN": 10.0, "_CA_MARGIN": -7.0, "_HD2_CARE": 0.6}],
+ ["k_hd6", "omw_ad_a1", {"_HD2_CARE": 0.6}]]

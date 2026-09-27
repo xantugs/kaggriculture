@@ -21,6 +21,12 @@ for k, vals in knobs.items():
 chain = re.findall(r"^(_[A-Za-z0-9_]*PARENT) *= *agent\s*$", base, flags=re.M)
 skip_vars = [('skip' + l[:-7], {'__skip__': [l]}) for l in chain[1:]]
 phases = [('knobs', knob_vars), ('skips', skip_vars)]
+if os.environ.get('VARS'):
+    _vs = [tuple(v) for v in json.load(open(os.environ['VARS']))]
+    for _lab, _g in _vs:
+        if '_AD_CFG' in _g:
+            _g['_AD_CFG']['thresh'] = {int(k): v for k, v in _g['_AD_CFG']['thresh'].items()}
+    phases = [(os.environ.get('PHASE', 'r3'), _vs)]
 head = '''# Kaggriculture: pinned split sweep (copies vs divergent 2800+ opponents) for knob values and layer bypasses.
 import os
 os.environ['OMP_NUM_THREADS'] = '1'
