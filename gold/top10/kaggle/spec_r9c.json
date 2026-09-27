@@ -1,0 +1,17 @@
+{
+ "base": "T5",
+ "cands": {
+  "T5": "gold/top10/cands/full_T5.py",
+  "T5b": "gold/top10/cands/full_T5b.py",
+  "T6": "gold/top10/cands/full_T6.py"
+ },
+ "gates": {
+  "live191": [
+   "T5",
+   "T6"
+  ]
+ },
+ "S_override": {
+  "live191": 240
+ }
+}

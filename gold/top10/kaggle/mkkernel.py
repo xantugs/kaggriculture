@@ -147,7 +147,8 @@ if __name__ == '__main__':
                 if 'offhand' not in d['info']['TeamNames']:
                     continue
                 f = os.path.join(W, 'g', gate, '%d.json' % i); json.dump([d], open(f, 'w', encoding='utf-8'))
-                tasks += [('pin', gate, lab, f, g['S']) for lab in labs]
+                S = int(SPEC.get('S_override', {}).get(gate, g['S']))
+                tasks += [('pin', gate, lab, f, S) for lab in labs]
         elif gate in data['elite']:
             g = data['elite'][gate]; os.makedirs(os.path.join(W, 'g', gate), exist_ok=True)
             files = {}
