@@ -1,0 +1,2 @@
+== goldg (base sf8: 0 rows, wins 0)
+== top10g (base sf8: 0 rows, wins 0)

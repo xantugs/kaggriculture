@@ -1,0 +1,4 @@
+== eg0920 (base c22f_top: 0 rows, wins 0)
+== s2800 (base c22f_top: 149 rows, wins 106)
+  T2                     n  149     +614 +-  140  wins  106 ->  113 (+9/-2)
+  T3                     n  149    +1520 +-  164  wins  106 ->  117 (+12/-1)

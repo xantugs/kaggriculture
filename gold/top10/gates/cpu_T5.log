@@ -1,0 +1,8 @@
+113676198 gold/top10/cands/full_T5.py              m    65959  cpu/step max 1.031 s  p99 0.281  total 5.69 s  (wall tmax 1.192)
+113676198 gold/top10/lean_sf8.py                   m    52765  cpu/step max 0.594 s  p99 0.328  total 5.27 s  (wall tmax 0.665)
+113633403 gold/top10/cands/full_T5.py              m    -1579  cpu/step max 0.953 s  p99 0.328  total 5.73 s  (wall tmax 1.247)
+113633403 gold/top10/lean_sf8.py                   m    -5806  cpu/step max 0.812 s  p99 0.312  total 5.56 s  (wall tmax 0.959)
+113624741 gold/top10/cands/full_T5.py              m   -27047  cpu/step max 0.891 s  p99 0.312  total 4.98 s  (wall tmax 1.089)
+113624741 gold/top10/lean_sf8.py                   m   -26734  cpu/step max 0.703 s  p99 0.234  total 4.84 s  (wall tmax 0.882)
+113772943 gold/top10/cands/full_T5.py              m    21380  cpu/step max 0.969 s  p99 0.375  total 6.70 s  (wall tmax 1.271)
+113772943 gold/top10/lean_sf8.py                   m    15681  cpu/step max 1.156 s  p99 0.344  total 6.17 s  (wall tmax 1.655)
