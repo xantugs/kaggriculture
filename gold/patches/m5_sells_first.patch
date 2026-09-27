@@ -1,5 +1,5 @@
 --- ctl.py.pristine	2026-09-26 11:54:54.892988894 +0000
-+++ ctl.py	2026-09-26 18:32:21.894783268 +0000
++++ ctl.py	2026-09-26 18:50:31.702051921 +0000
 @@ -77,6 +77,7 @@
      trim_hour=10,
      reserve_release_hour=18,
@@ -8,7 +8,7 @@
      harvest_min_price=3,
      plant_defer=0.3,      # value of planting today = this fraction of the crop's net value
      land_sw_day=11,
-@@ -180,6 +181,24 @@
+@@ -180,6 +181,25 @@
      unit_floor_items=("WOOL", "MILK", "STRAWBERRY", "MELON", "TOMATO", "EGG", "CARROT", "WHEAT"),
      unit_floor_step=716,  # from this step on everything goes (the last town purchase is at step 716)
      chassis_unit_floor=0.0,  # the same floor on the chassis's SELL lots before the takeover
@@ -16,6 +16,7 @@
 +                           # both farms' lists index by index: a lot at a lower index than the rival's sells first)
 +    sells_first_chassis=False,  # the same reorder on the chassis's own lists before the takeover
 +    cash_guard_min=0,           # >0: on day 0 the chassis's seed orders never take the cash below this (the day-1 hires need it)
++    v233_wool_first=False,      # the chassis's SE sheep crew delivers its wool as soon as the harvest round is done (fertilizer after)
 +    sells_first_slots=False,    # hour 0: the programme's due premium lots outrank the day's last hires (they move to hour 1)
 +    sells_first_sort=False,     # our SELLs ordered by the price drop their lot causes (the costliest contest goes first)
 +    sells_first_slots1=False,   # hour 1: premium lots outrank the remaining hires as well (those move to hour 2)
@@ -33,7 +34,7 @@
      chassis_floor_from=12,
      chassis_floor_room=20,   # shed units kept free for the night's drop
      chassis_floor_items=None,  # products the chassis floor applies to (None: unit_floor_items)
-@@ -228,6 +247,11 @@
+@@ -228,6 +248,11 @@
      mkt_dp_fresh=False,   # no rival sale of the product in the pattern window: sell now (its first lot would otherwise land first)
      mkt_dp_from_day=0,
      mkt_dp_rival_w=1.0,   # the programme also charges the rival's forecast sales at the book our decision leaves (margin, not revenue)
@@ -45,7 +46,7 @@
      es_days=(),           # chassis days on which the tape's wheat replants in NW become strawberries (early strawberries)
      es_n=8,               # how many tiles to convert
      es_skip_cows=(),      # chassis days whose cow purchases are dropped to fund the seeds (costly: two early cows floor the milk market)
-@@ -281,6 +305,8 @@
+@@ -281,6 +306,8 @@
      race_min=1,
      race_w=0.3,           # value per unit (x price) of taking a race product a day earlier
      race_min_price=20,    # only while the quote is worth racing for
@@ -54,7 +55,7 @@
      sanx_on=False,        # strawberry annex run by hired workers while the chassis plays (replaces the day-12 takeover)
      sanx_step=288,
      sanx_plant_last=13,
-@@ -366,6 +392,77 @@
+@@ -366,6 +393,77 @@
      return max(1, int(round(p)))
  
  
@@ -132,7 +133,7 @@
  def _gc_fib(n):
      a, b = 1, 1
      for _ in range(n):
-@@ -560,6 +657,18 @@
+@@ -560,6 +658,18 @@
          self.final = final
          val = self._values(obs)
          self.val = val
@@ -151,7 +152,7 @@
          quads = list(farm["unlocked_quadrants"])
          orders0 = []
          spend = 0.0
-@@ -869,6 +978,7 @@
+@@ -869,6 +979,7 @@
                  v.acts = [a for a in v.acts if a[0] != "FERTILIZE"]; v.fert = 0
                  v.value -= v.gain.get("fert", 0.0)
          visits = [v for v in visits if v.acts]
@@ -159,7 +160,7 @@
  
          # ---- hour-0 sales: free shed room before the input purchases land (a full shed rejects them)
          buys0 = [o for o in orders0 if o[0] in ("BUY_PRODUCT", "BUY_ANIMAL")]
-@@ -1250,6 +1360,10 @@
+@@ -1250,6 +1361,10 @@
              elif cu >= 1 and not (ready and yu > 0 and age >= cd["my"]):
                  acts.append(["WATER"]); value += max(1, yu) * pv + 30; must = True
              harvest_now = ready and yu2 > 0 and (age >= cd["my"] or yu2 >= cd["mx"])
@@ -170,7 +171,7 @@
              if crop == "MELON":
                  harvest_now = age >= cd["fy"] and yu2 > 0 and (yu2 >= cd["mx"] or age >= cd["my"])
              if day >= 28 and ready and yu2 > 0 and (GC_P["d28_harvest_all"] or age >= cd["my"] or yu2 >= cd["mx"]):
-@@ -1277,7 +1391,7 @@
+@@ -1277,7 +1392,7 @@
          if yu > 0:
              over = max(0, yu + add - cd["mx"])
              thr = GC_P["tomato_harvest_min"] if crop == "TOMATO" else 2
@@ -179,7 +180,7 @@
              if race:
                  thr = min(thr, GC_P["race_min"])
              if over > 0 or done or day >= 28 or yu >= thr:
-@@ -1333,6 +1447,10 @@
+@@ -1333,6 +1448,10 @@
      def _animal_visit(self, pos, t, day, val, final):
          a = _GC_ANIM[t["animal"]]
          yu = int(t["yield_units"]); pv = val[a["prod"]]
@@ -190,7 +191,7 @@
          pend = int(t.get("pending_care_bonus", 0) or 0)
          acts = []; value = 0.0; must = False; wheat = 0; carry = 0
          if final:
-@@ -1371,7 +1489,7 @@
+@@ -1371,7 +1490,7 @@
          if yu > 0:
              nxt = (1 + pend) if prod_tonight else 0
              over = max(0, yu + nxt - a["held"])
@@ -199,7 +200,7 @@
              thr = min(3, GC_P["race_min"]) if race else 3
              if (over > 0 or yu >= thr or day >= 27) and (pv >= GC_P["harvest_min_price"] or day >= 28):
                  acts.append(["HARVEST"]); value += over * pv + yu * pv * 0.1; carry += yu
-@@ -2871,6 +2989,12 @@
+@@ -2871,6 +2990,12 @@
          return k
  
      def _market(self, obs, shed, carried, hour, day):
@@ -212,7 +213,7 @@
          step = int(obs["step"])
          sells = self._sell_orders(obs, shed, carried, hour, day, step)
          if GC_P["tick_defer"] and hour % 4 == 0 and hour > 0 and day < GC_P["tick_last_day"]:
-@@ -2899,18 +3023,29 @@
+@@ -2899,18 +3024,29 @@
                      _GC_REPORT["gc_open_feedbuy"] = _GC_REPORT.get("gc_open_feedbuy", 0) + k
          if hour == 0:
              fixed = list(self.orders0)
@@ -247,7 +248,7 @@
              self.hires_left -= h1
              return ([["HIRE"]] * h1 + list(self.orders1) + prem + rest)[:10]
          if self.hires_left and hour == 2:
-@@ -3012,6 +3147,10 @@
+@@ -3012,6 +3148,10 @@
              if plan is not None:
                  rv = lambda s2, _pl=plan: float(_pl.get(s2 + 1, 0))
                  _GC_REPORT["gc_cp_used"] = _GC_REPORT.get("gc_cp_used", 0) + 1
@@ -258,7 +259,7 @@
          if step % 4 != 1 and step > 0:
              if not GC_P["mkt_dp_every"]:
                  return None
-@@ -3046,6 +3185,15 @@
+@@ -3046,6 +3186,15 @@
          for i in range(imin, imax + 1):
              pr.append(pr[-1] + _gc_price(p, i))
          w = float(GC_P["mkt_dp_rival_w"])
@@ -274,7 +275,7 @@
          NEG = -1e18; Kd = len(dsteps)
          V = [0.0] * (U + 1); best0 = 0
          for k in range(Kd - 1, -1, -1):
-@@ -3112,6 +3260,7 @@
+@@ -3112,6 +3261,7 @@
              if dp_budget is not None:
                  _GC_REPORT["gc_dp_room_min"] = min(_GC_REPORT.get("gc_dp_room_min", 999), dp_budget)
          self._due = set()
@@ -282,7 +283,7 @@
          val_now = {q: _gc_price(q, inv[q]) for q in _GC_PRODUCTS}
          urgent = self.open is not None and self._open_on(day) and bool(getattr(self, "_open_urgent", False))
          for p in _GC_PRODUCTS:
-@@ -3141,12 +3290,16 @@
+@@ -3141,12 +3291,16 @@
                  _GC_REPORT["gc_open_urgent_sold"] = _GC_REPORT.get("gc_open_urgent_sold", 0) + n
                  out.append(["SELL", p, n])
                  continue
@@ -300,7 +301,7 @@
                  if x is None:
                      held[p] = held.get(p, 0) + n; _GC_REPORT["gc_dp_wait"] = _GC_REPORT.get("gc_dp_wait", 0) + n
                      continue
-@@ -3253,6 +3406,28 @@
+@@ -3253,6 +3407,28 @@
  
  
  _GC = GoldCtl()
@@ -329,7 +330,61 @@
  _GC_DIV_SAVED = {}
  _GC_RICH = {}
  # ---------------------------------------------------------------------------------------------------------------
-@@ -4208,6 +4383,21 @@
+@@ -3974,6 +4150,53 @@
+         _GC_REPORT["gc_v219x_mvals"] = " ".join("%d:%d" % (a, b) for a, b in sorted(mv.items()))
+ 
+ 
++def _v233_worker_wool_first(obs, actor, targets):
++    """V233's two-hand SE sheep crew with the wool delivered as soon as no target holds wool (the 2600+ copies'
++    crews drop it two to three hours before ours and take the day's wool book); fertilizer is collected after."""
++    farm = obs['farms'][obs['player']]; private = obs['private']; step = int(obs['step'])
++    pos = tuple(farm['hands'][actor - 1]); inv = private['inventories'][actor]
++    access = ((4, 4), (5, 4), (4, 5), (5, 5))
++    home = min(access, key=lambda p: (abs(pos[0] - p[0]) + abs(pos[1] - p[1]), p))
++    distance = abs(pos[0] - home[0]) + abs(pos[1] - home[1])
++    cargo = [item for item in ('WOOL', 'FERTILIZER') if inv.get(item, 0)]
++    if cargo and step % 24 >= (22 if step // 24 == 29 else 23) - distance:
++        return _v219_walk(pos, home) or ['PLACE', cargo[0], inv[cargo[0]]]
++    missing = sum(not (isinstance(farm['tiles'][y][x], dict) and farm['tiles'][y][x].get('animal') == 'SHEEP') for x, y in targets)
++    if missing and not inv.get('SHEEP', 0) and private['shed'].get('SHEEP', 0):
++        return _v219_walk(pos, home) or ['PICKUP', 'SHEEP', min(missing, private['shed']['SHEEP'])]
++    hungry = sum(not (isinstance(farm['tiles'][y][x], dict) and farm['tiles'][y][x].get('fed_today')) for x, y in targets)
++    if hungry and not inv.get('WHEAT', 0) and private['shed'].get('WHEAT', 0):
++        return _v219_walk(pos, home) or ['PICKUP', 'WHEAT', min(hungry, private['shed']['WHEAT'])]
++    wool_left = any(isinstance(farm['tiles'][y][x], dict) and farm['tiles'][y][x].get('animal') == 'SHEEP'
++                    and int(farm['tiles'][y][x].get('yield_units', 0) or 0) > 0 for x, y in targets)
++    busy = wool_left or inv.get('WOOL', 0) > 0
++    tasks = []
++    for target in targets:
++        x, y = target; tile = farm['tiles'][y][x]; command = None
++        if tile is None: command = ['BUILD_PASTURE']
++        elif isinstance(tile, dict) and tile.get('kind') == 'WEED': command = ['DIG']
++        elif isinstance(tile, dict) and tile.get('kind') == 'PASTURE' and not tile.get('animal'):
++            if inv.get('SHEEP', 0): command = ['PLACE', 'SHEEP']
++        elif isinstance(tile, dict) and tile.get('animal') == 'SHEEP':
++            if not tile['fed_today'] and inv.get('WHEAT', 0): command = ['FEED']
++            elif not tile['cared_today']: command = ['CARE']
++            elif tile['yield_units']: command = ['HARVEST']
++            elif tile['fertilizer_available'] and not busy: command = ['COLLECT_FERTILIZER']
++        if command: tasks.append((abs(pos[0] - x) + abs(pos[1] - y), targets.index(target), target, command))
++    if inv.get('WOOL', 0) and not wool_left and not any(c[0] in ('FEED', 'CARE', 'BUILD_PASTURE', 'PLACE', 'DIG') for _d, _i, _t, c in tasks):
++        _GC_REPORT["gc_v233_wool_first"] = _GC_REPORT.get("gc_v233_wool_first", 0) + 1
++        return _v219_walk(pos, home) or ['PLACE', 'WOOL', inv['WOOL']]
++    if tasks:
++        _, _, target, command = min(tasks)
++        return _v219_walk(pos, target) or command
++    if cargo: return _v219_walk(pos, home) or ['PLACE', cargo[0], inv[cargo[0]]]
++    return ['PASS']
++
++
++if GC_P.get("v233_wool_first") and "_SL_WORKER" in globals():
++    _SL_WORKER = _v233_worker_wool_first
++
++
+ def agent(observation, configuration=None):
+     step = int(observation["step"])
+     if step == 0:
+@@ -4208,6 +4431,21 @@
                  action = _lead2(observation, action)
              except Exception as e:
                  _GC_REPORT["gc_lead2_err"] = repr(e)[:120]

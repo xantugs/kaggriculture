@@ -436,3 +436,80 @@ units) +$66 +- 174 (wheat +$1,037 but wages -$1,504), with carrots -$622, at 4 u
 forecast (harvests from its tiles minus its sales) predicts its next-day sales worse than the 2-day hourly pattern.
 Every production lever runs into the Fibonacci wage (the day's 11th-14th hands cost $89-377); what the elites have is
 an integrated day 6-10 investment plan (land + herd + dense wheat), which is a planner, not a knob.
+
+## 26 Sep (night): the live games of 26 Sep, a broke opening, sf6, sf7 and sf8
+Data: `replays/live_0926/` on the other branch (all 191 ladder games of v23 = m3 and v24 = m5 up to 17:00 UTC, with
+the user's loss analysis). Every replay reproduces its recorded rewards here. Tools (`gold/harness/live/`):
+`import_replays.py` (raw Kaggle replay.json / .gz / .zip -> the pinned format), `lost_report.py` (per-day farms,
+money and ledgers of both seats; shadow-runs candidates to find which build played), `early_scan.py`, `crop_trace.py`
+(hourly units on tiles / carried / shed for one product), `prem_timing.py`, `pin_probe.py`, `day_fills.py`.
+A **live gate** = these 191 games pinned from day 12 (`pinned4.py`, S = 288), paired by game, split by opponent
+group (`livecmp.py`); subsets `live_copy` (105 games, rival identical to us through day 15) and `live_div` (86).
+
+Standing (their analysis, checked): v23 2,645 (70-34), 20-26 against 2600+ opponents: identical copies **5-9**,
+own plan from days 6-11 8-8, own agent 5-6, annex games 2-2; v24 82-5 at 2,195, no 2600+ opponent met yet.
+m5 from day 12 wins the same live games v23/v24 won (within one).
+
+**The broke opening (fixed: `cash_guard_min`, sf7).** Yoshiki_Nakamura (-$12,372) and Shs123 (-$21,474): the rival
+trades wheat at steps 0-1 (buys 30-38 and resells), our tape's fixed wheat orders at steps 0-1 cost ~$15 more, and
+the tape (which spends day 0 down to a median $11) ends day 0 with $0-1. The step-24 hires ($4) fail, the farmer
+alone never feeds the day-0 cows (the tape feeds them first on day 1), and 1-2 cows escape that night. The guard
+trims the chassis's day-0 BUY_SEED orders that would leave less than $5 (a wheat seed or two in those games). Full
+game (S = 0, rival replayed): Yoshiki -$13.3k -> **+$3.0k**, Shs123 -$20.6k -> **+$10.6k**; games where it does not
+fire are unchanged by construction (cash only falls on day 0). The older corpus has 3 such openings in 249 games
+(at $3, no escape); the step-0 wheat traders are new in the live field.
+
+**sf6** = sf5b + `div_over` holding cap 30 (`mkt_dp_cap`). Gates vs sf5b: elite +$172 +- 74 (82 -> 82), pinned 249
++$71 +- 44 (193 -> 195, +2/-0), 2800+ +$38 +- 61 (104 -> 105), closed loop unchanged (divergent-only). Caps 45/60:
++$158 (30 stays). Live gate vs m5: +$178 +- 48, wins 153 -> 154; 2600+ +$282 +- 176.
+
+**What the 2600+ copies do better** (traced tick by tick in the close losses, both tapes replayed): identical farms,
+but they sell premium goods earlier in the day. In len8487's game our V233 sheep workers (the 2-hand SE crew) do
+FEED, CARE, HARVEST, **COLLECT_FERTILIZER** on each tile before walking to the next; the copy's crew skips the
+collection until the wool is delivered, drops 12 wool at h17/h19 against our h20/h22 and takes the day's wool book
+(+$1.1k that day). In Civitasmass's game the units act identically and the copy's chassis simply sells its wool at
+h1-h9 while our market layers hold it (unit floor, reservations) and sell at h13-h21 into the book the copy already
+floored. Over days 24-29 the copies hold premium goods to days 28-29 and plant ~47 plots on days 24-27 to our 30
+(carrots 33 vs 22, wheat 14 vs 8), which is why the day-29 cash lead flips in the close games; over days 24-29 as
+a whole we still come out ahead (+$2.9k a game against v23's copies).
+
+Rejected tonight (paired vs sf6):
+- `care_min_price` 0 (always care): elite gate **-$1,831 +- 141, 82 -> 65**. The price gate on CARE is worth keeping:
+  caring in a glutted book costs hands and displaces crop work (one probe game: wool +$200, hires -$320, crops -$1.4k).
+- Holding cap 30 on copy games too (`c_tcap30`): live copy games -$30 +- 54, 93 -> 91.
+- Rival weight by cash gap (idea 21's form): weight 3 when $3k behind -$41 +- 52; 2.5 behind / 1 ahead -$93 +- 54.
+- Divergent `carrot_edge` 1.3 / 2.0 (more wheat): +$35 +- 95 (82 -> 84) / -$80 +- 105 (82 -> 82).
+- Later last plantings on copy games (`carrot_last_plant` 27, `wheat_last_plant` 26; the live analysis suggested it,
+  since copies plant ~17 more plots on days 24-27): live copy games **-$3,398 +- 395, 93 -> 58**. Confirms the other
+  session's e45: the copies' day-29 harvest is paid for with the days 24-28 labour our controller spends better.
+- sf7's cash guard never fires on the elite gate (210 seats identical) nor in 40 closed-loop games vs live v15a
+  (identical to sf4 on all 40); it only changes day-0 seed orders when the cash would fall below $5.
+- Care and harvest priced at the book one day of town drain ahead (`anim_fwd_days` 1): elite **-$900 +- 146**,
+  82 -> 78. The instantaneous price gate is right; the rival's own sales keep the book from recovering.
+- Chassis unit floor 0% / 3% instead of 8%: live copy games -$138 +- 90 / -$118 +- 63 (93 -> 93 both); elite
+  gate (0%) -$32 +- 66. The 8% floor stays.
+
+**Full-game replay on the live games** (`pinned4.py` at S = 0: our candidate plays all 720 steps, the rival's recorded
+actions replayed, shops pinned): sf7 wins 153 of 186 where v23/v24 won 148 (2600+ opponents: 23 of 45 against 20;
+copies at 2600+ 6 of 14 against 5; own-plan rivals at 2600+ 15 of 27 against 13); the mean margin is higher in
+every group.
+
+Rating dynamics seen in the live index: v23 went 600 -> 2,601 in its first 35 games (about two hours), v24 600 ->
+2,195 in 87 games with two early losses (one of them the broke opening, Shs123) and +5 a win once its uncertainty
+shrank. A new submission gets ~15 games an hour.
+
+**sf8** = sf7 + `v233_wool_first`: the chassis's two-hand SE sheep crew (V233, towns with two yarn stores) no longer
+collects fertilizer while wool is still on its tiles or in its hands, and delivers the wool as soon as the harvest
+round is done (the fertilizer follows; `_SL_WORKER` rebound in ctl.py, `patches/lean_patch_wf.py` for the lean file).
+- The 14 live V233 games: +$1,091 +- 373 a game (9 up, 1 down, 4 unchanged), wins 10 -> 10 (len8487 -$1,222 -> -$68).
+- Live gate (191 games, S = 288) vs sf6/sf7: **+$80 +- 34**, wins 154 -> 154, 10 games change (copies +$155 +- 69).
+- Pinned 249: **+$79 +- 29**, 195 -> 195 (13 change). Elite gate: identical (V233 never fires in those seats).
+- Closed loop vs live v15a (360 of 400 games, seeds 6100-6299 both seats; the container restarted before the
+  last 40): **+$127 +- 32**, wins 339 -> 342, 32 games change, 0 errors. Both crews race for the same wool book there.
+- Lean sf8 (`c_lsf8.py`, sha256 8b899b2f...) plays identically to the full build on the 14 V233 games and runs under
+  the official kaggle_environments runner (seed 6042, both seats: DONE, 120,197 vs 113,131 either way).
+
+Also measured on the elite gate (vs sf6): divergent footprint slack 5 +$98 +- 103 (82 -> 81); programme rival
+forecast over 3 days (`mkt_dp_rival_days` 3) -$73 +- 88 but **82 -> 86 wins (+4/-0)**; `mkt_dp_every_min` 2 +$30 +- 32
+(82 -> 83). Copy-game variants still open when the container restarted: no market programme on copies, copy
+takeover on day 22 / 20.
