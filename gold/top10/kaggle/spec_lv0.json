@@ -1,0 +1,1 @@
+{"base": "T5", "cands": {"T5": "gold/submit/main_ctl_T5.py", "T8": "gold/submit/main_ctl_T8.py", "m3": "gold/submit/main_ctl_mkt3_m7.py"}, "gates": {"lv0": ["T5", "T8", "m3"]}}

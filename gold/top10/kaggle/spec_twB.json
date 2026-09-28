@@ -1,0 +1,1 @@
+{"base": "T8s", "cands": {"T8s": "gold/top10/cands/full_T8s.py", "TWa": "gold/top10/cands/full_TWa.py", "TWb": "gold/top10/cands/full_TWb.py"}, "gates": {"lv3": ["T8s", "TWa", "TWb"], "lv4": ["T8s", "TWa", "TWb"]}}

@@ -67,3 +67,29 @@ def plantings(days, crop, a, b):
 
 def tiles(days, d, k):
     return days[d]['t'].get(k, 0)
+
+
+def ols(X, y):
+    """Pure-python OLS: returns (beta, se). X rows are lists (include an intercept column if wanted)."""
+    n, m = len(X), len(X[0])
+    A = [[0.0] * m for _ in range(m)]; bb = [0.0] * m
+    for r in range(n):
+        xr = X[r]; yr = y[r]
+        nz = [(i, v) for i, v in enumerate(xr) if v]
+        for i, vi in nz:
+            bb[i] += vi * yr
+            Ai = A[i]
+            for j, vj in nz: Ai[j] += vi * vj
+    M = [A[i][:] + [bb[i]] + [1.0 if j == i else 0.0 for j in range(m)] for i in range(m)]
+    for c in range(m):
+        piv = max(range(c, m), key=lambda r: abs(M[r][c])); M[c], M[piv] = M[piv], M[c]
+        pv = M[c][c]
+        if abs(pv) < 1e-12: continue
+        M[c] = [v / pv for v in M[c]]
+        for r in range(m):
+            if r != c and M[r][c]:
+                f = M[r][c]; M[r] = [a - f * b_ for a, b_ in zip(M[r], M[c])]
+    beta = [M[i][m] for i in range(m)]; inv = [M[i][m + 1:] for i in range(m)]
+    res = [y[r] - sum(X[r][j] * beta[j] for j in range(m)) for r in range(n)]
+    s2 = sum(e * e for e in res) / max(1, n - m)
+    return beta, [max(0, s2 * inv[i][i]) ** 0.5 for i in range(m)]

@@ -1,0 +1,1 @@
+{"base": "T5", "cands": {"T5": "gold/submit/main_ctl_T5.py"}, "gates": {"live191": ["T5"]}, "S_override": {"live191": 0}}

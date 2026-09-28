@@ -55,8 +55,8 @@ def download(slug):
     return got
 
 
-def push(slug, script, kind):
-    r = subprocess.run([sys.executable, os.path.join(ROOT, 'moon', 'kpush_tpu.py'), script, slug, kind, DS],
+def push(slug, script, kind, ds=None):
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'moon', 'kpush_tpu.py'), script, slug, kind, ds or DS],
                        capture_output=True, text=True, timeout=600)
     ok = '"versionNumber' in r.stdout and 'errorNullable' not in r.stdout
     print('push', slug, kind, 'ok' if ok else r.stdout[-200:], flush=True)
@@ -66,14 +66,14 @@ def push(slug, script, kind):
 if __name__ == '__main__':
     path = sys.argv[1]; poll = int(sys.argv[2]) if len(sys.argv) > 2 else 120
     finished = []
-    inbox = os.path.join(os.path.dirname(os.path.abspath(path)), 'kinbox.txt')  # append "slug script cpu|tpu" lines here
+    inbox = os.path.join(os.path.dirname(os.path.abspath(path)), 'kinbox.txt')  # append "slug script cpu|tpu [datasets]" lines here
     while True:
         st = json.load(open(path, encoding='utf-8'))
         if os.path.exists(inbox):
             lines = [l.split() for l in open(inbox, encoding='utf-8') if l.strip()]
             open(inbox, 'w').close()
             for l in lines:
-                if len(l) == 3 and l[0] not in st['running'] + st['done'] and l not in st['pending']:
+                if len(l) in (3, 4) and l[0] not in st['running'] + st['done'] and l not in st['pending']:
                     st['pending'].append(l); print('queued', l[0], flush=True)
         for slug in list(st['running']):
             s = status(slug)
@@ -83,8 +83,8 @@ if __name__ == '__main__':
                 print('finished', slug, s, files, flush=True)
         n_cpu = sum(1 for s in st['running'] if not s.endswith('-tpu') and s != 'kagg-gate-r1')
         while st['pending'] and n_cpu < MAX_CPU:
-            slug, script, kind = st['pending'][0]
-            if not push(slug, os.path.join(ROOT, script), kind):
+            slug, script, kind = st['pending'][0][:3]; ds = st['pending'][0][3] if len(st['pending'][0]) > 3 else None
+            if not push(slug, os.path.join(ROOT, script), kind, ds):
                 break
             st['pending'].pop(0); st['running'].append(slug); n_cpu += 1
         json.dump(st, open(path, 'w', encoding='utf-8'), indent=1)
