@@ -1,0 +1,16 @@
+{
+ "base": "T7",
+ "cands": {
+  "T7": "gold/top10/cands/full_T7.py",
+  "M2": "gold/top10/cands/full_M2.py",
+  "M3": "gold/top10/cands/full_M3.py",
+  "M4": "gold/top10/cands/full_M4.py",
+  "M5": "gold/top10/cands/full_M5.py"
+ },
+ "gates": {
+  "top10g": [
+   "M3",
+   "M5"
+  ]
+ }
+}

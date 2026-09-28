@@ -1,0 +1,3 @@
+== goldg (base T6c: 111 rows, wins 52)
+  T7                     n  111     +445 +-  118  wins   52 ->   54 (+3/-1)
+== top10g (base T6c: 0 rows, wins 0)

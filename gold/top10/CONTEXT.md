@@ -82,6 +82,20 @@ KawattaTaido 2922, Unknown Mother-Goose 2921, Fourth Quadrant 2906, Azat Akhtyam
 - Kaggle compute: `gold/top10/kaggle/` (pack_gates, mkkernel, kqueue + kinbox.txt). Kaggle rows are bit-identical to local.
   Max 5 concurrent batch CPU sessions (4 cores each); the TPU queue did not start in 2+ hours.
 
+## 27 Sep evening
+- v27 = T5 submitted (gold/submit/main_ctl_T5.py): vs v26 live191 +$1,625 (157 -> 169), pin249 +$1,608 (198 -> 209),
+  2800+ +$1,722 (106 -> 118), closed loop +$1.25-1.46k all three opponents; vs sf8 goldg 37% -> 46% wins.
+- T6 = T5 + s2t_ext (day-11 partial strawberry->tomato, 1-strawberry-shop towns with a tomato buyer): +$79 to +$586 on every gate.
+- Copy takeover day on T5: earlier is better now (live191 d19 +$311, d20 +$317, d21 +$154 vs d22; d24 -$429); live0927 d20 +$406.
+- Controller audit (5 areas): the same pickup-reserve bug found 5 times (market sells the WHEAT/FERTILIZER today's queued PICKUPs
+  need; day 28 reserve 0): market_fix1 +$163 +- 40 live; market_fix2 +$19; d28feed_fix +$178 +- 25 (169 -> 171); mtrim_fix +$185;
+  plant23_fix +$82 (fired); handover_fix1+3 small +. All merged into gold/top10/full/ctl_top3.py (verified line by line; T6c == T6).
+- T7 = T6 + copy day 20 + market_fix1/2 + d28feed + mtrim + plant23 + handover_fix1/3: gates running (Kaggle r12*).
+- Research (gold/top10/research/): under T5 the post-day-16 gap vs the gold zone is closed; what is left is pre-day-16 against
+  "opening winners" (Boey, Fourth Quadrant, 吃白饭的大肥鱼, Yizhou, THIRD FARM CLUB: early SW land, geese, dense wheat) and eggs.
+  Round-3 agents: no-yarn herd swap, premium-first tape delivery (copy ties), labour packing.
+- Pitfall: a merge resolver that writes CRLF on Windows made git merge-file duplicate the whole file; write LF (newline='').
+
 ## Leads open on 27 Sep (from the other session's last hours, code lost with its container)
 - Copy takeover day 22 instead of 24: +$760 +- 163 a game on the 105 live copy games (93 -> 96 wins), measured on sf6.
   Being re-measured on sf8 (days 21/22/23) by the main session.

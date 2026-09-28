@@ -1,0 +1,15 @@
+{
+ "base": "T7",
+ "cands": {
+  "T7": "gold/top10/cands/full_T7.py",
+  "T8": "gold/top10/cands/full_T8.py"
+ },
+ "gates": {
+  "goldg": [
+   "T8"
+  ],
+  "top10g": [
+   "T8"
+  ]
+ }
+}
