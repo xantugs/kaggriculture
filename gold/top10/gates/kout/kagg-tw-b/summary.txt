@@ -1,0 +1,6 @@
+== lv3 (base T8s: 50 rows, wins 27)
+  TWa                    n   50    -1602 +- 1590  wins   27 ->   26 (+0/-1)
+  TWb                    n   50     -640 +-  561  wins   27 ->   27 (+1/-1)
+== lv4 (base T8s: 50 rows, wins 34)
+  TWa                    n   50     +308 +-  232  wins   34 ->   35 (+2/-1)
+  TWb                    n   50     +111 +-  269  wins   34 ->   33 (+2/-3)

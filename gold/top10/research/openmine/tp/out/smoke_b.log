@@ -1,0 +1,21 @@
+gold/top10/cands/full_TP_A3g2.py: 4-56 of 60  margin -10443  wall 177s
+gold/top10/cands/full_TP_B2.py: 20-36 of 56  margin -788  wall 122s
+gold/top10/cands/full_TP_B2.py: 4-56 of 60  margin -11868  wall 141s
+gold/top10/cands/full_TP_B2.py: 86-73 of 159  margin +205  wall 488s
+done TP_B2 06:00
+gold/top10/cands/full_TP_B4.py: 24-32 of 56  margin -620  wall 101s
+gold/top10/cands/full_TP_B4.py: 3-57 of 60  margin -12785  wall 116s
+gold/top10/cands/full_TP_B4.py: 87-72 of 159  margin +1499  wall 525s
+done TP_B4 06:12
+gold/top10/cands/full_TP_B2d.py: 20-36 of 56  margin -689  wall 113s
+gold/top10/cands/full_TP_B2d.py: 4-56 of 60  margin -11582  wall 121s
+gold/top10/cands/full_TP_B2d.py: 94-65 of 159  margin +1769  wall 393s
+done TP_B2d 06:23
+gold/top10/cands/full_TP_ALL.py: 20-36 of 56  margin -1709  wall 89s
+gold/top10/cands/full_TP_ALL.py: 2-58 of 60  margin -12385  wall 97s
+gold/top10/cands/full_TP_ALL.py: 91-68 of 159  margin +2025  wall 261s
+done TP_ALL 06:30
+gold/top10/cands/full_TP_B2f.py: 20-36 of 56  margin -689  wall 59s
+gold/top10/cands/full_TP_B2f.py: 4-56 of 60  margin -11582  wall 78s
+gold/top10/cands/full_TP_B2f.py: 96-63 of 159  margin +1887  wall 324s
+done TP_B2f 06:38

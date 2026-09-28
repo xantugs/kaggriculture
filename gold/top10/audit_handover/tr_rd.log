@@ -1,0 +1,92 @@
+113620813 0 288
+113624741 0 384
+113629510 0 384
+113633403 0 288
+113638947 0 384
+113640096 0 384
+113647238 0 384
+113653439 0 288
+113657899 0 384
+113660258 0 384
+113668421 0 384
+113669672 0 384
+113675563 0 288
+113701612 0 384
+113708152 0 384
+113708805 0 384
+113723941 0 384
+113737446 0 384
+113745971 0 384
+113752335 0 384
+113770998 0 384
+113595000 0 288
+113596171 0 384
+113597343 0 384
+113598481 0 384
+113599643 0 384
+113600807 0 384
+113601979 0 384
+113603120 0 384
+113604281 0 288
+113608282 0 288
+113610121 0 288
+113611289 0 288
+113612468 0 288
+113616014 0 288
+113617246 0 288
+113619657 0 288
+113622060 0 288
+113637757 0 384
+113643600 0 288
+113644871 0 288
+113648427 0 384
+113652147 0 288
+113656698 0 288
+113662619 0 288
+113666109 0 384
+113672032 0 384
+113676743 0 288
+113677936 0 288
+113679102 0 288
+113680669 0 384
+113687700 0 384
+113695790 0 384
+113711146 0 384
+113719228 0 384
+113726483 0 384
+113735903 0 384
+113744024 0 384
+113761474 0 384
+113772943 0 288
+113672631 0 288
+113696377 0 384
+113663377 0 384
+113664496 0 384
+113665665 0 384
+113666897 0 384
+113667973 0 384
+113669130 0 384
+113670301 0 384
+113671458 0 384
+113676198 0 384
+113692779 0 288
+113697572 0 288
+Traceback (most recent call last):
+  File "C:\Users\khant\OneDrive\Documents\ChatGPT\2027\kaggriculture_review\kg\gold\top10\audit_handover\ho_trace.py", line 107, in <module>
+    for r in ex.map(job, [(cand, g, S) for g in gids]):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\process.py", line 642, in _chain_from_iterable_of_lists
+    for element in iterable:
+                   ^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\khant\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+concurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.

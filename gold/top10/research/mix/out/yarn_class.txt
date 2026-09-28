@@ -1,0 +1,11 @@
+gate seats by yarn timing (sheep us/elite at d11, d20; wool units sold us/elite; ledger us-elite)
+A yarn<=d9     n 128 win  29% margin  -3985 | sheep d11 11.2/10.5 d20 12.1/10.0 cows d11  6.4/ 6.8 geese 0.2/3.7 | wool u  263/ 231 | WOOL  +1857 MILK   +116 EGG  -5606 FERT  -1022 WHEA  -5500 anim  +1188 hire   +488 | us wool$ 42267 el wool$ 40410
+B yarn d12-15  n  67 win  28% margin  -5813 | sheep d11  5.6/ 3.2 d20  6.1/ 7.0 cows d11  8.0/ 8.9 geese 3.4/6.0 | wool u  153/ 151 | WOOL  -1289 MILK   +771 EGG  -3845 FERT   -951 WHEA  -6038 anim  +1912 hire  +1488 | us wool$ 22956 el wool$ 24245
+C yarn d18-24  n  58 win  38% margin  -4259 | sheep d11  5.5/ 3.3 d20  5.4/ 3.7 cows d11  8.3/ 9.1 geese 3.2/6.1 | wool u  108/  86 | WOOL    +11 MILK   +849 EGG  -4394 FERT   -590 WHEA  -4806 anim   +888 hire  +1244 | us wool$ 11850 el wool$ 11839
+D no yarn      n 128 win  20% margin  -8467 | sheep d11  5.6/ 3.2 d20  5.4/ 3.0 cows d11  7.7/ 8.5 geese 3.7/6.7 | wool u   84/  52 | WOOL  -1185 MILK    -94 EGG  -4566 FERT    +49 WHEA  -6691 anim   +300 hire  +1567 | us wool$  4764 el wool$  5949
+
+corpus top-30 seats by yarn timing: win% by sheep count at d11 (<=3 / 4-5 / 6+), wool $
+A yarn<=d9     n 1556 4-5: n  22 win  14% wool\$ 29186 6+: n1534 win  52% wool\$ 36427
+B yarn d12-15  n  668 4-5: n  78 win  56% wool\$ 23430 6+: n  22 win  45% wool\$ 19070 <=3: n 568 win  50% wool\$ 23009
+C yarn d18-24  n  710 4-5: n 100 win  39% wool\$ 12463 6+: n  15 win  33% wool\$ 12480 <=3: n 595 win  54% wool\$ 12246
+D no yarn      n 1521 4-5: n 193 win  31% wool\$  5177 6+: n  39 win  23% wool\$  5315 <=3: n1289 win  55% wool\$  5270

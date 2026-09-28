@@ -1,0 +1,38 @@
+
+== STRAWBERRY: per seat per day  sold units @ avg price | harvested units
+d10 | Boey   0.0 @   0 hv   0.0 | FQ     0.0 @   0 hv   0.0 | CBF    0.0 @   0 hv   0.0 | TFC    0.0 @   0 hv   0.0 | Yiz    0.0 @   0 hv   0.0 | T7     0.0 @   0 hv   0.0 
+d11 | Boey   0.0 @   0 hv   0.0 | FQ     0.0 @   0 hv   1.2 | CBF    0.0 @   0 hv   0.0 | TFC    0.0 @   0 hv   0.0 | Yiz    0.0 @   0 hv   0.0 | T7     0.0 @   0 hv   0.0 
+d12 | Boey   0.0 @   0 hv   0.4 | FQ     1.3 @ 178 hv   2.2 | CBF    0.1 @ 153 hv   1.7 | TFC    0.0 @   0 hv   0.0 | Yiz    0.0 @   0 hv   6.9 | T7     0.0 @   0 hv   0.0 
+d13 | Boey   0.5 @ 192 hv   3.9 | FQ     2.4 @ 192 hv   6.7 | CBF    1.8 @ 176 hv   3.4 | TFC    0.1 @ 198 hv   1.7 | Yiz    5.9 @ 184 hv  11.8 | T7     0.0 @   0 hv   0.0 
+d14 | Boey   3.4 @ 187 hv   3.1 | FQ     7.4 @ 195 hv   7.0 | CBF    3.3 @ 173 hv  11.8 | TFC    1.3 @ 203 hv   2.1 | Yiz   10.7 @ 191 hv   7.9 | T7     0.0 @   0 hv   0.0 
+d15 | Boey   4.1 @ 192 hv   4.9 | FQ     7.1 @ 196 hv   8.2 | CBF   16.0 @ 190 hv  15.8 | TFC    1.1 @ 167 hv   3.3 | Yiz   11.3 @ 182 hv  12.4 | T7     6.0 @ 196 hv   7.9 
+d16 | Boey  19.5 @ 193 hv  27.6 | FQ    27.4 @ 192 hv  31.2 | CBF   21.5 @ 184 hv  28.2 | TFC   17.7 @ 191 hv  36.0 | Yiz   18.1 @ 179 hv  18.5 | T7     3.0 @ 187 hv  16.0 
+d17 | Boey  12.0 @ 179 hv   7.2 | FQ    14.3 @ 174 hv  11.7 | CBF   18.4 @ 173 hv   8.9 | TFC   15.7 @ 184 hv   2.8 | Yiz   12.5 @ 161 hv  14.6 | T7    17.5 @ 187 hv  15.9 
+d18 | Boey  23.9 @ 167 hv  29.3 | FQ    32.9 @ 164 hv  37.1 | CBF   15.9 @ 155 hv  26.4 | TFC   13.5 @ 178 hv  34.6 | Yiz   20.8 @ 145 hv  19.6 | T7    20.1 @ 176 hv  21.6 
+d19 | Boey  13.5 @ 154 hv  11.7 | FQ    15.1 @ 132 hv  12.4 | CBF   22.1 @ 136 hv   9.7 | TFC   24.9 @ 153 hv  10.4 | Yiz   12.3 @ 119 hv  16.1 | T7    16.2 @ 161 hv  16.0 
+d20 | Boey  15.1 @ 141 hv  24.5 | FQ    23.5 @ 117 hv  28.9 | CBF    7.3 @ 127 hv  14.9 | TFC   18.8 @ 140 hv  25.0 | Yiz   17.4 @  89 hv  12.9 | T7    17.5 @ 137 hv  21.0 
+d21 | Boey  10.8 @ 126 hv   8.7 | FQ    14.7 @  89 hv  10.4 | CBF   16.0 @ 126 hv   5.2 | TFC   15.5 @ 132 hv   6.6 | Yiz    8.5 @  66 hv   8.7 | T7    27.8 @ 140 hv  35.3 
+d22 | Boey  11.5 @ 126 hv  24.6 | FQ    18.0 @  93 hv  31.5 | CBF    9.2 @ 111 hv  16.8 | TFC   15.6 @ 121 hv  27.8 | Yiz    9.6 @  74 hv  18.1 | T7    27.0 @ 106 hv  24.6 
+d23 | Boey   8.3 @ 117 hv   3.6 | FQ    14.6 @  81 hv   9.4 | CBF   11.9 @ 124 hv   8.7 | TFC   18.7 @  98 hv   2.4 | Yiz    7.9 @  69 hv   4.7 | T7    31.4 @  79 hv  28.4 
+d24 | Boey   9.1 @ 108 hv   9.3 | FQ    13.5 @  85 hv  16.3 | CBF    9.9 @ 117 hv   6.3 | TFC    7.6 @ 107 hv   9.8 | Yiz    8.2 @  75 hv   7.4 | T7    16.4 @  65 hv   8.7 
+d25 | Boey  10.1 @ 127 hv  11.8 | FQ    13.6 @  94 hv  10.1 | CBF    7.0 @ 117 hv   9.1 | TFC   12.4 @ 103 hv  14.2 | Yiz    7.9 @  83 hv  11.5 | T7    18.0 @  68 hv  13.1 
+d26 | Boey  12.4 @ 134 hv   5.7 | FQ    12.7 @  98 hv   9.0 | CBF    7.1 @ 119 hv   8.6 | TFC   12.5 @ 111 hv   3.5 | Yiz   10.9 @  88 hv   7.0 | T7     8.1 @  77 hv   2.2 
+d27 | Boey  10.0 @ 130 hv   5.4 | FQ    12.4 @ 102 hv   6.7 | CBF   11.0 @ 135 hv   9.7 | TFC    4.9 @ 124 hv   3.8 | Yiz    7.8 @  80 hv   9.7 | T7    14.4 @  74 hv  21.6 
+d28 | Boey   9.5 @ 131 hv   5.0 | FQ     9.7 @ 104 hv   7.6 | CBF   12.6 @ 138 hv  13.0 | TFC    2.5 @ 139 hv   6.7 | Yiz   10.2 @  83 hv   7.5 | T7     9.8 @  77 hv   1.9 
+d29 | Boey  16.4 @ 126 hv   3.5 | FQ    11.5 @  96 hv   4.7 | CBF   22.2 @ 123 hv  15.0 | TFC   14.7 @ 140 hv   6.8 | Yiz   14.8 @  77 hv   2.8 | T7     0.8 @  80 hv   0.0 
+
+== TOMATO: per seat per day  sold units @ avg price
+d10 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.0 @   0
+d11 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.0 @   0
+d12 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.0 @   0
+d13 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.0 @   0
+d14 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.0 @   0
+d15 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.0 @   0
+d16 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.0 @   0
+d17 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @   0| TFC    0.0 @   0| Yiz    0.0 @   0| T7     0.2 @  73
+d18 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.0 @  71| TFC    0.0 @   0| Yiz    5.1 @  73| T7     2.9 @  70
+d19 | Boey   0.0 @   0| FQ     0.0 @   0| CBF    0.8 @  68| TFC    0.0 @  82| Yiz    8.4 @  72| T7     0.2 @  66
+d20 | Boey   0.0 @  67| FQ     0.0 @   0| CBF    3.3 @  70| TFC    1.6 @  75| Yiz   11.2 @  70| T7     9.2 @  67
+d21 | Boey   0.2 @  66| FQ     0.0 @   0| CBF    7.1 @  69| TFC    7.8 @  71| Yiz   15.6 @  68| T7     5.1 @  66
+d22 | Boey   0.6 @  69| FQ     0.0 @   0| CBF    6.4 @  68| TFC    6.9 @  70| Yiz   12.1 @  69| T7     5.2 @  61
+d23 | Boey   0.2 @  64| FQ

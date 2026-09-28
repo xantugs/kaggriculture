@@ -1,0 +1,92 @@
+per tile: units | fertilizer uses | labour actions (plant+water+harvest) | tile-days held | unit-weighted harvest day | gross $ at own sale price that day | net of seed | net $ per tile-day
+-- STRAWBERRY planted d0-5
+   Boey  tiles/seat   4.7 | 6.95u | fert 1.76 | lab  13.8 | days 15.4 | hday 16.5 | $  1223 | net $  1123 | $  73/tile-day
+   FQ    tiles/seat   6.6 | 7.77u | fert 2.17 | lab  15.1 | days 16.3 | hday 15.8 | $  1338 | net $  1238 | $  76/tile-day
+   CBF   tiles/seat  10.0 | 7.31u | fert 1.86 | lab  13.1 | days 15.3 | hday 16.1 | $  1243 | net $  1143 | $  75/tile-day
+   TFC   tiles/seat   4.2 | 6.19u | fert 1.70 | lab  12.2 | days 14.6 | hday 16.6 | $  1100 | net $  1000 | $  69/tile-day
+   Yiz   tiles/seat  10.0 | 7.56u | fert 2.31 | lab  17.0 | days 16.0 | hday 15.6 | $  1262 | net $  1162 | $  72/tile-day
+   T7    tiles/seat   4.0 | 7.97u | fert 1.99 | lab  14.0 | days 16.0 | hday 18.0 | $  1365 | net $  1265 | $  79/tile-day
+-- STRAWBERRY planted d6-7
+   Boey  tiles/seat  13.3 | 7.19u | fert 1.80 | lab  13.6 | days 15.7 | hday 19.0 | $  1128 | net $  1028 | $  65/tile-day
+   FQ    tiles/seat  15.2 | 7.28u | fert 1.86 | lab  13.8 | days 15.9 | hday 19.0 | $  1023 | net $   923 | $  58/tile-day
+   CBF   tiles/seat  10.0 | 6.36u | fert 1.62 | lab  12.1 | days 14.1 | hday 18.8 | $   934 | net $   834 | $  59/tile-day
+   TFC   tiles/seat  15.5 | 6.11u | fert 1.65 | lab  12.1 | days 14.6 | hday 18.7 | $   991 | net $   891 | $  61/tile-day
+   Yiz   tiles/seat   7.5 | 7.12u | fert 2.05 | lab  15.5 | days 15.8 | hday 19.0 | $   859 | net $   759 | $  48/tile-day
+   T7    tiles/seat  12.0 | 7.90u | fert 1.95 | lab  14.2 | days 16.0 | hday 19.3 | $  1171 | net $  1071 | $  67/tile-day
+-- STRAWBERRY planted d8-11
+   Boey  tiles/seat   5.3 | 7.09u | fert 1.82 | lab  13.0 | days 15.8 | hday 22.3 | $   929 | net $   829 | $  52/tile-day
+   FQ    tiles/seat   7.4 | 7.20u | fert 1.88 | lab  13.4 | days 15.7 | hday 22.0 | $   763 | net $   663 | $  42/tile-day
+   CBF   tiles/seat   1.9 | 4.61u | fert 1.17 | lab   9.6 | days 10.9 | hday 22.8 | $   575 | net $   475 | $  44/tile-day
+   TFC   tiles/seat   8.6 | 6.64u | fert 1.75 | lab  12.2 | days 15.1 | hday 22.4 | $   829 | net $   729 | $  48/tile-day
+   Yiz   tiles/seat   6.1 | 6.43u | fert 1.89 | lab  14.1 | days 15.7 | hday 23.3 | $   528 | net $   428 | $  27/tile-day
+   T7    tiles/seat  13.4 | 7.50u | fert 1.78 | lab  13.8 | days 16.8 | hday 23.3 | $   739 | net $   639 | $  38/tile-day
+-- STRAWBERRY planted d12-15
+   Boey  tiles/seat   3.4 | 6.80u | fert 1.79 | lab  12.2 | days 15.9 | hday 26.4 | $   866 | net $   766 | $  48/tile-day
+   FQ    tiles/seat   5.5 | 6.76u | fert 1.90 | lab  12.9 | days 16.0 | hday 26.2 | $   653 | net $   553 | $  35/tile-day
+   CBF   tiles/seat   9.6 | 7.06u | fert 1.84 | lab  12.7 | days 15.9 | hday 26.4 | $   886 | net $   786 | $  49/tile-day
+   TFC   tiles/seat   2.4 | 6.71u | fert 1.95 | lab  11.8 | days 15.7 | hday 27.2 | $   865 | net $   765 | $  49/tile-day
+   Yiz   tiles/seat   4.9 | 5.82u | fert 1.65 | lab  13.2 | days 15.8 | hday 26.0 | $   465 | net $   365 | $  23/tile-day
+   T7    tiles/seat   0.9 | 7.88u | fert 1.99 | lab  13.9 | days 17.0 | hday 25.0 | $   641 | net $   541 | $  32/tile-day
+-- MELON planted d0-0
+   Boey  tiles/seat   6.9 | 6.00u | fert 0.00 | lab  10.5 | days 10.0 | hday 10.0 | $  1470 | net $  1390 | $ 139/tile-day
+   FQ    tiles/seat   5.2 | 6.00u | fert 0.01 | lab  11.5 | days 10.0 | hday 10.0 | $  1471 | net $  1391 | $ 139/tile-day
+   CBF   tiles/seat   6.0 | 5.96u | fert 0.00 | lab  10.0 | days 10.0 | hday 10.0 | $  1486 | net $  1406 | $ 141/tile-day
+   TFC   tiles/seat   7.0 | 6.00u | fert 0.00 | lab  10.1 | days 10.0 | hday 10.0 | $  1515 | net $  1435 | $ 143/tile-day
+   Yiz   tiles/seat   6.0 | 6.00u | fert 0.00 | lab  10.0 | days 10.0 | hday 10.0 | $  1444 | net $  1364 | $ 136/tile-day
+   T7    tiles/seat  12.0 | 6.00u | fert 0.00 | lab  11.2 | days 10.0 | hday 10.0 | $  1389 | net $  1309 | $ 131/tile-day
+-- MELON planted d1-3
+   Boey  tiles/seat   3.5 | 5.93u | fert 0.03 | lab  10.6 | days 10.0 | hday 11.9 | $  1049 | net $   969 | $  97/tile-day
+   FQ    tiles/seat   4.2 | 5.98u | fert 0.03 | lab  10.6 | days 10.0 | hday 11.5 | $  1157 | net $  1077 | $ 108/tile-day
+   CBF   tiles/seat   4.0 | 5.89u | fert 0.00 | lab   9.9 | days 10.0 | hday 11.0 | $  1113 | net $  1033 | $ 103/tile-day
+   TFC   tiles/seat   3.6 | 5.92u | fert 0.00 | lab  10.4 | days 10.0 | hday 12.1 | $  1197 | net $  1117 | $ 112/tile-day
+   Yiz   tiles/seat   4.0 | 6.00u | fert 0.00 | lab  10.2 | days 10.0 | hday 11.0 | $  1207 | net $  1127 | $ 113/tile-day
+-- MELON planted d4-9
+   Boey  tiles/seat   2.1 | 5.83u | fert 0.53 | lab   8.9 | days  9.9 | hday 16.4 | $   714 | net $   634 | $  64/tile-day
+   FQ    tiles/seat   2.3 | 5.98u | fert 0.02 | lab  11.1 | days 10.0 | hday 15.9 | $   818 | net $   738 | $  74/tile-day
+   TFC   tiles/seat   1.3 | 5.87u | fert 0.00 | lab  10.3 | days 10.1 | hday 16.2 | $   877 | net $   797 | $  79/tile-day
+   Yiz   tiles/seat   0.1 | 5.50u | fert 0.00 | lab   9.5 | days 10.0 | hday 17.9 | $   667 | net $   587 | $  59/tile-day
+-- MELON planted d10-15
+   Boey  tiles/seat   0.3 | 5.86u | fert 0.17 | lab   9.6 | days 10.0 | hday 22.0 | $   632 | net $   552 | $  55/tile-day
+   CBF   tiles/seat   3.5 | 5.91u | fert 0.09 | lab   9.8 | days 10.0 | hday 20.8 | $   741 | net $   661 | $  66/tile-day
+   TFC   tiles/seat   3.2 | 5.94u | fert 0.00 | lab  10.1 | days 10.1 | hday 22.1 | $   676 | net $   596 | $  59/tile-day
+   T7    tiles/seat   0.1 | 6.00u | fert 0.00 | lab  10.0 | days 10.0 | hday 22.6 | $   611 | net $   531 | $  53/tile-day
+-- TOMATO planted d8-15
+   Boey  tiles/seat   0.3 | 6.55u | fert 1.11 | lab  10.8 | days 11.1 | hday 21.8 | $   433 | net $   383 | $  34/tile-day
+   CBF   tiles/seat   5.8 | 7.88u | fert 1.93 | lab  11.5 | days 11.0 | hday 22.2 | $   554 | net $   504 | $  46/tile-day
+   TFC   tiles/seat   5.4 | 7.34u | fert 1.65 | lab  11.1 | days 10.9 | hday 22.0 | $   520 | net $   470 | $  43/tile-day
+   Yiz   tiles/seat  12.4 | 6.86u | fert 1.44 | lab  12.1 | days 11.1 | hday 20.9 | $   478 | net $   428 | $  39/tile-day
+   T7    tiles/seat   3.9 | 7.66u | fert 1.68 | lab  11.0 | days 11.0 | hday 20.5 | $   516 | net $   466 | $  42/tile-day
+-- WHEAT planted d0-0
+   Boey  tiles/seat  12.4 | 2.88u | fert 0.00 | lab   5.0 | days  2.9 | hday  3.1 | $    83 | net $    73 | $  25/tile-day
+   FQ    tiles/seat   9.0 | 2.37u | fert 0.00 | lab   5.2 | days  2.4 | hday  2.5 | $    69 | net $    59 | $  25/tile-day
+   CBF   tiles/seat  10.0 | 2.80u | fert 0.00 | lab   4.8 | days  2.8 | hday  3.0 | $    83 | net $    73 | $  26/tile-day
+   TFC   tiles/seat  12.9 | 2.93u | fert 0.00 | lab   5.0 | days  2.9 | hday  3.2 | $    86 | net $    76 | $  26/tile-day
+   Yiz   tiles/seat   9.0 | 2.33u | fert 0.00 | lab   4.3 | days  2.3 | hday  2.4 | $    69 | net $    59 | $  25/tile-day
+   T7    tiles/seat   8.0 | 2.62u | fert 0.00 | lab   5.6 | days  2.6 | hday  2.7 | $    77 | net $    67 | $  26/tile-day
+-- WHEAT planted d1-5
+   Boey  tiles/seat   1.0 | 2.23u | fert 0.00 | lab   4.3 | days  2.3 | hday  5.6 | $    70 | net $    60 | $  27/tile-day
+   FQ    tiles/seat   3.9 | 2.05u | fert 0.00 | lab   4.5 | days  2.1 | hday  4.2 | $    59 | net $    49 | $  24/tile-day
+   TFC   tiles/seat   1.8 | 2.29u | fert 0.00 | lab   4.5 | days  2.3 | hday  6.0 | $    73 | net $    63 | $  28/tile-day
+   Yiz   tiles/seat   1.0 | 2.00u | fert 0.00 | lab   4.0 | days  2.0 | hday  3.0 | $    59 | net $    49 | $  24/tile-day
+   T7    tiles/seat  10.0 | 2.00u | fert 0.00 | lab   4.8 | days  2.0 | hday  5.0 | $    60 | net $    50 | $  25/tile-day
+-- WHEAT planted d6-9
+   Boey  tiles/seat  22.1 | 3.59u | fert 0.27 | lab   5.1 | days  3.1 | hday 11.5 | $   145 | net $   135 | $  43/tile-day
+   FQ    tiles/seat  24.3 | 3.49u | fert 0.22 | lab   5.5 | days  3.1 | hday 11.2 | $   136 | net $   126 | $  40/tile-day
+   CBF   tiles/seat  18.8 | 4.06u | fert 0.38 | lab   5.3 | days  3.5 | hday 11.8 | $   160 | net $   150 | $  43/tile-day
+   TFC   tiles/seat  21.5 | 2.47u | fert 0.01 | lab   4.5 | days  2.5 | hday 10.5 | $    96 | net $    86 | $  34/tile-day
+   Yiz   tiles/seat  28.5 | 3.51u | fert 0.36 | lab   4.8 | days  2.9 | hday 11.4 | $   139 | net $   129 | $  45/tile-day
+   T7    tiles/seat  13.9 | 2.23u | fert 0.00 | lab   4.7 | days  2.2 | hday  9.8 | $    84 | net $    74 | $  33/tile-day
+-- WHEAT planted d10-15
+   Boey  tiles/seat  39.2 | 4.70u | fert 0.73 | lab   5.3 | days  3.3 | hday 15.9 | $   180 | net $   170 | $  51/tile-day
+   FQ    tiles/seat  71.6 | 3.36u | fert 0.14 | lab   5.2 | days  3.2 | hday 15.6 | $   117 | net $   107 | $  33/tile-day
+   CBF   tiles/seat  32.1 | 4.52u | fert 0.71 | lab   5.1 | days  3.2 | hday 15.6 | $   172 | net $   162 | $  51/tile-day
+   TFC   tiles/seat  32.7 | 4.06u | fert 0.51 | lab   5.0 | days  3.1 | hday 15.9 | $   161 | net $   151 | $  48/tile-day
+   Yiz   tiles/seat  53.2 | 4.33u | fert 0.61 | lab   5.2 | days  3.3 | hday 15.7 | $   156 | net $   146 | $  44/tile-day
+   T7    tiles/seat  45.2 | 4.17u | fert 0.32 | lab   6.0 | days  3.5 | hday 16.5 | $   166 | net $   156 | $  44/tile-day
+-- CARROT planted d8-15
+   Boey  tiles/seat   5.4 | 2.97u | fert 0.26 | lab   4.7 | days  2.8 | hday 15.5 | $   132 | net $   112 | $  40/tile-day
+   FQ    tiles/seat  26.1 | 2.69u | fert 0.01 | lab   4.7 | days  2.7 | hday 15.0 | $   113 | net $    93 | $  34/tile-day
+   CBF   tiles/seat   3.5 | 2.65u | fert 0.09 | lab   4.6 | days  2.6 | hday 15.4 | $   111 | net $    91 | $  36/tile-day
+   TFC   tiles/seat   6.9 | 2.61u | fert 0.06 | lab   4.6 | days  2.6 | hday 14.7 | $   110 | net $    90 | $  34/tile-day
+   Yiz   tiles/seat   6.0 | 2.76u | fert 0.00 | lab   4.8 | days  2.8 | hday 15.9 | $   113 | net $    93 | $  33/tile-day
+   T7    tiles/seat   0.5 | 2.98u | fert 0.00 | lab   5.1 | days  3.0 | hday 16.9 | $   141 | net $   121 | $  40/tile-day

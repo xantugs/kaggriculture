@@ -1,0 +1,2 @@
+== goldg (base e: 111 rows, wins 47)
+== top10g (base e: 270 rows, wins 66)

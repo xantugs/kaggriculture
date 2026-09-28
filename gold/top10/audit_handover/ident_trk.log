@@ -1,0 +1,3 @@
+{"gid": 113620813, "opp": "codex是我的鲸鱼", "S": 288, "first_diff_step": 317, "first_fire_step": 1, "fired_units": 62, "m_base": -2712.0, "m_cand": -2319.0, "tmax_base": 1.1795, "tmax_cand": 1.2998, "ok": true, "wall": 73.1}
+{"gid": 113624741, "opp": "Ryui68925", "S": 288, "first_diff_step": 385, "first_fire_step": 1, "fired_units": 108, "m_base": -27047.0, "m_cand": -26850.0, "tmax_base": 0.9739, "tmax_cand": 1.1952, "ok": true, "wall": 65.4}
+{"gid": 113634243, "opp": "lumen", "S": 288, "first_diff_step": 537, "first_fire_step": 1, "fired_units": 131, "m_base": 1464.0, "m_cand": 1053.0, "tmax_base": 0.9293, "tmax_cand": 1.1574, "ok": true, "wall": 85.8}

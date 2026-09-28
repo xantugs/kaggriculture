@@ -1,0 +1,5 @@
+== lv0 (base e: 51 rows, wins 28)
+== lv1 (base e: 51 rows, wins 23)
+== lv2 (base e: 51 rows, wins 37)
+== lv3 (base e: 50 rows, wins 27)
+== lv4 (base e: 50 rows, wins 28)

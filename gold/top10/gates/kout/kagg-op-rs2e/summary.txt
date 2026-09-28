@@ -1,0 +1,2 @@
+== goldg (base rs2: 111 rows, wins 42)
+== top10g (base rs2: 270 rows, wins 68)

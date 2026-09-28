@@ -1,0 +1,54 @@
+NE strawberries (NE buy day and next) ~ const + straw buyers known + rival straw tiles (h0) + own cash/1000 (h0)
+  Boey  n=236 const  10.1 buyers  +5.7 rivStraw -0.20 cash/k -2.24  R2 0.75
+        buyers=0: mean   7.8 sd  1.9 n 70
+        buyers=1: mean  13.9 sd  2.5 n 115
+        buyers=2: mean  19.2 sd  3.5 n 51
+  FQ    n=267 const   9.1 buyers  +8.1 rivStraw -0.34 cash/k +38.10  R2 0.77
+        buyers=0: mean   6.0 sd  2.2 n 69
+        buyers=1: mean  16.5 sd  3.8 n 132
+        buyers=2: mean  22.0 sd  2.1 n 66
+  TFC   n=162 const   6.2 buyers  +7.1 rivStraw +0.02 cash/k +1.64  R2 0.81
+        buyers=0: mean   7.9 sd  2.8 n 40
+        buyers=1: mean  15.6 sd  2.4 n 89
+        buyers=2: mean  21.8 sd  1.2 n 33
+  CBF   n=200 const   9.8 buyers  -0.0 rivStraw +0.00 cash/k +0.14  R2 0.00
+        buyers=0: mean  10.0 sd  0.0 n 50
+        buyers=1: mean  10.0 sd  0.2 n 109
+        buyers=2: mean  10.0 sd  0.0 n 41
+  Yiz   n= 16 const  -8.0 buyers  +7.4 rivStraw -0.17 cash/k +11.46  R2 0.84
+        buyers=0: mean   0.3 sd  0.5 n 3
+        buyers=1: mean   7.6 sd  2.3 n 10
+        buyers=2: mean  14.3 sd  1.9 n 3
+  T7    n= 96 const  11.0 buyers  -0.0 rivStraw +0.00 cash/k -0.00  R2 nan
+        buyers=0: mean  11.0 sd  0.0 n 25
+        buyers=1: mean  11.0 sd  0.0 n 53
+        buyers=2: mean  11.0 sd  0.0 n 18
+
+SW strawberries (SW buy day..+3) ~ const + straw buyers known on SW buy day + NE strawberries
+  Boey  n=216 const   3.2 buyers  +5.4 NEstraw -0.25  R2 0.48
+  FQ    n=267 const   5.2 buyers  +7.7 NEstraw -0.53  R2 0.55
+  TFC   n=162 const   5.7 buyers  +6.0 NEstraw -0.29  R2 0.53
+  CBF   n=200 const   3.9 buyers  +1.4 NEstraw -0.40  R2 0.31
+  Yiz   n= 16 const   0.4 buyers  +3.5 NEstraw -0.16  R2 0.78
+  T7    n= 96 const   3.8 buyers  +4.5 NEstraw +0.00  R2 0.69
+
+NE wheat (buy day and next) ~ const + straw buyers + wheat buyers known
+  Boey  n=236 const   8.4 strawBuyers  -4.3 wheatBuyers +0.11  R2 0.63
+  FQ    n=267 const  12.2 strawBuyers  -5.8 wheatBuyers -0.38  R2 0.69
+  TFC   n=162 const   9.7 strawBuyers  -4.4 wheatBuyers -0.57  R2 0.72
+  CBF   n=200 const   6.0 strawBuyers  +0.0 wheatBuyers -0.30  R2 0.04
+  Yiz   n= 16 const  19.9 strawBuyers  -7.4 wheatBuyers -2.05  R2 0.88
+  T7    n= 96 const   6.6 strawBuyers  +0.1 wheatBuyers +0.14  R2 0.06
+
+Carrots d8-15 ~ const + carrot buyers known d9 + carrot buyers known d12
+  Boey  n=236 const   0.5 buyers@d9  +6.7 newBuyer@d12  +2.0  R2 0.26
+  FQ    n=267 const   1.0 buyers@d9 +26.7 newBuyer@d12 +16.5  R2 0.62
+  TFC   n=162 const   5.9 buyers@d9  +1.7 newBuyer@d12  -0.7  R2 0.06
+  CBF   n=200 const   1.6 buyers@d9  +2.4 newBuyer@d12  +0.4  R2 0.13
+  Yiz   n= 16 const   2.7 buyers@d9  +6.3 newBuyer@d12 +10.7  R2 0.62
+
+Tomatoes d9-15 ~ const + tomato buyers known d9 + new by d12
+  CBF   n=200 const   4.8 buyers@d9  +1.1 newBuyer@d12  +0.4  R2 0.04
+  TFC   n=162 const   4.1 buyers@d9  +1.6 newBuyer@d12  +0.5  R2 0.15
+  Yiz   n= 16 const   6.8 buyers@d9  +7.2 newBuyer@d12  +5.0  R2 0.77
+  T7    n= 96 const   1.8 buyers@d9  +1.5 newBuyer@d12  -0.2  R2 0.04
