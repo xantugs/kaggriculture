@@ -1,0 +1,2 @@
+# submitted agent files: keep the exact uploaded bytes (CRLF), so their sha256 matches the records
+gold/final/*_final.py -text

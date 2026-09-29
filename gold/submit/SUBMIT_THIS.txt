@@ -174,3 +174,32 @@ d4a84504d387745e399e34e3f52fe9f8bf63e0a24edaa074c5508270ee717033  submit/main_ct
 98477c7524533ca86fb335f3ef4a9ff206c11e8aaa01bab89bb989c2143035c1  submit/main_ctl_adapt_m8.py
 c453fef4851fb71d0d660dfb82ea94b5e9ccc5a76fa5260de172e80abed5094d  submit/main_ctl_adapt.py
 fed1c7e62553297e1451e6cc70c74d0a14a53005d9745d7a9fba6ca408b1db00  submit/main_ctl_adapt_d20.py
+
+v29 (28 Sep, submission 56638568): gold/submit/main_ctl_TPA31g.py = gold/top10/cands/full_TP_A31g.py (sha256 2ec369ae790335f8c...,
+  1,433,011 bytes) = T8 knob set + tape-plus layers {'tp': {'nw4': 3, 'ne6': True, 'ne6_extra': True, 'fert_keeper': True,
+  'nw4_rival_max': 7}} on gold/top10/full/ctl_tp.py (built by research/openmine/tp/build.sh). Paired vs T8 from step 0:
+  live 253 +$825 +- 195 (143 -> 154), 2800+ (S=144) +$96 +- 49, goldg 111 -$45 +- 136, top10g 270 +$55 +- 94, pin249 identical
+  (blind). Replaces the T5 slot (v27, -$1,827 vs T8 on live). Counting pair now v28 = T8, v29 = TP_A31g.
+
+v30 (28 Sep 20:35 UTC, submission 56651672): gold/submit/main_ctl_PF.py = gold/top10/cands/full_OP_PF.py (sha256 ded157612241613e...,
+  1,444,434 bytes) = opening controller cfg_p1e (hf strawberries, sheep-first on the spawn tile, liq_days) for days 0-15 on
+  gold/top10/full/ctl_op.py + T8 late game; the tape is routed in only against the C2S3 lineage (route {"tape": ["C2S3"]}).
+  Reacting: vs T8 59/120 (-$921), fresh 50/80 (+$898) and 23/40 (-$456); vs v29 15/40 (-$1,850); omw 38/40 (+$6,043), pub 39/40
+  (+$6,133). Recorded: live253 +$3,695 vs T8 (herdpoor/other artifact), goldg 56 -$2,350, top10g 60 -$1,054. Replaces the T8
+  slot (v28). Counting pair now v29 = TP_A31g, v30 = PF. User's call (29 Sep): "the controller might have a chance, let's submit it".
+
+29 Sep 03:28 UTC, user's call ("submit t8 + pf again as v28 and v30"): both resubmitted so the latest two are exactly T8 + PF.
+  56661347 = gold/submit/main_ctl_T8.py (sha256 50567f739108ef4d..., unchanged v28 file; old v28 56622850 was 2574.0)
+  56661351 = gold/submit/main_ctl_PF.py (sha256 ded157612241613e..., unchanged v30 file; old v30 56651672 was 2169.2 after 77 games)
+  Counting pair now T8 + PF; v29 TP_A31g (2541.8) is out. Both 29 Sep slots used; 2 slots remain on 30 Sep (deadline 23:59 UTC).
+  Final leaderboard = Bradley-Terry over games ~1-15 Oct (wins only), so ladder ratings before then do not carry over.
+
+29 Sep 04:59 UTC, user's yes ("yes sir") on the recommended pair; the latest two are now:
+  v31 56663285 = gold/submit/main_ctl_v29fc.py = gold/top10/cands/full_FC_phase.py = Codex/"astra" v29_phase_linear.py (sha256
+    54f6ed19b2285b8c...): v29 TP_A31g + phase forecast of the rival's milk/strawberry sales in the DP seller from day 12 (wool untouched).
+    Fresh 6500-6539 both seats: vs v29 62-18 +$469, vs T8 52-28 +$645, vs T8fc 55-25 +$430, vs PF 52-28; omw/pub 6500-6559 120-0 each
+    (+$8,619 / +$9,073); goldg vs v29 +$215 +- 170, vs T8 -$187; top10g vs v29 +$237 +- 125, vs T8 +$622.
+  v32 56663295 = gold/submit/main_ctl_PFcfc.py = gold/top10/cands/full_OP_PFcfc.py (sha256 e98d6ce9de238921...): PFc (cfg_p1e opening
+    controller; route tape vs ["C2S3", "chassis"], fine, chassis_min 2550) + the same forecast patch (research/opening/patch_phase_linear.py).
+    = T8fc vs copies/C2S3 (T8fc vs T8 60-20 +$456; pin249 +$84 +- 46), controller+fc vs herd-type rivals (PFfc vs PF 64-16 +$758).
+  T8r (56661347) and PFr (56661351) drop out. Kaggle allows 5 submissions a day: 29 Sep 4 of 5 used, 1 left; 5 on 30 Sep.

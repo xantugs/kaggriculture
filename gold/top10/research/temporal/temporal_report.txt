@@ -1,0 +1,20 @@
+seats per team (old/new): {'Unknown Mother-Goose': (46, 55), 'Vadim Vasilenko': (61, 75), 'DECEM': (56, 68), 'DSM': (50, 67), 'Boey': (41, 53), 'Majkel1337': (40, 48), 'Azat Akhtyamov': (37, 41), 'Fourth Quadrant': (48, 40)}
+
+FINAL MONEY own / rival (old -> new):
+   Unknown Mother-Goose   own 104793 -> 106557 ( +1763) | rival 104656 -> 106617 | win%  41 ->  33
+   Vadim Vasilenko        own 108075 -> 105327 ( -2748) | rival 108223 -> 103494 | win%  52 ->  64
+   DECEM                  own 105115 -> 106472 ( +1357) | rival 104542 -> 104165 | win%  61 ->  59
+   DSM                    own 105196 -> 107090 ( +1894) | rival 101262 -> 104285 | win%  76 ->  76
+   Boey                   own 106256 -> 106547 (  +291) | rival 103261 -> 106198 | win%  71 ->  57
+   Majkel1337             own 105799 -> 106770 (  +971) | rival 105789 -> 108273 | win%  38 ->  40
+   Azat Akhtyamov         own  99208 -> 104253 ( +5046) | rival 103528 -> 105951 | win%  11 ->  44
+   Fourth Quadrant        own  95909 ->  94615 ( -1293) | rival  92737 ->  96850 | win%  71 ->  42
+
+COMMON CHANGES (new - old per team; metrics where >= 6 of 8 teams moved the same way by a meaningful amount):
+   crop_WHEAT@12          up  1 down  7 | old mean     31.2 | per-team deltas: -5.7 -3.2 -3.8 -1.2 -0.9 -0.6 +2.3 -0.9
+   crop_WHEAT@15          up  1 down  7 | old mean     25.7 | per-team deltas: -8.1 -6.6 -7.8 -1.7 -1.2 -2.3 +1.6 -5.2
+   crop_WHEAT@20          up  0 down  7 | old mean     24.0 | per-team deltas: -9.6 -2.7 -1.9 -4.5 +0.3 -0.8 -4.2 -6.2
+   crop_WHEAT@25          up  1 down  7 | old mean     34.2 | per-team deltas: -3.1 -3.4 -2.4 -4.9 -1.8 -2.3 -4.8 +0.6
+   cash@9                 up  0 down  6 | old mean   1025.3 | per-team deltas: -1233.3 -1343.8 -1291.1 -276.5 -24.1 +90.8 -110.6 -120.5
+
+team order for deltas: ['Unknown Mother-Goose', 'Vadim Vasilenko', 'DECEM', 'DSM', 'Boey', 'Majkel1337', 'Azat Akhtyamov', 'Fourth Quadrant']
