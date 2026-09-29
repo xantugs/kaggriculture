@@ -1,0 +1,5 @@
+base s000 score +3752 wins 136/200 {'T8': (59, -921), 'omw': (38, 6043), 'pub': (39, 6133)}
+s133 crew={"a": 3.8, "tiles": 0.045, "anim": 0.18, "shed": 0.38, "plan anim_place_order=["COW", "SHEEP", "GOOSE"] score +3002 wins 136/200 {'T8': (62, -1943), 'omw': (38, 5377), 'pub': (36, 5573)} 
+s134 land_wheat=20 abs_last=3 score +3672 wins 137/200 {'T8': (60, -945), 'omw': (38, 6043), 'pub': (39, 5917)} 
+s135 crew={"a": 2.5, "tiles": 0.045, "anim": 0.18, "shed": 0.38, "plan liq_days=[6, 7, 8, 9, 10, 11] score +2489 wins 126/200 {'T8': (52, -1783), 'omw': (37, 4951), 'pub': (37, 4299)} 
+done

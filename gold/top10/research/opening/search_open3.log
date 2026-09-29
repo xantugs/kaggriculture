@@ -1,0 +1,29 @@
+base s000 score +4011 wins 103/120 {'T8': (24, -452), 'omw': (40, 5942), 'pub': (39, 6544)}
+s031 land={"NE": 6, "SW": 8, "SE": 12} score -6443 wins 36/120 {'T8': (6, -14426), 'omw': (16, -2571), 'pub': (14, -2331)} 
+s032 land_wheat=8 score +4165 wins 105/120 {'T8': (25, -103), 'omw': (40, 5924), 'pub': (40, 6673)} ACCEPT
+s033 mid_wheat_from=99 score +3329 wins 96/120 {'T8': (22, -534), 'omw': (36, 4996), 'pub': (38, 5524)} 
+s034 anim_day_max=3 sell_on_drop=true score +4164 wins 103/120 {'T8': (25, 56), 'omw': (38, 5778), 'pub': (40, 6660)} 
+s035 land_wheat=8 herd_cap=24 score +3240 wins 89/120 {'T8': (19, -103), 'omw': (35, 4423), 'pub': (35, 5399)} 
+s036 feed_buy_hour=14 score +4165 wins 105/120 {'T8': (25, -103), 'omw': (40, 5924), 'pub': (40, 6673)} 
+s037 anim_cond={"COW": ["milk", {"0": 3, "3": [4, 4.6], "4": [4, 5.6], "5": abs_last=3 score -3889 wins 36/120 {'T8': (4, -9941), 'omw': (15, -1016), 'pub': (17, -709)} 
+s038 portfolio={"melon": 10, "melon0": 10, "wheat0": 6} score +1495 wins 76/120 {'T8': (10, -3708), 'omw': (35, 4159), 'pub': (31, 4035)} 
+s041 anim_order=["COW", "SHEEP", "GOOSE"] score +2809 wins 91/120 {'T8': (15, -3105), 'omw': (38, 5664), 'pub': (38, 5869)} 
+s042 anim_cond={"COW": ["milk", {"0": 3, "3": [4, 4.6], "4": [4, 5.6], "5": abs_last=8 score +3982 wins 97/120 {'T8': (22, -94), 'omw': (38, 6045), 'pub': (37, 5995)} 
+s043 melon_fert=[6, 7] cash_keep=20 score +1645 wins 77/120 {'T8': (14, -2873), 'omw': (32, 3357), 'pub': (31, 4451)} 
+s044 anim_order=["SHEEP", "COW", "GOOSE"] over={"plant_must": false, "max_hands": 12, "hire_cost_w": 1.0, " score +3945 wins 98/120 {'T8': (27, 117), 'omw': (36, 5781), 'pub': (35, 5936)} 
+s045 anim_place_order=["COW", "SHEEP", "GOOSE"] hires0=4 score +3884 wins 99/120 {'T8': (21, -1415), 'omw': (38, 6394), 'pub': (40, 6673)} 
+s046 anim_place_order=["COW", "SHEEP", "GOOSE"] eh_all=false score +2950 wins 91/120 {'T8': (16, -1810), 'omw': (38, 5330), 'pub': (37, 5331)} 
+s047 melon_fert=[6, 7] score +1645 wins 77/120 {'T8': (14, -2873), 'omw': (32, 3357), 'pub': (31, 4451)} 
+s048 hires0=4 score +3884 wins 99/120 {'T8': (21, -1415), 'omw': (38, 6394), 'pub': (40, 6673)} 
+s049 hires0=4 score +3884 wins 99/120 {'T8': (21, -1415), 'omw': (38, 6394), 'pub': (40, 6673)} 
+s050 herd_cap=20 portfolio={"melon": 8, "melon0": 8, "wheat0": 10} score +1344 wins 75/120 {'T8': (13, -3321), 'omw': (25, 2288), 'pub': (37, 5066)} 
+s051 hires0=4 score +3884 wins 99/120 {'T8': (21, -1415), 'omw': (38, 6394), 'pub': (40, 6673)} 
+s052 feed_buy_hour=10 score +4303 wins 101/120 {'T8': (23, -322), 'omw': (38, 6388), 'pub': (40, 6843)} 
+s053 herd_cap=16 score +3080 wins 85/120 {'T8': (17, -3227), 'omw': (34, 6436), 'pub': (34, 6031)} 
+s054 herd_cap=20 anim_place_order=["COW", "SHEEP", "GOOSE"] score +4165 wins 105/120 {'T8': (25, -103), 'omw': (40, 5924), 'pub': (40, 6673)} 
+s055 anim_split={"budget": 8, "last": 8} score +2377 wins 92/120 {'T8': (20, -2033), 'omw': (33, 5222), 'pub': (39, 3942)} 
+s056 melon_fert=null hires0=4 score +3884 wins 99/120 {'T8': (21, -1415), 'omw': (38, 6394), 'pub': (40, 6673)} 
+s057 anim_split={"budget": 8, "last": 8} score +2377 wins 92/120 {'T8': (20, -2033), 'omw': (33, 5222), 'pub': (39, 3942)} 
+s059 anim_cond={"COW": ["milk", {"0": 2, "3": [4, 4.6], "4": [4, 5.6], "5": score -500 wins 53/120 {'T8': (7, -5564), 'omw': (23, 1956), 'pub': (23, 2109)} 
+s060 straw_max=30 land_wheat=8 score +3801 wins 95/120 {'T8': (15, -1934), 'omw': (40, 6344), 'pub': (40, 6992)} 
+done

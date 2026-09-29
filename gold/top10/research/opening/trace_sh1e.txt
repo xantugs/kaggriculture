@@ -1,0 +1,179 @@
+s  0 us [[4, 4]] el [[4, 4]] | last None None
+s  1 us [[4, 4]] el [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4]] | last [['PASS']] []
+s  3 us [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4]] el [[4, 4], [5, 4], [4, 5], [4, 5], [4, 4]] | last [['PASS'], ['PICKUP', 'SHEEP', 1], ['PICKUP', 'SHEEP', 1], ['PICKUP', 'COW', 1], ['PICKUP', 'SHEEP', 1]] [['BUY_SEED', 'WHEAT', 1]]
+s  4 us [[4, 4], [5, 4], [4, 5], [4, 5], [4, 4]] el [[3, 4], [4, 4], [4, 4], [4, 4], [4, 3]] | last [['PASS'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1], ['WEST'], ['PICKUP', 'WHEAT', 1]] []
+s  5 us [[4, 4], [4, 4], [4, 4], [4, 4], [4, 3]] el [[3, 3], [3, 4], [4, 3], [4, 4], [4, 2]] | last [['PASS'], ['WEST'], ['NORTH'], ['NORTH'], ['NORTH']] []
+s  6 us [[4, 4], [3, 4], [4, 3], [4, 4], [4, 2]] el [[3, 3], [3, 4], [4, 3], [4, 4], [4, 2]] | last [['PASS'], ['WEST'], ['NORTH'], ['BUILD_PASTURE'], ['NORTH']] []
+s  7 us [[4, 4], [3, 4], [4, 3], [4, 4], [4, 2]] el [[3, 3], [3, 4], [4, 3], [4, 4], [4, 2]] | last [['PASS'], ['BUILD_PASTURE'], ['BUILD_PASTURE'], ['PLACE', 'COW'], ['BUILD_PASTURE']] []
+s  8 us [[4, 4], [3, 4], [4, 3], [4, 4], [4, 2]] el [[3, 3], [3, 4], [4, 3], [3, 4], [4, 2]] | last [['PASS'], ['PLACE', 'SHEEP'], ['PLACE', 'SHEEP'], ['DROP'], ['PLACE', 'SHEEP']] []
+s  9 us [[4, 4], [3, 4], [4, 3], [3, 4], [4, 2]] el [[3, 3], [3, 4], [4, 3], [2, 4], [4, 2]] | last [['PASS'], ['FEED'], ['FEED'], ['WEST'], ['FEED']] []
+s 10 us [[4, 4], [3, 4], [4, 3], [2, 4], [4, 2]] el [[4, 3], [4, 4], [4, 4], [1, 4], [4, 3]] | last [['PASS'], ['CARE'], ['CARE'], ['WEST'], ['CARE']] []
+s 11 us [[4, 4], [4, 4], [4, 4], [1, 4], [4, 3]] el [[4, 4], [4, 4], [4, 4], [0, 4], [4, 4]] | last [['PASS'], ['EAST'], ['SOUTH'], ['WEST'], ['SOUTH']] []
+s 12 us [[4, 4], [4, 4], [4, 4], [0, 4], [4, 4]] el [[4, 4], [3, 4], [3, 4], [0, 3], [4, 4]] | last [['PASS'], ['DROP'], ['DROP'], ['WEST'], ['SOUTH']] []
+s 13 us [[4, 4], [3, 4], [3, 4], [0, 3], [4, 4]] el [[3, 4], [2, 4], [2, 4], [0, 3], [4, 3]] | last [['PASS'], ['WEST'], ['WEST'], ['NORTH'], ['DROP']] []
+s 14 us [[4, 4], [2, 4], [2, 4], [0, 3], [4, 3]] el [[3, 3], [1, 4], [2, 4], [0, 3], [4, 2]] | last [['PASS'], ['WEST'], ['WEST'], ['PLANT', 'WHEAT'], ['NORTH']] []
+s 15 us [[4, 4], [1, 4], [2, 4], [0, 3], [4, 2]] el [[3, 2], [1, 4], [2, 4], [0, 2], [4, 1]] | last [['PASS'], ['WEST'], ['PLANT', 'MELON'], ['WATER'], ['NORTH']] []
+s 16 us [[4, 4], [1, 4], [2, 4], [0, 2], [4, 1]] el [[3, 2], [1, 4], [2, 3], [0, 2], [4, 1]] | last [['PASS'], ['PLANT', 'MELON'], ['WATER'], ['NORTH'], ['NORTH']] []
+s 17 us [[4, 4], [1, 4], [2, 3], [0, 2], [4, 1]] el [[3, 2], [1, 3], [2, 3], [0, 2], [4, 1]] | last [['PASS'], ['WATER'], ['NORTH'], ['PLANT', 'WHEAT'], ['PLANT', 'MELON']] []
+s 18 us [[4, 4], [1, 3], [2, 3], [0, 2], [4, 1]] el [[2, 2], [1, 2], [2, 3], [0, 1], [4, 0]] | last [['PASS'], ['NORTH'], ['PLANT', 'MELON'], ['WATER'], ['WATER']] []
+s 19 us [[4, 4], [1, 2], [2, 3], [0, 1], [4, 0]] el [[2, 1], [1, 2], [1, 3], [0, 1], [4, 0]] | last [['PASS'], ['NORTH'], ['WATER'], ['NORTH'], ['NORTH']] []
+s 20 us [[4, 4], [1, 2], [1, 3], [0, 1], [4, 0]] el [[2, 1], [1, 2], [1, 2], [0, 1], [4, 0]] | last [['PASS'], ['PLANT', 'WHEAT'], ['WEST'], ['PLANT', 'WHEAT'], ['PLANT', 'MELON']] []
+s 21 us [[4, 4], [1, 2], [1, 2], [0, 1], [4, 0]] el [[2, 1], [1, 1], [1, 1], [0, 0], [3, 0]] | last [['PASS'], ['WATER'], ['NORTH'], ['WATER'], ['WATER']] []
+s 22 us [[4, 4], [1, 1], [1, 1], [0, 0], [3, 0]] el [[2, 0], [1, 0], [1, 1], [0, 0], [3, 0]] | last [['PASS'], ['NORTH'], ['NORTH'], ['NORTH'], ['WEST']] []
+s 23 us [[4, 4], [1, 0], [1, 1], [0, 0], [3, 0]] el [[2, 0], [1, 0], [1, 1], [0, 0], [3, 0]] | last [['PASS'], ['NORTH'], ['PLANT', 'WHEAT'], ['PLANT', 'WHEAT'], ['PLANT', 'WHEAT']] []
+d 0 | us $     2 h 4 .9 C1 S3 m5 w7 | el $     7 h 4 .4 C2 S3 m6 w10
+s 24 us [[4, 4]] el [[4, 4]] | last [['PASS'], ['PLANT', 'WHEAT'], ['WATER'], ['WATER'], ['WATER']] []
+s 25 us [[4, 4]] el [[4, 4], [5, 4], [4, 5], [5, 5]] | last [['PASS']] []
+s 26 us [[4, 4], [5, 4], [4, 5]] el [[3, 4], [4, 4], [4, 4], [4, 5]] | last [['PASS']] [['HIRE'], ['HIRE'], ['HIRE']]
+s 27 us [[4, 4], [4, 4], [4, 4]] el [[3, 3], [4, 3], [4, 4], [4, 4]] | last [['PASS'], ['WEST'], ['NORTH']] []
+s 28 us [[4, 4], [4, 3], [4, 4]] el [[3, 3], [4, 2], [3, 4], [4, 3]] | last [['PASS'], ['NORTH'], ['COLLECT_FERTILIZER']] []
+s 29 us [[4, 4], [4, 2], [3, 4]] el [[4, 3], [4, 2], [3, 4], [4, 3]] | last [['PASS'], ['NORTH'], ['WEST']] []
+s 30 us [[4, 4], [4, 2], [3, 4]] el [[4, 4], [4, 3], [4, 4], [4, 4]] | last [['PASS'], ['COLLECT_FERTILIZER'], ['COLLECT_FERTILIZER']] []
+s 31 us [[4, 4], [4, 3], [4, 4]] el [[4, 4], [4, 4], [4, 4], [4, 4], [5, 4]] | last [['PASS'], ['SOUTH'], ['EAST']] []
+s 32 us [[4, 4], [4, 4], [4, 4], [5, 4]] el [[4, 4], [4, 4], [4, 4], [4, 4], [5, 4]] | last [['PASS'], ['SOUTH'], ['DROP']] [['SELL', 'FERTILIZER', 4], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 5], ['BUY_SEED', 'MELON', 2]]
+s 33 us [[4, 4], [4, 4], [4, 4], [5, 4]] el [[3, 4], [4, 4], [4, 3], [3, 4], [4, 4]] | last [['PASS'], ['DROP'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1]] [['SELL', 'FERTILIZER', 1], ['BUY_SEED', 'MELON', 1]]
+s 34 us [[4, 4], [4, 4], [4, 3], [4, 4]] el [[3, 3], [4, 3], [4, 2], [3, 4], [4, 4]] | last [['PASS'], ['PICKUP', 'WHEAT', 1], ['NORTH'], ['WEST']] [['BUY_SEED', 'MELON', 1]]
+s 35 us [[4, 4], [4, 3], [4, 2], [4, 4]] el [[3, 3], [4, 3], [4, 2], [3, 4], [4, 4]] | last [['PASS'], ['NORTH'], ['NORTH'], ['FEED']] []
+s 36 us [[4, 4], [4, 3], [4, 2], [4, 4]] el [[3, 3], [4, 3], [4, 2], [4, 4], [4, 4]] | last [['PASS'], ['FEED'], ['FEED'], ['CARE']] []
+s 37 us [[4, 4], [4, 3], [4, 2], [5, 4]] el [[4, 3], [4, 4], [4, 3], [4, 4], [3, 4]] | last [['PASS'], ['CARE'], ['CARE'], ['EAST']] []
+s 38 us [[4, 4], [4, 4], [4, 3], [5, 4]] el [[4, 4], [4, 4], [4, 4], [3, 4], [2, 4]] | last [['PASS'], ['SOUTH'], ['SOUTH'], ['DROP']] []
+s 39 us [[4, 4], [4, 4], [4, 4], [4, 4]] el [[4, 4], [4, 4], [4, 4], [2, 4], [2, 3]] | last [['PASS'], ['DROP'], ['SOUTH'], ['WEST']] []
+s 40 us [[4, 4], [4, 4], [4, 4], [3, 4]] el [[4, 4], [4, 4], [4, 4], [1, 4], [2, 2]] | last [['PASS'], ['PASS'], ['DROP'], ['WEST']] []
+s 41 us [[4, 4], [4, 4], [4, 4], [2, 4]] el [[4, 4], [4, 4], [4, 4], [0, 4], [2, 2]] | last [['PASS'], ['PASS'], ['PASS'], ['WEST']] []
+s 42 us [[4, 4], [4, 4], [4, 4], [1, 4]] el [[4, 4], [4, 4], [4, 4], [0, 4], [2, 2]] | last [['PASS'], ['PASS'], ['PASS'], ['WEST']] []
+s 43 us [[4, 4], [4, 4], [4, 4], [1, 4]] el [[4, 4], [4, 4], [4, 4], [0, 4], [3, 2]] | last [['PASS'], ['PASS'], ['PASS'], ['PLANT', 'MELON']] []
+s 44 us [[4, 4], [4, 4], [4, 4], [1, 4]] el [[4, 4], [4, 4], [4, 4], [1, 4], [3, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['WATER']] []
+s 45 us [[4, 4], [4, 4], [4, 4], [2, 4]] el [[4, 4], [4, 4], [4, 4], [1, 3], [3, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['EAST']] []
+s 46 us [[4, 4], [4, 4], [4, 4], [2, 3]] el [[4, 4], [4, 4], [4, 4], [1, 3], [3, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['NORTH']] []
+s 47 us [[4, 4], [4, 4], [4, 4], [2, 3]] el [[4, 4], [4, 4], [4, 4], [1, 3], [3, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['PLANT', 'MELON']] []
+d 1 | us $    70 h 3 .8 C1 S3 m5 w7 x1 | el $    35 h 4 C2 S3 m10 w10
+s 48 us [[4, 4]] el [[4, 4]] | last [['PASS'], ['PASS'], ['PASS'], ['WATER']] []
+s 49 us [[4, 4]] el [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [4, 5]] | last [['PASS']] []
+s 50 us [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [4, 5]] el [[3, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [4, 5]] | last [['PASS']] [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE']]
+s 51 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [4, 5]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [4, 5]] | last [['PASS'], ['WEST'], ['NORTH'], ['PASS'], ['NORTH'], ['WEST'], ['PASS']] []
+s 52 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [4, 5]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [4, 5]] | last [['PASS'], ['WEST'], ['NORTH'], ['PASS'], ['NORTH'], ['COLLECT_FERTILIZER'], ['PASS']] []
+s 53 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [4, 5]] el [[4, 3], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [4, 5]] | last [['PASS'], ['COLLECT_FERTILIZER'], ['COLLECT_FERTILIZER'], ['PASS'], ['COLLECT_FERTILIZER'], ['DROP'], ['PASS']] [['SELL', 'FERTILIZER', 1], ['BUY_PRODUCT', 'WHEAT', 2]]
+s 54 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [4, 5]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 4], [4, 4]] | last [['PASS'], ['EAST'], ['SOUTH'], ['PASS'], ['SOUTH'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1]] [['BUY_PRODUCT', 'WHEAT', 1]]
+s 55 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 4], [4, 4]] el [[4, 4], [4, 4], [4, 4], [4, 5], [4, 4], [3, 3], [4, 3]] | last [['PASS'], ['DROP'], ['DROP'], ['PASS'], ['SOUTH'], ['WEST'], ['NORTH']] [['SELL', 'FERTILIZER', 2], ['BUY_PRODUCT', 'WHEAT', 2], ['BUY_SEED', 'STRAWBERRY', 1]]
+s 56 us [[4, 4], [4, 4], [4, 4], [4, 5], [4, 4], [3, 3], [4, 3]] el [[4, 4], [3, 4], [4, 3], [3, 5], [3, 4], [3, 3], [4, 2]] | last [['PASS'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1], ['WEST'], ['DROP'], ['NORTH'], ['NORTH']] [['SELL', 'FERTILIZER', 2], ['BUY_SEED', 'STRAWBERRY', 2]]
+s 57 us [[4, 4], [3, 4], [4, 3], [3, 5], [3, 4], [3, 3], [4, 2]] el [[4, 4], [3, 4], [4, 3], [2, 5], [2, 4], [3, 3], [4, 2]] | last [['PASS'], ['WEST'], ['NORTH'], ['WEST'], ['WEST'], ['FEED'], ['NORTH']] []
+s 58 us [[4, 4], [3, 4], [4, 3], [2, 5], [2, 4], [3, 3], [4, 2]] el [[4, 4], [3, 4], [4, 3], [1, 5], [1, 4], [4, 3], [4, 2]] | last [['PASS'], ['FEED'], ['FEED'], ['WEST'], ['WEST'], ['CARE'], ['FEED']] []
+s 59 us [[4, 4], [3, 4], [4, 3], [1, 5], [1, 4], [4, 3], [4, 2]] el [[4, 4], [4, 4], [4, 4], [1, 4], [1, 3], [4, 4], [4, 3]] | last [['PASS'], ['CARE'], ['CARE'], ['WEST'], ['WEST'], ['EAST'], ['CARE']] []
+s 60 us [[4, 4], [4, 4], [4, 4], [1, 4], [1, 3], [4, 4], [4, 3]] el [[4, 3], [4, 4], [4, 4], [1, 3], [1, 2], [4, 4], [4, 4]] | last [['PASS'], ['EAST'], ['SOUTH'], ['NORTH'], ['NORTH'], ['SOUTH'], ['SOUTH']] []
+s 61 us [[4, 4], [4, 4], [4, 4], [1, 3], [1, 2], [4, 4], [4, 4]] el [[4, 2], [3, 4], [3, 4], [1, 2], [1, 1], [4, 4], [4, 4]] | last [['PASS'], ['DROP'], ['DROP'], ['NORTH'], ['NORTH'], ['DROP'], ['SOUTH']] []
+s 62 us [[4, 4], [3, 4], [3, 4], [1, 2], [1, 1], [4, 4], [4, 4]] el [[4, 1], [3, 3], [2, 4], [1, 2], [1, 1], [4, 4], [4, 4]] | last [['PASS'], ['WEST'], ['WEST'], ['NORTH'], ['NORTH'], ['PASS'], ['DROP']] []
+s 63 us [[4, 4], [3, 3], [2, 4], [1, 2], [1, 1], [4, 4], [4, 4]] el [[4, 1], [3, 2], [2, 3], [0, 2], [1, 0], [4, 4], [4, 4]] | last [['PASS'], ['NORTH'], ['WEST'], ['WATER'], ['WATER'], ['PASS'], ['PASS']] []
+s 64 us [[4, 4], [3, 2], [2, 3], [0, 2], [1, 0], [4, 4], [4, 4]] el [[4, 0], [3, 2], [2, 3], [0, 2], [1, 0], [4, 4], [4, 4]] | last [['PASS'], ['NORTH'], ['NORTH'], ['WEST'], ['NORTH'], ['PASS'], ['PASS']] []
+s 65 us [[4, 4], [3, 2], [2, 3], [0, 2], [1, 0], [4, 4], [4, 4]] el [[4, 0], [3, 2], [2, 4], [0, 2], [1, 0], [4, 4], [4, 4]] | last [['PASS'], ['WATER'], ['WATER'], ['WATER'], ['WATER'], ['PASS'], ['PASS']] []
+s 66 us [[4, 4], [3, 2], [2, 4], [0, 2], [1, 0], [4, 4], [4, 4]] el [[3, 0], [3, 2], [2, 4], [0, 1], [1, 0], [4, 4], [4, 4]] | last [['PASS'], ['PASS'], ['SOUTH'], ['HARVEST'], ['HARVEST'], ['PASS'], ['PASS']] []
+s 67 us [[4, 4], [3, 2], [2, 4], [0, 1], [1, 0], [4, 4], [4, 4]] el [[3, 0], [3, 2], [1, 4], [0, 1], [1, 0], [4, 4], [4, 4]] | last [['PASS'], ['PASS'], ['WATER'], ['NORTH'], ['DIG'], ['PASS'], ['PASS']] []
+s 68 us [[4, 4], [3, 2], [1, 4], [0, 1], [1, 0], [4, 4], [4, 4]] el [[2, 0], [3, 2], [1, 4], [0, 1], [0, 0], [4, 4], [4, 4]] | last [['PASS'], ['PASS'], ['WEST'], ['WATER'], ['PLANT', 'STRAWBERRY'], ['PASS'], ['PASS']] []
+s 69 us [[4, 4], [3, 2], [1, 4], [0, 1], [1, 0], [4, 4], [4, 4]] el [[2, 0], [3, 2], [0, 4], [0, 1], [0, 0], [4, 4], [4, 4]] | last [['PASS'], ['PASS'], ['WATER'], ['HARVEST'], ['WATER'], ['PASS'], ['PASS']] []
+s 70 us [[4, 4], [3, 2], [0, 4], [0, 1], [0, 0], [4, 4], [4, 4]] el [[2, 1], [3, 2], [0, 3], [0, 1], [0, 0], [4, 4], [4, 4]] | last [['PASS'], ['PASS'], ['WEST'], ['PLANT', 'STRAWBERRY'], ['WEST'], ['PASS'], ['PASS']] []
+s 71 us [[4, 4], [3, 2], [0, 3], [0, 1], [0, 0], [4, 4], [4, 4]] el [[2, 1], [3, 2], [0, 3], [0, 1], [0, 0], [4, 4], [4, 4]] | last [['PASS'], ['PASS'], ['NORTH'], ['WATER'], ['WATER'], ['PASS'], ['PASS']] []
+d 2 | us $    89 h 6 .9 C1 S3 m5 s2 w5 | el $    54 h 6 .1 C2 S3 m10 s3 w6
+s 72 us [[4, 4]] el [[4, 4]] | last [['PASS'], ['PASS'], ['WATER'], ['PASS'], ['HARVEST'], ['PASS'], ['PASS']] []
+s 73 us [[4, 4]] el [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [4, 5]] | last [['PASS']] []
+s 74 us [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [4, 5]] el [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [3, 5]] | last [['PASS']] [['SELL', 'WHEAT', 3], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE']]
+s 75 us [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [3, 5]] el [[3, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [2, 5]] | last [['PASS'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1], ['PASS'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1], ['WEST']] []
+s 76 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [2, 5]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 4]] | last [['PASS'], ['WEST'], ['NORTH'], ['PASS'], ['NORTH'], ['WEST'], ['WEST']] []
+s 77 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 4]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 3]] | last [['PASS'], ['WEST'], ['NORTH'], ['PASS'], ['NORTH'], ['FEED'], ['NORTH']] []
+s 78 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 3]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 2]] | last [['PASS'], ['FEED'], ['FEED'], ['PASS'], ['FEED'], ['CARE'], ['NORTH']] []
+s 79 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 2]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 2]] | last [['PASS'], ['CARE'], ['CARE'], ['PASS'], ['CARE'], ['COLLECT_FERTILIZER'], ['NORTH']] []
+s 80 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 2]] el [[4, 3], [4, 4], [4, 4], [5, 5], [4, 3], [3, 4], [1, 2]] | last [['PASS'], ['COLLECT_FERTILIZER'], ['COLLECT_FERTILIZER'], ['PASS'], ['COLLECT_FERTILIZER'], ['DROP'], ['WATER']] [['SELL', 'FERTILIZER', 1], ['BUY_SEED', 'STRAWBERRY', 1]]
+s 81 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 3], [3, 4], [1, 2]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 4], [1, 2]] | last [['PASS'], ['EAST'], ['SOUTH'], ['PASS'], ['SOUTH'], ['WEST'], ['WEST']] []
+s 82 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 4], [1, 2]] el [[4, 4], [3, 4], [4, 4], [5, 5], [4, 4], [1, 4], [1, 2]] | last [['PASS'], ['DROP'], ['DROP'], ['PASS'], ['SOUTH'], ['WEST'], ['WATER']] [['SELL', 'FERTILIZER', 2], ['BUY_SEED', 'STRAWBERRY', 2]]
+s 83 us [[4, 4], [3, 4], [4, 4], [5, 5], [4, 4], [1, 4], [1, 2]] el [[4, 4], [3, 3], [4, 4], [5, 5], [4, 4], [0, 4], [1, 2]] | last [['PASS'], ['WEST'], ['PASS'], ['PASS'], ['DROP'], ['WEST'], ['HARVEST']] [['SELL', 'FERTILIZER', 2], ['BUY_SEED', 'STRAWBERRY', 2]]
+s 84 us [[4, 4], [3, 3], [4, 4], [5, 5], [4, 4], [0, 4], [1, 2]] el [[4, 4], [3, 2], [4, 4], [5, 5], [4, 4], [0, 4], [1, 2]] | last [['PASS'], ['NORTH'], ['PASS'], ['PASS'], ['PASS'], ['WEST'], ['PLANT', 'STRAWBERRY']] []
+s 85 us [[4, 4], [3, 2], [4, 4], [5, 5], [4, 4], [0, 4], [1, 2]] el [[4, 4], [3, 1], [4, 4], [5, 5], [4, 4], [0, 3], [1, 1]] | last [['PASS'], ['NORTH'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['WATER']] []
+s 86 us [[4, 4], [3, 1], [4, 4], [5, 5], [4, 4], [0, 3], [1, 1]] el [[4, 4], [3, 1], [4, 4], [5, 5], [4, 4], [0, 2], [1, 1]] | last [['PASS'], ['NORTH'], ['PASS'], ['PASS'], ['PASS'], ['NORTH'], ['NORTH']] []
+s 87 us [[4, 4], [3, 1], [4, 4], [5, 5], [4, 4], [0, 2], [1, 1]] el [[4, 4], [3, 0], [4, 4], [5, 5], [4, 4], [0, 2], [1, 1]] | last [['PASS'], ['WATER'], ['PASS'], ['PASS'], ['PASS'], ['NORTH'], ['WATER']] []
+s 89 us [[4, 4], [3, 0], [4, 4], [5, 5], [4, 4], [0, 2], [1, 1]] el [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [0, 3], [1, 1]] | last [['PASS'], ['WATER'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['PLANT', 'STRAWBERRY']] []
+s 90 us [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [0, 3], [1, 1]] el [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [0, 3], [2, 1]] | last [['PASS'], ['WEST'], ['PASS'], ['PASS'], ['PASS'], ['SOUTH'], ['WATER']] []
+s 94 us [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [0, 3], [2, 1]] el [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [1, 3], [2, 1]] | last [['PASS'], ['WATER'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['PASS']] []
+s 95 us [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [1, 3], [2, 1]] el [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [1, 3], [2, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['EAST'], ['PASS']] []
+d 3 | us $    41 h 6 .8 C1 S3 m3 s7 x3 | el $   105 h 6 C2 S3 m10 s8 w2
+s 96 us [[4, 4]] el [[4, 4]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['PASS']] []
+s 97 us [[4, 4]] el [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [4, 5]] | last [['PASS']] []
+s 98 us [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [4, 5]] el [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [3, 5]] | last [['PASS']] [['SELL', 'WHEAT', 7], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_SEED', 'STRAWBERRY', 2]]
+s 99 us [[4, 4], [5, 4], [4, 5], [5, 5], [4, 4], [5, 4], [3, 5]] el [[3, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [3, 4]] | last [['PASS'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1], ['PASS'], ['PICKUP', 'WHEAT', 1], ['PICKUP', 'WHEAT', 1], ['WEST']] []
+s100 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 4], [3, 4]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [3, 3]] | last [['PASS'], ['WEST'], ['NORTH'], ['PASS'], ['NORTH'], ['WEST'], ['NORTH']] []
+s101 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [3, 3]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [3, 2]] | last [['PASS'], ['WEST'], ['NORTH'], ['PASS'], ['NORTH'], ['FEED'], ['NORTH']] []
+s102 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [3, 2]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [3, 2]] | last [['PASS'], ['FEED'], ['FEED'], ['PASS'], ['FEED'], ['CARE'], ['NORTH']] []
+s103 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [3, 2]] el [[3, 3], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 2]] | last [['PASS'], ['CARE'], ['CARE'], ['PASS'], ['CARE'], ['COLLECT_FERTILIZER'], ['WATER']] []
+s104 us [[4, 4], [3, 4], [4, 3], [5, 5], [4, 2], [4, 4], [2, 2]] el [[4, 3], [4, 4], [4, 4], [5, 5], [4, 3], [4, 3], [2, 3]] | last [['PASS'], ['COLLECT_FERTILIZER'], ['COLLECT_FERTILIZER'], ['PASS'], ['COLLECT_FERTILIZER'], ['DROP'], ['WEST']] [['SELL', 'FERTILIZER', 1]]
+s105 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 3], [4, 3], [2, 3]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [4, 2], [2, 3]] | last [['PASS'], ['EAST'], ['SOUTH'], ['PASS'], ['SOUTH'], ['NORTH'], ['SOUTH']] []
+s106 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [4, 2], [2, 3]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [4, 1], [2, 4]] | last [['PASS'], ['DROP'], ['DROP'], ['PASS'], ['SOUTH'], ['NORTH'], ['WATER']] [['SELL', 'FERTILIZER', 2]]
+s108 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [4, 1], [2, 4]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [4, 0], [1, 4]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['WATER']] []
+s110 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [4, 0], [1, 4]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 4]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['WATER']] []
+s111 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 4]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 3]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WEST'], ['WEST']] []
+s112 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 3]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 2]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['NORTH']] []
+s113 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 2]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['HARVEST'], ['NORTH']] []
+s115 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [0, 1]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 0], [1, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PLANT', 'STRAWBERRY'], ['WATER']] []
+s116 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [3, 0], [1, 1]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [1, 0]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['EAST']] []
+s117 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 0], [1, 0]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [1, 0]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WEST'], ['NORTH']] []
+s118 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [1, 0]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [0, 0]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['SOUTH'], ['WATER']] []
+s119 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [0, 0]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [0, 0]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['WEST']] []
+d 4 | us $   407 h 6 .8 C1 S3 m3 s8 x2 | el $   568 h 6 C2 S3 m10 s10
+d 5 | us $   815 h 6 .8 C1 S3 m3 s8 x2 | el $  1100 h 6 C2 S3 m10 s10
+m145 us $815 el $894 d -79 | ord [] | shed {'COW': 1} | rec None
+m146 us $606 el $894 d -288 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 5]] | shed {'WHEAT': 5, 'COW': 1} | rec None
+m149 us $606 el $249 d 357 | ord [] | shed {'COW': 1} | rec [['SELL', 'WOOL', 6], ['BUY_SEED', 'STRAWBERRY', 1], ['BUY_SEED', 'WHEAT', 2], ['BUY_ANIMAL', 'COW', 2]]
+m150 us $6 el $533 d -527 | ord [['SELL', 'WOOL', 6], ['BUY_LAND'], ['BUY_SEED', 'STRAWBERRY', 9], ['BUY_SEED', 'WHEAT', 3]] | shed {'COW': 1} | rec None
+m151 us $85 el $533 d -448 | ord [['SELL', 'WOOL', 6], ['BUY_SEED', 'STRAWBERRY', 1], ['BUY_SEED', 'WHEAT', 2], ['BUY_ANIMAL', 'COW', 2]] | shed {'COW': 1} | rec [['SELL', 'WOOL', 6], ['SELL', 'FERTILIZER', 1], ['BUY_ANIMAL', 'COW', 3]]
+m152 us $85 el $597 d -512 | ord [] | shed {'COW': 1} | rec [['SELL', 'FERTILIZER', 2], ['BUY_ANIMAL', 'COW', 1]]
+m153 us $277 el $379 d -102 | ord [['SELL', 'WOOL', 6], ['SELL', 'FERTILIZER', 1], ['BUY_ANIMAL', 'COW', 3]] | shed {'COW': 1} | rec [['SELL', 'FERTILIZER', 2]]
+m154 us $58 el $560 d -502 | ord [['SELL', 'FERTILIZER', 2], ['BUY_ANIMAL', 'COW', 1]] | shed {'COW': 2} | rec None
+m155 us $148 el $560 d -412 | ord [['SELL', 'FERTILIZER', 2]] | shed {'WHEAT': 1} | rec None
+d 6 | us $   148 h 8 .8 C1 S3 m3 s8 x2 | el $   560 h 8 .4 C8 S3 m10 s20 w5
+m169 us $148 el $378 d -230 | ord [] | shed {'WHEAT': 1, 'COW': 2} | rec [['HIRE', None, 1]]
+m170 us $30 el $344 d -314 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 4]] | shed {'WHEAT': 3, 'COW': 2} | rec None
+m171 us $30 el $344 d -314 | ord [['HIRE']] | shed {'COW': 2} | rec None
+m176 us $30 el $453 d -423 | ord [['SELL', 'FERTILIZER', 1], ['BUY_PRODUCT', 'WHEAT', 2]] | shed {'COW': 2} | rec [['SELL', 'FERTILIZER', 5], ['BUY_ANIMAL', 'COW', 1]]
+m177 us $110 el $493 d -383 | ord [['SELL', 'FERTILIZER', 3], ['BUY_PRODUCT', 'WHEAT', 5], ['BUY_SEED', 'WHEAT', 2]] | shed {'WHEAT': 6, 'COW': 2} | rec None
+m178 us $110 el $493 d -383 | ord [['SELL', 'FERTILIZER', 5], ['BUY_ANIMAL', 'COW', 1]] | shed {'WHEAT': 4, 'COW': 2} | rec [['SELL', 'FERTILIZER', 1]]
+m179 us $110 el $580 d -470 | ord [] | shed {'WHEAT': 2, 'COW': 2} | rec None
+m180 us $110 el $580 d -470 | ord [['SELL', 'FERTILIZER', 1]] | shed {'COW': 2} | rec None
+m183 us $110 el $667 d -557 | ord [] | shed {'WHEAT': 1, 'COW': 2} | rec None
+m184 us $110 el $667 d -557 | ord [['SELL', 'FERTILIZER', 1]] | shed {'WHEAT': 4, 'COW': 1} | rec None
+d 7 | us $   110 h 8 .8 C1 S3 m3 s8 x2 | el $   667 h 9 .1 C9 S3 m10 s20 w7
+m193 us $110 el $446 d -336 | ord [] | shed {'WHEAT': 5, 'COW': 2} | rec [['SELL', 'MILK', 6], ['HIRE', None, 1], ['BUY_PRODUCT', 'WHEAT', 7], ['BUY_ANIMAL', 'COW', 1]]
+m194 us $22 el $1104 d -1082 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 5]] | shed {'WHEAT': 6, 'COW': 2} | rec [['SELL', 'FERTILIZER', 2]]
+m195 us $22 el $1278 d -1256 | ord [['SELL', 'MILK', 6], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 7], ['BUY_ANIMAL', 'COW', 1]] | shed {'WHEAT': 1, 'COW': 2} | rec None
+m196 us $108 el $1278 d -1170 | ord [['SELL', 'FERTILIZER', 2]] | shed {'COW': 2} | rec None
+m204 us $108 el $1364 d -1256 | ord [] | shed {'WHEAT': 1, 'COW': 1} | rec [['SELL', 'FERTILIZER', 5]]
+m205 us $108 el $1792 d -1684 | ord [['SELL', 'FERTILIZER', 1]] | shed {'WHEAT': 3, 'COW': 1} | rec [['SELL', 'MILK', 6], ['SELL', 'FERTILIZER', 4]]
+m206 us $108 el $3461 d -3353 | ord [['SELL', 'FERTILIZER', 5]] | shed {'WHEAT': 3, 'COW': 1} | rec None
+m207 us $192 el $3461 d -3269 | ord [['SELL', 'MILK', 6], ['SELL', 'FERTILIZER', 4]] | shed {'WHEAT': 3, 'COW': 1} | rec None
+d 8 | us $   192 h 8 .8 C1 S3 m3 s6 x4 | el $  3461 h 9 C10 S3 m10 s20 w7
+m217 us $192 el $953 d -761 | ord [] | shed {'WHEAT': 3, 'COW': 2} | rec [['HIRE', None, 1], ['HIRE', None, 1], ['HIRE', None, 1]]
+m218 us $33 el $775 d -742 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 13], ['BUY_LAND']] | shed {'WHEAT': 6, 'COW': 2} | rec None
+m219 us $33 el $775 d -742 | ord [['HIRE'], ['HIRE'], ['HIRE']] | shed {'COW': 2} | rec None
+m221 us $33 el $1294 d -1261 | ord [] | shed {'COW': 2} | rec [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'COW', 1], ['BUY_ANIMAL', 'GOOSE', 1]]
+m222 us $3 el $1338 d -1335 | ord [['SELL', 'WOOL', 4], ['BUY_SEED', 'STRAWBERRY', 1], ['BUY_SEED', 'WHEAT', 15]] | shed {'COW': 2} | rec [['SELL', 'FERTILIZER', 2]]
+m223 us $3 el $1506 d -1503 | ord [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'COW', 1], ['BUY_ANIMAL', 'GOOSE', 1]] | shed {'COW': 2} | rec [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'GOOSE', 2]]
+m224 us $87 el $1617 d -1530 | ord [['SELL', 'FERTILIZER', 2]] | shed {'WHEAT': 3, 'COW': 1} | rec None
+m225 us $295 el $1617 d -1322 | ord [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'GOOSE', 2]] | shed {'WHEAT': 3, 'GOOSE': 1, 'COW': 1} | rec None
+m237 us $295 el $1700 d -1405 | ord [] | shed {'COW': 2} | rec [['SELL', 'FERTILIZER', 6]]
+m238 us $295 el $2196 d -1901 | ord [['SELL', 'FERTILIZER', 1]] | shed {'COW': 2} | rec None
+m239 us $459 el $2196 d -1737 | ord [['SELL', 'FERTILIZER', 6]] | shed {'WHEAT': 1, 'COW': 2} | rec [['SELL', 'FERTILIZER', 3]]
+d 9 | us $   459 h 8 .8 C1 P1 S2 m1 s6 x6 | el $  2196 h11 .8 C12 G2 S3 m10 s21 w19
+d10 | us $     3 h10 .8 C1 P1 S2 m1 s3 x9 | el $ 10767 h10 .9 C11 G3 S3 c1 m5 s21 t5 w17
+d11 | us $    68 h 2 .8 C1 P1 S2 m1 x12 | el $ 18176 h10 .1 C11 G3 S4 c1 m2 s21 t5 w27
+d12 | us $     0 h 1 .8 C1 P2 S1 m1 x12 | el $ 18212 h 9 C11 G3 S4 c1 m2 s22 t6 w26
+d13 | us $     0 h 0 .8 P3 S1 x13 | el $ 20886 h 9 C11 G3 S4 m2 s37 t6 w12
+d14 | us $   152 h 9 .7 P4 w1 x13 | el $ 23666 h 9 C11 G3 S4 m2 s37 t8 w10
+d15 | us $     8 h 7 .6 P4 w2 x13 | el $ 35604 h11 C11 G3 S4 m2 s37 t8 w10
+d16 | us $     8 h 0 .3 C2 P2 m3 w2 x13 | el $ 47744 h 9 C11 G3 S4 m2 s37 t8 w10
+d17 | us $     8 h 0 .6 C2 P1 m3 t2 w2 x9 | el $ 60835 h 9 C11 G3 S4 m2 s37 t9 w9
+d18 | us $     8 h 0 .8 P3 m3 t2 x9 | el $ 67569 h11 C12 G3 S4 m2 s34 t20
+d19 | us $    48 h 0 .5 G1 P3 m3 t2 w2 x9 | el $ 75390 h10 C12 G3 S4 m3 s29 t20 w4
+d20 | us $    46 h 2 .1 G1 m3 t2 w14 x4 | el $ 82519 h 9 C12 G3 S4 m2 s27 t20 w7
+d21 | us $    46 h 0 .1 G1 m3 t2 w14 x4 | el $ 90344 h10 C13 G3 S4 m1 s27 t15 w12
+d22 | us $     4 h 0 .1 G1 m3 t2 w14 x4 | el $ 97210 h10 C13 G3 S4 m1 s17 t15 w22
+d23 | us $    48 h 0 .1 G1 m3 t2 w11 x7 | el $111142 h 9 C13 G3 S2 m1 s17 t14 w25
+d24 | us $   310 h 2 .1 m3 t2 w14 x5 | el $120079 h10 C13 G3 S2 m1 s17 t14 w25
+d25 | us $  1145 h 1 .1 m3 t2 w14 x5 | el $131877 h11 C13 G3 S1 c2 m1 s17 t12 w26
+d26 | us $  1230 h 1 .1 c1 m3 t2 w13 x5 | el $135625 h11 C13 G3 c2 m1 s16 t12 w28
+d27 | us $  2096 h 2 .5 c1 m1 t2 w11 x5 | el $162283 h11 .5 C13 G3 c2 m1 s16 t12 w23
+d28 | us $  6802 h 1 .15 c1 t2 w2 x5 | el $176893 h13 .21 C13 G3 m1 s15 t11 w11

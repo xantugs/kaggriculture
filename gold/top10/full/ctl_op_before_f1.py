@@ -664,8 +664,6 @@ _OPEN_DEFAULT = dict(
     rival_straw=None,          # {"w": 0.5, "min": 8, "from_day": 4}: strawberry target cut by w per rival strawberry plot (shared book)
     sell_on_drop=False,        # goods a unit drops this hour count as sellable this hour (units act before the market settles)
     melon_fert=None,           # [6, 7]: melon plants at these ages get a FERTILIZE (needs fertilizer kept in the shed: over.fert_keep)
-    e1_defend_wool=None,       # F1, with urgent_min: {"from": 5, "to": 10, "sheep": 4}: on those days, while the rival shows at least that many
-                               # sheep on its tiles, WOOL keeps the old urgent liquidation (sell ahead of their flood)
     urgent_min=None,           # E1: urgent opening sales liquidate only the premium (DP-timed) units needed to fund the unfunded schedule
                                # (cash shortfall + this buffer in $); the rest goes to the forecast seller. None: sell everything (old)
     melon_fert_jit=False,      # with melon_fert: the evening fertilizer reserve also keeps one unit per melon that reaches a melon_fert
@@ -4798,17 +4796,6 @@ class GoldCtl:
         e1 = e1_buf is not None and e1_need is not None and GC_P["mkt_dp"] and not last
         e1_dp = set(GC_P["mkt_dp_prods"]) if e1 else set()
         e1_got = 0.0; e1_sold = {}
-        e1_defend = False
-        e1_dw = self.open.get("e1_defend_wool") if (e1 and self.open is not None) else None
-        if e1_dw:
-            try:
-                if int(e1_dw.get("from", 5)) <= day <= int(e1_dw.get("to", 10)):
-                    rs_ = sum(1 for row in obs["farms"][1 - self.me]["tiles"] for t_ in row if isinstance(t_, dict) and t_.get("animal") == "SHEEP")
-                    e1_defend = rs_ >= int(e1_dw.get("sheep", 4))
-            except Exception:
-                e1_defend = False
-            if e1_defend:
-                _GC_REPORT["gc_e1_defend"] = _GC_REPORT.get("gc_e1_defend", 0) + 1
         if (not melon_urgent and self.open is not None and self._open_on(day) and int(self.open.get("melon_sell_now", 0) or 0) > 0
                 and int(shed.get("MELON", 0)) >= int(self.open["melon_sell_now"])):
             melon_urgent = True   # melons in the shed sell at once during the opening: the first seller takes the melon book
@@ -4844,7 +4831,7 @@ class GoldCtl:
             lot = GC_P["drip"].get(p) if GC_P["drip_on"] else None
             if lot and not last and not pressure and day < 29:
                 n = min(n, lot)
-            if (urgent and not (e1 and p in e1_dp and not (melon_urgent and p == "MELON") and not (e1_defend and p == "WOOL"))) or (melon_urgent and p == "MELON"):
+            if (urgent and not (e1 and p in e1_dp and not (melon_urgent and p == "MELON"))) or (melon_urgent and p == "MELON"):
                 # the opening's scheduled purchases wait for this cash: no holds (and the melon dump goes out at once)
                 _GC_REPORT["gc_open_urgent_sold"] = _GC_REPORT.get("gc_open_urgent_sold", 0) + n
                 if urgent:

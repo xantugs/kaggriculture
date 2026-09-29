@@ -1,0 +1,7 @@
+== full_CGt
+determinism: same actions True (719 steps), same result True (80635.0, 80085.0)
+state reset: game B after game A in the same agent == fresh game B: actions True result True ((76637.0, 75753.0) vs (76637.0, 75753.0))
+stdout during a game: 0 chars
+memory over 6 games in one process (KiB after each game): [23618, 24731, 37252, 49382, 26916, 39077]
+official seed 6042: statuses ['DONE', 'DONE'] rewards [123418.0, 122882.0] steps 720 wall 28s
+official seed 8500: statuses ['DONE', 'DONE'] rewards [114103.0, 114103.0] steps 720 wall 24s

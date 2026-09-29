@@ -1,0 +1,17 @@
+15 seats {'CBF': 8, 'Kaggle': 3, 'Majkel': 4}
+CBF 113065970 m -16059.0 us 146324.0 el 162383.0 wall 12.1 err 0  T 14
+CBF 113079212 m 7201.0 us 109910.0 el 102709.0 wall 14.7 err 0  T 16
+CBF 113091953 m -10200.0 us 82030.0 el 92230.0 wall 14.5 err 0  T 16
+CBF 113093088 m -1513.0 us 85894.0 el 87407.0 wall 12.8 err 0  T 26
+CBF 113103588 m -16371.0 us 140429.0 el 156800.0 wall 12.7 err 0  T 29
+CBF 113125645 m 1926.0 us 90501.0 el 88575.0 wall 12.2 err 0  T 29
+CBF 113138587 m -14367.0 us 102386.0 el 116753.0 wall 11.8 err 0  T 38
+CBF 113175616 m -16769.0 us 113970.0 el 130739.0 wall 11.6 err 0  T 40
+Kaggle 113074365 m 413.0 us 99775.0 el 99362.0 wall 12.0 err 0  T 41
+Kaggle 113087145 m 3060.0 us 108699.0 el 105639.0 wall 11.4 err 0  T 50
+Kaggle 113146625 m 1832.0 us 126561.0 el 124729.0 wall 11.7 err 0  T 52
+Majkel 113092068 m -13821.0 us 86787.0 el 100608.0 wall 10.7 err 0  T 52
+Majkel 113189343 m -9515.0 us 113467.0 el 122982.0 wall 12.4 err 0  T 62
+Majkel 113202318 m -25811.0 us 76678.0 el 102489.0 wall 13.2 err 0  T 65
+Majkel 113214242 m 4895.0 us 106894.0 el 101999.0 wall 13.0 err 0  T 65
+ALLDONE eo 15 wins 6 margin -7007

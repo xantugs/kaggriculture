@@ -1,0 +1,35 @@
+seed 6300 seatA 1  final A 107345  B 111388  (A-B -4043)
+ d |   A cash   B cash     gap  dgap | hA hB | A revenue (units x price)                    | B revenue                                    | A census                       | B census
+ 0 |       42       14      28    28 |  5  5 | whe250                                       | whe250                                       | C3 S2 m7 w11                   | C2 S2 m12 w8
+ 1 |      353      106     247   219 |  5  3 | fer497                                       | fer298                                       | C3 S2 m7 w13                   | C2 S2 m12 w8
+ 2 |       90      215    -125  -372 |  5  4 | fer489 whe150                                | fer486 whe60                                 | C3 S2 m7 w11                   | C3 S2 m12 w8
+ 3 |       90      353    -263  -138 |  6  5 | fer480 whe90                                 | fer380 whe239                                | C4 G2 S2 m7 w10                | C3 S2 m12 w7
+ 4 |      476      753    -277   -14 |  7  4 | fer749 whe120                                | fer652 whe60                                 | C4 G2 S2 m7 s2 w5              | C4 S2 m12 w7
+ 5 |     1364      857     507   784 |  6  4 | fer725 whe478                                | fer453 whe58                                 | C4 G2 S2 m7 s5 w5              | C4 S2 m12 s4 w3
+ 6 |      272      561    -289  -796 |  9  7 | woo2338 fer176                               | woo2348 fer799 whe270                        | C6 G3 S2 m7 s18 w5             | C6 S2 m12 s12 w6
+ 7 |       43      350    -307   -18 |  7  7 | fer435                                       | fer772 woo374                                | C7 G3 S2 m7 s20 w4             | C8 S2 m12 s16 w8
+ 8 |      270     1270   -1000  -693 | 11  8 | mil3282 fer1340 egg400                       | mil3546 fer820 whe68                         | C7 G3 S3 m7 s30 w9             | C8 S4 m12 s20 w5
+ 9 |      911     2025   -1114  -114 | 11  8 | woo1492 fer714 egg392 whe284                 | woo1352 fer1087 whe70                        | C7 G4 S4 m7 s31 w20            | C8 S5 m12 s20 w5
+10 |     4745    17454  -12709 -11595 | 11 11 | mel4068 fer1117 mil558                       | mel15216 mil4074 fer667 whe111               | C7 G4 S6 s31 w24               | C8 G2 S6 s20 w12
+11 |     8964    17428   -8464  4245 | 10 10 | mel4920 fer926 mil555 egg188                 | mel2460 mil1677 fer1138 whe351               | C10 G4 S6 s31 w24              | C8 G3 S6 s33 w21
+12 |    11409    21016   -9607 -1143 | 10  9 | mil1140 fer1066 woo532 egg368 whe355         | woo1288 mil1176 fer1139 whe360               | C10 G4 S6 s31 w23              | C8 G3 S6 s33 w24
+13 |    14678    23700   -9022   585 | 11  9 | mil1719 fer1084 woo464 whe351 egg180         | mil2247 fer1030 whe936                       | C10 G4 S6 s31 w22              | C8 G3 S6 s33 w24
+14 |    19421    26500   -7079  1943 | 11  9 | mil1617 whe1245 fer910 woo642 egg540 str422  | mil2709 woo819 fer751 whe342                 | C10 G4 S6 s31 w22              | C8 G3 S6 s33 w24
+15 |    21888    32693  -10805 -3726 | 11 10 | mil3333 str424 fer188 egg176 woo88           | str3536 mil3513 fer889 whe456 egg176 woo18   | C10 G4 S6 s31 w22              | C8 G3 S6 s33 w24
+16 |    23975    33162   -9187  1618 | 11  9 | str1135 mil795 egg528 fer506 woo10           | whe468 egg440 fer46 woo5                     | C10 G4 S6 c3 m7 s31 w14        | C8 G3 S6 m5 s33 w20
+17 |    34018    38927   -4909  4278 | 12  9 | str6525 mil2286 whe1503 fer468 egg172        | str3546 mil2115 fer220 whe190 egg129 woo3    | C10 G4 S6 c10 m7 s31 t2 w5     | C8 G3 S6 c4 m5 s33 t2 w14
+18 |    42083    47138   -5055  -146 | 10 10 | str5808 whe980 mil747 egg516 fer361          | str6083 mil1179 fer644 egg516 whe456 woo5    | C10 G4 S6 c15 m7 s31 t2        | C8 G3 S6 c11 m5 s33 t2 w7
+19 |    51367    52753   -1386  3669 | 10  8 | str7982 mil1596 fer324 egg168                | str2568 mil2013 whe1036 egg168               | C10 G4 S6 c15 m7 s31 t2        | C8 G3 S6 c18 m5 s33 t2
+20 |    60862    56979    3883  5269 | 11  9 | str6798 mil2640 egg672 fer661 car504 woo66   | str3216 mil504 whe371 fer198 egg168 woo88    | C10 G4 S6 c17 m7 s29 t2        | C8 G3 S6 c18 m5 s33 t2
+21 |    66680    65413    1267 -2616 | 10 10 | str4632 mil1335 car1197 fer145 woo20         | str6876 mil1485 car684 egg168 fer145 woo20   | C10 G4 S6 c20 m7 s26 t2        | C8 G3 S6 c22 m5 s29 t2
+22 |    72447    71957     490  -777 | 12 10 | str4368 mil1545 car840 egg504 fer260         | str5068 car1176 mil801 egg336 fer331         | C10 G4 S6 c28 m7 s13 t2 w5     | C8 G3 S6 c26 m5 s21 t2 w4
+23 |    78411    80111   -1700 -2190 | 11 10 | str6116 mil1230 car872 egg336 fer260         | str7164 car1540 mil1455 egg168               | C10 G4 S6 c19 m7 s11 t2 w16    | C8 G3 S6 c22 m5 s17 t2 w12
+24 |    81506    82149    -643  1057 | 13 13 | car2243 mil1317 str612 egg504 woo108 fer64   | str1728 car1000 mil765 egg336 woo162 fer42   | C10 G4 S6 c11 m7 s1 t2 w34     | C8 G3 S6 c11 m5 s13 t2 w27
+25 |    85223    87913   -2690 -2047 | 12 11 | str3560 car1288 mil504 fer147 woo9           | str5420 car1960 mil477 egg168 fer147         | C10 G4 S6 m7 t2 w46            | C8 G3 S6 m5 s13 t2 w38
+26 |    91186    91088      98  2788 | 14 11 | mel3852 car1620 mil918 whe705 egg672 str328  | car1980 mil829 egg504 str328 fer106          | C10 G4 S6 c14 t2 w39           | C8 G3 S6 c10 s13 t2 w33
+27 |    93954    95910   -1956 -2054 | 13 11 | whe1692 mel972 mil915 tom592 fer74 woo55     | mel3810 whe705 tom592 mil582 egg420 fer87 wo | C10 G4 S6 c14 t2 w34           | C8 G3 S6 c10 s13 t2 w27
+28 |   101700   105622   -3922 -1966 | 12 10 | whe6479 mil1296 egg588 fer93 woo15           | str4888 whe4512 mil666 tom592 egg252 fer158  | C10 G4 S6 c14 t2 w3            | C8 G3 S6 c10 t2 w3
+29 |        0        0       0  3922 | 11  7 | whe2437 car2384 tom584 egg504 fer185 woo10   | whe3475 car1720 egg126 mil78 fer69 woo5      |                                | 
+revenue totals A: str48710 mil29328 whe17119 fer14544 mel13812
+revenue totals B: str50421 mil31891 mel21486 whe14844 fer13554
+revenue A-B by product: mel-7674 egg+3333 mil-2563 whe+2275 str-1711 fer+990 car+888 woo-736 tom-8

@@ -28,7 +28,6 @@ GC_P = dict(
     straw_last_plant=12,
     straw_target=33,      # strawberry plants to hold while planting them is allowed
     feed_reserve=1.0,     # wheat kept per animal for the next morning
-    care_eve_fix=False,   # an animal's production eve: CARE counts for the next batch (the banked bonus is consumed and restarts)
     drop_refill=False,    # a unit that DROPs mid-queue (shed stop, courier) re-picks the wheat/fertilizer/animals the rest
                           # of its queue feeds/fertilizes/places (the engine's DROP empties the whole inventory: sf8 then
                           # skipped those FEEDs, and animals placed the day before escaped)
@@ -81,26 +80,11 @@ GC_P = dict(
     trim_hour=10,
     trim_fix=False,       # _trim_queue gets the turns really left (hours h..23 = 24 - h; day 29 ends at hour 22): sf8 passed
                           # 23 - h and cut one planned visit from every full route that was exactly on time
-    pick_fix=False,       # the market never sells the WHEAT/FERTILIZER that queued PICKUPs still need: sf8 kept only
-                          # tomorrow's reserve, so the hour-1 sale sold the inputs of the hands hired at hour 1 (their
-                          # pickups run at hour 2; on day 28 the reserve is 0 and everything went) and the hour-0 room
-                          # lot sold below today's fert/wheat needs: FERTILIZE/FEED then popped as no-ops (day-28 escapes)
-    plant23_fix=False,    # a PLANT that would run at the day's last turn (no turn left for its WATER: the new plant
-                          # turns weed at the night refresh) is skipped with its WATER; the seed and the empty tile wait
-    mtrim_fix=False,      # True or "surv" (strip only while a life-saving WATER/FEED would be lost, only parts before it). _trim_queue with only must visits left and still over the turns left (unplanned refill pickups,
-                          # a late hire's actual spawn) strips their deferrable parts, latest first: fertilizer collects,
-                          # fertilizations, plantings; sf8 ran the queue in order and lost its last must visits
     reserve_release_hour=18,
     care_min_price=12,
     anim_fwd_days=0.0,    # >0: care/harvest decisions price animal goods at the book after this many days of town drain (no sales)
     harvest_min_price=3,
     plant_defer=0.3,      # value of planting today = this fraction of the crop's net value
-    eh_level=None,        # g_wheat: harvest-wave leveling, e.g. {"margin": 2, "min_units": 5, "last_day": 26, "frac": 0.5}: when the
-                          # one-time crops due tomorrow (wheat age 3, carrots age 2) outnumber those due today by more than margin,
-                          # harvest frac of the excess today among the age-3 wheat that holds min_units after today's water
-                          # (nearest the shed first; replanted today). Splits the harvest/overflow wave that buys the 14th-15th hand.
-    plant_last_w=None,    # g_wheat: on/after the last one-time planting day (max of wheat/carrot_last_plant) a planting is
-                          # worth this fraction of the crop's value (deferring it loses the crop); None: plant_defer
     land_sw_day=11,
     drop_slack=0,         # turns kept free in each route for a shed stop
     always_drop=False,
@@ -282,19 +266,6 @@ GC_P = dict(
     es_waves=(),          # more waves: dicts {days, quads, n}: the tape's wheat replants in those quadrants on those days become strawberries
     es_cow_days=(),       # days on which one skipped cow is bought back (hour 0, cash permitting); units that pick up
     es_cow_reserve=300.0, # cows at the shed carry the extra ones and place them on the tape's empty pastures
-    w2t_days=(),          # TOMATO track: chassis days on which the tape's PLANT WHEAT become PLANT TOMATO (the elites run
-                          # ~13 tomatoes by day 16 on the tiles we keep in wheat); rival div2-flagged, farms differ (s2t_max_sim)
-    w2t_n=3,              # at most this many conversions per day (tomato seeds bought at the day's first free market slot)
-    w2t_total=12,         # no conversion once our farm holds this many tomato plants (s2t's included)
-    w2t_min_dem=6,        # tomato demand among the unlocked shops (6 per pizza shop / farmers market) at least this
-    w2t_cash=3000.0,      # and at least this much cash when the seeds are bought
-    w2t_adapt=False,      # also require ADAPT's divergent flag (_AD_STATE off) at the time
-    tomato_alt_dyn=False, # TOMATO track: a tomato plot's alternative is the filler's value per tile-day at today's prices
-    tomato_alt_min=15.0,  #   (wheat/carrot, as _choose_crops values them) but at least this, instead of tomato_alt_day
-    tomato_units_fc=8.0,  # units a tomato plot is valued at in the planner (4 at age 9 and 11); the recorded plots give ~6
-    s2t_ext=None,         # TOMATO track: also convert in towns over s2t_max_shops, e.g. {"straw": 1, "tom": 1, "days": [11],
-                          # "max_n": 99}: with at most `straw` strawberry-buying shops unlocked, when at least `tom` tomato
-                          # buyers (pizza shop / farmers market) are unlocked, on `days`, at most max_n plantings that day
     s2t_max_n=99,         # at most this many strawberry plantings converted per day
     s2t_days=(),          # chassis days: on these planting days, when the rival's cash at step 2 lies outside the band of
     s2t_crop="TOMATO",    # chassis copies (div2_band), the tape's PLANT STRAWBERRY and its strawberry seed purchases become
@@ -383,66 +354,6 @@ GC_P = dict(
                           # the rest; among units with the same spawn tile and turn cap (interchangeable routes) the routes
                           # whose goods reach the night drop with the highest value go to the lowest unit indices
     shed_perm_min=60,     # only on days whose planned night load (units carried after each route's last stop) is this big
-    market_fix1=False,    # au_market: never sell shed WHEAT/FERTILIZER that today's queued PICKUPs still need. sf8 kept only the
-                          # reserve for the NEXT morning (0 on day 28: d28_zero_reserve), so the hour-1 market sold the inputs of
-                          # the hands hired at hours 1-2 and of every unit's second PICKUP (one PICKUP per turn: wheat at hour 1,
-                          # fertilizer at hour 2); those FEEDs/FERTILIZEs then ran dry. Also the hour-0 room sale of WHEAT /
-                          # FERTILIZER keeps today's planned need, not only the reserve.
-    market_fix2=False,    # au_market: the hour-0 room sale (a full shed rejects BUY_PRODUCT/BUY_ANIMAL) sold only the top lot
-                          # even when it freed less than the purchases need (partial wheat/fertilizer fills, FEEDs/FERTILIZEs
-                          # ran dry): take further lots, in the same order, until the room is covered
-    w3val_fix=False,      # au_crops: an optional window water of a one-time crop whose harvest (and its watering) is tomorrow
-                          # is valued by what max_yield leaves of it: sf8 valued a fertilized wheat's age-3 water at +2 units
-                          # although the age-4 water then adds only 1 (6 cap) instead of 2: the true gain is 1 unit
-    d28feed_fix=False,    # au_crops: day 28 (the last night refresh: day 29 has none) feeds only animals that produce tonight
-                          # and only when it pays: unfed yesterday, FEED saves (1 + pend) units from the escape; fed yesterday,
-                          # it adds the banked care bonus pend (sf8 counted 1 + pend: the base unit comes unfed). sf8 fed every
-                          # unfed animal as a must visit (sheep with no production left: wheat, turns and hires for nothing).
-                          # An animal left to escape has its held units harvested as a must visit (never skipped by shed_skip)
-    pickres_fix=False,    # au_crops: the market keeps in the shed what today's queued PICKUPs still need (late hires pick up
-                          # at hour 2): sf8 kept only the next-morning reserve, which is 0 on day 28 (d28_zero_reserve), so
-                          # the hour-1 sale took the wheat/fertilizer of the late hires' FEEDs/FERTILIZEs (cows unfed, care lost)
-    handover_fix1=False,  # the rival-sale tracker (_mk_track/_mk_store, sell_timing) also runs through the chassis phase on the
-                          # chassis's final market list: at takeover sf8 had no rival history, so the market programme's rival
-                          # forecast was empty on the first controller day and half the pattern on the second (ndays=2)
-    handover_fix2=False,  # step 0 of a game: clear ADAPT's divergent flag (and its report) before the takeover rules read it; sf8
-                          # read the previous game's flag first (ADAPT restores it only inside the chassis call that follows), so
-                          # in a process that reuses the module, a game after a divergent one ran with div_over applied all game
-    handover_fix3=False,  # the hire search starts from 0 hands on the first controller day (the day the controller really took over);
-                          # sf8 tested day == start // 24 (the copy day 22), so on the rich (12) / divergent (16) first day the search
-                          # started at last_hires - 3 = 7 from the default last_hires 10 (it forced 7 hands where 4-6 were best);
-                          # day start // 24 keeps its search from 0 as before
-    tie_blk=None,         # TIES track, chassis days: e.g. {"from": 6, "to": 19, "cross": False}. A tape unit standing on a
-                          # shed-access tile runs a block of non-move commands there (PICKUP WHEAT, FEED, CARE, COLLECT, HARVEST,
-                          # PLACE ...) before it walks on. When the block holds a premium drop behind non-premium work, the
-                          # block is permuted: the premium HARVEST on that tile first, then the drop (sold in that turn), then
-                          # the rest in the tape's order. Same tile, same number of turns, same work: the unit is back in the
-                          # tape's lockstep when it moves, and our lot settles ahead of a copy's identical lot of that step.
-                          # "cross": also when the earlier sale falls before a town drain (another tick window).
-    tie_sort=None,        # TIES track, chassis phase against a rival ADAPT has not flagged: "prem" puts our premium SELLs
-                          # (milk, wool, strawberry, melon, tomato) ahead of the other SELLs in each list; "impact" sorts them
-                          # by the price drop each lot causes (as sells_first_sort). A copy's list mirrors ours, so a lot moved
-                          # up wins its contest and the lots it passes lose theirs: fertilizer/wheat ties are worth cents.
-    vrp_pack=None,        # r3 labour (a): after the hire search picks h hands, empty one hand's route into the others' slack
-                          # (cheapest feasible insertion; the remaining hands take the spawns/caps of an (h-1)-hand plan) and keep
-                          # h-1 hands when every must visit still fits and the plan scores better under the same hire-search score
-                          # (unserved value + shed overflow + popped visits + w * wage). dict: {"min_day": 20, "max_day": 28,
-                          # "tries": 3 (shortest routes tried as the one emptied), "rounds": 1 (h-1, h-2, ...), "slack": 0 (turns kept
-                          # free in routes that receive visits), "w": None (wage weight; None = hire_cost_w), "opt": True (optional
-                          # visits that no longer fit may be dropped, their value counted)}
-    eh_slack=None,        # r3 labour (b): harvest-wave leveling into spare turns only (no new hire). After the hire search and the
-                          # shed stops, on days when the one-time crops due tomorrow outnumber those due today by more than margin,
-                          # wheat/carrots one day before their last window day (a water visit today, units after today's water
-                          # >= min_units) are harvested today (+ replanted with the same crop when allowed and a seed is at hand or
-                          # bought), in routes with the turns to spare and while tonight's carried load stays under `room`.
-                          # dict: {"margin": 0, "min_units": 5, "first_day": 16, "last_day": 25, "max_n": 8, "keep": 1,
-                          # "replant": True, "room": 80, "crops": ["WHEAT"]}
-    d27_wheat=None,       # r3 labour (c): late wheat on spare turns, no new hire (set it in div_over for the divergent path only).
-                          # After the hire search and the shed stops, plant WHEAT (+ FERTILIZE when the shed has spare fertilizer,
-                          # + WATER) on tiles a one-time harvest empties today (appended to that visit) and on empty tiles near a
-                          # route, into routes with >= min_spare free turns; the plot is harvested on day 29 (planted day 27:
-                          # 1 + 2 units at age 2). dict: {"days": [27], "min_spare": 4, "keep": 1 (turns left free after the
-                          # insertion), "max_n": 10, "fert": True, "empties": True, "buy": True (buy missing seeds at hour 1)}
 )
 
 _GC_CROPS = {
@@ -626,111 +537,7 @@ _OPEN_DEFAULT = dict(
     over={"plant_must": False, "max_hands": 12, "hire_cost_w": 1.0, "prem_drop": True, "prem_drop_max": 6, "deliver_prem": 800.0, "hire_compact": True},   # GC_P overrides while the opening runs
     feed_buy_hour=14,          # buy tomorrow's feed at this hour when the shed is short and the cash is in
     replan_hours=(5, 9, 13),   # hours at which affordable scheduled purchases are made and the routes redone
-    anim_cond=None,            # herd-first: {kind: [buyers, {day: [target with 0, 1, 2+ buyers known]}]}, buyers in
-                               # milk / yarn / egg / none (cumulative targets incl. the day's purchases; replaces anim)
-    straw_hf=None,             # herd-first strawberries: {"early": {day: cum}, "ne": [a, b] (a + b * straw buyers on the NE day),
-                               # "sw": [a, b, c] (a + b * buyers + c * NE plots, from the SW day), "late": [a, b, day]}
-    eh_all=False,              # early harvest frees tiles for every due placement (strawberries, melons, animal structures)
-    div_at_until=False,        # apply GC_P["div_over"] when the opening ends (the controller's divergent-rival rules)
-    land_hold=True,            # a due land purchase holds the cash (nothing else bought until it is paid)
-    anim_round=0.5,            # targets: int(t + anim_round)
-    lean=False,                # cash: the hour-0 sale of the shed's goods funds the plan; reserve = cash_keep only
-    crew=None,                 # {"a": 3.3, "tiles": .045, "anim": .18, "shed": .38, "plant": .13, "lo": 4, "hi": 12, "below": 0}
-    force_first=False,         # routes: premium harvests, then animals, then a shed stop, then the rest (tail trimmed)
-    mid_tiles=True,            # mid-day animal purchases only up to the tiles/structures free for them today
-    anim_split=None,           # {"budget": 8}: opening VRP, animal chores split over the crew in short segments + shed stop
-    anim_tiles=False,          # keep free tiles (nearest the shed) for the animals still due today; keep empty structures
-    anim_tiles_max=4,
-    abs_last=5,                # anim_before_straw applies through this day
-    land_wheat=0,              # mid-day land purchase: wheat seeds for this many new tiles reserved before animals
-    melon_first=False,         # melons ahead of strawberries on the melon days
-    anim_day_max=99,           # animals bought per day at most (plan + mid-day)
-    herd_cap=99,               # herd (placed + shed) at most
-    mid_wheat_from=99,         # from this day the mid-day replan plants wheat on free tiles when the cash is in
-    mid_wheat_max=8,           # ... at most this many plots per replan
-    wheat_cap=None,            # standing wheat plots at most (the fills stop there)
-    mid_melon=False,           # melon_first days: the second melon batch is bought mid-day from the fertilizer sales
-    straw_gate=None,           # {"from": 3, "to": 12, "ahead": 1}: strawberry seeds spend only cash above the next land payment due
-                               # within `ahead` days plus tomorrow's feed shortfall (deferred plants are bought when a sale covers them)
-    tom_sw=None,               # [a, b, cap]: tomatoes planted on the SW purchase day, a + b * tomato buyers known (PIZZA_SHOP, FARMERS_MARKET)
-    tom_ramp=None,             # {"from": 10, "per_day": 1.5, "cap": 12, "buyers": false}: tomatoes planted daily from that day (before the wheat fill)
-    force_first_min=0.0,       # force_first only on days whose premium harvests (melons, wool, milk, ...) are worth at least this
-    herd_cap_by_yarn=None,     # {"1": 24, "2": 28}: herd cap raised by the number of yarn stores known
-    anim_place_order=None,     # placement order of the kinds on the nearest tiles, e.g. ["SHEEP", "COW", "GOOSE"] (the day-6 wool trip first)
-    access_free=False,         # keep the four shed-access tiles free of crops through access_free_last (day 1): animals go there
-    access_free_last=1,
-    farmer_h0=False,           # the farmer starts its route at hour 0 instead of holding (4,4) for the hires (spawns modelled as farmer away)
-    rival_anim=None,           # {"w": 0.5, "floor": {"COW": 2, "SHEEP": 2}}: cow/sheep targets cut by w per rival animal of the kind
-    rival_straw=None,          # {"w": 0.5, "min": 8, "from_day": 4}: strawberry target cut by w per rival strawberry plot (shared book)
-    sell_on_drop=False,        # goods a unit drops this hour count as sellable this hour (units act before the market settles)
-    melon_fert=None,           # [6, 7]: melon plants at these ages get a FERTILIZE (needs fertilizer kept in the shed: over.fert_keep)
-    e1_defend_wool=None,       # F1, with urgent_min: {"from": 5, "to": 10, "sheep": 4}: on those days, while the rival shows at least that many
-                               # sheep on its tiles, WOOL keeps the old urgent liquidation (sell ahead of their flood)
-    urgent_min=None,           # E1: urgent opening sales liquidate only the premium (DP-timed) units needed to fund the unfunded schedule
-                               # (cash shortfall + this buffer in $); the rest goes to the forecast seller. None: sell everything (old)
-    melon_fert_jit=False,      # with melon_fert: the evening fertilizer reserve also keeps one unit per melon that reaches a melon_fert
-                               # age tomorrow unfertilized (just in time: nothing is held on the other days)
-    melon_sell_now=0,          # >0: during the opening, melons in the shed (at least this many units) are sold at once, no market holds
-    melon_day=None,            # {"min_units": 20, "slack": 4}: a day with that many ripe melon units puts the melon harvests first in
-                               # every route and drops them at the shed right after (the day-10 dump race), if the route stays within cap + slack
 )
-
-
-_OPEN_BUYERS = {"milk": ("PIZZA_SHOP", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP"), "yarn": ("YARN_STORE",),
-                "egg": ("BAKERY", "BRUNCH_SPOT"), "straw": ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET"),
-                "none": ()}
-
-
-def _open_targets(opn, day, shops, rival_c=None):
-    """Cumulative herd targets for the day: the herd-first conditional tables when set, else the plain day tables."""
-    out = []
-    if opn.get("anim_cond"):
-        for an, spec in opn["anim_cond"].items():
-            buyers, tab = spec[0], spec[1]
-            k = sum(1 for s in shops if s in _OPEN_BUYERS.get(buyers, ()))
-            row = None
-            for d in sorted(int(x) for x in tab):
-                if d <= day:
-                    row = tab[d] if d in tab else tab[str(d)]
-            if row is None:
-                t = 0
-            elif isinstance(row, (list, tuple)):
-                t = float(row[min(k, len(row) - 1)])
-            else:
-                t = float(row)
-            out.append((an, int(t + float(opn.get("anim_round", 0.5)))))
-        ra = opn.get("rival_anim")
-        if ra and rival_c is not None:
-            # contest avoidance for the herd: the milk and wool books are thin (39 / 42 units to half price), so every rival
-            # animal of a kind lowers our target for it by w (floor: the day-0 herd); geese are exempt (eggs never crash)
-            out2 = []
-            for an, t in out:
-                if an in ("COW", "SHEEP"):
-                    n_r = int(rival_c.get(an, 0))
-                    floor_ = int(ra.get("floor", {}).get(an, 2))
-                    t = max(floor_, t - int(round(float(ra.get("w", 0.5)) * n_r)))
-                out2.append((an, t))
-            return out2
-        return out
-    for an, tab in opn["anim"].items():
-        t_ = _open_target({int(k): v for k, v in tab.items()}, day)
-        if an == "SHEEP" and day >= 6 and "YARN_STORE" in shops:
-            t_ = max(t_, opn["sheep_yarn"])
-        out.append((an, t_))
-    return out
-
-
-def _open_herd_cap(opn, shops):
-    """Herd cap for the day: the plain cap, raised by herd_cap_by_yarn {"1": 24, "2": 28} when yarn stores are known (the
-    wool book refills 12 a day per store; the tape grows to 15-19 sheep in such towns and takes the whole book)."""
-    cap = int(opn.get("herd_cap", 99))
-    tab = opn.get("herd_cap_by_yarn")
-    if tab:
-        k = sum(1 for s_ in (shops or []) if s_ == "YARN_STORE")
-        for kk in sorted(int(x) for x in tab):
-            if k >= kk:
-                cap = max(cap, int(tab[kk] if kk in tab else tab[str(kk)]))
-    return cap
 
 
 def _open_target(table, day):
@@ -778,13 +585,10 @@ class GoldCtl:
         self.footprint_n = None
         self.n_animals = 0
         self.final = False
-        self._first_day = None
         self.open = None
         if getattr(self, "_open_over", None):
             GC_P.update(self._open_over)
         self._open_over = None
-        self._open_land_day = {}
-        self._open_ne_n = 0
         if GC_P["open"] is not None:
             self.open = dict(_OPEN_DEFAULT)
             self.open.update(GC_P["open"] if isinstance(GC_P["open"], dict) else {})
@@ -795,60 +599,10 @@ class GoldCtl:
     def _straw_demand(self, shops):
         return sum(6 for sh in shops if sh in ("BRUNCH_SPOT", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP", "FARMERS_MARKET")) + 1
 
-    def _rival_counts(self, obs):
-        """Public census of the rival's farm: standing plots by crop and placed animals by kind."""
-        me = int(obs["player"]); rf = obs["farms"][1 - me]
-        c = {}
-        for row in rf["tiles"]:
-            for t in row:
-                if isinstance(t, dict):
-                    if t.get("kind") == "PLANT":
-                        c[t["crop"]] = c.get(t["crop"], 0) + 1
-                    elif "animal" in t:
-                        c[t["animal"]] = c.get(t["animal"], 0) + 1
-        self._rival_c = c
-        return c
-
     def _open_straw_target(self, day, shops):
         op = self.open
         if day > op["straw_last"]:
             return 0
-        t_ = self._open_straw_target0(day, shops)
-        rs = op.get("rival_straw")
-        if rs and day >= int(rs.get("from_day", 4)):
-            # contest avoidance: the strawberry book halves after 32 units and refills 6 a day per buyer; plots the rival
-            # already has will fill the same days, so ours count for less (w per rival plot), down to a floor
-            n_r = int(getattr(self, "_rival_c", {}).get("STRAWBERRY", 0))
-            cut = int(round(float(rs.get("w", 0.5)) * n_r))
-            if cut > 0:
-                t2 = max(int(rs.get("min", 8)), t_ - cut)
-                _GC_REPORT["gc_rival_straw_cut"] = max(_GC_REPORT.get("gc_rival_straw_cut", 0), t_ - t2)
-                t_ = t2
-        return t_
-
-    def _open_straw_target0(self, day, shops):
-        op = self.open
-        sh = op.get("straw_hf")
-        if sh:
-            # herd-first: NW plots on days 2-4, NE plots on the NE day by the strawberry buyers known then, SW plots
-            # from the SW day by the buyers known then less the NE plots (cumulative plots incl. harvested/rotten ones
-            # are not tracked: the target is on standing plants, which only grow before day 12)
-            t = _open_target({int(k): v for k, v in sh.get("early", {}).items()}, day)
-            st = getattr(self, "_open_land_day", {})
-            if "NE" in st and day >= st["NE"][0]:
-                b = st["NE"][1]
-                a_, b_ = sh.get("ne", [7, 7])
-                self._open_ne_n = int(round(a_ + b_ * b))
-                t += self._open_ne_n
-            if "SW" in st and day >= st["SW"][0]:
-                b = st["SW"][1]
-                sw = sh.get("sw", [4, 6, -0.4])
-                t += max(0, int(round(sw[0] + sw[1] * b + sw[2] * getattr(self, "_open_ne_n", 0))))
-            lt = sh.get("late")
-            if lt and day >= int(lt[2]):
-                b = sum(1 for s in shops if s in _OPEN_BUYERS["straw"])
-                t += max(0, int(round(lt[0] + lt[1] * b)))
-            return min(op["straw_max"], t)
         if day < 6:
             return _open_target(op["straw_early"], day)
         dem = self._straw_demand(shops) - 1
@@ -863,85 +617,33 @@ class GoldCtl:
             t = int(round(a + b * dem))
         return min(op["straw_max"], t)
 
-    def _straw_gate_res(self, obs, day):
-        """straw_gate: cash strawberry seeds must leave untouched (next land payment due soon + tomorrow's feed)."""
-        op = self.open
-        g = op.get("straw_gate") if op else None
-        if not g or not (int(g.get("from", 3)) <= day <= int(g.get("to", 12))):
-            return 0.0
-        farm = obs["farms"][self.me]; shed = obs["private"]["shed"]
-        quads = list(farm["unlocked_quadrants"]); res = 0.0
-        n_extra = max(0, len(quads) - 1)
-        if n_extra < 3:
-            due = [int(d_) for q_, d_ in (op.get("land") or {}).items() if d_ is not None and q_ not in quads]
-            if due and min(due) <= day + int(g.get("ahead", 1)):
-                res += (1000.0, 2000.0, 4000.0)[n_extra]
-        n_an = sum(1 for row in farm["tiles"] for t in row if isinstance(t, dict) and "animal" in t) + sum(int(shed.get(a_, 0)) for a_ in _GC_ANIM)
-        res += max(0, n_an - int(shed.get("WHEAT", 0))) * (float(self.pnow.get("WHEAT", 30)) + 3.0)
-        _GC_REPORT["gc_straw_gate_max"] = max(_GC_REPORT.get("gc_straw_gate_max", 0), int(res))
-        return res
-
     def _open_crops(self, obs, day, free, replant, shops, counts, avail, seeds):
         """Opening schedule: strawberries (nearest the shed), melons, then wheat on what is left; seeds limited by cash."""
         op = self.open
         out = {}
         cash = avail
         slots = sorted(free, key=lambda p: _gc_dist(p, (4.5, 4.5))) + sorted(replant, key=lambda p: _gc_dist(p, (4.5, 4.5)))
-        if op.get("access_free") and day <= int(op.get("access_free_last", 1)):
-            # the four shed-access tiles stay free of crops on the herd days: an animal placed there is harvested by a hand
-            # the hour it spawns and dropped the next hour (the tape's cow on (4,4) sells its milk at hour 2 of day 8)
-            slots = [p for p in slots if p not in _GC_ACCESS_SET]
         want = []
         n_s = max(0, self._open_straw_target(day, shops) - counts.get("STRAWBERRY", 0))
-        if op.get("melon_first") and day <= op["melon_last"]:
-            n_m = max(0, op["melon"] - counts.get("MELON", 0))
-            if day == op["from_day"] and op.get("melon0") is not None:
-                n_m = min(n_m, int(op["melon0"]))
-            want.append(("MELON", n_m))
-            want.append(("STRAWBERRY", n_s))
-        else:
-            want.append(("STRAWBERRY", n_s))
-            if day <= op["melon_last"]:
-                want.append(("MELON", max(0, op["melon"] - counts.get("MELON", 0))))
+        want.append(("STRAWBERRY", n_s))
+        if day <= op["melon_last"]:
+            want.append(("MELON", max(0, op["melon"] - counts.get("MELON", 0))))
         n_w = 0
         if day == 0 and op["wheat0"] is not None:
             n_w = op["wheat0"]
         elif op["wheat_fill"] and day >= op["wheat_fill_from"]:
             n_w = len(slots)
-        if op.get("wheat_cap") is not None:
-            n_w = max(0, min(n_w, int(op["wheat_cap"]) - counts.get("WHEAT", 0)))
-        tr_ = op.get("tom_ramp")
-        if tr_ and day >= int(tr_.get("from", 10)):
-            tb_ = sum(1 for s_ in shops if s_ in ("PIZZA_SHOP", "FARMERS_MARKET"))
-            if tb_ > 0 or not tr_.get("buyers", False):
-                acc_ = getattr(self, "_tom_ramp_acc", 0.0) + float(tr_.get("per_day", 1.5))
-                n_t = int(acc_); self._tom_ramp_acc = acc_ - n_t
-                n_t = max(0, min(n_t, int(tr_.get("cap", 12)) - counts.get("TOMATO", 0)))
-                if n_t > 0:
-                    want.append(("TOMATO", n_t))
-        st_ = getattr(self, "_open_land_day", {})
-        if op.get("tom_sw") and "SW" in st_ and st_["SW"][0] == day and counts.get("TOMATO", 0) == 0:
-            a_, b_ = float(op["tom_sw"][0]), float(op["tom_sw"][1])
-            tb_ = sum(1 for s_ in shops if s_ in ("PIZZA_SHOP", "FARMERS_MARKET"))
-            n_t = int(min(float(op["tom_sw"][2]) if len(op["tom_sw"]) > 2 else 8, round(a_ + b_ * tb_)))
-            if tb_ == 0 and len(op["tom_sw"]) > 3 and not op["tom_sw"][3]:
-                n_t = 0
-            if n_t > 0:
-                want.append(("TOMATO", n_t))
         want.append(("WHEAT", n_w))
         held = dict(seeds)
         k = 0
         for crop, n in want:
             price = _GC_CROPS[crop]["seed"]
-            sg_ = self._straw_gate_res(obs, day) if (crop == "STRAWBERRY" and op.get("straw_gate")) else 0.0
             while n > 0 and k < len(slots) - (op["keep_free"] if crop == "WHEAT" else 0):
                 if held.get(crop, 0) > 0:
                     held[crop] -= 1
-                elif cash >= price and cash - price >= sg_:
+                elif cash >= price:
                     cash -= price
                 else:
-                    if sg_ > 0 and cash >= price:
-                        _GC_REPORT["gc_straw_gated"] = _GC_REPORT.get("gc_straw_gated", 0) + n
                     break
                 out[slots[k]] = crop; k += 1; n -= 1
         self.open_spent = avail - cash
@@ -959,14 +661,7 @@ class GoldCtl:
     # ------------------------------------------------------------------ planning
     def plan_day(self, obs):
         _GC_REPORT["gc_days"] += 1
-        self._plan_hour = int(obs["step"]) % 24
-        try:
-            self._rival_counts(obs)
-        except Exception:
-            self._rival_c = {}
         step = int(obs["step"]); day = step // 24
-        if getattr(self, "_first_day", None) is None:
-            self._first_day = day   # handover_fix3: the controller's first day (reset() clears it)
         self.day = day
         me = self.me
         farm = obs["farms"][me]
@@ -1007,11 +702,6 @@ class GoldCtl:
             self.footprint_n = None
             GC_P.update(self.open.get("after", {}) or {})
         if opn is not None:
-            if not hasattr(self, "_open_land_day"):
-                self._open_land_day = {}
-            for q_ in quads:
-                if q_ != "NW" and q_ not in self._open_land_day:
-                    self._open_land_day[q_] = (day, sum(1 for s in shops if s in _OPEN_BUYERS["straw"]))
             if day == opn["from_day"]:
                 self.last_hires = opn["hires0"]
                 hire_budget = sum(_gc_fib(k) for k in range(opn["hires0"] + 1))
@@ -1019,27 +709,6 @@ class GoldCtl:
             # tomorrow's hires and feed (the evening purchase covers the feed when the cash is in)
             n_an_k = sum(1 for row in tiles for t in row if isinstance(t, dict) and "animal" in t) + sum(int(shed.get(a_, 0)) for a_ in ("COW", "SHEEP", "GOOSE"))
             keep = max(opn["cash_keep"], sum(_gc_fib(k) for k in range(min(self.last_hires, 11))) + n_an_k * (self.pnow.get("WHEAT", 30) + 3) + 40)
-            if opn.get("lean"):
-                keep = float(opn["cash_keep"])
-                # the hour-0 list sells the shed's goods ahead of every purchase and hire: count them as cash
-                inv_ = obs["market"]["inventory"]
-                s0 = 0.0
-                for p_ in _GC_PRODUCTS:
-                    n_ = int(shed.get(p_, 0))
-                    if p_ == "WHEAT":
-                        n_ -= n_an_k + 2
-                    if n_ > 0:
-                        # the lot's average price (each unit sold lowers the quote)
-                        s0 += sum(float(_gc_price(p_, int(inv_[p_]) + k_)) for k_ in range(min(n_, 40)))
-                money = money + 0.97 * s0
-                self._open_s0 = s0
-                _GC_REPORT["gc_open_s0"] = _GC_REPORT.get("gc_open_s0", 0) + int(s0)
-            md_e = opn.get("melon_day")
-            if md_e and md_e.get("keep_eve"):
-                ripe_tom = sum(6 for row in tiles for t_ in row if isinstance(t_, dict) and t_.get("crop") == "MELON" and day + 1 - int(t_["planted_day"]) >= 10)
-                if ripe_tom >= int(md_e.get("min_units", 20)):
-                    keep = max(keep, float(md_e["keep_eve"]))
-                    _GC_REPORT["gc_melon_eve"] = day
             self._open_keep = keep
 
         # ---- land (the chassis schedule: NE early, SW around day 11)
@@ -1049,9 +718,6 @@ class GoldCtl:
                 d_ = opn["land"].get(q_)
                 if q_ not in quads and not new_quads and d_ is not None and day >= int(d_) and money - spend - hire_budget - keep >= price_:
                     orders0.append(["BUY_LAND"]); spend += price_; new_quads.append(q_)
-                    if not hasattr(self, "_open_land_day"):
-                        self._open_land_day = {}
-                    self._open_land_day[q_] = (day, sum(1 for s in shops if s in _OPEN_BUYERS["straw"]))
                     _GC_REPORT["gc_open_land"] = _GC_REPORT.get("gc_open_land", "") + "%s%d " % (q_, day)
                     break
         elif not final and day <= 16:
@@ -1117,33 +783,6 @@ class GoldCtl:
 
         visits = []
         replant = []
-        self._eh_set = set()
-        ehl = GC_P.get("eh_level")
-        if ehl and not final and day <= int(ehl.get("last_day", 26)):
-            try:
-                due_t = 0; due_n = 0; cand_w = []
-                mu = int(ehl.get("min_units", 5))
-                for pos_, t_ in plants:
-                    c_ = t_["crop"]
-                    if c_ not in ("WHEAT", "CARROT"):
-                        continue
-                    my_ = _GC_CROPS[c_]["my"]; a_ = day - int(t_["planted_day"])
-                    if a_ >= my_:
-                        due_t += 1
-                    elif a_ == my_ - 1:
-                        due_n += 1
-                        if c_ == "WHEAT":
-                            fa_ = int(t_.get("fertilized_until_day", -1)) >= day
-                            yu_ = int(t_["yield_units"]) + (2 if fa_ else 1)
-                            if yu_ >= mu and not t_.get("watered_today"):
-                                cand_w.append(pos_)
-                ex = due_n - due_t - int(ehl.get("margin", 2))
-                if ex > 0 and cand_w:
-                    k = min(len(cand_w), int(ex * float(ehl.get("frac", 0.5)) + 0.5))
-                    self._eh_set = set(sorted(cand_w, key=lambda q: _gc_dist(q, (4.5, 4.5)))[:k])
-                    _GC_REPORT["gc_eh_level"] = _GC_REPORT.get("gc_eh_level", 0) + len(self._eh_set)
-            except Exception as e:
-                _GC_REPORT["gc_eh_level_err"] = repr(e)[:120]
         for pos, t in plants:
             v = self._plant_visit(pos, t, day, val, final)
             if v is not None:
@@ -1186,7 +825,12 @@ class GoldCtl:
                 have[t["animal"]] = have.get(t["animal"], 0) + 1
             for an in ("COW", "SHEEP", "GOOSE"):
                 have[an] = have.get(an, 0) + shed.get(an, 0)
-            targets = _open_targets(opn, day, shops, getattr(self, "_rival_c", None))
+            targets = []
+            for an, tab in opn["anim"].items():
+                t_ = _open_target({int(k): v for k, v in tab.items()}, day)
+                if an == "SHEEP" and day >= 6 and "YARN_STORE" in shops:
+                    t_ = max(t_, opn["sheep_yarn"])
+                targets.append((an, t_))
             # cows, sheep, geese: the order of their first batches' value
             land_res = 0.0
             if not new_quads:
@@ -1198,55 +842,35 @@ class GoldCtl:
                 n_ = max(0, t_ - have.get(an, 0))
                 cost_ = _GC_ANIM[an]["cost"]
                 straw_due = max(0, self._open_straw_target(day, shops) - counts.get("STRAWBERRY", 0)) * 100
-                if opn.get("melon_first") and 0 < day <= opn["melon_last"]:
-                    # the melon seeds due today come before the day's animals (first-seller melon market)
-                    straw_due = 0
-                    melon_res = max(0, opn["melon"] - counts.get("MELON", 0) - int(seeds.get("MELON", 0))) * 80
-                else:
-                    melon_res = 0
                 n_an0 = len(animals) + sum(herd_new.values()) + sum(int(shed.get(a_, 0)) for a_ in ("COW", "SHEEP", "GOOSE"))
                 feed0 = max(0, n_an0 - int(shed.get("WHEAT", 0))) * (self.pnow.get("WHEAT", 30) + 3)
-                budget_ = money - spend - hire_budget - keep - feed0 - land_res - melon_res - (0 if ((opn["anim_before_straw"] and day <= int(opn.get("abs_last", 5))) or (opn["anim_first_day"] and day == 0)) else straw_due)
+                budget_ = money - spend - hire_budget - keep - feed0 - land_res - (0 if (opn["anim_before_straw"] or (opn["anim_first_day"] and day == 0)) else straw_due)
                 k_ = min(n_, int(budget_ // cost_)) if cost_ > 0 else 0
-                _nb = sum(herd_new.values())
-                _nh = len(animals) + sum(int(shed.get(a_, 0)) for a_ in ("COW", "SHEEP", "GOOSE")) + _nb
-                if day != opn["from_day"]:
-                    k_ = max(0, min(k_, int(opn.get("anim_day_max", 99)) - _nb, _open_herd_cap(opn, shops) - _nh))
-                if k_ <= 0 and n_ > 0 and opn.get("anim_strict") and budget_ < cost_:
-                    break   # strict order: the morning cash is saved for this kind
                 if k_ > 0 and len(orders0) < 7:
                     orders0.append(["BUY_ANIMAL", an, k_]); spend += k_ * cost_
-                    if getattr(self, "_open_bought_day", None) != day:
-                        self._open_bought_day = day; self._open_bought_n = 0
-                    self._open_bought_n += k_
                     herd_new[an] = herd_new.get(an, 0) + k_
                     _GC_REPORT["gc_open_anim"] = _GC_REPORT.get("gc_open_anim", "") + "d%d:%s%d " % (day, an[0], k_)
         # ---- animals waiting in the shed
         free_struct = {"COOP": [p for p, k in structs if k == "COOP"], "PASTURE": [p for p, k in structs if k == "PASTURE"]}
         taken = set()
-        self._unplaced_n = 0
-        _po = tuple((opn.get("anim_place_order") if opn is not None else None) or ("COW", "SHEEP", "GOOSE"))
-        for an in _po:
+        for an in ("COW", "SHEEP", "GOOSE"):
             for _ in range(shed.get(an, 0) + herd_new.get(an, 0)):
                 st = _GC_ANIM[an]["st"]
                 if free_struct[st]:
                     pos = free_struct[st].pop(0)
-                    fc = [["FEED"], ["CARE"]] if (opn is not None and opn["feed_place"] and day <= 28
-                                                   and (day != opn["from_day"] or opn.get("feed0_kinds") is None or an in opn["feed0_kinds"])) else []
+                    fc = [["FEED"], ["CARE"]] if (opn is not None and opn["feed_place"] and day <= 28) else []
                     visits.append(_GcVisit(pos, [["PLACE", an]] + fc, value=300.0, must=True, anim=an, tag="L", wheat=1 if fc else 0))
                 else:
                     cand = [p for p in empties if p not in taken]
                     if not cand:
-                        self._unplaced_n += 1
-                        continue
+                        break
                     pos = min(cand, key=lambda p: _gc_dist(p, (4.5, 4.5)))
                     taken.add(pos)
-                    fc = [["FEED"], ["CARE"]] if (opn is not None and opn["feed_place"] and day <= 28
-                                                   and (day != opn["from_day"] or opn.get("feed0_kinds") is None or an in opn["feed0_kinds"])) else []
+                    fc = [["FEED"], ["CARE"]] if (opn is not None and opn["feed_place"] and day <= 28) else []
                     visits.append(_GcVisit(pos, [["BUILD_" + st], ["PLACE", an]] + fc, value=300.0, must=True, anim=an, tag="L", wheat=1 if fc else 0))
 
         # ---- empty coops/pastures no animal will use: dig and plant them like weeds
-        if GC_P["dig_structs"] and not final and not (opn is not None and opn.get("anim_tiles")):
+        if GC_P["dig_structs"] and not final:
             for st in ("COOP", "PASTURE"):
                 for pos in free_struct[st]:
                     weeds.append(pos)
@@ -1254,30 +878,10 @@ class GoldCtl:
         need_seeds = {}
         if not final:
             free = [p for p in empties if p not in taken] + list(weeds)
-            anim_due = 0
-            if opn is not None and opn.get("anim_tiles"):
-                # animals still due today (bought mid-day as the cash comes in): their tiles stay free, nearest the shed
-                have_ = {}
-                for _p, t in animals:
-                    have_[t["animal"]] = have_.get(t["animal"], 0) + 1
-                for an_, t_ in _open_targets(opn, day, shops):
-                    anim_due += max(0, t_ - have_.get(an_, 0) - int(shed.get(an_, 0)) - herd_new.get(an_, 0))
-                anim_due -= len(free_struct["COOP"]) + len(free_struct["PASTURE"])
-                anim_due = max(0, min(anim_due, int(opn.get("anim_tiles_max", 4))))
-                if anim_due:
-                    resv = sorted([p for p in free if p not in weeds], key=lambda q: _gc_dist(q, (4.5, 4.5)))[:anim_due]
-                    free = [p for p in free if p not in resv]
-                    anim_due -= len(resv)
-                    _GC_REPORT["gc_open_resv"] = _GC_REPORT.get("gc_open_resv", 0) + len(resv)
             if opn is not None:
                 # early wheat harvest: free the tiles the due strawberries need (oldest wheat first, age >= 2)
                 eh0, eh1 = opn["early_harvest"]
                 due = max(0, self._open_straw_target(day, shops) - counts.get("STRAWBERRY", 0))
-                if opn.get("eh_all"):
-                    if day <= opn["melon_last"]:
-                        due += max(0, opn["melon"] - counts.get("MELON", 0))
-                    due += int(getattr(self, "_unplaced_n", 0))   # animals with no tile today (placed tomorrow)
-                    due += anim_due   # animals due today with no free tile yet
                 short = due - len(free) - sum(1 for v in replant)
                 if eh0 <= day <= eh1 and short > 0:
                     cand = []
@@ -1313,8 +917,6 @@ class GoldCtl:
                     _GC_REPORT["gc_footprint_cut"] = _GC_REPORT.get("gc_footprint_cut", 0) + 1
             if opn is not None:
                 n_an = len(animals) + sum(herd_new.values()) + sum(int(shed.get(an, 0)) for an in ("COW", "SHEEP", "GOOSE"))
-                if day == opn["from_day"] and opn.get("feed0_kinds") is not None:
-                    n_an = sum(v_.wheat for v_ in visits)
                 feed_est = max(0, n_an - int(shed.get("WHEAT", 0))) * (self.pnow.get("WHEAT", 30) + 3)
                 crop_for = self._open_crops(obs, day, free, [v.pos for v in replant], shops, counts, money - spend - hire_budget - keep - feed_est, seeds)
                 # anything scheduled and still unfunded makes today's sales urgent (no market holds)
@@ -1322,31 +924,14 @@ class GoldCtl:
                 straw_left = max(0, self._open_straw_target(day, shops) - counts.get("STRAWBERRY", 0) - n_s_planned)
                 land_left = any(q_ not in quads and q_ not in new_quads and opn["land"].get(q_) is not None and day >= int(opn["land"][q_]) for q_ in ("NE", "SW", "SE"))
                 anim_left = False
-                for an, t_ in _open_targets(opn, day, shops):
+                for an, tab in opn["anim"].items():
+                    t_ = _open_target({int(k): v for k, v in tab.items()}, day)
                     have_ = sum(1 for _p, t in animals if t["animal"] == an) + int(shed.get(an, 0)) + herd_new.get(an, 0)
                     if t_ > have_:
                         anim_left = True
                 self._open_urgent = bool(land_left or straw_left > 0 or anim_left)
                 if self._open_urgent:
                     _GC_REPORT["gc_open_urgent_days"] = _GC_REPORT.get("gc_open_urgent_days", 0) + 1
-                try:
-                    # E1: the cash the unfunded schedule still needs beyond what is left after today's commitments
-                    left_ = (money - spend - hire_budget - keep - feed_est) - float(getattr(self, "open_spent", 0.0) or 0.0)
-                    n_planned_ = sum(1 for c in crop_for.values())
-                    c_unf = 100.0 * min(straw_left, max(0, len(free) - n_planned_))
-                    if land_left:
-                        n_ext_ = max(0, len(quads) - 1 + len(new_quads))
-                        if n_ext_ < 3:
-                            c_unf += (1000.0, 2000.0, 4000.0)[n_ext_]
-                    n_miss_ = 0
-                    for an, t_ in _open_targets(opn, day, shops):
-                        have_ = sum(1 for _p, t in animals if t["animal"] == an) + int(shed.get(an, 0)) + herd_new.get(an, 0)
-                        k_ = max(0, min(t_ - have_, int(opn.get("anim_day_max", 99)) - n_miss_))
-                        n_miss_ += k_; c_unf += k_ * _GC_ANIM[an]["cost"]
-                    self._open_need = max(0.0, c_unf - left_)
-                except Exception as e:
-                    self._open_need = None
-                    _GC_REPORT["gc_e1_need_err"] = repr(e)[:120]
             else:
                 crop_for = self._choose_crops(obs, day, free, [v.pos for v in replant], shops, val, counts)
             for pos in free:
@@ -1358,15 +943,12 @@ class GoldCtl:
                 if GC_P["late_units"] and day >= GC_P["late_day"] and crop in GC_P["late_units"]:
                     # a late plot only grows what the last day allows (a day-27 carrot: 2 units at age 2)
                     pv_ = GC_P["late_units"][crop] * val[crop] - _GC_CROPS[crop]["seed"] - GC_P["late_labor"]
-                visits.append(_GcVisit(pos, acts, value=self._pdefer(day) * pv_, tag="P",
+                visits.append(_GcVisit(pos, acts, value=GC_P["plant_defer"] * pv_, tag="P",
                                        must=GC_P["plant_must"] and day <= GC_P["plant_must_last"]))
                 need_seeds[crop] = need_seeds.get(crop, 0) + 1
-            keep_empty = set()
-            if opn is not None and anim_due > 0:
-                keep_empty = set(v.pos for v in sorted(replant, key=lambda v: _gc_dist(v.pos, (4.5, 4.5)))[:anim_due])
             for v in replant:
                 crop = crop_for.get(v.pos)
-                if not crop or v.pos in keep_empty:
+                if not crop:
                     continue
                 if opn is not None and GC_P["deliver_prem"] and self._prem_value(v) >= float(GC_P["deliver_prem"]):
                     continue   # delivery day: the tile is planted tomorrow, the hands carry the goods home now
@@ -1374,7 +956,7 @@ class GoldCtl:
                 pv_ = self._crop_value(crop, val)
                 if GC_P["late_units"] and day >= GC_P["late_day"] and crop in GC_P["late_units"]:
                     pv_ = GC_P["late_units"][crop] * val[crop] - _GC_CROPS[crop]["seed"] - GC_P["late_labor"]
-                v.value += self._pdefer(day) * pv_
+                v.value += GC_P["plant_defer"] * pv_
                 need_seeds[crop] = need_seeds.get(crop, 0) + 1
             for crop, n in need_seeds.items():
                 buy = n - seeds.get(crop, 0)
@@ -1420,15 +1002,9 @@ class GoldCtl:
         # ---- hour-0 sales: free shed room before the input purchases land (a full shed rejects them)
         buys0 = [o for o in orders0 if o[0] in ("BUY_PRODUCT", "BUY_ANIMAL")]
         res_w = int(GC_P["feed_reserve"] * len(animals)) + 2
-        keep0 = {"WHEAT": res_w, "FERTILIZER": GC_P["fert_keep"]}
         sell0 = []
         for p in sorted(_GC_PRODUCTS, key=lambda p: -(shed.get(p, 0) * val.get(p, 0))):
             n = int(shed.get(p, 0)) - (res_w if p == "WHEAT" else (GC_P["fert_keep"] if p == "FERTILIZER" else 0))
-            if GC_P.get("market_fix1") and p in ("WHEAT", "FERTILIZER"):
-                need_ = int(wheat_need) if p == "WHEAT" else int(self._fert_need_day)
-                if n > 0 and int(shed.get(p, 0)) - need_ < n:
-                    _GC_REPORT["gc_mfix1"] = _GC_REPORT.get("gc_mfix1", 0) + 1
-                    n = int(shed.get(p, 0)) - need_
             if n > 0:
                 sell0.append(["SELL", p, n])
         need_room = sum(int(v) for v in shed.values()) + sum(int(o[2]) for o in buys0) - 95
@@ -1440,7 +1016,7 @@ class GoldCtl:
                 timed = set(GC_P["timed"]) if GC_P["sell_timing"] else set()
                 cands = []
                 for p in _GC_PRODUCTS:
-                    n = int(shed.get(p, 0)) - keep0.get(p, 0)
+                    n = int(shed.get(p, 0)) - (res_w if p == "WHEAT" else (GC_P["fert_keep"] if p == "FERTILIZER" else 0))
                     if n > 0:
                         cands.append(((1 if p in timed else 0), -val.get(p, 0) / float(_GC_MKT[p][0]), p, n))
                 take = need_room
@@ -1458,38 +1034,9 @@ class GoldCtl:
             elif not final and day >= GC_P["late_sell0_day"] and GC_P["late_sell0"] > 0:
                 sell0 = sell0[:max(GC_P["late_sell0"], 1 if need_room > 0 else 0)]
             else:
-                sell0_all = list(sell0)
                 sell0 = sell0[:max(GC_P["max_sell0"], 1 if need_room > 0 else 0)]
-                if GC_P.get("market_fix2") and need_room > 0 and buys0 and sum(int(o[2]) for o in sell0) < need_room - 5:
-                    # the purchases would really not fit (engine: BUY_PRODUCT/BUY_ANIMAL fail at 100 units)
-                    got = sum(int(o[2]) for o in sell0)
-                    for o in sell0_all[len(sell0):]:
-                        if got >= need_room:
-                            break
-                        k = min(int(o[2]), need_room - got)
-                        sell0.append(["SELL", o[1], k]); got += k
-                        _GC_REPORT["gc_mfix2"] = _GC_REPORT.get("gc_mfix2", 0) + 1
         self.sell0 = sell0
         self.n0_hires = 10 - len(buys0) - len(sell0)
-        self._crew_n = None
-        if opn is not None and opn.get("crew"):
-            cw = opn["crew"]
-            n_tiles = len(plants) + sum(1 for v in visits if any(a[0] == "PLANT" for a in v.acts) and v.tag == "P")
-            n_pl = sum(1 for v in visits for a in v.acts if a[0] in ("PLANT", "BUILD_COOP", "BUILD_PASTURE"))
-            n_sh = sum(int(shed.get(a_, 0)) for a_ in ("COW", "SHEEP", "GOOSE")) + sum(herd_new.values())
-            cn = cw.get("a", 3.3) + cw.get("tiles", 0.045) * len(plants) + cw.get("anim", 0.18) * len(animals) + \
-                cw.get("shed", 0.38) * n_sh + cw.get("plant", 0.13) * n_pl
-            cn = int(max(cw.get("lo", 4), min(cw.get("hi", 12), round(cn))))
-            self._crew_n = max(0, cn - int(cw.get("below", 0)))   # the elite fit counts hires (hands)
-            if day == opn["from_day"]:
-                self._crew_n = int(opn["hires0"])
-            md_ = opn.get("melon_day")
-            if md_ and md_.get("hands") and not final:
-                ripe_ = sum(int(t_.get("yield_units", 0)) for _p_, t_ in plants if t_["crop"] == "MELON" and day - int(t_["planted_day"]) >= 10)
-                if ripe_ >= int(md_.get("min_units", 20)):
-                    self._crew_n = int(md_["hands"])
-                    _GC_REPORT["gc_melon_crew"] = _GC_REPORT.get("gc_melon_crew", 0) + 1
-            _GC_REPORT["gc_open_crew"] = _GC_REPORT.get("gc_open_crew", "") + "%d:%d " % (day, cn)
         import time as _t
         t0 = _t.perf_counter()
         routes, hires, spawns = self._route_and_hire(visits, money - spend, final, day)
@@ -1497,7 +1044,6 @@ class GoldCtl:
         self.hires_planned = hires
         self.last_hires = hires
         _GC_REPORT["gc_hires"] += hires
-        self._h0_pending = int(obs["hour"]) != 0
         self.orders0 = list(self.sell0) + [o for o in orders0 if o[0] in ("BUY_PRODUCT", "BUY_ANIMAL")]
         self.orders1 = [o for o in orders0 if o[0] not in ("BUY_PRODUCT", "BUY_ANIMAL")]
         if opn is not None and len(self.orders0) + len(self.orders1) + hires <= 10:
@@ -1505,35 +1051,6 @@ class GoldCtl:
         self.routes = routes
         self.spawns = spawns
         self.day = day
-        self._melon_drop = {}
-        self._melon_head = {}
-        md = self.open.get("melon_day") if (opn is not None and self.open is not None) else None
-        self._melon_md = md
-        if False:
-            try:
-                def _is_melon_h(v):
-                    t_ = tiles[v.pos[1]][v.pos[0]]
-                    return (isinstance(t_, dict) and t_.get("crop") == "MELON" and v.carry > 0 and any(a[0] == "HARVEST" for a in v.acts))
-                ripe = sum(v.carry for r in routes for v in r if _is_melon_h(v))
-                if ripe >= int(md.get("min_units", 20)):
-                    self._melon_day_on = day   # the day's melons (and tomorrow's leftovers) sell at once: the dump race
-                    for u, r in enumerate(routes):
-                        mel = [v for v in r if _is_melon_h(v)]
-                        if not mel:
-                            continue
-                        rest = [v for v in r if not _is_melon_h(v)]
-                        head = self._order(spawns[u], mel)
-                        new_r = head + rest
-                        cap = self._cap(u) + int(md.get("slack", 4))
-                        if self._rcost(spawns[u], new_r) <= cap:
-                            routes[u] = new_r
-                            self._melon_drop[u] = list(head)
-                            _GC_REPORT["gc_melon_day"] = _GC_REPORT.get("gc_melon_day", 0) + 1
-                    self.routes = routes
-            except Exception as e:
-                _GC_REPORT["gc_melon_day_err"] = repr(e)[:120]
-        if GC_P.get("dbg_days") and day in GC_P["dbg_days"]:
-            _GC_REPORT["gc_dbg_d%d" % day] = " | ".join("u%d:%s" % (u, ",".join("%s%d%d%s%s" % (v.tag, v.pos[0], v.pos[1], "".join(a[0][0] for a in v.acts), ("$%d" % self._prem_value(v)) if self._prem_value(v) else "") for v in r)) for u, r in enumerate(routes))
         # shed stops: only as many as needed so the end-of-day drop fits in the shed
         if GC_P["stop_v2"]:
             self.drop_at = {}
@@ -1549,31 +1066,6 @@ class GoldCtl:
         else:
             self.drop_at, _ovf, _pv = self._plan_drops(routes, spawns)
         _GC_REPORT["gc_ovf_plan"] = _GC_REPORT.get("gc_ovf_plan", 0) + int(_ovf)
-        ehs = GC_P.get("eh_slack")
-        if ehs and not final and int(ehs.get("first_day", 16)) <= day <= int(ehs.get("last_day", 25)):
-            try:
-                self._eh_slack(ehs, routes, spawns, tiles, seeds, money - spend, day, hires, val)
-            except Exception as e:
-                _GC_REPORT["gc_ehs_err"] = repr(e)[:120]
-        d27 = GC_P.get("d27_wheat")
-        if d27 and not final and day in [int(x) for x in d27.get("days", [27])]:
-            try:
-                if d27.get("plan", True):
-                    self._d27_wheat(d27, routes, spawns, tiles, seeds, shed, money - spend, day, hires)
-                stock = int(d27.get("stock", 0))
-                late = max(0, int(hires) - int(getattr(self, "n0_hires", 10)))
-                if stock > 0 and money - spend - 10 * stock >= 100 and len(self.orders1) + late + 1 <= 8:
-                    # seeds for idle hands (execution-time plots, see _d27_dispatch)
-                    self.orders1 = list(self.orders1) + [["BUY_SEED", "WHEAT", stock]]
-                    _GC_REPORT["gc_d27_stock"] = _GC_REPORT.get("gc_d27_stock", 0) + stock
-            except Exception as e:
-                _GC_REPORT["gc_d27_err"] = repr(e)[:120]
-        for u, head in (getattr(self, "_melon_drop", {}) or {}).items():
-            if u < len(routes) and routes[u]:
-                idx = [i for i, v in enumerate(routes[u]) if any(v is h for h in head)]
-                if idx and not any(v.tag == "S" for v in routes[u][:idx[-1] + 1]):
-                    self.drop_at[u] = idx[-1]
-                    _GC_REPORT["gc_melon_drop"] = _GC_REPORT.get("gc_melon_drop", 0) + 1
         if opn is not None and money - spend < opn["cash_low"] and not final:
             for u, r in enumerate(routes):
                 if u in self.drop_at or not r or any(v.tag == "S" for v in r):
@@ -1614,84 +1106,10 @@ class GoldCtl:
                     _GC_REPORT["gc_prem_drops"] = _GC_REPORT.get("gc_prem_drops", 0) + 1
         if GC_P.get("shed_perm") and not final:
             self._shed_perm(routes, spawns)
-        md = getattr(self, "_melon_md", None)
-        if md and not final:
-            # melon day: the ripe melons go first in every route and are dropped at the shed right after (the dump race);
-            # runs on the final routes (after the stop planning, which reorders visits)
-            try:
-                def _is_melon_h(v):
-                    t_ = tiles[v.pos[1]][v.pos[0]]
-                    return (isinstance(t_, dict) and t_.get("crop") == "MELON" and v.carry > 0 and any(a[0] == "HARVEST" for a in v.acts))
-                if md.get("harvest_all", True):
-                    # every ripe melon (age >= 10) is harvested today, whatever its units: tomorrow's price is the crashed one
-                    for r in routes:
-                        for v in r:
-                            t_ = tiles[v.pos[1]][v.pos[0]]
-                            if (isinstance(t_, dict) and t_.get("crop") == "MELON" and day - int(t_["planted_day"]) >= 10
-                                    and not any(a[0] in ("HARVEST", "DIG") for a in v.acts)):
-                                yu_ = int(t_.get("yield_units", 0)); w_ = 1 if (any(a[0] == "WATER" for a in v.acts) and yu_ < 6) else 0
-                                v.acts = ([["WATER"]] if w_ else []) + [["HARVEST"]]
-                                v.carry = yu_ + w_; v.must = True
-                                _GC_REPORT["gc_melon_hall"] = _GC_REPORT.get("gc_melon_hall", 0) + 1
-                ripe = sum(v.carry for r in routes for v in r if _is_melon_h(v))
-                pm_ = float(md.get("prem_min", 0.0) or 0.0)
-                def _is_prem_h(v):
-                    return v.tag == "A" and any(a[0] == "HARVEST" for a in v.acts) and self._prem_value(v) >= 150.0
-                prem_tot = sum(self._prem_value(v) for r in routes for v in r if _is_prem_h(v)) if pm_ > 0 else 0.0
-                head_ok = (lambda v: _is_melon_h(v) or (pm_ > 0 and prem_tot >= pm_ and _is_prem_h(v)))
-                if ripe >= int(md.get("min_units", 20)) or (pm_ > 0 and prem_tot >= pm_):
-                    if ripe >= int(md.get("min_units", 20)):
-                        self._melon_day_on = day
-                    else:
-                        _GC_REPORT["gc_prem_day"] = _GC_REPORT.get("gc_prem_day", 0) + 1
-                    mel_all = [v for r in routes for v in r if head_ok(v)]
-                    base = [[v for v in r if not head_ok(v)] for r in routes]
-                    heads = [[] for _ in routes]
-                    slack = int(md.get("slack", 4))
-                    left = []
-                    # one ripe melon per hand first (the nearest tiles to the shed first), then second rounds where the cap allows
-                    for v in sorted(mel_all, key=lambda v: _gc_dist(v.pos, (4.5, 4.5))):
-                        # one melon trip per unit before any unit takes a second: the trip outranks the unit's other work
-                        # (its tail beyond the cap goes unserved); ties by the trip cost from the unit's spawn
-                        best = None
-                        for u in range(len(routes)):
-                            trip = sum(2 * _gc_dist(spawns[u], h_.pos) + len(h_.acts) + 1 for h_ in heads[u] + [v])
-                            over = max(0, self._rcost(spawns[u], base[u]) + trip - self._cap(u) - slack) if md.get("cap_aware", False) else 0
-                            key = (len(heads[u]), over, trip)
-                            if best is None or key < best[0]:
-                                best = (key, u)
-                        heads[best[1]].append(v)
-                    self._melon_head = {}
-                    for u in range(len(routes)):
-                        if heads[u]:
-                            head = self._order(spawns[u], heads[u])
-                            for v in head:
-                                t_ = tiles[v.pos[1]][v.pos[0]]
-                                if isinstance(t_, dict) and t_.get("crop") == "MELON" and int(t_.get("yield_units", 0)) >= 6 and any(a[0] == "WATER" for a in v.acts):
-                                    v.acts = [a for a in v.acts if a[0] != "WATER"]   # already full: no water before the harvest
-                            routes[u] = head + base[u]
-                            self._melon_head[u] = len(head)
-                            _GC_REPORT["gc_melon_day"] = _GC_REPORT.get("gc_melon_day", 0) + 1
-                        else:
-                            routes[u] = base[u]
-                    for v in left:
-                        # no room anywhere: one more trip for the unit with the fewest melon trips (then the most slack);
-                        # its tail beyond the cap goes unserved rather than the melons
-                        u = min(range(len(routes)), key=lambda u: (int(self._melon_head.get(u, 0)), self._rcost(spawns[u], routes[u]) - self._cap(u)))
-                        nh_ = int(self._melon_head.get(u, 0))
-                        head = self._order(spawns[u], routes[u][:nh_] + [v])
-                        routes[u] = head + routes[u][nh_:]
-                        self._melon_head[u] = len(head)
-                        _GC_REPORT["gc_melon_left"] = _GC_REPORT.get("gc_melon_left", 0) + 1
-                    self.routes = routes
-            except Exception as e:
-                _GC_REPORT["gc_melon_day_err"] = repr(e)[:120]
         if final and not GC_P["stop_v2"]:
             for u, r in enumerate(routes):
                 if r:
                     self.drop_at[u] = len(r) - 1
-        if GC_P.get("dbg_days") and day in GC_P["dbg_days"]:
-            _GC_REPORT["gc_dbg2_d%d" % day] = "drop_at=%s | " % (dict(self.drop_at),) + " | ".join("u%d:%s" % (u, ",".join("%s%d%d%s%s" % (v.tag, v.pos[0], v.pos[1], "".join(a[0][0] for a in v.acts), ("$%d" % self._prem_value(v)) if self._prem_value(v) else "") for v in r)) for u, r in enumerate(routes))
         # tomorrow's fertilizations: ongoing crops on a production eve without cover, one-time crops entering the window
         fert_tom = 0
         for pos, t in plants:
@@ -1717,9 +1135,6 @@ class GoldCtl:
                     k1 = age1 + 1 - cd["fy"]
                     if k1 >= 0 and k1 % cd["iv"] == 0 and (k1 // cd["iv"] + 1) <= cd["mx"] and fu < day + 1:
                         fert_on += 1
-                elif t["crop"] == "MELON" and opn.get("melon_fert") and opn.get("melon_fert_jit") and age1 in opn["melon_fert"] and fu < day + 1                         and int(t.get("yield_units", 0)) < cd["mx"]:
-                    fert_on += 1
-                    _GC_REPORT["gc_melon_jit_res"] = _GC_REPORT.get("gc_melon_jit_res", 0) + 1
             self.reserve["FERTILIZER"] = fert_on
 
     # ------------------------------------------------------------------ opening: mid-day purchases and re-routing
@@ -1727,13 +1142,8 @@ class GoldCtl:
         """A scheduled purchase (land, strawberry seeds, animals) that the morning could not afford but the day's sales
         can: buy it now, add its visits and re-route the unfinished work (with extra hands if they pay)."""
         opn = self.open
-        self._plan_hour = int(hour)
         step = int(obs["step"]); day = step // 24
         me = self.me; farm = obs["farms"][me]; priv = obs["private"]
-        try:
-            self._rival_counts(obs)
-        except Exception:
-            pass
         money = float(farm["money"])
         shed = {k: int(v) for k, v in dict(priv["shed"]).items()}
         seeds = {k: int(v) for k, v in dict(priv["seeds"]).items()}
@@ -1744,11 +1154,8 @@ class GoldCtl:
         orders = []
         # ---- what is planned already (queued visits)
         claimed = set(); planned_crop = {}; pending_place = {}
-        _af = bool(opn.get("access_free"))
         for u, q in self.queues.items():
             for tgt, a, v in (q or []):
-                if _af and a[0] in ("DROP", "PICKUP", "PASS"):
-                    continue   # a shed stop does not occupy its access tile: a structure may still be built there
                 claimed.add(tuple(tgt))
                 if a[0] == "PLANT": planned_crop[a[1]] = planned_crop.get(a[1], 0) + 1
                 if a[0] == "PLACE" and len(a) > 1 and a[1] in _GC_ANIM: pending_place[a[1]] = pending_place.get(a[1], 0) + 1
@@ -1766,128 +1173,51 @@ class GoldCtl:
             counts[c] = counts.get(c, 0) + n
         # ---- land (a due purchase the cash cannot cover yet holds the cash: nothing below it is bought)
         new_q = None
-        if not hasattr(self, "_open_land_day"):
-            self._open_land_day = {}
-        for q_ in quads:
-            if q_ != "NW" and q_ not in self._open_land_day:
-                self._open_land_day[q_] = (day, sum(1 for s in shops if s in _OPEN_BUYERS["straw"]))
-        if getattr(self, "_open_bought_day", None) != day:
-            self._open_bought_day = day; self._open_bought_n = 0
         for q_, price_ in (("NE", 1000), ("SW", 2000), ("SE", 4000)):
             d_ = opn["land"].get(q_)
             if q_ not in quads and d_ is not None and day >= int(d_):
                 if cash >= price_:
                     orders.append(["BUY_LAND"]); cash -= price_; new_q = q_
-                    self._open_land_day[q_] = (day, sum(1 for s in shops if s in _OPEN_BUYERS["straw"]))
                     for y in range(10):
                         for x in range(10):
                             if tiles[y][x] == "LOCKED" and _gc_quad(x, y) == q_:
                                 free.append((x, y))
                     _GC_REPORT["gc_open_land"] = _GC_REPORT.get("gc_open_land", "") + "%s%d@%d " % (q_, day, hour)
-                elif opn.get("land_hold", True):
-                    self._open_need = max(0.0, price_ - cash)
+                else:
                     return []
                 break
         # ---- strawberries (targets) reserved first, then animals (targets) with what the cash allows
         visits = []
-        if opn.get("rescue_feed") and hour <= 19:
-            # an animal unfed yesterday and not fed yet today escapes tonight: queue a FEED (buy the wheat if short)
-            fq = set()
-            for u_, q_ in self.queues.items():
-                for tgt, a, v in (q_ or []):
-                    if a[0] == "FEED":
-                        fq.add(tuple(tgt))
-            hungry = []
-            for y in range(10):
-                for x in range(10):
-                    t = tiles[y][x]
-                    if isinstance(t, dict) and "animal" in t and not t.get("fed_today") and int(t.get("consecutive_unfed", 0)) >= 1 and (x, y) not in fq:
-                        hungry.append((x, y))
-            if hungry:
-                carried = sum(int(dict(i).get("WHEAT", 0)) for i in priv["inventories"])
-                short_w = max(0, len(hungry) - int(shed.get("WHEAT", 0)))
-                if short_w > 0:
-                    px_ = _gc_price("WHEAT", obs["market"]["inventory"]["WHEAT"] - short_w)
-                    k_ = min(short_w, int(max(0.0, money - 5.0) // max(1, px_)))
-                    if k_ > 0:
-                        orders.append(["BUY_PRODUCT", "WHEAT", k_]); cash -= k_ * px_
-                for p_ in hungry:
-                    visits.append(_GcVisit(p_, [["FEED"], ["CARE"]], value=500.0, must=True, wheat=1, tag="A"))
-                _GC_REPORT["gc_open_rescue"] = _GC_REPORT.get("gc_open_rescue", 0) + len(hungry)
         n_an_tot = sum(animals_n.values()) + sum(shed.get(a_, 0) for a_ in _GC_ANIM) + sum(pending_place.values())
         feed0 = max(0, n_an_tot - shed.get("WHEAT", 0)) * (self.pnow.get("WHEAT", 30) + 3)
-        if not opn.get("lean") or opn.get("lean_feed"):
-            cash -= feed0   # tomorrow's feed stays funded (the evening purchase buys it)
+        cash -= feed0
         n_s_due = max(0, self._open_straw_target(day, shops) - counts.get("STRAWBERRY", 0))
         s_res = 100.0 * max(0, min(n_s_due, len(free)) - seeds.get("STRAWBERRY", 0))
-        if opn.get("anim_before_straw") and day <= int(opn.get("abs_last", 5)):
-            s_res = 0.0
-        w_res = 0.0
-        if new_q is not None and opn.get("land_wheat"):
-            w_res = 10.0 * min(int(opn["land_wheat"]), max(0, len(free) - n_s_due))
-            s_res += w_res
-        if opn.get("straw_gate"):
-            s_res = min(s_res, max(0.0, cash - self._straw_gate_res(obs, day)))
         s_res = min(s_res, max(0.0, cash))
         cash -= s_res
-        m_res = 0.0; n_m_due = 0
-        if opn.get("mid_melon") and opn.get("melon_first") and 0 < day <= int(opn["melon_last"]):
-            n_m_due = max(0, int(opn["melon"]) - counts.get("MELON", 0))
-            m_res = 80.0 * max(0, min(n_m_due, max(0, len(free) - n_s_due)) - seeds.get("MELON", 0))
-            m_res = min(m_res, max(0.0, cash)); cash -= m_res
-        n_t_due = 0
-        if new_q == "SW" and opn.get("tom_sw"):
-            a_, b_ = float(opn["tom_sw"][0]), float(opn["tom_sw"][1])
-            tb_ = sum(1 for s_ in shops if s_ in ("PIZZA_SHOP", "FARMERS_MARKET"))
-            n_t_due = int(min(float(opn["tom_sw"][2]) if len(opn["tom_sw"]) > 2 else 8, round(a_ + b_ * tb_)))
-            if tb_ == 0 and len(opn["tom_sw"]) > 3 and not opn["tom_sw"][3]:
-                n_t_due = 0
         herd_new = {}
-        targets = _open_targets(opn, day, shops, getattr(self, "_rival_c", None))
-        room_t = len(free) if opn.get("mid_tiles", True) else 999
-        fst = {"COOP": 0, "PASTURE": 0}
-        for y in range(10):
-            for x in range(10):
-                t = tiles[y][x]
-                if isinstance(t, dict) and t.get("kind") in ("COOP", "PASTURE") and "animal" not in t and (x, y) not in claimed:
-                    fst[t["kind"]] += 1
+        targets = []
+        for an, tab in opn["anim"].items():
+            t_ = _open_target({int(k): v for k, v in tab.items()}, day)
+            if an == "SHEEP" and day >= 6 and "YARN_STORE" in shops:
+                t_ = max(t_, opn["sheep_yarn"])
+            targets.append((an, t_))
         for an, t_ in sorted(targets, key=lambda x: opn["anim_order"].index(x[0]) if x[0] in opn["anim_order"] else 9):
             have = animals_n.get(an, 0) + shed.get(an, 0) + pending_place.get(an, 0)
             k_ = min(max(0, t_ - have), int(cash // _GC_ANIM[an]["cost"]))
-            if opn.get("mid_tiles", True):
-                k_ = min(k_, room_t + fst[_GC_ANIM[an]["st"]])
-            _nh = sum(animals_n.values()) + sum(shed.get(a_, 0) for a_ in _GC_ANIM) + sum(pending_place.values()) + sum(herd_new.values())
-            k_ = max(0, min(k_, int(opn.get("anim_day_max", 99)) - self._open_bought_n, _open_herd_cap(opn, shops) - _nh))
-            if k_ <= 0 and max(0, t_ - have) > 0 and opn.get("anim_strict") and cash < _GC_ANIM[an]["cost"]:
-                _GC_REPORT["gc_open_strict"] = _GC_REPORT.get("gc_open_strict", 0) + 1
-                break   # the cash is saved for this kind; the cheaper kinds wait
             if k_ > 0:
                 orders.append(["BUY_ANIMAL", an, k_]); cash -= k_ * _GC_ANIM[an]["cost"]; herd_new[an] = k_
-                self._open_bought_n += k_
-                st_ = _GC_ANIM[an]["st"]
-                use_ = min(k_, fst[st_]); fst[st_] -= use_; room_t -= (k_ - use_)
                 _GC_REPORT["gc_open_anim"] = _GC_REPORT.get("gc_open_anim", "") + "d%d@%d:%s%d " % (day, hour, an[0], k_)
         taken = set()
-        est = {"COOP": [], "PASTURE": []}
-        for y in range(10):
-            for x in range(10):
-                t = tiles[y][x]
-                if isinstance(t, dict) and t.get("kind") in ("COOP", "PASTURE") and "animal" not in t and (x, y) not in claimed:
-                    est[t["kind"]].append((x, y))
         for an, k_ in herd_new.items():
             st = _GC_ANIM[an]["st"]
             for _ in range(k_):
-                fc = [["FEED"], ["CARE"]] if opn["feed_place"] else []
-                if est[st]:
-                    pos = min(est[st], key=lambda p: _gc_dist(p, (4.5, 4.5)))
-                    est[st].remove(pos)
-                    visits.append(_GcVisit(pos, [["PLACE", an]] + fc, value=300.0, must=True, anim=an, tag="L", wheat=1 if fc else 0))
-                    continue
                 cand = [p for p in free if p not in taken]
                 if not cand:
                     break
                 pos = min(cand, key=lambda p: _gc_dist(p, (4.5, 4.5)))
                 taken.add(pos)
+                fc = [["FEED"], ["CARE"]] if opn["feed_place"] else []
                 # the animal lands in the shed after this step: a PASS keeps the pickup from firing too early
                 visits.append(_GcVisit(pos, [["BUILD_" + st], ["PLACE", an]] + fc, value=300.0, must=True, anim=an, tag="L", wheat=1 if fc else 0))
         free = [p for p in free if p not in taken]
@@ -1908,44 +1238,11 @@ class GoldCtl:
             k += 1; n_s -= 1
         if buy_s > 0:
             orders.append(["BUY_SEED", "STRAWBERRY", buy_s])
-        cash += m_res
-        if n_m_due > 0:
-            held_m = seeds.get("MELON", 0); buy_m = 0
-            while n_m_due > 0 and k < len(slots):
-                if held_m > 0:
-                    held_m -= 1
-                elif cash >= 80:
-                    cash -= 80; buy_m += 1
-                else:
-                    break
-                pv_ = self._crop_value("MELON", self.val)
-                visits.append(_GcVisit(slots[k], [["PLANT", "MELON"], ["WATER"]], value=GC_P["plant_defer"] * pv_, tag="P"))
-                k += 1; n_m_due -= 1
-            if buy_m > 0:
-                orders.append(["BUY_SEED", "MELON", buy_m])
-                _GC_REPORT["gc_open_midmelon"] = _GC_REPORT.get("gc_open_midmelon", 0) + buy_m
-        if n_t_due > 0:
-            held_t = seeds.get("TOMATO", 0); buy_t = 0
-            while n_t_due > 0 and k < len(slots):
-                if held_t > 0:
-                    held_t -= 1
-                elif cash >= 50:
-                    cash -= 50; buy_t += 1
-                else:
-                    break
-                pv_ = self._crop_value("TOMATO", self.val)
-                visits.append(_GcVisit(slots[k], [["PLANT", "TOMATO"], ["WATER"]], value=GC_P["plant_defer"] * pv_, tag="P"))
-                k += 1; n_t_due -= 1
-            if buy_t > 0:
-                orders.append(["BUY_SEED", "TOMATO", buy_t])
-                _GC_REPORT["gc_open_tomsw"] = _GC_REPORT.get("gc_open_tomsw", 0) + buy_t
-        mid_w = new_q is None and day >= int(opn.get("mid_wheat_from", 99)) and opn["wheat_fill"]
-        if (new_q is not None and opn["wheat_fill"]) or mid_w:
+        if new_q is not None and opn["wheat_fill"]:
             # the rest of the new land: wheat, as far as the seeds are affordable
             n_w = 0
-            w_room = 999 if opn.get("wheat_cap") is None else max(0, int(opn["wheat_cap"]) - counts.get("WHEAT", 0))
-            for p in (slots[k:k + int(opn.get("mid_wheat_max", 8))] if mid_w else slots[k:]):
-                if cash < 10 or n_w >= w_room:
+            for p in slots[k:]:
+                if cash < 10:
                     break
                 cash -= 10; n_w += 1
                 pv_ = self._crop_value("WHEAT", self.val)
@@ -1953,16 +1250,6 @@ class GoldCtl:
             if n_w > seeds.get("WHEAT", 0):
                 orders.append(["BUY_SEED", "WHEAT", n_w - seeds.get("WHEAT", 0)])
         self._open_urgent = bool(n_s > 0 or any(max(0, t_ - (animals_n.get(an, 0) + shed.get(an, 0) + pending_place.get(an, 0) + herd_new.get(an, 0))) > 0 for an, t_ in targets))
-        try:
-            c_unf = 100.0 * min(n_s, max(0, len(slots) - k))
-            room_n = max(0, int(opn.get("anim_day_max", 99)) - int(getattr(self, "_open_bought_n", 0)))
-            for an, t_ in targets:
-                k_ = max(0, min(t_ - (animals_n.get(an, 0) + shed.get(an, 0) + pending_place.get(an, 0) + herd_new.get(an, 0)), room_n))
-                room_n -= k_; c_unf += k_ * _GC_ANIM[an]["cost"]
-            self._open_need = max(0.0, c_unf - cash)
-        except Exception as e:
-            self._open_need = None
-            _GC_REPORT["gc_e1_need_err"] = repr(e)[:120]
         if not visits:
             return orders
         # ---- incremental routing: the morning's queues stay as they are (their deliveries included); the new
@@ -2071,21 +1358,11 @@ class GoldCtl:
                         g = min(2 if fu >= day else 1, cd["mx"] - yu)
                         acts.append(["WATER"])
                     acts.append(["HARVEST"])
-                    must_ = True
-                    if GC_P.get("d27_wheat") and int(t["planted_day"]) >= 27:
-                        must_ = False   # d27_wheat: a late plot is worth its units, never a hire of its own
-                    return _GcVisit(pos, acts, value=(yu + g) * pv, must=must_, tag="H", carry=yu + g)
+                    return _GcVisit(pos, acts, value=(yu + g) * pv, must=True, tag="H", carry=yu + g)
                 return None
             yu2 = yu
             if in_window and yu < cd["mx"]:
                 fert_active = fu >= day
-                mf_ = self.open.get("melon_fert") if (crop == "MELON" and self.open is not None and self._open_on(day)) else None
-                if mf_ and not fert_active and age in mf_:
-                    # the melon race: a fertilized melon (+2 a watered day) is ripe by day 8 and can be harvested, delivered and
-                    # sold at hour 0-6 of day 10, before the tape's hour-9 dump; an unfertilized one is ripe on day 11
-                    acts.append(["FERTILIZE"]); fert = 1; gain["fert"] = 2 * pv; value += 2 * pv
-                    fert_active = True
-                    _GC_REPORT["gc_melon_fert"] = _GC_REPORT.get("gc_melon_fert", 0) + 1
                 if (not fert_active) and age == ws and not (crop == "CARROT" and not GC_P["fert_carrots"]):
                     rem_days = cd["my"] - age + 1
                     extra = min(cd["mx"] - yu, 2 * rem_days) - min(cd["mx"] - yu, rem_days)
@@ -2104,9 +1381,6 @@ class GoldCtl:
             elif cu >= 1 and not (ready and yu > 0 and age >= cd["my"]):
                 acts.append(["WATER"]); value += max(1, yu) * pv + 30; must = True
             harvest_now = ready and yu2 > 0 and (age >= cd["my"] or yu2 >= cd["mx"])
-            if (not harvest_now and ready and yu2 > 0 and pos in getattr(self, "_eh_set", ())
-                    and yu2 >= int((GC_P.get("eh_level") or {}).get("min_units", 5))):
-                harvest_now = True
             eh = (GC_P["early_harvest"] or {}).get(crop)
             if eh and ready and age >= int(eh[0]) and yu2 >= int(eh[1]) and not harvest_now:
                 harvest_now = True
@@ -2119,20 +1393,6 @@ class GoldCtl:
                     keep = True
                 if not keep:
                     harvest_now = True
-            if (GC_P.get("w3val_fix") and not harvest_now and not must and crop in ("WHEAT", "CARROT") and yu2 > yu
-                    and any(a_[0] == "WATER" for a_ in acts)):
-                # w3val_fix: tomorrow is this plant's harvest day, whose watering (in the yield window) adds b anyway up to
-                # max_yield: today's water is worth only what the cap leaves of it (a fertilized wheat at age 3: +1, not +2)
-                hd = int(t["planted_day"]) + cd["my"]
-                if day >= 27 and GC_P["d28_harvest_all"] and not (GC_P["d28_keep_carrots"] and crop == "CARROT"):
-                    hd = min(hd, 28)
-                if hd == day + 1:
-                    fu2 = (day + 2) if fert else fu
-                    b = 2 if fu2 >= hd else 1
-                    gm = min(cd["mx"], yu2 + b) - min(cd["mx"], yu + b)
-                    if gm < yu2 - yu:
-                        value -= (yu2 - yu - gm) * pv
-                        _GC_REPORT["gc_w3val"] = _GC_REPORT.get("gc_w3val", 0) + 1
             if harvest_now:
                 acts.append(["HARVEST"]); value += yu2 * pv; must = True; carry = yu2
                 gain["prod"] = crop; gain["pv"] = pv
@@ -2234,23 +1494,11 @@ class GoldCtl:
             e += 1
         # bonus banked before the first production is capped by the held limit
         care_useful = e <= 28 and pend + 2 <= a["held"]
-        if GC_P.get("care_eve_fix") and prod_tonight and e <= 28:
-            # tonight's production consumes the banked bonus and restarts it: today's CARE counts for the next batch
-            care_useful = True
         care_worth = care_useful and pv >= GC_P["care_min_price"]
         unfed = int(t["consecutive_unfed"]) >= 1
         wheat_px = self.pnow.get("WHEAT", 40)
         bonus_tonight = prod_tonight and pv * (1 + pend) > wheat_px
         feed = day <= 28 and (unfed or care_worth or bonus_tonight or GC_P["feed_all"])
-        d28_escape = False
-        if GC_P.get("d28feed_fix") and day == 28 and not GC_P["feed_all"]:
-            # tonight's production is the last one that counts: a FEED today saves it from the escape (unfed yesterday:
-            # 1 + pend units) or adds the banked care bonus (fed yesterday: pend units; the base unit comes unfed)
-            f28 = prod_tonight and ((1 + pend) if unfed else pend) * pv > wheat_px
-            if feed and not f28:
-                _GC_REPORT["gc_d28feed"] = _GC_REPORT.get("gc_d28feed", 0) + 1
-            feed = f28
-            d28_escape = unfed and not feed
         if feed:
             acts.append(["FEED"]); wheat = 1
             if unfed:
@@ -2275,15 +1523,7 @@ class GoldCtl:
             return None
         # animals are the densest value on the farm: visit every fed one every day
         must = must or (GC_P["animals_must"] and wheat > 0)
-        if d28_escape and yu > 0 and any(a_[0] == "HARVEST" for a_ in acts):
-            must = True   # d28feed_fix: the animal escapes tonight with whatever it still holds
         return _GcVisit(pos, acts, value=value, must=must, wheat=wheat, tag="A", carry=carry, gain=locals().get("gain_a"))
-
-    def _pdefer(self, day):
-        w = GC_P.get("plant_last_w")
-        if w is not None and day >= max(GC_P["wheat_last_plant"], GC_P["carrot_last_plant"]):
-            return float(w)
-        return GC_P["plant_defer"]
 
     def _crop_value(self, crop, val):
         cd = _GC_CROPS[crop]
@@ -2357,7 +1597,6 @@ class GoldCtl:
         """Forecast revenue of n tomato plots planted today (4 units at age 9 and 11 each), selling on arrival,
         against town demand (current + expected new shops) and the opponent's visible tomato plants."""
         inv = float(obs["market"]["inventory"]["TOMATO"])
-        uh = float(GC_P.get("tomato_units_fc", 8.0)) / 2.0
         k_now = sum(1 for s in shops if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
         n_shops = len(shops)
         opp = obs["farms"][1 - self.me]
@@ -2366,7 +1605,7 @@ class GoldCtl:
             for t in row:
                 if isinstance(t, dict) and t.get("crop") == "TOMATO":
                     pd = int(t["planted_day"])
-                    for age, u in ((9, uh), (11, uh)):
+                    for age, u in ((9, 4), (11, 4)):
                         d = pd + age
                         if d >= day:
                             opp_sup[d] = opp_sup.get(d, 0) + u * GC_P["opp_tomato_w"]
@@ -2375,7 +1614,7 @@ class GoldCtl:
             for t in row:
                 if isinstance(t, dict) and t.get("crop") == "TOMATO":
                     pd = int(t["planted_day"])
-                    for age, u in ((9, uh), (11, uh)):
+                    for age, u in ((9, 4), (11, 4)):
                         d = pd + age
                         if d >= day:
                             mine[d] = mine.get(d, 0) + u
@@ -2388,7 +1627,7 @@ class GoldCtl:
             inv += opp_sup.get(d, 0) + mine.get(d, 0)
             for age in (9, 11):
                 if d == day + age and d <= 29:
-                    q = uh * n
+                    q = 4 * n
                     p0 = _gc_price("TOMATO", inv); p1 = _gc_price("TOMATO", inv + q)
                     rev += q * 0.5 * (p0 + p1)
                     inv += q
@@ -2503,12 +1742,6 @@ class GoldCtl:
             return 0
         fert = self.pnow.get("FERTILIZER", 50)
         alt = GC_P["tomato_alt_day"] * 12.0      # what the tile earns as wheat/carrot over the same 12 days
-        if GC_P.get("tomato_alt_dyn"):
-            v_w = (6 * val["WHEAT"] - 10 - fert) / 4.0 + GC_P["wheat_feed_bonus"]
-            cd_ = sum(2 if x == "PET_CAFE" else (1 if x == "FARMERS_MARKET" else 0) for x in shops)
-            v_c = (4 * val["CARROT"] - 20 - fert) / 3.0 if cd_ >= GC_P["carrot_min_demand"] else -1e9
-            alt = max(float(GC_P["tomato_alt_min"]), v_w, v_c) * min(12.0, 30.0 - day)
-            _GC_REPORT["gc_tom_alt"] = "%d:%d" % (day, int(alt))
         cost = 50 + 2 * fert + GC_P["tomato_labor"]
         best_n, best_v = 0, 0.0
         base = self._tomato_value(obs, day, 0, shops)
@@ -2675,10 +1908,7 @@ class GoldCtl:
     # ------------------------------------------------------------------ routing
     def _spawns(self, n_hires, farmer_pos):
         occ = {p: 0 for p in _GC_ACCESS}
-        if (self.open is not None and self.open.get("farmer_h0") and self._open_on(getattr(self, "day", 0))
-                and int(getattr(self, "_plan_hour", 0)) == 0):
-            farmer_pos = None   # farmer_h0: the farmer leaves (4,4) at hour 0, before the hour-0 hires spawn
-        if farmer_pos is not None and tuple(farmer_pos) in occ:
+        if tuple(farmer_pos) in occ:
             occ[tuple(farmer_pos)] += 1
         out = []
         for _ in range(n_hires):
@@ -2703,96 +1933,7 @@ class GoldCtl:
             t += abs(pos[0] - a[0]) + abs(pos[1] - a[1]) + 1
         return t
 
-    def _vrp1_open(self, visits, h, starts=None, caps=None):
-        """Opening VRP (anim_split): animal/premium visits by angle around the shed, cut into per-unit segments of about
-        `budget` turns, each closed by a shed stop; then the other visits by cheapest insertion after those prefixes."""
-        cfg = self.open.get("anim_split") or {}
-        spawns = [(4, 4)] + self._spawns(h, (4, 4))
-        if starts is not None:
-            spawns = list(starts)
-        n_units = len(spawns)
-        s = GC_P["drop_slack"]
-        n0 = getattr(self, "n0_hires", 9)
-        if caps is None:
-            caps = [23 - s] + [(23 if i < n0 else 22) - s for i in range(n_units - 1)]
-        anv = [v for v in visits if v.tag in ("A", "L") or (self._prem_value(v) > 0 and any(a[0] == "HARVEST" for a in v.acts))]
-        ids = set(id(v) for v in anv)
-        oth = [v for v in visits if id(v) not in ids]
-        anv.sort(key=lambda v: _gc_math.atan2(v.pos[1] - 4.5, v.pos[0] - 4.5))
-        tot = self._rcost((4, 4), self._order((4, 4), anv)) if anv else 0
-        B = max(int(cfg.get("budget", 8)), int(_gc_math.ceil(tot / float(max(1, n_units)))) + 2)
-        segs = [[] for _ in range(n_units)]
-        u = 0
-        for v in anv:
-            trial = segs[u] + [v]
-            c = self._rcost(spawns[u], self._order(spawns[u], trial))
-            if c > B and segs[u] and u + 1 < n_units:
-                u += 1; trial = [v]
-            segs[u] = trial
-        routes = [[] for _ in range(n_units)]
-        for u in range(n_units):
-            seg = segs[u]
-            if not seg:
-                continue
-            pr = [v for v in seg if self._prem_value(v) > 0 and any(a[0] == "HARVEST" for a in v.acts)]
-            an = [v for v in seg if v not in pr]
-            head = self._order(spawns[u], pr) if pr else []
-            pos = head[-1].pos if head else spawns[u]
-            a_ord = self._order(pos, an) if an else []
-            seg = head + a_ord
-            if sum(v.carry for v in seg) >= int(self.open.get("stop_min", 1)):
-                seg = seg + [self._stop_visit(seg[-1].pos)]
-            routes[u] = seg
-        plen = [len(r) for r in routes]
-        costs = [self._rcost(spawns[u], routes[u]) for u in range(n_units)]
-        flags = [[any(v.wheat for v in r), any(v.fert for v in r), set(v.anim for v in r if v.anim)] for r in routes]
-        unserved = []
-        for v in sorted(oth, key=lambda v: (0 if v.must else 1, -v.value / (len(v.acts) + 2.0))):
-            best = None
-            for u in range(n_units):
-                r = routes[u]; fl = flags[u]
-                extra = (1 if v.wheat and not fl[0] else 0) + (1 if v.fert and not fl[1] else 0) + (1 if v.anim and v.anim not in fl[2] else 0)
-                base = costs[u] + extra + len(v.acts)
-                if base > caps[u]:
-                    continue
-                prev = r[plen[u] - 1].pos if plen[u] > 0 else spawns[u]
-                for i in range(plen[u], len(r) + 1):
-                    nxt = r[i].pos if i < len(r) else None
-                    dd = abs(prev[0] - v.pos[0]) + abs(prev[1] - v.pos[1])
-                    if nxt is not None:
-                        dd += abs(v.pos[0] - nxt[0]) + abs(v.pos[1] - nxt[1]) - abs(prev[0] - nxt[0]) - abs(prev[1] - nxt[1])
-                    c = base + dd
-                    if c <= caps[u] and (best is None or c - costs[u] < best[0]):
-                        best = (c - costs[u], u, i, c)
-                    if nxt is not None:
-                        prev = nxt
-            if best is None:
-                unserved.append(v); continue
-            _, u, i, c = best
-            routes[u].insert(i, v); costs[u] = c
-            if v.wheat: flags[u][0] = True
-            if v.fert: flags[u][1] = True
-            if v.anim: flags[u][2].add(v.anim)
-        for u in range(n_units):
-            tail = routes[u][plen[u]:]
-            if len(tail) > 2:
-                st = routes[u][plen[u] - 1].pos if plen[u] > 0 else spawns[u]
-                rr = routes[u][:plen[u]] + self._order(st, tail)
-                if self._rcost(spawns[u], rr) <= self._rcost(spawns[u], routes[u]):
-                    routes[u] = rr
-        # a segment over the cap (a lone unit with many animals) keeps its must visits; the tail goes unserved
-        for u in range(n_units):
-            while self._rcost(spawns[u], routes[u]) > caps[u] and len(routes[u]) > plen[u]:
-                tail = routes[u][plen[u]:]
-                opt = [i for i, v in enumerate(tail) if not v.must]
-                i = (plen[u] + opt[-1]) if opt else len(routes[u]) - 1
-                unserved.append(routes[u].pop(i))
-        return routes, spawns, unserved
-
     def _vrp(self, visits, h, starts=None, caps=None):
-        if (self.open is not None and self.open.get("anim_split") and self._open_on(getattr(self, "day", 0)) and not self.final
-                and getattr(self, "day", 0) <= int(self.open["anim_split"].get("last", 99))):
-            return self._vrp1_open(visits, h, starts, caps)
         def k_far(v):
             return (0 if v.must else 1, -(abs(v.pos[0] - 4.5) + abs(v.pos[1] - 4.5)) if v.must else -v.value / (len(v.acts) + 2.0))
 
@@ -2813,63 +1954,15 @@ class GoldCtl:
             if best is None or sc < best[0]:
                 best = (sc, routes, spawns, unserved)
         routes, spawns, unserved = best[1], best[2], best[3]
-        if (self.open is not None and self._open_on(getattr(self, "day", 0)) and self.open.get("force_first") and not self.final
-                and sum(self._prem_value(v) for v in visits if any(a[0] == "HARVEST" for a in v.acts)) >= float(self.open.get("force_first_min", 0.0))):
-            _GC_REPORT["gc_open_ff"] = _GC_REPORT.get("gc_open_ff", 0) + 1
-            unserved = list(unserved)
-            for u, r in enumerate(routes):
-                if not r:
-                    continue
-                cap = caps[u] if caps is not None else self._cap(u)
-                new, over = self._force_first(spawns[u], r, cap)
-                routes[u] = new
-                unserved += over
-            return routes, spawns, unserved
         if float(GC_P["deliver_prem"] or 0.0) > 0:
             # premium deliveries first whenever the route can afford the detour (the day's cash depends on them)
             for u, r in enumerate(routes):
                 if len(r) > 1 and any(self._prem_value(v) >= float(GC_P["deliver_prem"]) for v in r):
                     cap = caps[u] if caps is not None else self._cap(u)
                     new = self._order_anim_first(spawns[u], r, cap)
-                    if GC_P.get("dbg_days") and getattr(self, "day", -1) in GC_P["dbg_days"]:
-                        _GC_REPORT["gc_dbg_vrp"] = _GC_REPORT.get("gc_dbg_vrp", "") + " h%d u%d cap%d new%d old%d first%s" % (h, u, cap, self._rcost(spawns[u], new), self._rcost(spawns[u], r), new[0].pos)
                     if self._rcost(spawns[u], new) <= cap:
                         routes[u] = new
         return routes, spawns, unserved
-
-    def _force_first(self, start, vs, cap):
-        """Opening route: premium harvests first, then the other animals, a shed stop (the day's fertilizer and premium
-        goods sell at once: the herd-first cash cycle), then the rest by nearest neighbour; the tail beyond the cap is
-        returned as overflow (lowest value per turn first, must visits kept)."""
-        dprem = float(GC_P["deliver_prem"] or 0.0)
-        body = [v for v in vs if v.tag != "S"]
-        pr = [v for v in body if self._prem_value(v) > 0 and any(a[0] == "HARVEST" for a in v.acts)]
-        an = [v for v in body if v.tag in ("A", "L") and v not in pr]
-        rest = [v for v in body if v not in pr and v not in an]
-        head = self._order(start, pr) if pr else []
-        pos = head[-1].pos if head else start
-        a_ord = self._order(pos, an) if an else []
-        carry = sum(v.carry for v in head + a_ord)
-        mid = []
-        if head or carry >= int(self.open.get("stop_min", 1)):
-            last = (head + a_ord)[-1]
-            mid = [self._stop_visit(last.pos)]
-            pos = mid[0].pos
-        else:
-            pos = a_ord[-1].pos if a_ord else pos
-        r_ord = self._order(pos, rest) if rest else []
-        out = head + a_ord + mid + r_ord
-        over = []
-        while self._rcost(start, out) > cap:
-            cands = [v for v in r_ord if not v.must]
-            if not cands:
-                cands = [v for v in r_ord]
-            if not cands:
-                break
-            v = min(cands, key=lambda v: v.value / (len(v.acts) + 1.0))
-            r_ord.remove(v); over.append(v)
-            out = head + a_ord + mid + r_ord
-        return out, over
 
     def _order_anim_first(self, start, vs, cap):
         """Animals (premium goods) first so their products reach the shed early; keep the plain order if that costs more than 2 turns."""
@@ -3071,13 +2164,8 @@ class GoldCtl:
 
     def _route_and_hire(self, visits, cash, final, day):
         best = None
-        first = day == GC_P["start"] // 24 or (bool(GC_P.get("handover_fix3")) and day == getattr(self, "_first_day", None))
-        lo = 0 if (first or final) else max(0, self.last_hires - 3)
+        lo = 0 if (day == GC_P["start"] // 24 or final) else max(0, self.last_hires - 3)
         hi = GC_P["max_hands_final"] if final else GC_P["max_hands"]
-        if getattr(self, "_crew_n", None) is not None and not final:
-            lo = max(0, self._crew_n)
-            if self.open.get("crew", {}).get("cap"):
-                hi = min(hi, self._crew_n + int(self.open["crew"]["cap"]))
         while lo > 0 and sum(_gc_fib(q) for q in range(lo)) > cash - 20:
             lo -= 1   # a farm that wakes up broke must still get a plan (fewer hands), not a crashed day
         for h in range(lo, hi + 1):
@@ -3117,375 +2205,19 @@ class GoldCtl:
             if best is None or score > best[0]:
                 best = (score, h, routes, spawns, sum(v.value for v in unserved))
                 self._last_unserved = (sum(1 for v in unserved if v.must), len(unserved), sorted({v.tag for v in unserved}))
-                if GC_P.get("vrp_pack"):
-                    self._pack_un = list(unserved)
             if not unserved and ovf == 0 and best[1] < h:
                 break
-        vp = GC_P.get("vrp_pack")
-        if vp and not final and best is not None and best[1] >= 1 and int(vp.get("min_day", 20)) <= day <= int(vp.get("max_day", 28)):
-            self._pack_best = best
-            try:
-                self._pack_hands(best, vp, cash)
-            except Exception as e:   # never lose a day to the packer
-                _GC_REPORT["gc_pack_err"] = repr(e)[:120]
-                self._pack_best = best
-            best = self._pack_best
         _GC_REPORT["gc_unserved"] += int(best[4])
         return best[2], best[1], best[3]
-
-    def _plan_score(self, h, routes, spawns, unserved, w):
-        """The hire search's score of a plan (non-final days): -(unserved value, must +1e5) - shed overflow/popped - w * wages."""
-        pen = sum((v.value + (1e5 if v.must else 0.0)) for v in unserved)
-        if GC_P["ovf_hire"]:
-            if GC_P["stop_v2"]:
-                rr = [list(r) for r in routes]
-                ovf, popped = self._plan_stops(rr, spawns)
-                dprem = float(GC_P["deliver_prem"] or 0.0)
-                if dprem > 0:
-                    undel = sum(self._prem_after_stop(r) for r in rr if self._prem_after_stop(r) >= dprem)
-                    pen += undel * GC_P["deliver_prem_w"]
-            else:
-                _d, ovf, popped = self._plan_drops([list(r) for r in routes], spawns)
-            pen += ovf * GC_P["ovf_value"] + popped
-            self._ps_ovf = ovf * GC_P["ovf_value"] + popped
-        return -pen - w * sum(_gc_fib(q) for q in range(h))
-
-    def _pack1(self, routes, spawns, vp):
-        """Empty one hand's route into the other units' slack. Returns (routes, spawns, dropped optional visits) for h-1 hands,
-        or None when some must visit does not fit."""
-        n = len(routes); h = n - 1
-        if h < 1:
-            return None
-        sp2 = [(4, 4)] + self._spawns(h - 1, (4, 4))
-        caps2 = [self._cap(u) for u in range(h)]
-        slack = int(vp.get("slack", 0))
-        allow_opt = bool(vp.get("opt", True))
-        order = sorted(range(1, n), key=lambda u: (self._rcost(spawns[u], routes[u]) if routes[u] else -1, -u))
-        best = None
-        allc = []
-        for u in order[:max(1, int(vp.get("tries", 3)))]:
-            rest = [list(routes[k]) for k in range(n) if k != u]
-            costs = []
-            ok = True
-            for i, r in enumerate(rest):
-                c = self._rcost(sp2[i], r)
-                if c > caps2[i]:
-                    ok = False; break
-                costs.append(c)
-            if not ok:
-                continue
-            left = []
-            for v in sorted(routes[u], key=lambda v: (0 if v.must else 1, -v.value)):
-                bw = None
-                for w_ in range(h):
-                    d, j = self._ins_delta(sp2[w_], rest[w_], v)
-                    lim = caps2[w_] - slack
-                    if costs[w_] + d <= lim and (bw is None or d < bw[0]):
-                        rr = rest[w_][:j] + [v] + rest[w_][j:]
-                        c = self._rcost(sp2[w_], rr)
-                        if c <= lim:
-                            bw = (d, w_, rr, c)
-                if bw is None:
-                    if v.must or not allow_opt:
-                        ok = False; break
-                    left.append(v); continue
-                _d, w_, rr, c = bw
-                rest[w_] = rr; costs[w_] = c
-            if not ok:
-                continue
-            if vp.get("reorder"):
-                # the receiving routes: the VRP's own final ordering (animals first) when it is no longer
-                for i in range(h):
-                    if len(rest[i]) > 2:
-                        new = self._order_anim_first(sp2[i], rest[i], caps2[i])
-                        c = self._rcost(sp2[i], new)
-                        if c < costs[i]:
-                            rest[i] = new; costs[i] = c
-                            _GC_REPORT["gc_pack_reord"] = _GC_REPORT.get("gc_pack_reord", 0) + 1
-            lv = sum(v.value for v in left)
-            if best is None or lv < best[0]:
-                best = (lv, rest, sp2, left)
-            allc.append((lv, rest, sp2, left))
-        if best is None:
-            return None
-        if int(vp.get("score_k", 1)) > 1:
-            allc.sort(key=lambda c: c[0])
-            return [(c[1], c[2], c[3]) for c in allc[:int(vp.get("score_k", 1))]]
-        return best[1], best[2], best[3]
-
-    def _eh_slack(self, cfg, routes, spawns, tiles, seeds, cash, day, hires, val):
-        """eh_slack: pull tomorrow's one-time harvests into today's spare turns (see GC_P). Mutates routes/orders."""
-        crops = tuple(cfg.get("crops", ["WHEAT"]))
-        due_t = 0; due_n = 0
-        for y in range(10):
-            for x in range(10):
-                t = tiles[y][x]
-                if isinstance(t, dict) and t.get("kind") == "PLANT" and t.get("crop") in ("WHEAT", "CARROT"):
-                    my_ = _GC_CROPS[t["crop"]]["my"]; a_ = day - int(t["planted_day"])
-                    if a_ >= my_:
-                        due_t += 1
-                    elif a_ == my_ - 1:
-                        due_n += 1
-        _GC_REPORT["gc_ehs_try"] = _GC_REPORT.get("gc_ehs_try", 0) + 1
-        if due_n - due_t <= int(cfg.get("margin", 0)):
-            return
-        keep = int(cfg.get("keep", 1)); max_n = int(cfg.get("max_n", 8)); mu = int(cfg.get("min_units", 5))
-        room = int(cfg.get("room", 80))
-        n_units = len(routes)
-        caps = [self._cap(u) for u in range(n_units)]
-        costs = [self._rcost(spawns[u], routes[u]) for u in range(n_units)]
-        load = sum(self._eod_carry(r) for r in routes)
-        rep_ok = bool(cfg.get("replant", True))
-        need = {}
-        for r in routes:
-            for v in r:
-                for a in v.acts:
-                    if a[0] == "PLANT" and len(a) > 1:
-                        need[a[1]] = need.get(a[1], 0) + 1
-        late = max(0, int(hires) - int(getattr(self, "n0_hires", 10)))
-        can_buy = len(self.orders1) + late + 1 <= 8
-        buys = {}
-        cands = []
-        for u in range(n_units):
-            for v in routes[u]:
-                if v.tag != "C" or not v.acts or any(a[0] in ("HARVEST", "PLANT", "DIG") for a in v.acts):
-                    continue
-                if not any(a[0] == "WATER" for a in v.acts):
-                    continue
-                t = tiles[v.pos[1]][v.pos[0]]
-                if not (isinstance(t, dict) and t.get("kind") == "PLANT" and t.get("crop") in crops):
-                    continue
-                cd = _GC_CROPS[t["crop"]]; age = day - int(t["planted_day"])
-                if age != cd["my"] - 1 or t.get("watered_today"):
-                    continue
-                g = 2 if (int(t.get("fertilized_until_day", -1)) >= day or v.fert) else 1
-                yu2 = min(cd["mx"], int(t["yield_units"]) + g)
-                if yu2 < mu:
-                    continue
-                cands.append((_gc_dist(v.pos, (4.5, 4.5)), u, v, t["crop"], yu2))
-        cands.sort(key=lambda c: c[0])
-        n = 0
-        for _d, u, v, crop, yu2 in cands:
-            if n >= max_n:
-                break
-            if load + yu2 > room:
-                continue
-            rep = False; nb = 0
-            if rep_ok and day <= (GC_P["wheat_last_plant"] if crop == "WHEAT" else GC_P["carrot_last_plant"]):
-                have = int(seeds.get(crop, 0)) + buys.get(crop, 0) - need.get(crop, 0)
-                if have > 0:
-                    rep = True
-                elif can_buy and cash - 60 >= _GC_CROPS[crop]["seed"]:
-                    rep = True; nb = 1
-            extra = 1 + (2 if rep else 0)
-            if costs[u] + extra > caps[u] - keep:
-                continue
-            if nb:
-                buys[crop] = buys.get(crop, 0) + 1; cash -= _GC_CROPS[crop]["seed"]
-            v.acts = v.acts + [["HARVEST"]] + ([["PLANT", crop], ["WATER"]] if rep else [])
-            v.carry += yu2; v.value += yu2 * val.get(crop, 0.0)
-            v.gain = dict(v.gain or {}); v.gain["prod"] = crop; v.gain["pv"] = val.get(crop, 0.0)
-            if rep:
-                need[crop] = need.get(crop, 0) + 1
-            costs[u] = self._rcost(spawns[u], routes[u])
-            load = sum(self._eod_carry(r) for r in routes)
-            n += 1
-        buys = {k: v for k, v in buys.items() if v > 0}
-        if buys:
-            self.orders1 = list(self.orders1) + [["BUY_SEED", c, k] for c, k in buys.items()]
-        if n:
-            _GC_REPORT["gc_ehs_n"] = _GC_REPORT.get("gc_ehs_n", 0) + n
-            _GC_REPORT["gc_ehs_days"] = _GC_REPORT.get("gc_ehs_days", 0) + 1
-            _GC_REPORT["gc_ehs_buy"] = _GC_REPORT.get("gc_ehs_buy", 0) + sum(buys.values())
-
-    def _d27_dispatch(self, u, pos, inv, turns_left, tiles, sim, seeds, planting, claimed, hour):
-        """d27_wheat dispatch: an idle unit with no job left plants a late wheat plot on the nearest free tile
-        (PLANT, FERTILIZE when it carries fertilizer, WATER) if a spare seed is at hand and the plot fits the day."""
-        res = sum(1 for q in self.queues.values() for _t, a, _v in (q or []) if a[0] == "PLANT" and len(a) > 1 and a[1] == "WHEAT")
-        if int(seeds.get("WHEAT", 0)) - res - int(planting.get("WHEAT", 0)) <= 0:
-            return None
-        f = 1 if int(inv.get("FERTILIZER", 0)) > 0 else 0
-        best = None
-        for y in range(10):
-            for x in range(10):
-                key = (x, y)
-                t = sim[key] if key in sim else tiles[y][x]
-                if t is not None or key in claimed:
-                    continue
-                d = _gc_dist(pos, key)
-                if best is None or d < best[0]:
-                    best = (d, key)
-        if best is None:
-            return None
-        d, key = best
-        need = d + 2 + f
-        if need > turns_left - 1:
-            return None
-        q = [(key, ["PLANT", "WHEAT"], None)]
-        if f:
-            q.append((key, ["FERTILIZE"], None))
-        q.append((key, ["WATER"], None))
-        _GC_REPORT["gc_d27_disp"] = _GC_REPORT.get("gc_d27_disp", 0) + 1
-        return q
-
-    def _d27_wheat(self, cfg, routes, spawns, tiles, seeds, shed, cash, day, hires):
-        """d27_wheat: late wheat plots on the routes' spare turns (no hire). Mutates routes/orders."""
-        min_spare = int(cfg.get("min_spare", 4)); keep = int(cfg.get("keep", 1)); max_n = int(cfg.get("max_n", 10))
-        n_units = len(routes)
-        caps = [self._cap(u) for u in range(n_units)]
-        costs = [self._rcost(spawns[u], routes[u]) for u in range(n_units)]
-        # seeds on hand (today's other plantings first) and what may be bought at hour 1
-        need_w = sum(1 for r in routes for v in r for a in v.acts if a[0] == "PLANT" and len(a) > 1 and a[1] == "WHEAT")
-        have = max(0, int(seeds.get("WHEAT", 0)) - need_w)
-        can_buy = 0
-        if cfg.get("buy", True):
-            late = max(0, int(hires) - int(getattr(self, "n0_hires", 10)))
-            if len(self.orders1) + late + 1 <= 8:
-                can_buy = max(0, int((cash - 60) // 10))
-        budget = min(max_n, have + can_buy)
-        _GC_REPORT["gc_d27_try"] = _GC_REPORT.get("gc_d27_try", 0) + 1
-        _GC_REPORT["gc_d27_spare"] = _GC_REPORT.get("gc_d27_spare", 0) + sum(max(0, caps[u] - costs[u]) for u in range(n_units))
-        _GC_REPORT["gc_d27_units_sp"] = _GC_REPORT.get("gc_d27_units_sp", 0) + sum(1 for u in range(n_units) if caps[u] - costs[u] >= min_spare)
-        if budget <= 0:
-            _GC_REPORT["gc_d27_nobudget"] = _GC_REPORT.get("gc_d27_nobudget", 0) + 1
-            return
-        f_sold = sum(int(o[2]) for o in (self.sell0 or []) if o and o[0] == "SELL" and o[1] == "FERTILIZER")
-        f_avail = int(shed.get("FERTILIZER", 0)) - f_sold - int(getattr(self, "_fert_need_day", 0)) - 1 if cfg.get("fert", True) else 0
-        used = {tuple(v.pos) for r in routes for v in r}
-        n_new = 0; n_fert = 0
-
-        def acts_for():
-            nonlocal f_avail
-            if f_avail > 0:
-                return [["PLANT", "WHEAT"], ["FERTILIZE"], ["WATER"]], 1
-            return [["PLANT", "WHEAT"], ["WATER"]], 0
-        # (1) tiles a one-time harvest empties today: append to that visit
-        for u in range(n_units):
-            if n_new >= budget:
-                break
-            r = routes[u]
-            for v in r:
-                if n_new >= budget or caps[u] - costs[u] < min_spare:
-                    break
-                if v.tag == "S" or not v.acts or v.acts[-1][0] != "HARVEST" or any(a[0] == "PLANT" for a in v.acts):
-                    continue
-                t = tiles[v.pos[1]][v.pos[0]]
-                if not (isinstance(t, dict) and t.get("kind") == "PLANT" and not _GC_CROPS[t["crop"]]["on"]):
-                    continue
-                acts, f = acts_for()
-                extra = len(acts) + (1 if f and not any(x.fert for x in r) else 0)
-                if costs[u] + extra > caps[u] - keep:
-                    continue
-                v.acts = v.acts + acts; v.fert += f
-                costs[u] = self._rcost(spawns[u], r)
-                n_new += 1; n_fert += f; f_avail -= f
-        # (2) empty tiles near a route with spare turns
-        if cfg.get("empties", True) and n_new < budget:
-            empt = [(x, y) for y in range(10) for x in range(10) if tiles[y][x] is None and (x, y) not in used]
-            while n_new < budget and empt:
-                best = None
-                for u in range(n_units):
-                    if caps[u] - costs[u] < min_spare:
-                        continue
-                    acts, f = acts_for()
-                    for pos in empt:
-                        nv = _GcVisit(pos, acts, value=0.0, must=False, fert=f, tag="W")
-                        d, j = self._ins_delta(spawns[u], routes[u], nv)
-                        if costs[u] + d <= caps[u] - keep and (best is None or d < best[0]):
-                            best = (d, u, j, nv)
-                if best is None:
-                    break
-                d, u, j, nv = best
-                rr = routes[u][:j] + [nv] + routes[u][j:]
-                c = self._rcost(spawns[u], rr)
-                if c > caps[u] - keep:
-                    break
-                routes[u] = rr; costs[u] = c
-                empt.remove(nv.pos); used.add(nv.pos)
-                n_new += 1; n_fert += nv.fert; f_avail -= nv.fert
-        if n_new <= 0:
-            return
-        buy = max(0, n_new - have)
-        if buy > 0:
-            self.orders1 = list(self.orders1) + [["BUY_SEED", "WHEAT", buy]]
-        self._fert_need_day = int(getattr(self, "_fert_need_day", 0)) + n_fert
-        _GC_REPORT["gc_d27_plots"] = _GC_REPORT.get("gc_d27_plots", 0) + n_new
-        _GC_REPORT["gc_d27_fert"] = _GC_REPORT.get("gc_d27_fert", 0) + n_fert
-        _GC_REPORT["gc_d27_buy"] = _GC_REPORT.get("gc_d27_buy", 0) + buy
-
-    def _pack_hands(self, best, vp, cash):
-        """vrp_pack: try h-1 (then h-2, ... up to `rounds`) hands by emptying routes of the chosen plan; keep the best score."""
-        self._pack_best = best
-        w = vp.get("w")
-        w = float(GC_P["hire_cost_w"] if w is None else w)
-        sc0, h, routes, spawns, uval = best
-        un0 = list(getattr(self, "_pack_un", None) or [])
-        cur_sc = self._plan_score(h, routes, spawns, un0, w)
-        base_sc = cur_sc
-        cur = (h, routes, spawns, un0)
-        for _r in range(max(1, int(vp.get("rounds", 1)))):
-            hh, rt, sp, un = cur
-            if hh < 1:
-                break
-            res = self._pack1(rt, sp, vp)
-            if res is None:
-                _GC_REPORT["gc_pack_fail"] = _GC_REPORT.get("gc_pack_fail", 0) + 1
-                if vp.get("dbg"):
-                    _GC_REPORT["gc_pkf_h"] = _GC_REPORT.get("gc_pkf_h", 0) + hh
-                    slk = sum(max(0, self._cap(u) - self._rcost(sp[u], rt[u])) for u in range(len(rt)))
-                    _GC_REPORT["gc_pkf_slack"] = _GC_REPORT.get("gc_pkf_slack", 0) + slk
-                    _GC_REPORT["gc_pkf_min"] = _GC_REPORT.get("gc_pkf_min", 0) + min(self._rcost(sp[u], rt[u]) for u in range(1, len(rt)))
-                break
-            if isinstance(res, list):
-                # score_k: the k packings that drop the least value, scored in full (shed stops, overflow); keep the best
-                bs = None
-                for rt_, sp_, left_ in res:
-                    sc_ = self._plan_score(hh - 1, rt_, sp_, un + left_, w)
-                    if bs is None or sc_ > bs[0]:
-                        bs = (sc_, rt_, sp_, left_, self._ps_ovf if hasattr(self, "_ps_ovf") else 0)
-                rt2, sp2, left = bs[1], bs[2], bs[3]
-                un2 = un + left
-                sc2 = bs[0]
-                self._ps_ovf = bs[4]
-            else:
-                rt2, sp2, left = res
-                un2 = un + left
-                sc2 = self._plan_score(hh - 1, rt2, sp2, un2, w)
-            if sc2 <= cur_sc:
-                _GC_REPORT["gc_pack_worse"] = _GC_REPORT.get("gc_pack_worse", 0) + 1
-                if vp.get("dbg"):
-                    ovf2 = self._ps_ovf
-                    self._plan_score(hh, rt, sp, un, w); ovf1 = self._ps_ovf
-                    _GC_REPORT["gc_pkw_drop"] = _GC_REPORT.get("gc_pkw_drop", 0) + int(sum(v.value for v in left))
-                    _GC_REPORT["gc_pkw_ndrop"] = _GC_REPORT.get("gc_pkw_ndrop", 0) + len(left)
-                    _GC_REPORT["gc_pkw_ovf"] = _GC_REPORT.get("gc_pkw_ovf", 0) + int(ovf2 - ovf1)
-                    _GC_REPORT["gc_pkw_wage"] = _GC_REPORT.get("gc_pkw_wage", 0) + int(w * _gc_fib(hh - 1))
-                    _GC_REPORT["gc_pkw_h"] = _GC_REPORT.get("gc_pkw_h", 0) + hh
-                break
-            cur_sc = sc2; cur = (hh - 1, rt2, sp2, un2)
-        if cur[0] < h:
-            hh, rt, sp, un = cur
-            _GC_REPORT["gc_pack"] = _GC_REPORT.get("gc_pack", 0) + (h - hh)
-            _GC_REPORT["gc_pack_wage"] = _GC_REPORT.get("gc_pack_wage", 0) + sum(_gc_fib(q) for q in range(hh, h))
-            _GC_REPORT["gc_pack_drop"] = _GC_REPORT.get("gc_pack_drop", 0) + int(sum(v.value for v in un) - sum(v.value for v in un0))
-            self._pack_best = (cur_sc, hh, rt, sp, sum(v.value for v in un))
 
     # ------------------------------------------------------------------ execution
     def _compile(self, routes, spawns, hour0=True):
         qs = []
         for u, r in enumerate(routes):
             q = []
-            if u == 0 and hour0 and not (self.open is not None and self.open.get("farmer_h0") and self._open_on(getattr(self, "day", 0))):
+            if u == 0 and hour0:
                 q.append((spawns[0], ["PASS"], None))   # keep the farmer on (4,4) at hour 0 so hires spawn where planned
             wheat = sum(v.wheat for v in r); fert = sum(v.fert for v in r)
-            nh = int((getattr(self, "_melon_head", {}) or {}).get(u, 0))
-            if nh > 0:
-                # melon day: one melon trip at a time (harvest, straight back to the shed, drop), the pickups after them
-                for v in r[:nh]:
-                    for a in v.acts:
-                        q.append((v.pos, list(a), v))
-                    q.append((_gc_near_access(v.pos), ["DROP"], None))
-                r = r[nh:]
             if wheat:
                 q.append((spawns[u], ["PICKUP", "WHEAT", wheat], None))
             if fert:
@@ -3495,8 +2227,6 @@ class GoldCtl:
                 if n:
                     q.append((spawns[u], ["PICKUP", an, n], None))
             drop_at = self.drop_at.get(u)
-            if nh > 0 and drop_at is not None:
-                drop_at = drop_at - nh if drop_at >= nh else None
             for k, v in enumerate(r):
                 for a in v.acts:
                     q.append((v.pos, list(a), v))
@@ -3847,66 +2577,6 @@ class GoldCtl:
             worst = min(opt.values(), key=lambda v: v.value / (len(v.acts) + 1.0))
             q[:] = [it for it in q if it[2] is not worst]
             _GC_REPORT["gc_trimmed"] = _GC_REPORT.get("gc_trimmed", 0) + 1
-        if GC_P.get("mtrim_fix") and q:
-            # mtrim_fix: only must visits are left and they still overrun (unplanned refill pickups, a late hire's
-            # actual spawn): the queue would run in order and lose its last must visits (often the thirsty day-2
-            # water of a new wheat/carrot). Strip their deferrable parts instead, latest first: fertilizer collects,
-            # fertilizations (and a fertilizer pickup nothing needs any more), then plantings (with their water).
-            def cost2(qq):
-                t = 0; p = tuple(pos)
-                for tgt, a, v in qq:
-                    if GC_P["shed_any"] and a[0] in ("PICKUP", "DROP"):
-                        tgt = p if p in _GC_ACCESS_SET else _gc_near_access(p)
-                    t += abs(p[0] - tgt[0]) + abs(p[1] - tgt[1]) + 1
-                    p = tuple(tgt)
-                return t
-            surv = GC_P.get("mtrim_fix") == "surv"
-            tl_ = getattr(self, "_tiles_now", None)
-
-            def last_lost_surv(qq):
-                """surv variant: index of the last item the turn budget cannot reach that saves a life tonight (WATER of a
-                plant unwatered since yesterday, FEED of an animal unfed since yesterday); None when every such item fits."""
-                if tl_ is None:
-                    return None
-                t = 0; p = tuple(pos); out = None
-                for i, (tgt, a, v) in enumerate(qq):
-                    if GC_P["shed_any"] and a[0] in ("PICKUP", "DROP"):
-                        tgt = p if p in _GC_ACCESS_SET else _gc_near_access(p)
-                    t += abs(p[0] - tgt[0]) + abs(p[1] - tgt[1]) + 1
-                    p = tuple(tgt)
-                    if t > turns_left and a[0] in ("WATER", "FEED"):
-                        tile = tl_[tgt[1]][tgt[0]]
-                        if not isinstance(tile, dict):
-                            continue
-                        if a[0] == "WATER" and tile.get("kind") == "PLANT" and not tile.get("watered_today") and int(tile.get("consecutive_unwatered", 0)) >= 1:
-                            out = i
-                        elif a[0] == "FEED" and "animal" in tile and not tile.get("fed_today") and int(tile.get("consecutive_unfed", 0)) >= 1:
-                            out = i
-                return out
-            for stage in ("COLLECT_FERTILIZER", "FERTILIZE", "PLANT"):
-                while q and cost2(q) > turns_left:
-                    lim = len(q)
-                    if surv:
-                        k_ = last_lost_surv(q)
-                        if k_ is None:
-                            break
-                        lim = k_
-                    idx = [i for i, it in enumerate(q[:lim]) if it[2] is not None and it[1][0] == stage]
-                    if not idx:
-                        break
-                    i = idx[-1]; v = q[i][2]
-                    if stage == "PLANT" and v.tag == "P":
-                        q[:] = [it for it in q if it[2] is not v]
-                    elif stage == "PLANT":
-                        drop = {i}
-                        if i + 1 < len(q) and q[i + 1][1][0] == "WATER" and q[i + 1][2] is v:
-                            drop.add(i + 1)
-                        q[:] = [it for j, it in enumerate(q) if j not in drop]
-                    else:
-                        q.pop(i)
-                        if stage == "FERTILIZE" and not any(it[1][0] == "FERTILIZE" for it in q):
-                            q[:] = [it for it in q if not (it[1][0] == "PICKUP" and len(it[1]) > 1 and it[1][1] == "FERTILIZER")]
-                    _GC_REPORT["gc_mtrim"] = _GC_REPORT.get("gc_mtrim", 0) + 1
 
     def _dispatch(self, u, pos, inv, turns_left, tiles, sim, seeds, shed, claimed, day, hour):
         """Idle unit: queue the best remaining unclaimed job it can finish today (value per turn)."""
@@ -4166,8 +2836,6 @@ class GoldCtl:
         y = int(t["yield_units"]); cls = GC_P.get("shed_skip_cls", ("A", "O", "G"))
         if "animal" in t:
             a = _GC_ANIM[t["animal"]]
-            if GC_P.get("d28feed_fix") and int(t.get("consecutive_unfed", 0) or 0) >= 1 and not t.get("fed_today"):
-                return False   # escapes tonight: its units go with it
             k = day + 1 - int(t.get("placed_day", 0)) - a["fy"]
             add = (1 + (int(t.get("pending_care_bonus", 0) or 0) if t.get("fed_today") else 0)) if (k >= 0 and k % a["iv"] == 0) else 0
             return "A" in cls and y + add <= a["held"]
@@ -4213,14 +2881,6 @@ class GoldCtl:
                 self._skip_over -= int(tile.get("yield_units", 0) or 0)
                 _GC_REPORT["gc_shed_skip"] = _GC_REPORT.get("gc_shed_skip", 0) + 1
                 _GC_REPORT["gc_shed_skip_u"] = _GC_REPORT.get("gc_shed_skip_u", 0) + int(tile.get("yield_units", 0) or 0)
-                continue
-            if (act[0] == "PLANT" and GC_P.get("plant23_fix") and hour >= (22 if self.final else 23)
-                    and self._useful(act, tile, inv, seeds, planting, shed, room)):
-                # plant23_fix: no turn left to water the new plant today (it would turn weed tonight)
-                q.pop(0)
-                if q and q[0][1][0] == "WATER" and tuple(q[0][0]) == tuple(tgt):
-                    q.pop(0)
-                _GC_REPORT["gc_plant23"] = _GC_REPORT.get("gc_plant23", 0) + 1
                 continue
             if self._useful(act, tile, inv, seeds, planting, shed, room):
                 q.pop(0)
@@ -4274,7 +2934,6 @@ class GoldCtl:
             self.day_plan = day
             self.queues = {u: q for u, q in enumerate(self._compile(self.routes, self.spawns))}
         tiles = farm["tiles"]
-        self._tiles_now = tiles
         self._drop_wait = 0
         if GC_P["rematch"] and hour == 2 and not getattr(self, "_rematched", None) == day:
             self._rematched = day
@@ -4306,11 +2965,6 @@ class GoldCtl:
                 self.queues[u] = [(_gc_near_access(tuple(pos)), ["DROP"], None)]
             if GC_P["dispatch"] and not self.queues.get(u) and hour >= 1 and not (self.final and hour >= 18):
                 nq = self._dispatch(u, pos, inv, 23 - hour + 1, tiles, sim, seeds, shed, claimed, day, hour)
-                if not nq and GC_P.get("d27_wheat") and not self.final and day in [int(x) for x in GC_P["d27_wheat"].get("days", [27])]                         and GC_P["d27_wheat"].get("dispatch", False):
-                    try:
-                        nq = self._d27_dispatch(u, pos, inv, 23 - hour + 1, tiles, sim, seeds, planting, claimed, hour)
-                    except Exception as e:
-                        nq = None; _GC_REPORT["gc_d27_derr"] = repr(e)[:120]
                 if nq:
                     if GC_P["final_flush"] and self.final:
                         last = nq[-1][0]
@@ -4328,16 +2982,6 @@ class GoldCtl:
                 elif a[0] == "COLLECT_FERTILIZER": t2["fertilizer_available"] = False
                 sim[key] = t2
             units.append(a)
-        if GC_P.get("pick_fix"):
-            n_exp = len(positions) + int((getattr(self, "hires_planned", 0) if hour == 0 else getattr(self, "hires_left", 0)) or 0)
-            pend = {}
-            for u, q in self.queues.items():
-                if u >= n_exp or not q:
-                    continue
-                for _t, a2, _v in q:
-                    if a2[0] == "PICKUP" and len(a2) > 1:
-                        pend[a2[1]] = pend.get(a2[1], 0) + (int(a2[2]) if len(a2) >= 3 else 1)
-            self._pend_pick = pend
         carried = 0
         self.carried_items = {}
         for u in range(len(positions)):
@@ -4347,22 +2991,7 @@ class GoldCtl:
             carried += sum(int(x) for x in inv.values())
             for k2, n2 in inv.items():
                 self.carried_items[k2] = self.carried_items.get(k2, 0) + int(n2)
-        shed_m = shed
-        if self.open is not None and self.open.get("sell_on_drop") and self._open_on(day):
-            # units act before the market settles: goods dropped this hour can be sold this hour (the tape's recorded routes
-            # sell wool at hour 5 of day 6 and milk at hour 2 of day 8 in the drop's own step; the controller was an hour late)
-            shed_m = dict(shed); room_ = 100 - sum(shed.values()); added = 0
-            for u in range(len(positions)):
-                if units[u][0] != "DROP":
-                    continue
-                inv = dict(invs[u]) if u < len(invs) else {}
-                for k2, n2 in inv.items():
-                    n3 = min(int(n2), max(0, room_ - added))
-                    if n3 > 0:
-                        shed_m[k2] = shed_m.get(k2, 0) + n3; added += n3
-            if added:
-                _GC_REPORT["gc_sell_on_drop"] = _GC_REPORT.get("gc_sell_on_drop", 0) + added
-        market = self._market(obs, shed_m, carried, hour, day)[:10]
+        market = self._market(obs, shed, carried, hour, day)[:10]
         if GC_P["sell_timing"]:
             try:
                 self._mk_store(obs, shed, market)
@@ -4545,8 +3174,7 @@ class GoldCtl:
                 if k > 0:
                     rest = rest + [["BUY_PRODUCT", "WHEAT", k]]
                     _GC_REPORT["gc_open_feedbuy"] = _GC_REPORT.get("gc_open_feedbuy", 0) + k
-        if hour == 0 or getattr(self, "_h0_pending", False):
-            self._h0_pending = False
+        if hour == 0:
             fixed = list(self.orders0)
             due = []
             if GC_P["sell_timing"] and not (GC_P["tick_defer0"] and day < GC_P["tick_last_day"]):
@@ -4566,10 +3194,6 @@ class GoldCtl:
             orders = fixed + [["HIRE"]] * h0 + due
             return orders[:10]
         mid = list(getattr(self, "_mid_orders", []) or [])
-        if mid and hour == 1:
-            h1 = max(0, min(self.hires_left, 10 - len(self.orders1)))
-            self.hires_left -= h1
-            return ([["HIRE"]] * h1 + list(self.orders1) + mid + prem + rest)[:10]
         if mid:
             return (mid + prem + rest)[:10]
         if hour == 1:
@@ -4792,33 +3416,6 @@ class GoldCtl:
         self._dp_rv_now = {}
         val_now = {q: _gc_price(q, inv[q]) for q in _GC_PRODUCTS}
         urgent = self.open is not None and self._open_on(day) and bool(getattr(self, "_open_urgent", False))
-        melon_urgent = self.open is not None and getattr(self, "_melon_day_on", -99) in (day, day - 1)
-        e1_buf = self.open.get("urgent_min") if (urgent and self.open is not None) else None
-        e1_need = getattr(self, "_open_need", None) if urgent else None
-        e1 = e1_buf is not None and e1_need is not None and GC_P["mkt_dp"] and not last
-        e1_dp = set(GC_P["mkt_dp_prods"]) if e1 else set()
-        e1_got = 0.0; e1_sold = {}
-        e1_defend = False
-        e1_dw = self.open.get("e1_defend_wool") if (e1 and self.open is not None) else None
-        if e1_dw:
-            try:
-                if int(e1_dw.get("from", 5)) <= day <= int(e1_dw.get("to", 10)):
-                    rs_ = sum(1 for row in obs["farms"][1 - self.me]["tiles"] for t_ in row if isinstance(t_, dict) and t_.get("animal") == "SHEEP")
-                    e1_defend = rs_ >= int(e1_dw.get("sheep", 4))
-            except Exception:
-                e1_defend = False
-            if e1_defend:
-                _GC_REPORT["gc_e1_defend"] = _GC_REPORT.get("gc_e1_defend", 0) + 1
-        if (not melon_urgent and self.open is not None and self._open_on(day) and int(self.open.get("melon_sell_now", 0) or 0) > 0
-                and int(shed.get("MELON", 0)) >= int(self.open["melon_sell_now"])):
-            melon_urgent = True   # melons in the shed sell at once during the opening: the first seller takes the melon book
-        pend = {}
-        if GC_P.get("market_fix1") and not last:
-            # inputs still to be picked up today (hands hired at hours 1-2, second PICKUPs, refills, dispatches)
-            for _u, _q in (self.queues or {}).items():
-                for _t, _a, _v in (_q or []):
-                    if _a[0] == "PICKUP" and len(_a) > 1 and _a[1] in ("WHEAT", "FERTILIZER"):
-                        pend[_a[1]] = pend.get(_a[1], 0) + (int(_a[2]) if len(_a) >= 3 else 1)
         for p in _GC_PRODUCTS:
             n = int(shed.get(p, 0))
             a = int(self.arb.get(p, 0)) if (GC_P["arb_on"] or GC_P["arb_chassis"]) else 0
@@ -4835,29 +3432,15 @@ class GoldCtl:
                 if hour >= GC_P["reserve_release_hour"]:
                     # what units carry now lands in the shed tonight and covers tomorrow's needs
                     keep = max(0, keep - int(ci.get(p, 0)))
-                if pend.get(p, 0) > keep:
-                    _GC_REPORT["gc_mfix1"] = _GC_REPORT.get("gc_mfix1", 0) + 1
-                    keep = pend[p]
                 n -= keep
             if n <= 0:
                 continue
             lot = GC_P["drip"].get(p) if GC_P["drip_on"] else None
             if lot and not last and not pressure and day < 29:
                 n = min(n, lot)
-            if (urgent and not (e1 and p in e1_dp and not (melon_urgent and p == "MELON") and not (e1_defend and p == "WOOL"))) or (melon_urgent and p == "MELON"):
-                # the opening's scheduled purchases wait for this cash: no holds (and the melon dump goes out at once)
+            if urgent:
+                # the opening's scheduled purchases wait for this cash: no holds
                 _GC_REPORT["gc_open_urgent_sold"] = _GC_REPORT.get("gc_open_urgent_sold", 0) + n
-                if urgent:
-                    try:
-                        v_ = float(sum(_gc_price(p, int(inv[p]) + i_) for i_ in range(n)))
-                        e1_got += v_; e1_sold[p] = e1_sold.get(p, 0) + n
-                        _GC_REPORT["gc_urg_value"] = _GC_REPORT.get("gc_urg_value", 0) + int(v_)
-                        if p in GC_P["mkt_dp_prods"]:
-                            _GC_REPORT["gc_urg_value_dp"] = _GC_REPORT.get("gc_urg_value_dp", 0) + int(v_)
-                    except Exception:
-                        pass
-                if p == "MELON" and melon_urgent:
-                    _GC_REPORT["gc_melon_sold_now"] = _GC_REPORT.get("gc_melon_sold_now", 0) + n
                 out.append(["SELL", p, n])
                 continue
             d29 = GC_P["mkt_dp_d29"] and day == 29 and step < 716
@@ -4881,11 +3464,6 @@ class GoldCtl:
                 if n <= 0:
                     continue
                 _GC_REPORT["gc_dp_sold"] = _GC_REPORT.get("gc_dp_sold", 0) + n
-                if e1:
-                    try:
-                        e1_got += float(sum(_gc_price(p, int(inv[p]) + i_) for i_ in range(n))); e1_sold[p] = e1_sold.get(p, 0) + n
-                    except Exception:
-                        pass
                 out.append(["SELL", p, n])
                 continue
             fl = GC_P["sell_floor"].get(p) if GC_P["sell_floor"] else None
@@ -4931,46 +3509,10 @@ class GoldCtl:
                     if n <= 0:
                         continue
             out.append(["SELL", p, n])
-        if urgent and e1_need is not None:
-            # trace: value sold this urgent step against the cash the unfunded schedule still needs
-            _GC_REPORT["gc_urg_steps"] = _GC_REPORT.get("gc_urg_steps", 0) + 1
-            _GC_REPORT["gc_urg_got"] = _GC_REPORT.get("gc_urg_got", 0) + int(e1_got)
-            _GC_REPORT["gc_urg_over"] = _GC_REPORT.get("gc_urg_over", 0) + int(max(0.0, e1_got - float(e1_need)))
-        if e1:
-            # E1: premium units only up to the shortfall (+ buffer), the next unit always the dearest one held
-            need_ = float(e1_need) + float(e1_buf) - e1_got
-            _GC_REPORT["gc_e1_steps"] = _GC_REPORT.get("gc_e1_steps", 0) + 1
-            extra = {}
-            while need_ > 0:
-                best_p = None; best_v = 0.0
-                for q in e1_dp:
-                    h_ = int(held.get(q, 0)) - extra.get(q, 0)
-                    if h_ <= 0:
-                        continue
-                    v_ = float(_gc_price(q, int(inv[q]) + e1_sold.get(q, 0) + extra.get(q, 0)))
-                    if v_ > best_v:
-                        best_p, best_v = q, v_
-                if best_p is None or best_v <= 1:
-                    break
-                extra[best_p] = extra.get(best_p, 0) + 1; need_ -= best_v
-            for q, k_ in extra.items():
-                held[q] = int(held.get(q, 0)) - k_
-                if held[q] <= 0:
-                    held.pop(q, None)
-                for o in out:
-                    if o[0] == "SELL" and o[1] == q:
-                        o[2] = int(o[2]) + k_
-                        break
-                else:
-                    out.append(["SELL", q, k_])
-            _GC_REPORT["gc_e1_extra_units"] = _GC_REPORT.get("gc_e1_extra_units", 0) + sum(extra.values())
-            _GC_REPORT["gc_e1_held_units"] = _GC_REPORT.get("gc_e1_held_units", 0) + sum(int(v) for q, v in held.items() if q in e1_dp)
         # shed room: the end-of-day drop (and any drop) must fit; release held lots first when it would not
         if held:
             total = sum(int(v) for v in shed.values()) - sum(int(o[2]) for o in out)
-            # pick_fix: the stock queued pickups take next turn needs no room for the held lots
-            pend_ = sum(min(int(shed.get(p_, 0)), int(x)) for p_, x in getattr(self, "_pend_pick", {}).items()) if GC_P.get("pick_fix") else 0
-            over = max(total - pend_ + (carried if hour >= 20 else 0) - (100 if hour >= 20 else GC_P["hold_room"]),
+            over = max(total + (carried if hour >= 20 else 0) - (100 if hour >= 20 else GC_P["hold_room"]),
                        total + getattr(self, "_drop_wait", 0) - 100)
             if GC_P["room_v3"] and over > 0:
                 # unit by unit, release where the marginal quote gives up least against the product's floor
@@ -5574,92 +4116,13 @@ def _early_straw(obs, action):
     return action
 
 
-_S2TX = {}
-
-
-def _s2tx_book(obs, day, prod, n, me):
-    """Forecast (our revenue, the rival's revenue) of `prod` from today to day 29 when we add n plots today, selling
-    on arrival into the book drained by the town (current shops + expected future ones) and supplied by every visible
-    plant of both farms (units per production as the controller's forecasts count them)."""
-    shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
-    if prod == "STRAWBERRY":
-        buyers = _STRAW_SHOPS; fw = 0.5 * GC_P["future_shop_w"] * GC_P["straw_future_w"]
-        ages = [10 + 2 * k + int(GC_P["straw_lag"]) for k in range(4)]; u = float(GC_P["straw_units"])
-        w_us, w_op = GC_P["straw_our_w"], GC_P["straw_opp_w"]
-    else:
-        buyers = ("PIZZA_SHOP", "FARMERS_MARKET"); fw = 0.25 * GC_P["future_shop_w"]
-        ages = [9, 11]; u = float(GC_P.get("tomato_units_fc", 8.0)) / 2.0
-        w_us, w_op = 1.0, GC_P["opp_tomato_w"]
-    k_now = sum(1 for x in shops if x in buyers); n_shops = len(shops)
-    sup = [{}, {}]
-    for side, w in ((me, w_us), (1 - me, w_op)):
-        for row in obs["farms"][side]["tiles"]:
-            for t in row:
-                if isinstance(t, dict) and t.get("crop") == prod:
-                    pd = int(t["planted_day"])
-                    for a in ages:
-                        if pd + a >= day:
-                            sup[side == me][pd + a] = sup[side == me].get(pd + a, 0.0) + u * w
-    inv = float(obs["market"]["inventory"][prod]); rev = [0.0, 0.0]
-    for d in range(day, 30):
-        unl = min(8, d // 3) - n_shops
-        inv -= 6.0 * (k_now + max(0, unl) * fw) + 1.0
-        q = sup[0].get(d, 0.0)       # the rival's units
-        if q > 0:
-            rev[1] += q * 0.5 * (_gc_price(prod, int(inv)) + _gc_price(prod, int(inv + q))); inv += q
-        q = sup[1].get(d, 0.0) + (u * n if (d - day) in ages else 0.0)
-        if q > 0:
-            rev[0] += q * 0.5 * (_gc_price(prod, int(inv)) + _gc_price(prod, int(inv + q))); inv += q
-    return rev
-
-
-def _s2tx_eval(obs, day, n):
-    """Margin forecast of converting n of today's strawberry plantings to tomatoes: tomato revenue + the tile freed
-    ~6 days earlier (wheat at today's value) + seeds/fertilizer saved - the strawberries' revenue - what the rival's
-    strawberries gain from our missing ones + what its tomatoes lose to ours."""
-    me = int(obs["player"])
-    val = {p_: float(_gc_price(p_, obs["market"]["inventory"][p_])) for p_ in _GC_PRODUCTS}
-    fert = val.get("FERTILIZER", 50.0)
-    s1 = _s2tx_book(obs, day, "STRAWBERRY", n, me); s0 = _s2tx_book(obs, day, "STRAWBERRY", 0, me)
-    t1 = _s2tx_book(obs, day, "TOMATO", n, me); t0 = _s2tx_book(obs, day, "TOMATO", 0, me)
-    S = s1[0] - s0[0]; Ds = s0[1] - s1[1]          # rival strawberry revenue our plots take away
-    T = t1[0] - t0[0]; Dt = t0[1] - t1[1]          # rival tomato revenue our plots take away
-    v_w = (6 * val["WHEAT"] - 10 - fert) / 4.0 + GC_P["wheat_feed_bonus"]
-    F = n * float(GC_P.get("s2tx_free_days", 6.0)) * max(0.0, v_w)
-    C = n * (50.0 + fert)
-    w = float(GC_P.get("s2tx_denial_w", 1.0))
-    return T + F + C - S + w * (Dt - Ds), (int(S), int(T), int(F), int(C), int(Ds), int(Dt))
-
-
 def _straw_to_tom(obs, action):
     day = int(obs["step"]) // 24
-    if int(obs["step"]) == 0:
-        _S2TX.clear()
     if day not in GC_P["s2t_days"] or not (_DIV2.get("on") or GC_P["s2t_all"]):
         return action
     shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
-    ext_n = None
     if GC_P["s2t_max_shops"] is not None and sum(1 for s in shops if s in _STRAW_SHOPS) > GC_P["s2t_max_shops"]:
-        ext = GC_P.get("s2t_ext")
-        if not ext:
-            return action
-        n_s = sum(1 for s in shops if s in _STRAW_SHOPS); n_t = sum(1 for s in shops if s in ("PIZZA_SHOP", "FARMERS_MARKET"))
-        if n_s > int(ext.get("straw", 1)) or n_t < int(ext.get("tom", 1)) or day not in ext.get("days", GC_P["s2t_days"]):
-            return action
-        ext_n = int(ext.get("max_n", 99))
-        stx0 = _S2TX.setdefault(day, {"seed": 0, "plant": 0})
-        if "fc" not in stx0:
-            try:
-                nb = int(ext.get("fc_n", 13))
-                v, parts = _s2tx_eval(obs, day, nb)
-                stx0["fc"] = v
-                _GC_REPORT["gc_s2tx_fc"] = "%d %d:%s" % (day, int(v), ",".join(str(x) for x in parts))
-            except Exception as e:
-                stx0["fc"] = None
-                _GC_REPORT["gc_s2tx_fc_err"] = repr(e)[:120]
-        if ext.get("fc_margin") is not None and (stx0["fc"] is None or stx0["fc"] < float(ext["fc_margin"])):
-            return action
-        _GC_REPORT["gc_s2t_ext"] = 1
+        return action
     if GC_P["s2t_max_sim"] is not None and not GC_P["s2t_all"]:
         me = int(obs["player"]); same = 0; n = 0
         for ra, rb in zip(obs["farms"][me]["tiles"], obs["farms"][1 - me]["tiles"]):
@@ -5671,43 +4134,12 @@ def _straw_to_tom(obs, action):
         _GC_REPORT["gc_s2t_sim"] = round(sim, 3)
         if sim > GC_P["s2t_max_sim"]:
             return action
-    if ext_n is None and int(GC_P["s2t_max_n"]) < 99:
-        ext_n = int(GC_P["s2t_max_n"])   # TOMATO track: partial conversion in the base (no strawberry shop) towns too
     crop = GC_P["s2t_crop"]
     if GC_P["s2t_by_town"]:
         crop = "TOMATO" if ("PIZZA_SHOP" in shops or "FARMERS_MARKET" in shops) else ("CARROT" if "PET_CAFE" in shops else "WHEAT")
         _GC_REPORT["gc_s2t_crop"] = crop
     cmds = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
     changed = 0; new = []
-    if ext_n is not None:
-        # partial conversion: the seeds bought for the batch are split (tomato seeds for at most ext_n plantings);
-        # a PLANT turns into tomato only while the converted seeds cover every tomato PLANT of the turn
-        stx = _S2TX.setdefault(day, {"seed": 0, "plant": 0})
-        market = []; seed_add = 0   # counters are committed only after the market-size guard below
-        for o in action.get("market") or []:
-            if isinstance(o, list) and len(o) >= 3 and o[0] == "BUY_SEED" and o[1] == "STRAWBERRY" and stx["seed"] + seed_add < ext_n:
-                k = min(int(o[2]), ext_n - stx["seed"] - seed_add); seed_add += k; changed += 1
-                market.append(["BUY_SEED", crop, k])
-                if int(o[2]) - k > 0:
-                    market.append(["BUY_SEED", "STRAWBERRY", int(o[2]) - k])
-                continue
-            market.append(o)
-        have = int(dict(obs["private"]["seeds"]).get(crop, 0) or 0)
-        t_now = sum(1 for c in cmds if isinstance(c, list) and len(c) >= 2 and c[0] == "PLANT" and c[1] == crop)
-        conv = 0
-        for c in cmds:
-            if (isinstance(c, list) and len(c) >= 2 and c[0] == "PLANT" and c[1] == "STRAWBERRY"
-                    and stx["plant"] + conv < ext_n and t_now + conv + 1 <= have):
-                c = ["PLANT", crop]; conv += 1
-            new.append(c)
-        if len(market) > 10:
-            return action
-        stx["seed"] += seed_add; stx["plant"] += conv; changed += conv
-        if changed:
-            action = dict(action); action["farmer"] = new[0]; action["hands"] = new[1:]; action["market"] = market
-            _GC_REPORT["gc_s2t"] = _GC_REPORT.get("gc_s2t", 0) + changed
-            _GC_REPORT["gc_s2tx"] = _GC_REPORT.get("gc_s2tx", 0) + conv
-        return action
     for c in cmds:
         if isinstance(c, list) and len(c) >= 2 and c[0] == "PLANT" and c[1] == "STRAWBERRY":
             c = ["PLANT", crop]; changed += 1
@@ -5720,74 +4152,6 @@ def _straw_to_tom(obs, action):
     if changed:
         action = dict(action); action["farmer"] = new[0]; action["hands"] = new[1:]; action["market"] = market
         _GC_REPORT["gc_s2t"] = _GC_REPORT.get("gc_s2t", 0) + changed
-    return action
-
-
-_W2T = {}
-
-
-def _wheat_to_tom(obs, action):
-    """TOMATO track: on w2t_days the tape's wheat replants become tomatoes (seeds bought first: the engine drops every
-    PLANT of a crop in a turn when the seeds do not cover all of them, and market orders settle after unit actions)."""
-    step = int(obs["step"]); day = step // 24
-    if step == 0:
-        _W2T.clear()
-    if day not in GC_P["w2t_days"] or not (_DIV2.get("on") or GC_P["s2t_all"]):
-        return action
-    if GC_P["w2t_adapt"]:
-        ad = globals().get("_AD_STATE")
-        if not (isinstance(ad, dict) and ad.get("off")):
-            return action
-    st = _W2T.setdefault(day, {"bought": 0, "done": 0, "ok": None})
-    me = int(obs["player"]); farm = obs["farms"][me]
-    if st["ok"] is None:
-        shops = list(_gc_get(obs["town"], "unlocked_shops", []) or [])
-        dem = 6 * sum(1 for x in shops if x in ("PIZZA_SHOP", "FARMERS_MARKET"))
-        ok = dem >= GC_P["w2t_min_dem"]
-        if ok and GC_P["s2t_max_sim"] is not None and not GC_P["s2t_all"]:
-            same = 0; n = 0
-            for ra, rb in zip(obs["farms"][me]["tiles"], obs["farms"][1 - me]["tiles"]):
-                for ta, tb in zip(ra, rb):
-                    ka = ta if not isinstance(ta, dict) else (ta.get("crop") or ta.get("animal") or ta.get("kind"))
-                    kb = tb if not isinstance(tb, dict) else (tb.get("crop") or tb.get("animal") or tb.get("kind"))
-                    same += (ka == kb); n += 1
-            ok = same / float(max(1, n)) <= GC_P["s2t_max_sim"]
-        if ok and GC_P["s2t_days"] and day in GC_P["s2t_days"] and _GC_REPORT.get("gc_s2t"):
-            ok = False   # s2t converts this day's strawberry batch: its seeds are the tomato seeds in the shed
-        st["ok"] = ok
-    if not st["ok"]:
-        return action
-    seeds_t = int(dict(obs["private"]["seeds"]).get("TOMATO", 0) or 0)
-    n_tom = sum(1 for row in farm["tiles"] for t in row if isinstance(t, dict) and t.get("crop") == "TOMATO")
-    action = dict(action)
-    if st["bought"] == 0 and not st.get("tried_buy_done"):
-        k = min(int(GC_P["w2t_n"]), int(GC_P["w2t_total"]) - n_tom - seeds_t)
-        mk = list(action.get("market") or [])
-        if k <= 0 or float(farm["money"]) < GC_P["w2t_cash"] + 50 * k:
-            st["tried_buy_done"] = True
-            if k <= 0:
-                st["ok"] = seeds_t > 0   # seeds already there (a previous day's leftovers) may still be used
-            return action
-        if len(mk) < 10:
-            mk.append(["BUY_SEED", "TOMATO", k]); action["market"] = mk
-            st["bought"] = k; st["buy_step"] = step
-            _GC_REPORT["gc_w2t_seed"] = _GC_REPORT.get("gc_w2t_seed", 0) + k
-        return action
-    if st.get("buy_step") == step:
-        return action
-    cmds = [action.get("farmer") or ["PASS"]] + list(action.get("hands") or [])
-    t_now = sum(1 for c in cmds if isinstance(c, list) and len(c) >= 2 and c[0] == "PLANT" and c[1] == "TOMATO")
-    lim = int(GC_P["w2t_total"]) - n_tom
-    new = []; conv = 0
-    for c in cmds:
-        if (isinstance(c, list) and len(c) >= 2 and c[0] == "PLANT" and c[1] == "WHEAT" and st["done"] < max(st["bought"], 0) + 99
-                and t_now + conv + 1 <= seeds_t and conv < lim and st["done"] + conv < int(GC_P["w2t_n"])):
-            c = ["PLANT", "TOMATO"]; conv += 1
-        new.append(c)
-    if conv:
-        st["done"] += conv
-        action["farmer"] = new[0]; action["hands"] = new[1:]
-        _GC_REPORT["gc_w2t"] = _GC_REPORT.get("gc_w2t", 0) + conv
     return action
 
 
@@ -5851,264 +4215,6 @@ def _lead2(obs, action):
     if added:
         action = dict(action); action["market"] = market
         _GC_REPORT["gc_lead2"] = _GC_REPORT.get("gc_lead2", 0) + added
-    return action
-
-
-_TB_PREM = ("MILK", "WOOL", "STRAWBERRY", "MELON", "TOMATO")
-_TB_ANIM = {"COW": "MILK", "SHEEP": "WOOL", "GOOSE": "EGG"}
-_TB_MOVES = ("NORTH", "SOUTH", "EAST", "WEST")
-_TB = {}
-
-
-def _tb_raw(tape, t, u):
-    a = tape[t] if 0 <= t < len(tape) and isinstance(tape[t], dict) else {}
-    if u == 0:
-        c = a.get("farmer") or ["PASS"]
-    else:
-        hs = a.get("hands") or []
-        c = hs[u - 1] if u - 1 < len(hs) and hs[u - 1] else ["PASS"]
-    return list(c)
-
-
-def _tb_sim(block, inv, hp, hn, fert):
-    """Inventory through a block on one tile: (ok, final inventory). ok is False when a FEED / FERTILIZE / animal PLACE
-    would find nothing to use (a harvest yields hn of hp once; the tile's fertilizer can be collected once)."""
-    inv = {k: int(v) for k, v in inv.items() if int(v) > 0}
-    harvested = False; collected = False
-    for c in block:
-        op = c[0]
-        if op == "PICKUP" and len(c) >= 2:
-            n = int(c[2]) if len(c) >= 3 else 1
-            inv[c[1]] = inv.get(c[1], 0) + max(0, n)
-        elif op == "FEED":
-            if inv.get("WHEAT", 0) <= 0:
-                return False, inv
-            inv["WHEAT"] -= 1
-        elif op == "FERTILIZE":
-            if inv.get("FERTILIZER", 0) <= 0:
-                return False, inv
-            inv["FERTILIZER"] -= 1
-        elif op == "COLLECT_FERTILIZER":
-            if fert and not collected:
-                collected = True
-                inv["FERTILIZER"] = inv.get("FERTILIZER", 0) + 1
-        elif op == "HARVEST":
-            if hp and hn > 0 and not harvested:
-                harvested = True
-                inv[hp] = inv.get(hp, 0) + hn
-        elif op == "PLACE" and len(c) >= 2:
-            n = int(c[2]) if len(c) >= 3 else 1
-            if c[1] in ("COW", "SHEEP", "GOOSE"):
-                if inv.get(c[1], 0) <= 0:
-                    return False, inv
-                inv[c[1]] -= 1
-            else:
-                inv[c[1]] = inv.get(c[1], 0) - min(max(0, n), inv.get(c[1], 0))
-        elif op == "DROP":
-            inv = {}
-    return True, {k: v for k, v in inv.items() if v > 0}
-
-
-def _tb_plan(obs, tape, u, step, pos, inv, cur, cfg):
-    """A permuted block for unit u standing on shed-access tile pos (see GC_P['tie_blk']), or None."""
-    if pos not in _GC_ACCESS_SET or cur != _tb_raw(tape, step, u):
-        return None
-    day = step // 24
-    last = day * 24 + 23
-    block = []
-    for t in range(step, last + 1):
-        c = _tb_raw(tape, t, u)
-        if not c or c[0] in _TB_MOVES:
-            break
-        block.append(c)
-    if len(block) < 2:
-        return None
-    me = int(obs["player"])
-    farm = obs["farms"][me]
-    tile = farm["tiles"][pos[1]][pos[0]]
-    hp, hn, fert = None, 0, False
-    if isinstance(tile, dict):
-        if tile.get("animal"):
-            hp = _TB_ANIM.get(tile["animal"]); fert = bool(tile.get("fertilizer_available"))
-        elif tile.get("kind") == "PLANT":
-            hp = tile.get("crop")
-        hn = int(tile.get("yield_units", 0) or 0)
-    inv = {k: int(v) for k, v in dict(inv or {}).items() if int(v) > 0}
-    held = {k: inv.get(k, 0) for k in _TB_PREM if inv.get(k, 0) > 0}
-    ih = None; j = None
-    for i, c in enumerate(block):
-        op = c[0]
-        if op == "HARVEST" and ih is None and hp in _TB_PREM and hn > 0:
-            ih = i; held[hp] = held.get(hp, 0) + hn
-            continue
-        if op == "PLACE" and len(c) >= 2 and c[1] in _TB_PREM:
-            j = i; break
-        if op == "DROP" and any(v > 0 for v in held.values()):
-            j = i; break
-    if j is None:
-        return None
-    D = block[j]
-    if D[0] == "PLACE":
-        prod = D[1]
-    else:
-        prods = [k for k, v in held.items() if v > 0]
-        if len(prods) != 1:
-            return None
-        prod = prods[0]
-    if ih is not None and hp != prod:
-        return None
-    if ih is None and not inv.get(prod, 0):
-        return None
-    e = 0 if ih is None else 1
-    if j - e < 1:
-        return None
-    jumped = [block[i] for i in range(j) if i != ih]
-    for c in jumped:
-        if c[0] == "DROP" or (c[0] in ("PLACE", "PICKUP") and len(c) >= 2 and c[1] in _TB_PREM):
-            return None
-    new = ([block[ih]] if ih is not None else []) + [list(D)] + jumped + [list(c) for c in block[j + 1:]]
-    ok0, fin0 = _tb_sim(block, inv, hp, hn, fert)
-    ok1, fin1 = _tb_sim(new, inv, hp, hn, fert)
-    if not ok0 or not ok1 or fin0 != fin1:
-        return None
-    t_e, t_d = step + e, step + j
-    if (t_e - 1) // 4 != (t_d - 1) // 4 and not cfg.get("cross", False):
-        return None
-    # the tape sells this product at its drop step (or the step after: the chassis's one-step lead)
-    sold = any(isinstance(o, list) and len(o) >= 3 and o[0] == "SELL" and o[1] == prod
-               for t in (t_d, t_d + 1) if 0 <= t < len(tape) and isinstance(tape[t], dict)
-               for o in (tape[t].get("market") or []))
-    if not sold:
-        return None
-    # delayed PICKUPs: the shed must hold what every unit's tape picks up of that item through our new pickup turn
-    shed = {k: int(v) for k, v in dict(obs["private"]["shed"]).items()}
-    for k_new, c in enumerate(new):
-        if c[0] != "PICKUP" or len(c) < 2:
-            continue
-        k_old = block.index(c) if c in block else k_new
-        if k_new <= k_old:
-            continue
-        need = 0
-        for t in range(step, step + k_new + 1):
-            a = tape[t] if 0 <= t < len(tape) and isinstance(tape[t], dict) else {}
-            for c2 in [a.get("farmer")] + list(a.get("hands") or []):
-                if isinstance(c2, list) and len(c2) >= 2 and c2[0] == "PICKUP" and c2[1] == c[1]:
-                    need += int(c2[2]) if len(c2) >= 3 else 1
-        if shed.get(c[1], 0) < need:
-            return None
-    n = held.get(prod, 0)
-    if D[0] == "PLACE" and len(D) >= 3:
-        n = min(n, int(D[2]))
-    if n <= 0:
-        return None
-    return dict(t0=step, day=day, pos=pos, cmds=new, sell_i=e, prod=prod, n=int(n), lead=j - e)
-
-
-def _tb_opt_order(orders, inv):
-    """tie_sort "opt": a copy runs the same SELL list in the same order, so our lot X at index i beats the copy's lot
-    of X when i is below the copy's index (the tape order), ties when equal and loses when above. Choose the order of
-    our leading SELLs (up to five) that maximises the sum of lot impacts won minus lost (impact = units x the price
-    drop the lot causes); the tape order unless something strictly better exists."""
-    import itertools
-    k = 0
-    while k < len(orders) and k < 10 and isinstance(orders[k], list) and orders[k] and orders[k][0] == "SELL":
-        k += 1
-    if k < 2 or k > 5:
-        return orders
-    front = orders[:k]
-    def impact(o):
-        try:
-            p = o[1]; n = min(100, int(o[2]) if len(o) > 2 else 1)
-            if n <= 0 or p not in _GC_MKT:
-                return 0.0
-            i0 = int(inv[p])
-            return float(n) * (_gc_price(p, i0) - _gc_price(p, i0 + n))
-        except Exception:
-            return 0.0
-    imp = [impact(o) for o in front]
-    best, best_perm = 0.0, None
-    for perm in itertools.permutations(range(k)):
-        sc = 0.0
-        for pos, i in enumerate(perm):
-            if pos < i:
-                sc += imp[i]
-            elif pos > i:
-                sc -= imp[i]
-        if sc > best + 1e-9:
-            best, best_perm = sc, perm
-    if best_perm is None:
-        return orders
-    _GC_REPORT["gc_tie_sort"] = _GC_REPORT.get("gc_tie_sort", 0) + 1
-    return [front[i] for i in best_perm] + orders[k:]
-
-
-def _tie_blk(obs, action):
-    cfg = GC_P.get("tie_blk") or {}
-    step = int(obs["step"]); day = step // 24
-    me = int(obs["player"])
-    st = _TB.get(me)
-    if st is None or step == 0 or step <= st["step"]:
-        st = _TB[me] = {"step": -1, "plans": {}}
-    st["step"] = step
-    if not isinstance(action, dict) or not (int(cfg.get("from", 6)) <= day <= int(cfg.get("to", 19))):
-        return action
-    if cfg.get("copy_only"):
-        ad = globals().get("_AD_STATE")
-        if isinstance(ad, dict) and ad.get("off"):
-            return action
-    impl = globals().get("_IMPL"); ch = getattr(impl, "chassis", None)
-    pst = ch.players.get(me) if ch is not None else None
-    if not pst or pst.get("route") not in ch.routes:
-        return action
-    tape = ch.routes[pst["route"]]
-    farm = obs["farms"][me]
-    positions = [tuple(farm["farmer"])] + [tuple(p) for p in (farm["hands"] or [])]
-    invs = list(obs["private"].get("inventories") or [])
-    cmds = [list(action.get("farmer") or ["PASS"])] + [list(c) if c else ["PASS"] for c in (action.get("hands") or [])]
-    for u in list(st["plans"]):
-        pl = st["plans"][u]
-        if pl["day"] != day or step - pl["t0"] >= len(pl["cmds"]):
-            del st["plans"][u]
-        elif u >= len(positions) or positions[u] != pl["pos"]:
-            del st["plans"][u]
-            _GC_REPORT["gc_tie_abort"] = _GC_REPORT.get("gc_tie_abort", 0) + 1
-    sells = {}
-    changed = False
-    for u in range(min(len(cmds), len(positions))):
-        pl = st["plans"].get(u)
-        if pl is None:
-            pl = _tb_plan(obs, tape, u, step, positions[u], invs[u] if u < len(invs) else {}, cmds[u], cfg)
-            if pl is None:
-                continue
-            st["plans"][u] = pl
-            _GC_REPORT["gc_tie_blk"] = _GC_REPORT.get("gc_tie_blk", 0) + 1
-            _GC_REPORT["gc_tie_lead"] = _GC_REPORT.get("gc_tie_lead", 0) + pl["lead"]
-        i = step - pl["t0"]
-        if cmds[u] != pl["cmds"][i]:
-            cmds[u] = list(pl["cmds"][i]); changed = True
-        if i == pl["sell_i"]:
-            sells[pl["prod"]] = sells.get(pl["prod"], 0) + pl["n"]
-    if not changed and not sells:
-        return action
-    action = dict(action)
-    action["farmer"] = cmds[0]
-    action["hands"] = cmds[1:]
-    if sells:
-        market = [list(o) for o in (action.get("market") or []) if isinstance(o, list)]
-        for item, q in sells.items():
-            for o in market:
-                if len(o) >= 3 and o[0] == "SELL" and o[1] == item:
-                    o[2] = int(o[2]) + q
-                    break
-            else:
-                if len(market) >= 10:
-                    continue
-                k = 0
-                while k < len(market) and market[k] and market[k][0] == "SELL":
-                    k += 1
-                market.insert(k, ["SELL", item, int(q)])
-            _GC_REPORT["gc_tie_units"] = _GC_REPORT.get("gc_tie_units", 0) + q
-        action["market"] = market
     return action
 
 
@@ -6243,59 +4349,6 @@ if GC_P.get("v233_wool_first") and "_SL_WORKER" in globals():
     _SL_WORKER = _v233_worker_wool_first
 
 
-_OPR = {}
-
-
-def _opr_class(obs, route):
-    """Rival class from what its step-0 orders left visible at step 1: money and hands (tiles are still empty)."""
-    me = int(obs["player"]); rf = obs["farms"][1 - me]
-    m = float(rf["money"]); h = len(rf["hands"])
-    for lo, hi in route.get("c2s3_bands", ((540, 720), (940, 980), (2440, 2480))):
-        if h == 0 and lo <= m <= hi:
-            return "C2S3"
-    if h == 0 and m >= float(route.get("chassis_min", 2985)):
-        return "chassis"
-    if route.get("fine"):
-        # finer herd classes (28 Sep, from the elite refs' step-1 fingerprints): TFC 19/5 and 吃白饭的大肥鱼 12-17/4 spend
-        # everything ("herdpoor": the tape beats them, the opening loses); Boey 2339/5 and Fourth Quadrant 393-1596/3-4 are
-        # the seats the opening wins ("herdfirst"); Majkel1337 1806-1835/5 ("majkel") is a tape seat.
-        if h >= 4 and m < float(route.get("herdpoor_max", 300)):
-            return "herdpoor"
-        if h == 5 and 2200 <= m <= 2500:
-            return "herdfirst"
-        if h == 5 and 1700 < m < 2200:
-            return "majkel"
-        if 3 <= h <= 5 and 300 <= m <= 1700:
-            return "herdfirst"
-        return "other"
-    if h >= 3 and m <= float(route.get("herd_max", 1600)):
-        return "herdfirst"
-    return "other"
-
-
-def _opr_route(obs):
-    """Step 1: play the tape (T8) against the classes listed in open['route']['tape'], the opening otherwise."""
-    op = GC_P.get("open")
-    if not isinstance(op, dict) or not op.get("route") or "cls" in _OPR:
-        return
-    route = op["route"]
-    cls = _opr_class(obs, route)
-    _OPR["cls"] = cls
-    _GC_REPORT["gc_route"] = cls
-    try:
-        _rf = obs["farms"][1 - int(obs["player"])]
-        _GC_REPORT["gc_route_obs"] = "%d/%d" % (int(float(_rf["money"])), len(_rf["hands"]))
-    except Exception:
-        pass
-    if cls in route.get("tape", ()):
-        GC_P.update(route.get("tape_over", {"start": 480, "care_eve_fix": False}))
-        GC_P["open"] = None
-        _GC.open = None
-        _GC_REPORT["gc_route_tape"] = 1
-    else:
-        GC_P["start"] = 1
-
-
 def agent(observation, configuration=None):
     step = int(observation["step"])
     if step == 0:
@@ -6303,17 +4356,8 @@ def agent(observation, configuration=None):
     _GC.me = int(observation["player"])
     if step == 0 and _GC_DIV_SAVED:
         GC_P.update(_GC_DIV_SAVED); _GC_DIV_SAVED.clear()
-    if step == 0 and GC_P.get("handover_fix2"):
-        _ad0 = globals().get("_AD_STATE")
-        if isinstance(_ad0, dict) and (_ad0.get("off") or _ad0.get("saved")) and callable(globals().get("_ad_restore")):
-            _ad_restore()
-            _GC_REPORT["gc_hfix2"] = _GC_REPORT.get("gc_hfix2", 0) + 1
-        if isinstance(globals().get("_AD_REPORT"), dict):
-            _AD_REPORT.update(ad_divergent=0, ad_step=-1, ad_sim=-1.0)
     if step == 0:
-        _GC_RICH.clear(); _OPR.clear()
-    if step == 1:
-        _opr_route(observation)
+        _GC_RICH.clear()
     start = GC_P["start"]
     if GC_P.get("tom_debug") and step == 288 and not _GC_RICH.get("tdbg"):
         _GC_RICH["tdbg"] = True
@@ -6327,16 +4371,7 @@ def agent(observation, configuration=None):
         _GC_REPORT["gc_tom_inv0"] = int(observation["market"]["inventory"]["TOMATO"])
     steps = GC_P["rich_steps"] or ((GC_P["rich_start"],) if GC_P["rich_start"] is not None else ())
     due = [s for s in steps if s <= step and s not in _GC_RICH.get("done", ())]
-    _op_rh = isinstance(GC_P.get("open"), dict) and bool(GC_P["open"].get("rich_handover"))
-    _rh_snap = None
-    if due and _op_rh and not _GC_RICH.get("rich") and not _GC_RICH.get("div_applied") and GC_P["div_over"]:
-        # the clone plays from step 0 (taken): evaluate the town as T8 does; div_over first (T8 applies it at step 143)
-        _rh_snap = (dict(GC_P), dict(_GC_DIV_SAVED))
-        for k, v in GC_P["div_over"].items():
-            if k not in _GC_DIV_SAVED:
-                _GC_DIV_SAVED[k] = GC_P.get(k)
-        GC_P.update(GC_P["div_over"])
-    if due and not _GC_RICH.get("rich") and (not _GC_RICH.get("taken") or _op_rh):
+    if due and not _GC_RICH.get("rich") and not _GC_RICH.get("taken"):
         _GC_RICH.setdefault("done", set()).update(due)
         _GC_RICH["checked"] = True
         shops = list(_gc_get(observation["town"], "unlocked_shops", []) or [])[:max(4, len(_gc_get(observation["town"], "unlocked_shops", []) or [])) if GC_P["rich_steps"] else 4]
@@ -6421,16 +4456,6 @@ def agent(observation, configuration=None):
                 if kk not in _GC_DIV_SAVED:
                     _GC_DIV_SAVED[kk] = GC_P.get(kk)
             GC_P.update(GC_P["rich_over"])
-        if _op_rh:
-            if _GC_RICH["rich"]:
-                # rich town: the opening ends now and T8's rich-town controller takes over (div_over + rich_over)
-                _GC_RICH["div_applied"] = True
-                if _GC.open is not None:
-                    _GC.open["until"] = min(int(_GC.open["until"]), step // 24)
-                _GC_REPORT["gc_open_rich"] = step
-            elif _rh_snap is not None:
-                GC_P.clear(); GC_P.update(_rh_snap[0])
-                _GC_DIV_SAVED.clear(); _GC_DIV_SAVED.update(_rh_snap[1])
     if GC_P["start_div2"] is not None and step >= 2:
         # the step-2 cash rule (see _div2_check) classed the rival divergent: take over at start_div2
         if not _DIV2 and step <= 2:
@@ -6472,18 +4497,6 @@ def agent(observation, configuration=None):
     if GC_P["open"] is not None:
         od = GC_P["open"].get("from_day", _OPEN_DEFAULT["from_day"]) if isinstance(GC_P["open"], dict) else _OPEN_DEFAULT["from_day"]
         start = min(start, 24 * int(od))   # the scheduled opening starts on its day whatever the rival is classed as
-        op_ = GC_P["open"] if isinstance(GC_P["open"], dict) else {}
-        if op_.get("route"):
-            start = max(start, 1)   # the rival is classed at step 1 (the tape plays step 0)
-        if (op_.get("div_at_until") and step >= 24 * int(op_.get("until", _OPEN_DEFAULT["until"])) and GC_P["div_over"]
-                and not _GC_RICH.get("div_applied")):
-            # the opening hands over to the controller's divergent-rival rules (T8 against the elite: day 16 + div_over)
-            _GC_RICH["div_applied"] = True
-            for k, v in GC_P["div_over"].items():
-                if k not in _GC_DIV_SAVED:
-                    _GC_DIV_SAVED[k] = GC_P.get(k)
-            GC_P.update(GC_P["div_over"])
-            _GC_REPORT["gc_open_div"] = step
     if step >= start:
         _GC_RICH["taken"] = True
     if step == 0 and GC_P["chassis_globals"]:
@@ -6565,17 +4578,6 @@ def agent(observation, configuration=None):
                 action = _straw_to_tom(observation, action)
             except Exception as e:
                 _GC_REPORT["gc_s2t_err"] = repr(e)[:120]
-        if GC_P["w2t_days"]:
-            try:
-                _div2_check(observation)
-                action = _wheat_to_tom(observation, action)
-            except Exception as e:
-                _GC_REPORT["gc_w2t_err"] = repr(e)[:120]
-        if GC_P.get("tie_blk"):
-            try:
-                action = _tie_blk(observation, action)
-            except Exception as e:
-                _GC_REPORT["gc_tie_err"] = repr(e)[:120]
         if GC_P["lead2"]:
             try:
                 action = _lead2(observation, action)
@@ -6587,24 +4589,6 @@ def agent(observation, configuration=None):
                 ad = globals().get("_AD_STATE")
                 if GC_P["sells_first_div_sort"] and isinstance(ad, dict) and ad.get("off"):
                     action["market"] = _gc_sells_first(action["market"], observation["market"]["inventory"])
-                elif GC_P.get("tie_sort") == "impact" and not (isinstance(ad, dict) and ad.get("off")):
-                    # copies: the lots whose contest costs the most go first (a copy runs this same list: each move
-                    # trades a tie for a win and a loss, and the lot moved up is the one worth more)
-                    action["market"] = _gc_sells_first(action["market"], observation["market"]["inventory"])
-                elif GC_P.get("tie_sort") == "opt" and not (isinstance(ad, dict) and ad.get("off")):
-                    action["market"] = _tb_opt_order(_gc_sells_first(action["market"]), observation["market"]["inventory"])
-                elif GC_P.get("tie_sort") == "prem" and not (isinstance(ad, dict) and ad.get("off")):
-                    # copies: premium lots ahead of fertilizer/wheat/egg/carrot lots (their books barely move: losing
-                    # those ties costs cents, the premium tie won is worth a lot's price drop)
-                    m_ = _gc_sells_first(action["market"])
-                    k_ = 0
-                    while k_ < len(m_) and isinstance(m_[k_], list) and m_[k_] and m_[k_][0] == "SELL":
-                        k_ += 1
-                    head_ = m_[:min(k_, 10)]
-                    pr_ = [o for o in head_ if len(o) >= 2 and o[1] in _TB_PREM]
-                    if pr_ and pr_ != head_[:len(pr_)]:
-                        _GC_REPORT["gc_tie_sort"] = _GC_REPORT.get("gc_tie_sort", 0) + 1
-                    action["market"] = pr_ + [o for o in head_ if not (len(o) >= 2 and o[1] in _TB_PREM)] + m_[len(head_):]
                 else:
                     action["market"] = _gc_sells_first(action["market"])   # a copy runs this same list: keep its sell order
             except Exception as e:
@@ -6629,31 +4613,6 @@ def agent(observation, configuration=None):
                 action = _fert_idle(observation, action)
             except Exception as e:
                 _GC_REPORT["gc_fert_idle_err"] = repr(e)[:120]
-        if GC_P.get("handover_fix1") and GC_P["sell_timing"] and isinstance(action, dict):
-            try:
-                _GC._mk_track(observation)
-                # the shed our SELLs draw on this turn: units that DROP now land in it before the market runs (the
-                # chassis sells goods in the turn they are dropped; the pre-drop shed would credit those sales to the rival)
-                shed_ = {k: int(v) for k, v in dict(observation["private"]["shed"]).items()}
-                invs_ = list(observation["private"].get("inventories") or [])
-                for u_, a_ in enumerate([action.get("farmer")] + list(action.get("hands") or [])):
-                    if not (isinstance(a_, (list, tuple)) and a_ and u_ < len(invs_)):
-                        continue
-                    if a_[0] == "DROP":
-                        for k2, n2 in dict(invs_[u_]).items():
-                            shed_[k2] = shed_.get(k2, 0) + int(n2)
-                    elif a_[0] == "PLACE" and len(a_) >= 2 and a_[1] in _GC_PRODUCTS:
-                        # the chassis's partial delivery ["PLACE", item, n] on a shed-access tile
-                        n2 = min(int(a_[2]) if len(a_) >= 3 else 1, int(dict(invs_[u_]).get(a_[1], 0)))
-                        if n2 > 0:
-                            shed_[a_[1]] = shed_.get(a_[1], 0) + n2
-                    elif a_[0] == "PICKUP" and len(a_) >= 2:
-                        n2 = int(a_[2]) if len(a_) >= 3 else 1
-                        shed_[a_[1]] = max(0, shed_.get(a_[1], 0) - max(0, n2))
-                _GC._mk_store(observation, shed_, [o for o in (action.get("market") or []) if isinstance(o, list)])
-                _GC_REPORT["gc_hfix1"] = sum(len(v) for v in _GC.rival_sales.values())
-            except Exception as e:
-                _GC_REPORT["gc_hfix1_err"] = repr(e)[:120]
         return action
     if GC_P["arb_chassis"] and not _GC_RICH.get("arb_handed"):
         _GC_RICH["arb_handed"] = True
@@ -6669,77 +4628,6 @@ def agent(observation, configuration=None):
         _GC_REPORT["gc_last_error"] = repr(e)[:200]
         return {"farmer": ["PASS"], "hands": [], "market": []}
 
-
-
-
-# ---- delivery-first harvest waves (from the Codex audit, 28 Sep): open["liq_days"] = [6, 8, 9]. On those opening days the
-# animal HARVEST legs (wool, milk, eggs worth >= 3 units) are split from the feed/care chores into short collect-and-deliver
-# trips that run first in every route, so the day's product is in the shed and sold before the input pickups; the chores are
-# routed afterwards from the shed. Off unless the knob is set (the build is then byte-identical in behaviour).
-_LIQ_VRP = GoldCtl._vrp
-_LIQ_COMPILE = GoldCtl._compile
-
-
-def _liq_vrp(self, visits, h, starts=None, caps=None):
-    day = getattr(self, "day", 0)
-    opn = getattr(self, "open", None)
-    days = opn.get("liq_days") if isinstance(opn, dict) else None
-    if not days or not self._open_on(day) or day not in days or starts is not None:
-        return _LIQ_VRP(self, visits, h, starts, caps)
-    def _ripe_melon(v):
-        if not opn.get("liq_melon") or v.tag != "P":
-            return False
-        t_ = self.tiles_today[v.pos[1]][v.pos[0]]
-        return isinstance(t_, dict) and t_.get("crop") == "MELON" and int(t_.get("yield_units", 0)) >= int(opn.get("liq_melon_min", 6))
-    hot = [v for v in visits if any(a[0] == "HARVEST" for a in v.acts) and ((v.tag == "A" and v.carry >= 3) or _ripe_melon(v))]
-    if not hot:
-        return _LIQ_VRP(self, visits, h, starts, caps)
-    sp = [(4, 4)] + self._spawns(h, (4, 4)); ends = list(sp)
-    caps0 = [self._cap(u) for u in range(len(sp))]; left = list(caps0)
-    heads = [[] for _ in sp]; tail = []
-    mapping = {id(v): v for v in hot}
-    for v in sorted(hot, key=lambda v: -v.carry * (self.val.get("MELON", 250) if _ripe_melon(v) else self.val.get((v.gain or {}).get("prod", "WOOL"), 100))):
-        ret = _gc_near_access(v.pos)
-        u = min(range(len(sp)), key=lambda u: (bool(heads[u]), abs(sp[u][0] - v.pos[0]) + abs(sp[u][1] - v.pos[1])))
-        cost = _gc_dist(ends[u], v.pos) + 1 + _gc_dist(v.pos, ret) + 1
-        if cost >= left[u] - 2:
-            mapping.pop(id(v)); continue
-        head = _GcVisit(v.pos, [["HARVEST"]], value=v.value, must=v.must, tag="J", carry=int(self.tiles_today[v.pos[1]][v.pos[0]].get("yield_units", 0)))
-        heads[u].extend([head, self._stop_visit(v.pos)]); left[u] -= cost; ends[u] = ret
-    for v in visits:
-        if id(v) in mapping:
-            acts = [a for a in v.acts if a[0] != "HARVEST"]
-            if _ripe_melon(v):
-                acts = []   # a harvested melon plant is gone: nothing left to tend
-            if acts:
-                tail.append(_GcVisit(v.pos, acts, value=v.value, must=v.must, wheat=v.wheat, fert=v.fert, anim=v.anim, gain=v.gain, tag=v.tag, carry=int(any(a[0] == "COLLECT_FERTILIZER" for a in acts))))
-        else:
-            tail.append(v)
-    rr, _, un = _LIQ_VRP(self, tail, h, ends, left)
-    _GC_REPORT["gc_liq_days"] = _GC_REPORT.get("gc_liq_days", 0) + 1
-    return [heads[u] + rr[u] for u in range(len(sp))], sp, un
-
-
-def _liq_compile(self, routes, spawns, hour0=True):
-    if not any(any(getattr(v, "tag", None) == "J" for v in r) for r in routes):
-        return _LIQ_COMPILE(self, routes, spawns, hour0)
-    out = _LIQ_COMPILE(self, routes, spawns, hour0)
-    for u, q in enumerate(out):
-        headidx = [i for i, (p, a, v) in enumerate(q) if v is not None and v.tag == "J"]
-        if not headidx:
-            continue
-        moving = []; rest = []
-        for p, a, v in q:
-            if a[0] == "PICKUP": moving.append((p, a, v))
-            else: rest.append((p, a, v))
-        j = max(i for i, (p, a, v) in enumerate(rest) if v is not None and v.tag == "J")
-        stop = next((i for i in range(j + 1, len(rest)) if rest[i][1][0] == "DROP"), j)
-        out[u] = rest[:stop + 1] + moving + rest[stop + 1:]
-    return out
-
-
-GoldCtl._vrp = _liq_vrp
-GoldCtl._compile = _liq_compile
 
 agent.telemetry = _GC_REPORT
 globals().pop("kaggle_submission_agent", None)

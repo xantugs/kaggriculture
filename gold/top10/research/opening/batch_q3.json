@@ -1,0 +1,51 @@
+{
+ "f1": {
+  "melon_fert": [
+   6
+  ],
+  "over": {
+   "plant_must": false,
+   "max_hands": 11,
+   "hire_cost_w": 1.0,
+   "prem_drop": true,
+   "prem_drop_max": 6,
+   "deliver_prem": 800.0,
+   "hire_compact": false,
+   "max_sell0": 10,
+   "fert_keep": 7
+  }
+ },
+ "f2": {
+  "melon_fert": [
+   6,
+   7
+  ],
+  "over": {
+   "plant_must": false,
+   "max_hands": 11,
+   "hire_cost_w": 1.0,
+   "prem_drop": true,
+   "prem_drop_max": 6,
+   "deliver_prem": 800.0,
+   "hire_compact": false,
+   "max_sell0": 10,
+   "fert_keep": 7
+  }
+ },
+ "f3": {
+  "melon_fert": [
+   6
+  ],
+  "over": {
+   "plant_must": false,
+   "max_hands": 11,
+   "hire_cost_w": 1.0,
+   "prem_drop": true,
+   "prem_drop_max": 6,
+   "deliver_prem": 800.0,
+   "hire_compact": false,
+   "max_sell0": 10,
+   "fert_keep": 10
+  }
+ }
+}

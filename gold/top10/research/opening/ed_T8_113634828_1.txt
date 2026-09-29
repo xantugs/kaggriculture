@@ -1,0 +1,35 @@
+gid 113634828 seat 1 team ? shops ['SMOOTHIE_SHOP', 'BAKERY', 'PET_CAFE', 'PET_CAFE', 'YARN_STORE', 'YARN_STORE', 'YARN_STORE', 'BAKERY']: us 76774 elite 99324 (us-elite -22550)
+ d |  us cash  el cash     gap  dgap | hU hE | us revenue                                     | elite revenue                                  | us census                      | elite census
+ 0 |       12       11       1     1 |  5  4 | whe250                                         | whe368                                         | C2 S2 m12 w8                   | C4 S2 m3 w9
+ 1 |       99        5      94    93 |  3  5 | fer298                                         | fer596 whe476                                  | C2 S2 m12 w8                   | C4 S2 m8 w11
+ 2 |      206       16     190    96 |  4  6 | fer486 whe60                                   | whe1675 fer686                                 | C3 S2 m12 w8                   | C4 S3 m9 s1 w7
+ 3 |      329       40     289    99 |  5  6 | fer379 whe226                                  | whe1771 fer960                                 | C3 S2 m12 w7                   | C5 S3 m9 s5 w2
+ 4 |      729       27     702   413 |  4  6 | fer645 whe54                                   | fer748 whe134                                  | C4 S2 m12 w7                   | C6 S3 m9 s6 w1
+ 5 |      825       43     782    80 |  4  7 | fer447 whe58                                   | fer813 whe58                                   | C4 S2 m12 s4 w3                | C7 S3 m9 s6
+ 6 |      665       57     608  -174 |  7  8 | woo2340 fer785 whe279                          | woo2544 fer870 whe748                          | C6 S2 m12 s12 w6               | C7 S3 m12 s26 w2
+ 7 |      431       77     354  -254 |  7  8 | fer751 woo370                                  | whe1052 fer833                                 | C8 S2 m12 s16 w8               | C6 S3 m12 s27 w2
+ 8 |     1492      774     718   364 |  8 10 | mil3822 fer805 whe70                           | mil4830 whe2355 fer2319 woo1122                | C8 S4 m12 s20 w5               | C9 S5 m13 s30 w18
+ 9 |     2029     2109     -80  -798 |  8  9 | woo1180 fer1077 whe74                          | fer3992 whe2463 woo1376                        | C8 S5 m12 s20 w5               | C9 S5 m13 s30 w18
+10 |    16767     3839   12928 13008 | 11 12 | mel14502 mil3813 fer666 whe114                 | mel4488 whe2968 fer2566 mil1758                | C8 G2 S6 s20 w12               | C9 S5 c3 m10 s30 w40
+11 |    16703    10072    6631 -6297 | 10 12 | mel2460 mil1548 fer1154 whe351                 | mel5118 whe2786 fer2576 woo532 mil531          | C8 G3 S6 s33 w21               | C9 S5 c11 m5 s30 w40
+12 |    19217    14932    4285 -2346 |  9 11 | fer1156 mil846 woo656 whe351                   | whe3074 mil2793 fer2564 woo892 mel816          | C8 G3 S6 s33 w24               | C9 S5 c24 m4 s30 w28
+13 |    21549    17778    3771  -514 |  9 12 | mil1509 fer1068 whe879                         | whe3436 fer3089 mil756 str386                  | C8 G3 S6 s33 w24               | C9 S5 c38 m4 s30 w14
+14 |    22866    22615     251 -3520 |  9 12 | mil1524 fer841 whe297 woo294                   | whe3926 fer2045 str1948 mil1335 car735         | C8 G3 S6 s33 w24               | C9 S5 c34 m4 s30 w17
+15 |    26670    24642    2028  1777 | 10 12 | str3120 mil1431 fer961 whe384 egg110           | whe2942 fer1865 car1204 str386                 | C8 G3 S6 c3 s33 w21            | C9 S6 c24 m4 s30 w23
+16 |    28739    36478   -7739 -9767 |  9 13 | woo1125 egg660 fer343 whe198                   | str7754 whe2343 mel2118 fer1907 car1567 woo806 | C8 G3 S6 c6 m1 s33 w18         | C9 S6 c11 m1 s30 w34
+17 |    33285    41001   -7716    23 | 10 12 | str2784 woo1044 fer586 mil442 egg162 whe66     | str2540 fer2481 whe1683 car1537 woo363 mil155  | C8 G3 S6 c12 m1 s33 w12        | C9 S6 c5 m1 s29 w40
+18 |    40071    40405    -334  7382 | 10 12 | str3940 woo2254 fer575 whe528 egg440 mil63     | whe2072 str2056 fer1495 car738 mel564 mil6     | C8 G3 S6 c12 m1 s33 w12        | C9 S13 c7 s23 w37
+19 |    42810    42165     645   979 |  8 12 | woo2244 car378 whe248 egg216 str128 mil18      | whe2574 fer1450 woo1122 car210 mil28           | C8 G3 S6 c16 m1 s33 w8         | C7 S13 c7 s18 w45
+20 |    45343    43975    1368   723 | 10 11 | str1480 woo733 egg440 car387 fer102 mil98      | whe2873 fer1287 woo1002 car387 mil20           | C8 G3 S6 c17 m1 s33 w7         | C6 S13 c23 s14 w39
+21 |    48220    44966    3254  1886 | 10 12 | woo1512 str986 car903 fer342 egg220 mil85      | woo2145 whe1896 fer975 str450 car258 mil6      | C8 G3 S6 c24 m1 s29 w4         | C6 S17 c32 s11 w27
+22 |    52142    50327    1815 -1439 | 10 12 | woo2736 fer490 egg440 car390 str229 whe156     | woo4707 whe2168 fer1268 car88 mil20            | C8 G3 S6 c17 m1 s21 w19        | C5 S17 c24 s6 w36
+23 |    53864    56167   -2303 -4118 |  8 12 | woo916 car792 str256 egg220 fer22              | woo3640 whe2062 car1695 fer727                 | C8 G3 S6 c21 m1 s17 w19        | C5 S17 c12 s3 w40
+24 |    56842    64329   -7487 -5184 | 10 12 | woo1824 car852 fer588 egg440 mil96             | woo7150 whe1210 car1200 fer482 mil152 str90    | C8 G3 S6 c24 m1 s13 w19        | C5 S17 c5 w55
+25 |    60541    66702   -6161  1326 |  8 11 | woo2724 car1158 egg220 mil156 str24            | woo1392 whe1100 car1028 fer548 mil255          | C8 G3 S6 c27 m1 s13 w17        | C5 S17 c3 w64
+26 |    62001    72707  -10706 -4545 | 15 11 | woo1872 egg672 fer393 whe352 car312 str144 mil | woo5652 whe1782 fer363 str230 car228 mil36     | C8 G3 S6 c45 s13               | S17 c2 w60
+27 |    67533    86493  -18960 -8254 |  9 11 | woo3608 car1102 mel606 whe315 str102 mil52     | woo12424 whe2352 fer387 car108 str50 mil12     | C8 G3 S6 c34 s13               | S17 c2 w52
+28 |    69806    91103  -21297 -2337 |  7 10 | car1482 egg570 whe294 str22                    | whe2701 woo2322 fer637 car152 str35            | C8 G3 S6 c30                   | S17 c2 w33
+29 |        0        0       0 21297 | 12  9 | car4112 woo2812 egg684 mil309 fer216           | whe4340 woo3748 fer445 car259 mil96            |                                | 
+revenue totals us   : woo30244 mel17568 mil15904 fer15176 str13215 c
+revenue totals elite: whe61388 woo52939 fer40974 str15925 mil13109 m
+revenue us-elite by product: whe-55784 fer-25798 woo-22695 egg+5494 mel+4464 mil+2795 str-2710 car+474

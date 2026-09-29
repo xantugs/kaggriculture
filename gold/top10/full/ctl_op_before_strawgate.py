@@ -650,8 +650,6 @@ _OPEN_DEFAULT = dict(
     mid_wheat_max=8,           # ... at most this many plots per replan
     wheat_cap=None,            # standing wheat plots at most (the fills stop there)
     mid_melon=False,           # melon_first days: the second melon batch is bought mid-day from the fertilizer sales
-    straw_gate=None,           # {"from": 3, "to": 12, "ahead": 1}: strawberry seeds spend only cash above the next land payment due
-                               # within `ahead` days plus tomorrow's feed shortfall (deferred plants are bought when a sale covers them)
     tom_sw=None,               # [a, b, cap]: tomatoes planted on the SW purchase day, a + b * tomato buyers known (PIZZA_SHOP, FARMERS_MARKET)
     tom_ramp=None,             # {"from": 10, "per_day": 1.5, "cap": 12, "buyers": false}: tomatoes planted daily from that day (before the wheat fill)
     force_first_min=0.0,       # force_first only on days whose premium harvests (melons, wool, milk, ...) are worth at least this
@@ -664,12 +662,6 @@ _OPEN_DEFAULT = dict(
     rival_straw=None,          # {"w": 0.5, "min": 8, "from_day": 4}: strawberry target cut by w per rival strawberry plot (shared book)
     sell_on_drop=False,        # goods a unit drops this hour count as sellable this hour (units act before the market settles)
     melon_fert=None,           # [6, 7]: melon plants at these ages get a FERTILIZE (needs fertilizer kept in the shed: over.fert_keep)
-    e1_defend_wool=None,       # F1, with urgent_min: {"from": 5, "to": 10, "sheep": 4}: on those days, while the rival shows at least that many
-                               # sheep on its tiles, WOOL keeps the old urgent liquidation (sell ahead of their flood)
-    urgent_min=None,           # E1: urgent opening sales liquidate only the premium (DP-timed) units needed to fund the unfunded schedule
-                               # (cash shortfall + this buffer in $); the rest goes to the forecast seller. None: sell everything (old)
-    melon_fert_jit=False,      # with melon_fert: the evening fertilizer reserve also keeps one unit per melon that reaches a melon_fert
-                               # age tomorrow unfertilized (just in time: nothing is held on the other days)
     melon_sell_now=0,          # >0: during the opening, melons in the shed (at least this many units) are sold at once, no market holds
     melon_day=None,            # {"min_units": 20, "slack": 4}: a day with that many ripe melon units puts the melon harvests first in
                                # every route and drops them at the shed right after (the day-10 dump race), if the route stays within cap + slack
@@ -863,24 +855,6 @@ class GoldCtl:
             t = int(round(a + b * dem))
         return min(op["straw_max"], t)
 
-    def _straw_gate_res(self, obs, day):
-        """straw_gate: cash strawberry seeds must leave untouched (next land payment due soon + tomorrow's feed)."""
-        op = self.open
-        g = op.get("straw_gate") if op else None
-        if not g or not (int(g.get("from", 3)) <= day <= int(g.get("to", 12))):
-            return 0.0
-        farm = obs["farms"][self.me]; shed = obs["private"]["shed"]
-        quads = list(farm["unlocked_quadrants"]); res = 0.0
-        n_extra = max(0, len(quads) - 1)
-        if n_extra < 3:
-            due = [int(d_) for q_, d_ in (op.get("land") or {}).items() if d_ is not None and q_ not in quads]
-            if due and min(due) <= day + int(g.get("ahead", 1)):
-                res += (1000.0, 2000.0, 4000.0)[n_extra]
-        n_an = sum(1 for row in farm["tiles"] for t in row if isinstance(t, dict) and "animal" in t) + sum(int(shed.get(a_, 0)) for a_ in _GC_ANIM)
-        res += max(0, n_an - int(shed.get("WHEAT", 0))) * (float(self.pnow.get("WHEAT", 30)) + 3.0)
-        _GC_REPORT["gc_straw_gate_max"] = max(_GC_REPORT.get("gc_straw_gate_max", 0), int(res))
-        return res
-
     def _open_crops(self, obs, day, free, replant, shops, counts, avail, seeds):
         """Opening schedule: strawberries (nearest the shed), melons, then wheat on what is left; seeds limited by cash."""
         op = self.open
@@ -933,15 +907,12 @@ class GoldCtl:
         k = 0
         for crop, n in want:
             price = _GC_CROPS[crop]["seed"]
-            sg_ = self._straw_gate_res(obs, day) if (crop == "STRAWBERRY" and op.get("straw_gate")) else 0.0
             while n > 0 and k < len(slots) - (op["keep_free"] if crop == "WHEAT" else 0):
                 if held.get(crop, 0) > 0:
                     held[crop] -= 1
-                elif cash >= price and cash - price >= sg_:
+                elif cash >= price:
                     cash -= price
                 else:
-                    if sg_ > 0 and cash >= price:
-                        _GC_REPORT["gc_straw_gated"] = _GC_REPORT.get("gc_straw_gated", 0) + n
                     break
                 out[slots[k]] = crop; k += 1; n -= 1
         self.open_spent = avail - cash
@@ -1329,24 +1300,6 @@ class GoldCtl:
                 self._open_urgent = bool(land_left or straw_left > 0 or anim_left)
                 if self._open_urgent:
                     _GC_REPORT["gc_open_urgent_days"] = _GC_REPORT.get("gc_open_urgent_days", 0) + 1
-                try:
-                    # E1: the cash the unfunded schedule still needs beyond what is left after today's commitments
-                    left_ = (money - spend - hire_budget - keep - feed_est) - float(getattr(self, "open_spent", 0.0) or 0.0)
-                    n_planned_ = sum(1 for c in crop_for.values())
-                    c_unf = 100.0 * min(straw_left, max(0, len(free) - n_planned_))
-                    if land_left:
-                        n_ext_ = max(0, len(quads) - 1 + len(new_quads))
-                        if n_ext_ < 3:
-                            c_unf += (1000.0, 2000.0, 4000.0)[n_ext_]
-                    n_miss_ = 0
-                    for an, t_ in _open_targets(opn, day, shops):
-                        have_ = sum(1 for _p, t in animals if t["animal"] == an) + int(shed.get(an, 0)) + herd_new.get(an, 0)
-                        k_ = max(0, min(t_ - have_, int(opn.get("anim_day_max", 99)) - n_miss_))
-                        n_miss_ += k_; c_unf += k_ * _GC_ANIM[an]["cost"]
-                    self._open_need = max(0.0, c_unf - left_)
-                except Exception as e:
-                    self._open_need = None
-                    _GC_REPORT["gc_e1_need_err"] = repr(e)[:120]
             else:
                 crop_for = self._choose_crops(obs, day, free, [v.pos for v in replant], shops, val, counts)
             for pos in free:
@@ -1717,9 +1670,6 @@ class GoldCtl:
                     k1 = age1 + 1 - cd["fy"]
                     if k1 >= 0 and k1 % cd["iv"] == 0 and (k1 // cd["iv"] + 1) <= cd["mx"] and fu < day + 1:
                         fert_on += 1
-                elif t["crop"] == "MELON" and opn.get("melon_fert") and opn.get("melon_fert_jit") and age1 in opn["melon_fert"] and fu < day + 1                         and int(t.get("yield_units", 0)) < cd["mx"]:
-                    fert_on += 1
-                    _GC_REPORT["gc_melon_jit_res"] = _GC_REPORT.get("gc_melon_jit_res", 0) + 1
             self.reserve["FERTILIZER"] = fert_on
 
     # ------------------------------------------------------------------ opening: mid-day purchases and re-routing
@@ -1785,7 +1735,6 @@ class GoldCtl:
                                 free.append((x, y))
                     _GC_REPORT["gc_open_land"] = _GC_REPORT.get("gc_open_land", "") + "%s%d@%d " % (q_, day, hour)
                 elif opn.get("land_hold", True):
-                    self._open_need = max(0.0, price_ - cash)
                     return []
                 break
         # ---- strawberries (targets) reserved first, then animals (targets) with what the cash allows
@@ -1826,8 +1775,6 @@ class GoldCtl:
         if new_q is not None and opn.get("land_wheat"):
             w_res = 10.0 * min(int(opn["land_wheat"]), max(0, len(free) - n_s_due))
             s_res += w_res
-        if opn.get("straw_gate"):
-            s_res = min(s_res, max(0.0, cash - self._straw_gate_res(obs, day)))
         s_res = min(s_res, max(0.0, cash))
         cash -= s_res
         m_res = 0.0; n_m_due = 0
@@ -1953,16 +1900,6 @@ class GoldCtl:
             if n_w > seeds.get("WHEAT", 0):
                 orders.append(["BUY_SEED", "WHEAT", n_w - seeds.get("WHEAT", 0)])
         self._open_urgent = bool(n_s > 0 or any(max(0, t_ - (animals_n.get(an, 0) + shed.get(an, 0) + pending_place.get(an, 0) + herd_new.get(an, 0))) > 0 for an, t_ in targets))
-        try:
-            c_unf = 100.0 * min(n_s, max(0, len(slots) - k))
-            room_n = max(0, int(opn.get("anim_day_max", 99)) - int(getattr(self, "_open_bought_n", 0)))
-            for an, t_ in targets:
-                k_ = max(0, min(t_ - (animals_n.get(an, 0) + shed.get(an, 0) + pending_place.get(an, 0) + herd_new.get(an, 0)), room_n))
-                room_n -= k_; c_unf += k_ * _GC_ANIM[an]["cost"]
-            self._open_need = max(0.0, c_unf - cash)
-        except Exception as e:
-            self._open_need = None
-            _GC_REPORT["gc_e1_need_err"] = repr(e)[:120]
         if not visits:
             return orders
         # ---- incremental routing: the morning's queues stay as they are (their deliveries included); the new
@@ -4793,22 +4730,6 @@ class GoldCtl:
         val_now = {q: _gc_price(q, inv[q]) for q in _GC_PRODUCTS}
         urgent = self.open is not None and self._open_on(day) and bool(getattr(self, "_open_urgent", False))
         melon_urgent = self.open is not None and getattr(self, "_melon_day_on", -99) in (day, day - 1)
-        e1_buf = self.open.get("urgent_min") if (urgent and self.open is not None) else None
-        e1_need = getattr(self, "_open_need", None) if urgent else None
-        e1 = e1_buf is not None and e1_need is not None and GC_P["mkt_dp"] and not last
-        e1_dp = set(GC_P["mkt_dp_prods"]) if e1 else set()
-        e1_got = 0.0; e1_sold = {}
-        e1_defend = False
-        e1_dw = self.open.get("e1_defend_wool") if (e1 and self.open is not None) else None
-        if e1_dw:
-            try:
-                if int(e1_dw.get("from", 5)) <= day <= int(e1_dw.get("to", 10)):
-                    rs_ = sum(1 for row in obs["farms"][1 - self.me]["tiles"] for t_ in row if isinstance(t_, dict) and t_.get("animal") == "SHEEP")
-                    e1_defend = rs_ >= int(e1_dw.get("sheep", 4))
-            except Exception:
-                e1_defend = False
-            if e1_defend:
-                _GC_REPORT["gc_e1_defend"] = _GC_REPORT.get("gc_e1_defend", 0) + 1
         if (not melon_urgent and self.open is not None and self._open_on(day) and int(self.open.get("melon_sell_now", 0) or 0) > 0
                 and int(shed.get("MELON", 0)) >= int(self.open["melon_sell_now"])):
             melon_urgent = True   # melons in the shed sell at once during the opening: the first seller takes the melon book
@@ -4844,18 +4765,9 @@ class GoldCtl:
             lot = GC_P["drip"].get(p) if GC_P["drip_on"] else None
             if lot and not last and not pressure and day < 29:
                 n = min(n, lot)
-            if (urgent and not (e1 and p in e1_dp and not (melon_urgent and p == "MELON") and not (e1_defend and p == "WOOL"))) or (melon_urgent and p == "MELON"):
+            if urgent or (melon_urgent and p == "MELON"):
                 # the opening's scheduled purchases wait for this cash: no holds (and the melon dump goes out at once)
                 _GC_REPORT["gc_open_urgent_sold"] = _GC_REPORT.get("gc_open_urgent_sold", 0) + n
-                if urgent:
-                    try:
-                        v_ = float(sum(_gc_price(p, int(inv[p]) + i_) for i_ in range(n)))
-                        e1_got += v_; e1_sold[p] = e1_sold.get(p, 0) + n
-                        _GC_REPORT["gc_urg_value"] = _GC_REPORT.get("gc_urg_value", 0) + int(v_)
-                        if p in GC_P["mkt_dp_prods"]:
-                            _GC_REPORT["gc_urg_value_dp"] = _GC_REPORT.get("gc_urg_value_dp", 0) + int(v_)
-                    except Exception:
-                        pass
                 if p == "MELON" and melon_urgent:
                     _GC_REPORT["gc_melon_sold_now"] = _GC_REPORT.get("gc_melon_sold_now", 0) + n
                 out.append(["SELL", p, n])
@@ -4881,11 +4793,6 @@ class GoldCtl:
                 if n <= 0:
                     continue
                 _GC_REPORT["gc_dp_sold"] = _GC_REPORT.get("gc_dp_sold", 0) + n
-                if e1:
-                    try:
-                        e1_got += float(sum(_gc_price(p, int(inv[p]) + i_) for i_ in range(n))); e1_sold[p] = e1_sold.get(p, 0) + n
-                    except Exception:
-                        pass
                 out.append(["SELL", p, n])
                 continue
             fl = GC_P["sell_floor"].get(p) if GC_P["sell_floor"] else None
@@ -4931,40 +4838,6 @@ class GoldCtl:
                     if n <= 0:
                         continue
             out.append(["SELL", p, n])
-        if urgent and e1_need is not None:
-            # trace: value sold this urgent step against the cash the unfunded schedule still needs
-            _GC_REPORT["gc_urg_steps"] = _GC_REPORT.get("gc_urg_steps", 0) + 1
-            _GC_REPORT["gc_urg_got"] = _GC_REPORT.get("gc_urg_got", 0) + int(e1_got)
-            _GC_REPORT["gc_urg_over"] = _GC_REPORT.get("gc_urg_over", 0) + int(max(0.0, e1_got - float(e1_need)))
-        if e1:
-            # E1: premium units only up to the shortfall (+ buffer), the next unit always the dearest one held
-            need_ = float(e1_need) + float(e1_buf) - e1_got
-            _GC_REPORT["gc_e1_steps"] = _GC_REPORT.get("gc_e1_steps", 0) + 1
-            extra = {}
-            while need_ > 0:
-                best_p = None; best_v = 0.0
-                for q in e1_dp:
-                    h_ = int(held.get(q, 0)) - extra.get(q, 0)
-                    if h_ <= 0:
-                        continue
-                    v_ = float(_gc_price(q, int(inv[q]) + e1_sold.get(q, 0) + extra.get(q, 0)))
-                    if v_ > best_v:
-                        best_p, best_v = q, v_
-                if best_p is None or best_v <= 1:
-                    break
-                extra[best_p] = extra.get(best_p, 0) + 1; need_ -= best_v
-            for q, k_ in extra.items():
-                held[q] = int(held.get(q, 0)) - k_
-                if held[q] <= 0:
-                    held.pop(q, None)
-                for o in out:
-                    if o[0] == "SELL" and o[1] == q:
-                        o[2] = int(o[2]) + k_
-                        break
-                else:
-                    out.append(["SELL", q, k_])
-            _GC_REPORT["gc_e1_extra_units"] = _GC_REPORT.get("gc_e1_extra_units", 0) + sum(extra.values())
-            _GC_REPORT["gc_e1_held_units"] = _GC_REPORT.get("gc_e1_held_units", 0) + sum(int(v) for q, v in held.items() if q in e1_dp)
         # shed room: the end-of-day drop (and any drop) must fit; release held lots first when it would not
         if held:
             total = sum(int(v) for v in shed.values()) - sum(int(o[2]) for o in out)

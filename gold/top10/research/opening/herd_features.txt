@@ -1,0 +1,157 @@
+==== GOOD for controller
+griculture-adaptive-public-state-multi-route vs ctl  final us 167283 them  81007 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 66}
+      d1  them cash    175 q1 h0  C2 S2 me12 wh7                   | us cash    359 C3 S2 me7 wh13
+      d2  them cash     48 q1 h4  C2 S2 me12 wh7                   | us cash    387 C3 S2 me7 wh12
+      d4  them cash    135 q1 h5  C3 S2 me12 wh3                   | us cash    214 C4 G2 S2 me7 wh6
+      d6  them cash   1418 q2 h4  C4 S2 me12 st6 wh3               | us cash     85 C6 G4 S2 me7 st16 wh8
+      d8  them cash     19 q2 h7  C6 S4 me12 st13 wh3              | us cash     61 C6 G4 S3 me7 st35 wh7
+      d10 them cash  10002 q2 h11 C6 S5 st10 wh7                   | us cash   9209 C7 G4 S3 st36 wh22
+griculture-adaptive-public-state-multi-route vs tape final us  83411 them  43100 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 66}
+      d1  them cash    170 q1 h0  C2 S2 me12 wh7                   | us cash    101 C2 S2 me12 wh8
+      d2  them cash     43 q1 h4  C2 S2 me12 wh7                   | us cash    216 C3 S2 me12 wh8
+      d4  them cash    142 q1 h5  C3 S2 me12 wh3                   | us cash    772 C4 S2 me12 wh7
+      d6  them cash   1550 q2 h4  C4 S2 me12 st6 wh3               | us cash    649 C6 S2 me12 st12 wh6
+      d8  them cash    767 q2 h11 C6 S4 me12 st19 wh3              | us cash   1403 C8 S4 me12 st20 wh5
+      d10 them cash  13436 q2 h11 C8 S4 st19 wh9                   | us cash  17611 C8 G2 S6 st20 wh12
+kaggriculture-breaking-the-tie               vs ctl  final us 167283 them  81007 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 66}
+      d1  them cash    175 q1 h0  C2 S2 me12 wh7                   | us cash    359 C3 S2 me7 wh13
+      d2  them cash     48 q1 h4  C2 S2 me12 wh7                   | us cash    387 C3 S2 me7 wh12
+      d4  them cash    135 q1 h5  C3 S2 me12 wh3                   | us cash    214 C4 G2 S2 me7 wh6
+      d6  them cash   1418 q2 h4  C4 S2 me12 st6 wh3               | us cash     85 C6 G4 S2 me7 st16 wh8
+      d8  them cash     19 q2 h7  C6 S4 me12 st13 wh3              | us cash     61 C6 G4 S3 me7 st35 wh7
+      d10 them cash  10002 q2 h11 C6 S5 st10 wh7                   | us cash   9209 C7 G4 S3 st36 wh22
+kaggriculture-breaking-the-tie               vs tape final us  84488 them  43466 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 66}
+      d1  them cash    170 q1 h0  C2 S2 me12 wh7                   | us cash    101 C2 S2 me12 wh8
+      d2  them cash     43 q1 h4  C2 S2 me12 wh7                   | us cash    216 C3 S2 me12 wh8
+      d4  them cash    142 q1 h5  C3 S2 me12 wh3                   | us cash    772 C4 S2 me12 wh7
+      d6  them cash   1530 q2 h4  C4 S2 me12 st6 wh3               | us cash    649 C6 S2 me12 st12 wh6
+      d8  them cash    779 q2 h11 C6 S4 me12 st19 wh3              | us cash   1405 C8 S4 me12 st20 wh5
+      d10 them cash  12918 q2 h11 C8 S4 st19 wh9                   | us cash  17679 C8 G2 S6 st20 wh12
+kaggriculture-strongest-farmer-of-today      vs ctl  final us 161185 them  95213 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 66}
+      d1  them cash    175 q1 h0  C2 S2 me12 wh7                   | us cash    359 C3 S2 me7 wh13
+      d2  them cash     48 q1 h4  C2 S2 me12 wh7                   | us cash    387 C3 S2 me7 wh12
+      d4  them cash    135 q1 h5  C3 S2 me12 wh3                   | us cash    214 C4 G2 S2 me7 wh6
+      d6  them cash   1413 q2 h4  C4 S2 me12 st6 wh3               | us cash    379 C6 G3 S2 me7 st16 wh9
+      d8  them cash     51 q2 h6  C6 S4 me12 st13 wh3              | us cash    288 C6 G4 S3 me7 st35 wh8
+      d10 them cash   8598 q2 h11 C7 S4 st10 wh6                   | us cash  11709 C6 G4 S5 st36 wh12
+kaggriculture-strongest-farmer-of-today      vs tape final us  84449 them  46395 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 66}
+      d1  them cash    170 q1 h0  C2 S2 me12 wh7                   | us cash    101 C2 S2 me12 wh8
+      d2  them cash     43 q1 h4  C2 S2 me12 wh7                   | us cash    216 C3 S2 me12 wh8
+      d4  them cash    142 q1 h5  C3 S2 me12 wh3                   | us cash    772 C4 S2 me12 wh7
+      d6  them cash   1530 q2 h4  C4 S2 me12 st6 wh3               | us cash    649 C6 S2 me12 st12 wh6
+      d8  them cash    779 q2 h11 C6 S4 me12 st19 wh3              | us cash   1405 C8 S4 me12 st20 wh5
+      d10 them cash  12918 q2 h11 C8 S4 st19 wh9                   | us cash  17679 C8 G2 S6 st20 wh12
+==== MIDDLE
+counter-cyclical-orchard                     vs ctl  final us 136570 them  72928 | first sales {'WOOL': '6@21 x4', 'MILK': '9@1 x6'} | sold d0-10 {'WOOL': 9, 'MILK': 18}
+      d1  them cash    150 q1 h4  C3 S1 me8 wh11                   | us cash    348 C3 S2 me7 wh13
+      d2  them cash    143 q1 h4  C3 S1 me8 wh11                   | us cash    369 C3 S2 me7 wh11
+      d4  them cash    442 q1 h6  C3 S1 me11 wh8                   | us cash    372 C4 G2 S2 me7 st2 wh4
+      d6  them cash   1284 q1 h6  C4 S1 me13 wh6                   | us cash     63 C7 G2 S2 me7 st21 wh1
+      d8  them cash   1431 q1 h9  C4 S2 me15 wh4                   | us cash    350 C8 G2 S4 me7 st30 wh9
+      d10 them cash    327 q2 h12 C4 S5 me10 st23 wh4              | us cash   6447 C8 G3 S5 st36 wh18
+counter-cyclical-orchard                     vs tape final us 148830 them  58516 | first sales {'WOOL': '6@21 x4', 'MILK': '9@1 x8'} | sold d0-10 {'WOOL': 9, 'MILK': 18}
+      d1  them cash    150 q1 h4  C3 S1 me8 wh11                   | us cash     99 C2 S2 me12 wh6
+      d2  them cash    143 q1 h4  C3 S1 me8 wh11                   | us cash    217 C3 S2 me12 wh6
+      d4  them cash    440 q1 h6  C3 S1 me11 wh8                   | us cash    726 C4 S2 me12 wh7
+      d6  them cash   1296 q1 h6  C4 S1 me13 wh6                   | us cash    874 C6 S2 me12 st12 wh6
+      d8  them cash   1445 q1 h9  C4 S2 me15 wh4                   | us cash   1812 C8 S4 me12 st20 wh5
+      d10 them cash    498 q2 h12 C4 S5 me10 st24 wh4              | us cash  18544 C11 S5 st20 wh12
+kaggriculture-c01-scenario-v7-reproduction   vs ctl  final us 143446 them  67908 | first sales {'WOOL': '7@0 x12', 'MILK': '8@9 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 20, 'MILK': 18, 'MELON': 30}
+      d1  them cash     87 q1 h7  C2 S2 me9 wh2                    | us cash    347 C3 S2 me7 wh13
+      d2  them cash     90 q1 h8  C2 S2 ca2 me9 wh4                | us cash    362 C3 S2 me7 wh11
+      d4  them cash    132 q1 h8  C2 S2 ca2 me10 st4 wh4           | us cash     49 C4 G2 S2 me7 st2 wh4
+      d6  them cash    646 q1 h10 C2 S2 ca2 me10 st5 wh4           | us cash     47 C7 G3 S2 me7 st14 wh1
+      d8  them cash    633 q2 h8  C4 S4 me10 st9 wh5               | us cash     59 C8 G4 S4 me7 st28 wh7
+      d10 them cash   7229 q3 h10 C4 S4 me10 st22 wh8              | us cash   4529 C8 G6 S6 st31 wh21
+kaggriculture-c01-scenario-v7-reproduction   vs tape final us 142866 them  63811 | first sales {'WOOL': '7@0 x12', 'MILK': '8@8 x12', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 20, 'MILK': 18, 'MELON': 24}
+      d1  them cash     86 q1 h7  C2 S2 me9 wh2                    | us cash     98 C2 S2 me12 wh6
+      d2  them cash     90 q1 h8  C2 S2 ca2 me9 wh4                | us cash    214 C3 S2 me12 wh6
+      d4  them cash     93 q1 h8  C2 S2 ca2 me9 st6 wh4            | us cash    704 C4 S2 me12 wh7
+      d6  them cash    726 q1 h10 C2 S2 ca2 me9 st6 wh4            | us cash    836 C6 S2 me12 st12 wh6
+      d8  them cash    635 q2 h8  C4 S4 me9 st13 wh6               | us cash   1465 C8 S4 me12 st20 wh5
+      d10 them cash   4752 q3 h11 C4 S4 ca3 me9 st24 wh5           | us cash  17498 C10 S6 st20 wh12
+kaggriculture-precomputed-schedule-policy    vs ctl  final us 113321 them  76178 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 60}
+      d1  them cash    175 q1 h0  C2 S2 me12 wh7                   | us cash    359 C3 S2 me7 wh13
+      d2  them cash     48 q1 h4  C2 S2 me12 wh7                   | us cash    387 C3 S2 me7 wh12
+      d4  them cash    115 q1 h5  C3 S2 me12 wh3                   | us cash    214 C4 G2 S2 me7 wh6
+      d6  them cash    869 q2 h4  C4 S2 me14 st4 wh3               | us cash     83 C6 G3 S2 me7 st18 wh8
+      d8  them cash   1076 q2 h11 C6 S4 me19 st11 wh5              | us cash     37 C6 G3 S4 me7 st31 wh10
+      d10 them cash  15455 q2 h11 C8 S4 me7 st11 wh9               | us cash   7886 C7 G4 S6 st36 wh18
+kaggriculture-precomputed-schedule-policy    vs tape final us 113173 them  60490 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 60}
+      d1  them cash    171 q1 h0  C2 S2 me12 wh7                   | us cash    101 C2 S2 me12 wh8
+      d2  them cash     44 q1 h4  C2 S2 me12 wh7                   | us cash    216 C3 S2 me12 wh8
+      d4  them cash    123 q1 h5  C3 S2 me12 wh3                   | us cash    772 C4 S2 me12 wh7
+      d6  them cash    931 q2 h4  C4 S2 me14 st4 wh3               | us cash    649 C6 S2 me12 st12 wh6
+      d8  them cash   1011 q2 h11 C6 S4 me20 st11 wh5              | us cash   1406 C8 S4 me12 st20 wh5
+      d10 them cash  13347 q2 h11 C8 S4 me8 st11 wh9               | us cash  17295 C8 S8 st20 wh12
+==== BAD for controller
+kaggriculture-x544-nah-i-d-win               vs ctl  final us 101162 them  62916 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 60}
+      d1  them cash    175 q1 h0  C2 S2 me12 wh7                   | us cash    359 C3 S2 me7 wh13
+      d2  them cash     48 q1 h4  C2 S2 me12 wh7                   | us cash    387 C3 S2 me7 wh12
+      d4  them cash    115 q1 h5  C3 S2 me12 wh3                   | us cash    214 C4 G2 S2 me7 wh6
+      d6  them cash    893 q2 h4  C4 S2 me14 st4 wh3               | us cash    379 C6 G3 S2 me7 st16 wh9
+      d8  them cash    203 q2 h11 C6 S4 me19 st11 wh5              | us cash    293 C6 G4 S3 me7 st35 wh8
+      d10 them cash  14893 q2 h11 C8 S4 me7 st11 wh9               | us cash   7994 C7 G4 S6 st36 wh11
+kaggriculture-x544-nah-i-d-win               vs tape final us 112643 them  60473 | first sales {'WOOL': '6@4 x6', 'MILK': '8@5 x12', 'MELON': '10@16 x12'} | sold d0-10 {'WOOL': 20, 'MILK': 12, 'MELON': 60}
+      d1  them cash    170 q1 h0  C2 S2 me12 wh7                   | us cash    101 C2 S2 me12 wh8
+      d2  them cash     43 q1 h4  C2 S2 me12 wh7                   | us cash    216 C3 S2 me12 wh8
+      d4  them cash    122 q1 h5  C3 S2 me12 wh3                   | us cash    772 C4 S2 me12 wh7
+      d6  them cash    930 q2 h4  C4 S2 me14 st4 wh3               | us cash    649 C6 S2 me12 st12 wh6
+      d8  them cash    979 q2 h11 C6 S4 me20 st11 wh5              | us cash   1405 C8 S4 me12 st20 wh5
+      d10 them cash  13158 q2 h11 C8 S4 me8 st11 wh9               | us cash  17300 C8 S8 st20 wh12
+kaggriculture-findings-from-zero-to-top-meta vs ctl  final us 102456 them  74962 | first sales {'WOOL': '6@1 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 52, 'MILK': 6, 'MELON': 30}
+      d1  them cash      6 q1 h1  C1 S4 me5 wh5                    | us cash    360 C3 S2 me7 wh13
+      d2  them cash    167 q1 h2  C1 S4 me5 wh5                    | us cash    391 C3 S2 me7 wh12
+      d4  them cash    535 q1 h3  C1 S4 me5 st3 wh6                | us cash    210 C4 G2 S2 me7 wh6
+      d6  them cash   2774 q2 h4  C3 S4 me5 st8 wh7                | us cash    370 C6 G3 S2 me7 st15 wh10
+      d8  them cash     94 q2 h6  C8 S4 me5 st19 wh13              | us cash     32 C8 G3 S3 me7 st31 wh10
+      d10 them cash   6085 q3 h14 C8 S4 me12 st35 wh13             | us cash   2696 C10 G4 S5 st31 wh14
+kaggriculture-findings-from-zero-to-top-meta vs tape final us 144320 them  97134 | first sales {'WOOL': '6@1 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 52, 'MILK': 6, 'MELON': 30}
+      d1  them cash      6 q1 h1  C1 S4 me5 wh5                    | us cash    104 C2 S2 me12 wh8
+      d2  them cash    169 q1 h2  C1 S4 me5 wh5                    | us cash    218 C3 S2 me12 wh8
+      d4  them cash    545 q1 h3  C1 S4 me5 st3 wh6                | us cash    769 C4 S2 me12 wh7
+      d6  them cash   2850 q2 h4  C3 S4 me5 st8 wh7                | us cash    811 C6 S2 me12 st12 wh6
+      d8  them cash    179 q2 h6  C8 S4 me5 st19 wh13              | us cash   1762 C8 S4 me12 st20 wh5
+      d10 them cash   5301 q3 h14 C8 S4 me12 st35 wh13             | us cash  18228 C11 S5 st20 wh12
+kaggriculture-limit-breaker-agent            vs ctl  final us 139796 them 100491 | first sales {'WOOL': '6@16 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 36, 'MILK': 6, 'MELON': 30}
+      d1  them cash      4 q1 h1  C1 S4 me5 wh5                    | us cash    357 C3 S2 me7 wh13
+      d2  them cash    165 q1 h2  C1 S4 me5 wh5                    | us cash     98 C3 S2 me7 wh11
+      d4  them cash    537 q1 h3  C1 S4 me5 st3 wh6                | us cash    486 C4 G2 S2 me7 st1 wh7
+      d6  them cash     58 q2 h4  C3 S4 me5 st8 wh7                | us cash    108 C4 G2 S6 me7 st15 wh11
+      d8  them cash    899 q2 h6  C8 S4 me5 st20 wh13              | us cash    263 C4 G2 S7 me7 st30 wh12
+      d10 them cash   7350 q3 h14 C9 S4 me11 st34 wh13             | us cash   2026 C6 G2 S9 st31 wh21
+kaggriculture-limit-breaker-agent            vs tape final us 155911 them  98159 | first sales {'WOOL': '6@16 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 36, 'MILK': 6, 'MELON': 30}
+      d1  them cash      4 q1 h1  C1 S4 me5 wh5                    | us cash    101 C2 S2 me12 wh8
+      d2  them cash    167 q1 h2  C1 S4 me5 wh5                    | us cash    215 C3 S2 me12 wh8
+      d4  them cash    543 q1 h3  C1 S4 me5 st3 wh6                | us cash    766 C4 S2 me12 wh7
+      d6  them cash     10 q2 h4  C3 S4 me5 st8 wh7                | us cash    891 C6 S2 me12 st12 wh6
+      d8  them cash    138 q2 h6  C8 S4 me5 st19 wh13              | us cash   1897 C8 S4 me12 st20 wh5
+      d10 them cash   4612 q3 h14 C9 S4 me11 st30 wh13             | us cash  18363 C11 S5 st20 wh12
+inforcement-learning-examples-from-kaito-v27 vs ctl  final us 143794 them 104302 | first sales {'WOOL': '6@16 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 36, 'MILK': 6, 'MELON': 30}
+      d1  them cash      9 q1 h1  C1 S4 me5 wh5                    | us cash    357 C3 S2 me7 wh13
+      d2  them cash    170 q1 h2  C1 S4 me5 wh5                    | us cash     98 C3 S2 me7 wh11
+      d4  them cash    542 q1 h3  C1 S4 me5 st3 wh6                | us cash    486 C4 G2 S2 me7 st1 wh7
+      d6  them cash     94 q2 h4  C3 S4 me5 st8 wh7                | us cash    108 C4 G2 S6 me7 st15 wh11
+      d8  them cash   1107 q2 h6  C8 S4 me5 st20 wh13              | us cash    263 C4 G2 S7 me7 st30 wh12
+      d10 them cash   7718 q3 h14 C8 S4 me12 st31 wh13             | us cash   2026 C6 G2 S9 st31 wh21
+inforcement-learning-examples-from-kaito-v27 vs tape final us 149160 them  87369 | first sales {'WOOL': '6@16 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 36, 'MILK': 6, 'MELON': 30}
+      d1  them cash      9 q1 h1  C1 S4 me5 wh5                    | us cash    101 C2 S2 me12 wh8
+      d2  them cash    172 q1 h2  C1 S4 me5 wh5                    | us cash    215 C3 S2 me12 wh8
+      d4  them cash    548 q1 h3  C1 S4 me5 st3 wh6                | us cash    766 C4 S2 me12 wh7
+      d6  them cash     48 q2 h4  C3 S4 me5 st8 wh7                | us cash    890 C6 S2 me12 st12 wh6
+      d8  them cash    353 q2 h6  C8 S4 me5 st19 wh13              | us cash   1896 C8 S4 me12 st20 wh5
+      d10 them cash   4489 q3 h14 C8 S4 me12 st30 wh13             | us cash  18362 C11 S5 st20 wh12
+kaggriculture-weedproof-clone-market         vs ctl  final us 141706 them 104689 | first sales {'WOOL': '6@16 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 36, 'MILK': 6, 'MELON': 30}
+      d1  them cash      9 q1 h1  C1 S4 me5 wh5                    | us cash    357 C3 S2 me7 wh13
+      d2  them cash    170 q1 h2  C1 S4 me5 wh5                    | us cash     98 C3 S2 me7 wh11
+      d4  them cash    542 q1 h3  C1 S4 me5 st3 wh6                | us cash    486 C4 G2 S2 me7 st1 wh7
+      d6  them cash     94 q2 h4  C3 S4 me5 st8 wh7                | us cash    108 C4 G2 S6 me7 st15 wh11
+      d8  them cash    903 q2 h6  C8 S4 me5 st20 wh13              | us cash    263 C4 G2 S7 me7 st30 wh12
+      d10 them cash   7718 q3 h14 C8 S4 me12 st31 wh13             | us cash   2026 C6 G2 S9 st31 wh21
+kaggriculture-weedproof-clone-market         vs tape final us 142230 them  82775 | first sales {'WOOL': '6@16 x5', 'MILK': '9@0 x6', 'MELON': '10@12 x6'} | sold d0-10 {'WOOL': 36, 'MILK': 6, 'MELON': 30}
+      d1  them cash      9 q1 h1  C1 S4 me5 wh5                    | us cash    101 C2 S2 me12 wh8
+      d2  them cash    172 q1 h2  C1 S4 me5 wh5                    | us cash    215 C3 S2 me12 wh8
+      d4  them cash    548 q1 h3  C1 S4 me5 st3 wh6                | us cash    766 C4 S2 me12 wh7
+      d6  them cash     48 q2 h4  C3 S4 me5 st8 wh7                | us cash    890 C6 S2 me12 st12 wh6
+      d8  them cash    143 q2 h6  C8 S4 me5 st19 wh13              | us cash   1896 C8 S4 me12 st20 wh5
+      d10 them cash   4490 q3 h14 C8 S4 me12 st30 wh13             | us cash  18360 C11 S5 st20 wh12

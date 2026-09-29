@@ -1,0 +1,6 @@
+main_ctl_FWt seed 6042: statuses ['DONE', 'DONE'] rewards [123418.0, 122882.0] steps 720 wall 41s
+main_ctl_FWt seed 8500: statuses ['DONE', 'DONE'] rewards [114103.0, 114103.0] steps 720 wall 44s
+main_ctl_T8fcWt seed 6042: statuses ['DONE', 'DONE'] rewards [118724.0, 118724.0] steps 720 wall 49s
+main_ctl_T8fcWt seed 8500: statuses ['DONE', 'DONE'] rewards [121194.0, 121194.0] steps 720 wall 45s
+main_ctl_c2tr seed 6042: statuses ['DONE', 'DONE'] rewards [118724.0, 118724.0] steps 720 wall 53s
+main_ctl_c2tr seed 8500: statuses ['DONE', 'DONE'] rewards [121194.0, 121194.0] steps 720 wall 45s

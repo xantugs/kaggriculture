@@ -1,0 +1,22 @@
+base s000 score +3508 wins 99/120 {'T8': (20, -1320), 'omw': (39, 5907), 'pub': (40, 5937)}
+s001 portfolio={"melon": 10, "melon0": 7, "wheat0": 13} feed_buy_hour=14 score +3508 wins 99/120 {'T8': (20, -1320), 'omw': (39, 5907), 'pub': (40, 5937)} 
+s002 melon_fert=[6, 7] score +2055 wins 81/120 {'T8': (14, -2106), 'omw': (35, 4403), 'pub': (32, 3869)} 
+s003 crew={"a": 3.8, "tiles": 0.045, "anim": 0.18, "shed": 0.38, "plan hires0=5 score +3171 wins 93/120 {'T8': (19, -1436), 'omw': (38, 5377), 'pub': (36, 5573)} 
+s004 abs_last=5 score +3647 wins 99/120 {'T8': (20, -584), 'omw': (39, 5512), 'pub': (40, 6013)} ACCEPT
+s005 land_wheat=20 sell_on_drop=false score +3597 wins 99/120 {'T8': (20, -582), 'omw': (39, 5512), 'pub': (40, 5860)} 
+s006 crew={"a": 3.3, "tiles": 0.045, "anim": 0.18, "shed": 0.38, "plan score +3675 wins 91/120 {'T8': (16, -895), 'omw': (35, 5793), 'pub': (40, 6127)} 
+s007 abs_last=5 eh_all=false score +2052 wins 83/120 {'T8': (13, -2958), 'omw': (34, 4153), 'pub': (36, 4962)} 
+s008 cash_keep=140 score -347 wins 61/120 {'T8': (11, -5093), 'omw': (26, 2359), 'pub': (24, 1694)} 
+s009 cash_keep=20 score +3647 wins 99/120 {'T8': (20, -584), 'omw': (39, 5512), 'pub': (40, 6013)} 
+s010 eh_all=true score +3647 wins 99/120 {'T8': (20, -584), 'omw': (39, 5512), 'pub': (40, 6013)} 
+s011 land={"NE": 7, "SW": 11} feed_buy_hour=14 score -3646 wins 20/120 {'T8': (3, -6790), 'omw': (8, -2026), 'pub': (9, -2121)} 
+s012 land={"NE": 6, "SW": 8, "SE": 12} score -6777 wins 26/120 {'T8': (4, -12349), 'omw': (12, -3994), 'pub': (10, -3989)} 
+s013 anim_cond={"COW": ["milk", {"0": 2, "3": [4, 4.6], "4": [4, 5.6], "5": eh_all=true score -17 wins 66/120 {'T8': (7, -4383), 'omw': (30, 2395), 'pub': (29, 1939)} 
+s014 mid_wheat_from=1 sell_on_drop=true score +3022 wins 94/120 {'T8': (18, -1998), 'omw': (36, 4860), 'pub': (40, 6205)} 
+s015 straw_max=36 score +3647 wins 99/120 {'T8': (20, -584), 'omw': (39, 5512), 'pub': (40, 6013)} 
+s016 hires0=5 score +3647 wins 99/120 {'T8': (20, -584), 'omw': (39, 5512), 'pub': (40, 6013)} 
+s017 anim_split={"budget": 8, "last": 5} anim_day_max=5 score +3615 wins 100/120 {'T8': (23, -1113), 'omw': (38, 5905), 'pub': (39, 6053)} 
+s018 portfolio={"melon": 12, "melon0": 12, "wheat0": 8} land={"NE": 6, "SW": 8} score +1259 wins 79/120 {'T8': (11, -3219), 'omw': (38, 3945), 'pub': (30, 3051)} 
+s019 over={"plant_must": false, "max_hands": 11, "hire_cost_w": 1.0, " score +3888 wins 100/120 {'T8': (23, -817), 'omw': (38, 6607), 'pub': (39, 5873)} ACCEPT
+s020 portfolio={"melon": 10, "melon0": 7, "wheat0": 13} score +3647 wins 99/120 {'T8': (20, -584), 'omw': (39, 5512), 'pub': (40, 6013)} 
+done

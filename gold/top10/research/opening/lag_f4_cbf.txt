@@ -1,0 +1,19 @@
+result us 136395 elite 152018 (team ?, shops ['PIZZA_SHOP', 'SMOOTHIE_SHOP', 'BRUNCH_SPOT', 'SMOOTHIE_SHOP', 'PIZZA_SHOP', 'SMOOTHIE_SHOP', 'SMOOTHIE_SHOP', 'ICE_CREAM_SHOP'])
+ d | cash0  cashEnd  elite | hnd idle | 1st sell(h)              land  plant(h) n   place | seeds left  unsold shed          carried unfed | us census                          | elite census
+ 0 |   3000      43       7 |  5   35 | WHE0                        -      6  19      5 | {"WHE": 1}  {}                         0    3 | C3 S2 m7 unfed3 w12                | C2 S3 m6 unfed1 w10
+ 1 |     43     264      34 |  5   74 | FER4                        -     13   1      0 | {}          {"WHE": 3}                 2    1 | C3 S2 m7 unfed1 w13                | C2 S3 m10 w10
+ 2 |    264     375      52 |  5   24 | FER6 WHE21                  -     19   3      0 | {}          {"GOO": 1}                 8    0 | C3 S2 m7 w12                       | C2 S3 m10 s3 w6
+ 3 |    375     191      98 |  6   71 | WHE0 FER6                   -      -   0      2 | {}          {"WHE": 1, "COW": 1}       6    0 | C3 G2 S2 m7 w9                     | C2 S3 m10 s8 w2
+ 4 |    191     289     556 |  6   19 | FER6 WHE18                  -     20   1      1 | {}          {"COW": 1}                20    0 | C4 G2 S2 m7 s1 w4                  | C2 S3 m10 s10
+ 5 |    289     490    1082 |  6   32 | WHE0 FER6                   -     13   4      2 | {}          {}                         7    0 | C6 G2 S2 m7 s5 w2                  | C2 S3 m10 s10
+ 6 |    490     272     425 | 10   37 | WOO6 FER10                  7      8  18      0 | {"WHE": 8}  {"WHE": 7}                 9    3 | C6 G2 S2 m7 s20 unfed3 w4          | C8 S3 m10 s20 unfed6 w5
+ 7 |    272      82     500 |  8   91 | FER0 WHE0                   -      7   5      1 | {"WHE": 3}  {"WHE": 6}                18    0 | C6 G2 S3 m7 s20 w8                 | C9 S3 m10 s20 unfed1 w7
+ 8 |     82     590    3155 | 11   34 | FER0 EGG0 MIL3              4      6  15      2 | {"WHE": 8, "STR": 2}  {"WHE": 7, "COW": 1}       4    2 | C7 G2 S4 m7 s28 unfed2 w15         | C10 S3 m10 s20 unfed1 w7
+ 9 |    590     334    1483 | 10   36 | FER0 WOO6 EGG12             -      6   9      1 | {"WHE": 6}  {"WHE": 8, "SHE": 1}      13    1 | C8 G2 S4 m7 s35 unfed1 w17         | C11 G2 S3 empty_C1 m10 s21 unfed6 
+10 |    334    9221    9667 | 11   17 | FER0 MEL7                   -      8   3      1 | {"WHE": 4, "STR": 5}  {"WHE": 2, "COW": 2}      13    4 | C9 G2 S4 s36 unfed4 w18            | C11 G3 S3 c1 m5 s21 t5 unfed6 w17
+11 |   9221    8377   15739 | 11   23 | MIL0 FER0 WHE20             -      7  12      5 | {}          {}                        45    0 | C11 G3 S6 s40 w12 weed2            | C11 G3 S4 c1 m2 s21 t5 unfed1 w27
+12 |   8377   12363   15664 | 10   30 | FER0 EGG0 MIL0 WHE22 WOO    -      8   3      0 | {"WHE": 1}  {"WHE": 10}               43    0 | C11 G3 S6 s42 w10                  | C11 G3 S4 c1 m2 s22 t6 w26
+13 |  13889   18157   17141 | 10   24 | WOO0 FER0 MIL0 WHE22        -      9   4      0 | {}          {"WHE": 14}               38    1 | C11 G3 S6 s42 unfed1 w12           | C11 G3 S4 m2 s37 t6 unfed4 w12
+14 |  18157   19837   19757 |  9   21 | WOO0 FER0 EGG0 MIL6         -      8   2      0 | {"WHE": 1}  {"WHE": 6}                43    0 | C11 G3 S6 s42 w12                  | C11 G3 S4 m2 s37 t8 unfed1 w10
+15 |  19888   21861   30262 | 11   11 | MIL0 WOO0 STR0 FER0 WHE2    -     15   3      0 | {"WHE": 2}  {"WHE": 6}                64    2 | C11 G3 S6 s42 unfed2 w11           | C11 G3 S4 m2 s37 t8 unfed4 w10
+16 |  21861   26630   41362 |  8    2 | EGG1 FER1 STR21 MIL21 WO    -     10   5      0 | {"WHE": 2}  {"WHE": 11, "WOO": 6}     69    8 | C11 G3 S6 m1 s42 t4 unfed8 w8      | C11 G3 S4 m2 s37 t8 w10

@@ -1,0 +1,9 @@
+result us 140511 elite 161463 (team ?, shops ['PIZZA_SHOP', 'SMOOTHIE_SHOP', 'BRUNCH_SPOT', 'SMOOTHIE_SHOP', 'PIZZA_SHOP', 'SMOOTHIE_SHOP', 'SMOOTHIE_SHOP', 'ICE_CREAM_SHOP'])
+ d | cash0  cashEnd  elite | hnd idle | 1st sell(h)              land  plant(h) n   place | seeds left  unsold shed          carried unfed | us census                          | elite census
+ 0 | -                mf 0 lq 0 |   3000      93       7 |  5   39 | WHE0                        -      4  20      4 | {}          {}                         0    2 | C2 S2 m12 unfed2 w8                | C2 S3 m6 unfed1 w10
+ 1 | 12m y111111111111 f0 mf 0 lq 0 |     93     276      34 |  5  106 | FER6                        -      -   0      0 | {}          {"WHE": 2}                 1    0 | C2 S2 m12 w8                       | C2 S3 m10 w10
+ 2 | 12m y111111111111 f0 mf 0 lq 0 |    276      70      53 |  5   57 | FER8                        -      -   0      0 | {}          {"WHE": 5, "COW": 1}       0    0 | C2 S2 m12 w8                       | C2 S3 m10 s3 w6
+ 3 | 12m y111111111111 f0 mf 0 lq 0 |     70     346     104 |  5   69 | FER8                        -      -   0      1 | {}          {"WHE": 3}                 3    0 | C3 S2 m12 w7                       | C2 S3 m10 s8 w2
+ 4 | 12m y111111111111 f0 mf 0 lq 0 |    346     312     571 |  7   26 | FER6                        -      9   7      1 | {}          {}                        28    0 | C4 S2 m12 w7                       | C2 S3 m10 s10
+ 5 | 12m y111111111111 f0 mf 0 lq 0 |    312    1332    1103 |  5   66 | WHE0 FER6                   -      -   0      0 | {}          {"WHE": 6}                 0    0 | C4 S2 m12 w7                       | C2 S3 m10 s10
+ 6 | 12m y111111111111 f0 mf 0 lq 1 |   1332     472     392 |  9   21 | WOO4 FER11                  0      3  21      1 | {}          {"WHE": 5, "COW": 2}       1    2 | C4 G1 S2 m12 s12 unfed2 w16        | C8 S3 m10 s20 unfed6 w5

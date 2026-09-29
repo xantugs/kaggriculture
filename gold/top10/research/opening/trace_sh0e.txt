@@ -1,0 +1,66 @@
+s  0 us [[4, 4]] el [[4, 4]] | last None None
+s 23 us [[2, 0], [1, 0], [1, 1], [0, 0], [3, 0]] el [[2, 0], [1, 0], [1, 1], [0, 0], [3, 0]] | last [['PLANT', 'WHEAT'], ['PLANT', 'WHEAT'], ['WATER'], ['WATER'], ['WATER']] []
+d 0 | us $     5 h 4 .4 C2 S3 m6 w10 | el $     5 h 4 .4 C2 S3 m6 w10
+s 24 us [[4, 4]] el [[4, 4]] | last [['WATER'], ['WATER'], ['PASS'], ['PASS'], ['PASS']] []
+s 47 us [[4, 4], [4, 4], [4, 4], [1, 3], [3, 1]] el [[4, 4], [4, 4], [4, 4], [1, 3], [3, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['WATER'], ['PASS']] []
+d 1 | us $    30 h 4 C2 S3 m10 w10 | el $    30 h 4 C2 S3 m10 w10
+s 48 us [[4, 4]] el [[4, 4]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS']] []
+s 71 us [[2, 1], [3, 2], [0, 3], [0, 1], [0, 0], [4, 4], [4, 4]] el [[2, 1], [3, 2], [0, 3], [0, 1], [0, 0], [4, 4], [4, 4]] | last [['WATER'], ['PASS'], ['WATER'], ['PASS'], ['PLANT', 'STRAWBERRY'], ['PASS'], ['PASS']] []
+d 2 | us $    46 h 6 .1 C2 S3 m10 s3 w6 | el $    46 h 6 .1 C2 S3 m10 s3 w6
+s 72 us [[4, 4]] el [[4, 4]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['PASS'], ['PASS']] []
+s 95 us [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [1, 3], [2, 1]] el [[4, 4], [2, 0], [4, 4], [5, 5], [4, 4], [1, 3], [2, 1]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['WATER'], ['PASS']] []
+d 3 | us $    93 h 6 C2 S3 m10 s8 w2 | el $    93 h 6 C2 S3 m10 s8 w2
+s 96 us [[4, 4]] el [[4, 4]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS']] []
+s119 us [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [0, 0]] el [[4, 4], [4, 4], [4, 4], [5, 5], [4, 4], [2, 1], [0, 0]] | last [['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PASS'], ['PLANT', 'STRAWBERRY'], ['WATER']] []
+d 4 | us $   549 h 6 C2 S3 m10 s10 | el $   549 h 6 C2 S3 m10 s10
+d 5 | us $  1075 h 6 C2 S3 m10 s10 | el $  1075 h 6 C2 S3 m10 s10
+m145 us $868 el $868 d 0 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 5]] | shed {'WHEAT': 5} | rec None
+m149 us $188 el $188 d 0 | ord [['SELL', 'WOOL', 6], ['BUY_LAND'], ['BUY_SEED', 'STRAWBERRY', 9], ['BUY_SEED', 'WHEAT', 3]] | shed {} | rec [['SELL', 'WOOL', 6], ['BUY_SEED', 'STRAWBERRY', 1], ['BUY_SEED', 'WHEAT', 2], ['BUY_ANIMAL', 'COW', 2]]
+m150 us $429 el $429 d 0 | ord [['SELL', 'WOOL', 6], ['BUY_SEED', 'STRAWBERRY', 1], ['BUY_SEED', 'WHEAT', 2], ['BUY_ANIMAL', 'COW', 2]] | shed {'COW': 2} | rec None
+m152 us $346 el $346 d 0 | ord [['SELL', 'WOOL', 6], ['SELL', 'FERTILIZER', 1], ['BUY_ANIMAL', 'COW', 3]] | shed {'COW': 5} | rec [['SELL', 'FERTILIZER', 2], ['BUY_ANIMAL', 'COW', 1]]
+m153 us $125 el $125 d 0 | ord [['SELL', 'FERTILIZER', 2], ['BUY_ANIMAL', 'COW', 1]] | shed {'COW': 3} | rec [['SELL', 'FERTILIZER', 2]]
+m154 us $302 el $302 d 0 | ord [['SELL', 'FERTILIZER', 2]] | shed {} | rec None
+d 6 | us $   302 h 8 .4 C8 S3 m10 s20 w5 | el $   302 h 8 .4 C8 S3 m10 s20 w5
+m169 us $120 el $120 d 0 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 4]] | shed {'WHEAT': 4} | rec [['HIRE', None, 1]]
+m170 us $86 el $86 d 0 | ord [['HIRE']] | shed {} | rec None
+m175 us $109 el $109 d 0 | ord [['SELL', 'FERTILIZER', 1], ['BUY_PRODUCT', 'WHEAT', 2]] | shed {'WHEAT': 2} | rec [['SELL', 'FERTILIZER', 3], ['BUY_PRODUCT', 'WHEAT', 5], ['BUY_SEED', 'WHEAT', 2]]
+m176 us $186 el $186 d 0 | ord [['SELL', 'FERTILIZER', 3], ['BUY_PRODUCT', 'WHEAT', 5], ['BUY_SEED', 'WHEAT', 2]] | shed {'WHEAT': 7} | rec [['SELL', 'FERTILIZER', 5], ['BUY_ANIMAL', 'COW', 1]]
+m177 us $214 el $214 d 0 | ord [['SELL', 'FERTILIZER', 5], ['BUY_ANIMAL', 'COW', 1]] | shed {'WHEAT': 5, 'COW': 1} | rec None
+m179 us $298 el $298 d 0 | ord [['SELL', 'FERTILIZER', 1]] | shed {'COW': 1} | rec None
+m183 us $382 el $382 d 0 | ord [['SELL', 'FERTILIZER', 1]] | shed {} | rec None
+d 7 | us $   382 h 9 .1 C9 S3 m10 s20 w7 | el $   382 h 9 .1 C9 S3 m10 s20 w7
+m193 us $158 el $158 d 0 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 5]] | shed {'WHEAT': 5} | rec [['SELL', 'MILK', 6], ['HIRE', None, 1], ['BUY_PRODUCT', 'WHEAT', 7], ['BUY_ANIMAL', 'COW', 1]]
+m194 us $803 el $803 d 0 | ord [['SELL', 'MILK', 6], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 7], ['BUY_ANIMAL', 'COW', 1]] | shed {'WHEAT': 7, 'COW': 1} | rec [['SELL', 'FERTILIZER', 2]]
+m195 us $970 el $970 d 0 | ord [['SELL', 'FERTILIZER', 2]] | shed {'WHEAT': 2, 'COW': 1} | rec None
+m204 us $1053 el $1053 d 0 | ord [['SELL', 'FERTILIZER', 1]] | shed {} | rec [['SELL', 'FERTILIZER', 5]]
+m205 us $1461 el $1461 d 0 | ord [['SELL', 'FERTILIZER', 5]] | shed {} | rec [['SELL', 'MILK', 6], ['SELL', 'FERTILIZER', 4]]
+m206 us $3078 el $3078 d 0 | ord [['SELL', 'MILK', 6], ['SELL', 'FERTILIZER', 4]] | shed {} | rec None
+d 8 | us $  3078 h 9 C10 S3 m10 s20 w7 | el $  3078 h 9 C10 S3 m10 s20 w7
+m217 us $560 el $560 d 0 | ord [['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['HIRE'], ['BUY_PRODUCT', 'WHEAT', 13], ['BUY_LAND']] | shed {'WHEAT': 13} | rec [['HIRE', None, 1], ['HIRE', None, 1], ['HIRE', None, 1]]
+m218 us $382 el $382 d 0 | ord [['HIRE'], ['HIRE'], ['HIRE']] | shed {} | rec None
+m221 us $736 el $736 d 0 | ord [['SELL', 'WOOL', 4], ['BUY_SEED', 'STRAWBERRY', 1], ['BUY_SEED', 'WHEAT', 15]] | shed {} | rec [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'COW', 1], ['BUY_ANIMAL', 'GOOSE', 1]]
+m222 us $517 el $517 d 0 | ord [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'COW', 1], ['BUY_ANIMAL', 'GOOSE', 1]] | shed {'GOOSE': 1, 'COW': 1} | rec [['SELL', 'FERTILIZER', 2]]
+m223 us $674 el $674 d 0 | ord [['SELL', 'FERTILIZER', 2]] | shed {'WHEAT': 4, 'GOOSE': 1} | rec [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'GOOSE', 2]]
+m224 us $403 el $403 d 0 | ord [['SELL', 'WOOL', 4], ['BUY_ANIMAL', 'GOOSE', 2]] | shed {'WHEAT': 4, 'GOOSE': 2} | rec None
+m237 us $481 el $481 d 0 | ord [['SELL', 'FERTILIZER', 1]] | shed {'WHEAT': 1} | rec [['SELL', 'FERTILIZER', 6]]
+m238 us $941 el $941 d 0 | ord [['SELL', 'FERTILIZER', 6]] | shed {'WHEAT': 1} | rec None
+d 9 | us $   941 h11 .8 C12 G2 S3 m10 s21 w19 | el $   941 h11 .8 C12 G2 S3 m10 s21 w19
+d10 | us $  9085 h10 .9 C11 G3 S3 c1 m5 s21 t5 w17 | el $  9085 h10 .9 C11 G3 S3 c1 m5 s21 t5 w17
+d11 | us $ 14957 h10 .1 C11 G3 S4 c1 m2 s21 t5 w27 | el $ 14957 h10 .1 C11 G3 S4 c1 m2 s21 t5 w27
+d12 | us $ 14892 h 9 C11 G3 S4 c1 m2 s22 t6 w26 | el $ 14892 h 9 C11 G3 S4 c1 m2 s22 t6 w26
+d13 | us $ 15893 h 9 C11 G3 S4 m2 s37 t6 w12 | el $ 15893 h 9 C11 G3 S4 m2 s37 t6 w12
+d14 | us $ 18519 h 9 C11 G3 S4 m2 s37 t8 w10 | el $ 18519 h 9 C11 G3 S4 m2 s37 t8 w10
+d15 | us $ 29450 h11 C11 G3 S4 m2 s37 t8 w10 | el $ 29450 h11 C11 G3 S4 m2 s37 t8 w10
+d16 | us $ 40686 h 9 C11 G3 S4 m4 s37 t8 w8 | el $ 40351 h 9 C11 G3 S4 m2 s37 t8 w10
+d17 | us $ 51245 h 9 C11 G3 S4 m4 s37 t8 w8 | el $ 52035 h 9 C11 G3 S4 m2 s37 t9 w9
+d18 | us $ 57682 h11 C11 G3 S4 m4 s34 t8 w11 | el $ 57170 h11 C12 G3 S4 m2 s34 t20
+d19 | us $ 66360 h10 C11 G3 S4 m4 s29 t8 w16 | el $ 63359 h10 C12 G3 S4 m3 s29 t20 w4
+d20 | us $ 71635 h 9 C11 G3 S4 m3 s27 t8 w19 | el $ 68789 h 9 C12 G3 S4 m2 s27 t20 w7
+d21 | us $ 81230 h11 C11 G3 S4 m2 s27 t3 w25 | el $ 73287 h10 C13 G3 S4 m1 s27 t15 w12
+d22 | us $ 84518 h13 C11 G3 S4 m2 s17 t3 w35 | el $ 78586 h10 C13 G3 S4 m1 s17 t15 w22
+d23 | us $ 97427 h10 C11 G3 S4 m2 s17 t2 w36 | el $ 87782 h 9 C13 G3 S2 m1 s17 t14 w25
+d24 | us $103160 h11 C11 G3 S4 m2 s17 t2 w36 | el $ 94831 h10 C13 G3 S2 m1 s17 t14 w25
+d25 | us $114985 h11 C11 G3 S4 m2 s17 w38 | el $102587 h11 C13 G3 S1 c2 m1 s17 t12 w26
+d26 | us $122530 h15 C11 G3 S4 c14 m1 s16 w26 | el $106001 h11 C13 G3 c2 m1 s16 t12 w28
+d27 | us $133281 h10 .9 C11 G3 S4 c14 s16 w18 | el $126082 h11 .5 C13 G3 c2 m1 s16 t12 w23
+d28 | us $145208 h10 .26 C11 G3 S4 c14 s16 w1 | el $136718 h13 .21 C13 G3 m1 s15 t11 w11

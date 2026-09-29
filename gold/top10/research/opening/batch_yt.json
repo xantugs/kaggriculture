@@ -1,0 +1,3 @@
+{"y1": {"herd_cap_by_yarn": {"1": 24, "2": 30}},
+ "t1": {"tom_ramp": {"from": 8, "per_day": 2.0, "cap": 12, "buyers": true}},
+ "yt": {"herd_cap_by_yarn": {"1": 24, "2": 30}, "tom_ramp": {"from": 8, "per_day": 2.0, "cap": 12, "buyers": true}}}

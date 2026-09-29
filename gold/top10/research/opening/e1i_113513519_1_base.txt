@@ -1,0 +1,8 @@
+full_OP_c0tr.py gid 113513519: us 115860 elite 125827 (-9967)
+ d5  cash    509 elite   1085 anim C5G2S2     land [] | our wool - milk - | elite wool - milk -
+ d6  cash     85 elite    367 anim C7G2S2     land [3] | our wool 2:6@218 4:6@206 milk - | elite wool 4:6@206 5:6@193 7:6@183 milk -
+ d7  cash      2 elite    138 anim C7G2S2     land [] | our wool - milk - | elite wool - milk -
+ d8  cash     56 elite   3086 anim C7G2S3     land [6] | our wool - milk 5:6@211 6:12@207 | elite wool - milk 1:6@215 12:6@197
+ d9  cash   1566 elite   1202 anim C8G2S4     land [] | our wool 2:4@177 4:4@167 milk - | elite wool 4:4@167 5:4@141 7:4@125 milk -
+ d10 cash    555 elite   9897 anim C8G2S5     land [] | our wool - milk 23:3@207 | elite wool - milk -
+ d11 cash  10895 elite  15682 anim C8G4S6     land [] | our wool - milk 0:3@204 | elite wool - milk 1:6@203
