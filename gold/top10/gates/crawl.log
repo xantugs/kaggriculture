@@ -1,0 +1,15 @@
+15:42 subs visited 10 queue 299 episodes 437
+15:45 subs visited 20 queue 883 episodes 1731
+15:45 subs visited 30 queue 1507 episodes 3004
+15:46 subs visited 40 queue 1580 episodes 4033
+15:47 subs visited 50 queue 1592 episodes 4859
+15:47 subs visited 60 queue 1638 episodes 6195
+15:48 subs visited 70 queue 1752 episodes 7588
+15:48 subs visited 80 queue 2024 episodes 8785
+15:49 subs visited 90 queue 2059 episodes 9919
+15:51 subs visited 100 queue 2187 episodes 11129
+15:52 subs visited 110 queue 2324 episodes 12226
+15:52 subs visited 120 queue 2348 episodes 13335
+15:53 subs visited 130 queue 2409 episodes 14306
+15:54 subs visited 140 queue 2484 episodes 15123
+ListEpisodes failed {'submissionId': 56656922} <HTTPError 429: 'Too Many Requests'>

@@ -1,0 +1,282 @@
+[
+ {
+  "tag": "v10",
+  "ref": 56452796,
+  "date": "2026-09-22T04:22",
+  "score": "2820.2",
+  "bytes": 1041309,
+  "size_ok": true,
+  "sha256": "85014f4139ef373616be53f54104db2df8f2f6ea94568f080483e47c2b27d976",
+  "desc": "v10"
+ },
+ {
+  "tag": "v11",
+  "ref": 56454323,
+  "date": "2026-09-22T05:30",
+  "score": "2749.8",
+  "bytes": 1050445,
+  "size_ok": true,
+  "sha256": "045267a3596b088613689b766be99e6a893e53ad8a1b98c21cc4f8fcf902bec4",
+  "desc": "v11"
+ },
+ {
+  "tag": "v12",
+  "ref": 56459281,
+  "date": "2026-09-22T08:45",
+  "score": "2730.6",
+  "bytes": 1058902,
+  "size_ok": true,
+  "sha256": "caffc2ba0457e32eb131135f3155f087ac9bc300db546b4c1a48d0fd20ebf4ac",
+  "desc": "v12"
+ },
+ {
+  "tag": "v13",
+  "ref": 56490820,
+  "date": "2026-09-23T10:41",
+  "score": "2674.2",
+  "bytes": 1052315,
+  "size_ok": true,
+  "sha256": "84aa3a851f8f7a6f391a0c794dba2fed5df2d1334fdb14b00072ac4a352842e8",
+  "desc": "v13"
+ },
+ {
+  "tag": "v14",
+  "ref": 56499683,
+  "date": "2026-09-23T17:11",
+  "score": "2455.3",
+  "bytes": 1052316,
+  "size_ok": true,
+  "sha256": "62670666c9ccf3357d21a41ee49830777df23a199b120bfd87d658f54c9ca7d8",
+  "desc": "v14"
+ },
+ {
+  "tag": "v15",
+  "ref": 56520991,
+  "date": "2026-09-24T12:16",
+  "score": "2653.0",
+  "bytes": 1056467,
+  "size_ok": true,
+  "sha256": "4b15d062ddf57df7bd62d85d317d4435d95aa795f54494593b7cb047d28b1d66",
+  "desc": "v15"
+ },
+ {
+  "tag": "v16",
+  "ref": 56523589,
+  "date": "2026-09-24T14:19",
+  "score": "2662.0",
+  "bytes": 1056468,
+  "size_ok": true,
+  "sha256": "cce4f2934f494c6bbf456c559ffe61029f093eb379f9d4a64bb5fa4674f9272c",
+  "desc": "v16"
+ },
+ {
+  "tag": "v17",
+  "ref": 56527851,
+  "date": "2026-09-24T17:39",
+  "score": "2693.8",
+  "bytes": 1138115,
+  "size_ok": true,
+  "sha256": "4026ef1d8a8effc14edcdd88696438ab5437865fa46e793553c6a656dcf235d1",
+  "desc": "v17"
+ },
+ {
+  "tag": "v18",
+  "ref": 56538289,
+  "date": "2026-09-25T02:59",
+  "score": "2561.4",
+  "bytes": 1150038,
+  "size_ok": true,
+  "sha256": "98477c7524533ca86fb335f3ef4a9ff206c11e8aaa01bab89bb989c2143035c1",
+  "desc": "v18"
+ },
+ {
+  "tag": "v19",
+  "ref": 56544005,
+  "date": "2026-09-25T07:10",
+  "score": "2668.5",
+  "bytes": 1161827,
+  "size_ok": true,
+  "sha256": "d4a84504d387745e399e34e3f52fe9f8bf63e0a24edaa074c5508270ee717033",
+  "desc": "v19"
+ },
+ {
+  "tag": "v20",
+  "ref": 56557754,
+  "date": "2026-09-25T18:31",
+  "score": "1792.4",
+  "bytes": 1198880,
+  "size_ok": true,
+  "sha256": "10141c6fa605caf8ec426d7cc62a9d147db34f6024b053c400c671d9509fafe4",
+  "desc": "v20"
+ },
+ {
+  "tag": "v21",
+  "ref": 56567464,
+  "date": "2026-09-26T02:57",
+  "score": "2635.7",
+  "bytes": 1208628,
+  "size_ok": true,
+  "sha256": "a4ebfe004fb59843de12659aa47f8f7828872414dfef5cf64f78270d1b073dbd",
+  "desc": "v21"
+ },
+ {
+  "tag": "v22",
+  "ref": 56569220,
+  "date": "2026-09-26T04:38",
+  "score": "2678.4",
+  "bytes": 1226733,
+  "size_ok": true,
+  "sha256": "1cdb98edf6734e10f56e3e361432d08222b449c5093f7bd0dd0c4ffd1cbf9ba1",
+  "desc": "v22"
+ },
+ {
+  "tag": "v23",
+  "ref": 56571304,
+  "date": "2026-09-26T06:23",
+  "score": "2635.6",
+  "bytes": 1237674,
+  "size_ok": true,
+  "sha256": "b52e36cae12a87741d677869dbb8130d9c2c0ad910fdcb6798ab60a80fc012fd",
+  "desc": "v23"
+ },
+ {
+  "tag": "v24",
+  "ref": 56576862,
+  "date": "2026-09-26T10:27",
+  "score": "2419.3",
+  "bytes": 1241814,
+  "size_ok": true,
+  "sha256": "5a491de779fd75a00217ab37f5613a00e6c02b618d82c4c466ea2c57a4dd240a",
+  "desc": "v24"
+ },
+ {
+  "tag": "v25",
+  "ref": 56600788,
+  "date": "2026-09-27T06:41",
+  "score": "2599.4",
+  "bytes": 1116032,
+  "size_ok": true,
+  "sha256": "8b899b2fc77dd9a88f29b7f3d1600ba15745a42a843b71dcdd3ff2556b8f21cf",
+  "desc": "v25"
+ },
+ {
+  "tag": "v26",
+  "ref": 56603319,
+  "date": "2026-09-27T08:19",
+  "score": "2598.9",
+  "bytes": 1116032,
+  "size_ok": true,
+  "sha256": "1c78df6e39eca69387156fd371d05a55badd32c79a4194d701407f6fe8f506cf",
+  "desc": "v26 sf8 + copy takeover day 22 (lean)"
+ },
+ {
+  "tag": "v27",
+  "ref": 56607659,
+  "date": "2026-09-27T11:50",
+  "score": "2535.8",
+  "bytes": 1311219,
+  "size_ok": true,
+  "sha256": "cf91aa0187b7a263c70504f771e88e7eceb2c24b98659b827fe49865e598b571",
+  "desc": "v27 T5 = sf8 + copy takeover d22 + trim_fix + drop_refill + shed_skip + eh_level/visit_watered (full build)"
+ },
+ {
+  "tag": "v28",
+  "ref": 56622850,
+  "date": "2026-09-28T00:03",
+  "score": "2574.0",
+  "bytes": 1375844,
+  "size_ok": true,
+  "sha256": "50567f739108ef4db972f3056686a76ac88455b181aaac68a763a8f8726674c9",
+  "desc": "v28 T8 = T7 + tie_blk (premium-first tape delivery) + vrp_pack (route packing) + d27_wheat (full build)"
+ },
+ {
+  "tag": "v29",
+  "ref": 56638568,
+  "date": "2026-09-28T10:59",
+  "score": "2523.8",
+  "bytes": 1433011,
+  "size_ok": true,
+  "sha256": "2ec369ae790335f8b7f54344d6847487a34fb42cdb33e8a7265290b2c2d5481c",
+  "desc": "v29 TP_A31g = T8 + tape-plus (nw4=3, ne6+extra, fert_keeper). vs T8 from step 0: live253 +825 (143->154), 2800+ +96, gol"
+ },
+ {
+  "tag": "v30",
+  "ref": 56651672,
+  "date": "2026-09-28T20:35",
+  "score": "2205.0",
+  "bytes": 1444434,
+  "size_ok": true,
+  "sha256": "ded157612241613e4d4ba0cfb0cb844570fe17231a55616eb06c790c03cf38ff",
+  "desc": "v30 PF = opening controller (cfg_p1e: hf strawberries, sheep-first, liq_days) days 0-15 + T8 late game; tape only vs C2S"
+ },
+ {
+  "tag": "v28r",
+  "ref": 56661347,
+  "date": "2026-09-29T03:28",
+  "score": "1985.1",
+  "bytes": 1375844,
+  "size_ok": true,
+  "sha256": "50567f739108ef4db972f3056686a76ac88455b181aaac68a763a8f8726674c9",
+  "desc": "v28 T8 (resubmit) = T7 + tie_blk (premium-first tape delivery) + vrp_pack (route packing) + d27_wheat (full build); ladd"
+ },
+ {
+  "tag": "v30r",
+  "ref": 56661351,
+  "date": "2026-09-29T03:28",
+  "score": "1759.7",
+  "bytes": 1444434,
+  "size_ok": true,
+  "sha256": "ded157612241613e4d4ba0cfb0cb844570fe17231a55616eb06c790c03cf38ff",
+  "desc": "v30 PF (resubmit) = opening controller cfg_p1e (hf strawberries, sheep-first, liq_days) days 0-15 + T8 late game; tape o"
+ },
+ {
+  "tag": "v31",
+  "ref": 56663285,
+  "date": "2026-09-29T04:59",
+  "score": "2466.0",
+  "bytes": 1429616,
+  "size_ok": true,
+  "sha256": "54f6ed19b2285b8c5a66373bd9b583f9b6d1caa462a1ed6bcd48c782be2bf60f",
+  "desc": "v31 v29fc = v29 TP_A31g + phase forecast of rival milk/strawberry sales in the DP seller (day>=12, wool untouched). Fres"
+ },
+ {
+  "tag": "v32",
+  "ref": 56663295,
+  "date": "2026-09-29T04:59",
+  "score": "2391.8",
+  "bytes": 1441105,
+  "size_ok": true,
+  "sha256": "e98d6ce9de23892122162b7be71787703ede677cecd97a5da330cca8c73283ea",
+  "desc": "v32 PFcfc = opening controller cfg_p1e (days 0-15) vs herd-type/unknown rivals, T8 tape vs chassis copies + C2S3 lineage"
+ },
+ {
+  "tag": "v33",
+  "ref": 56681632,
+  "date": "2026-09-29T16:14",
+  "score": "2469.5",
+  "bytes": 1458273,
+  "size_ok": true,
+  "sha256": "fb1b68e2b2581c2ecd4d7f06878f8207835c2c8869da72e284dfaac6639bad9e",
+  "desc": "v33"
+ },
+ {
+  "tag": "v34",
+  "ref": 56697382,
+  "date": "2026-09-30T04:41",
+  "score": "2413.7",
+  "bytes": 1444659,
+  "size_ok": true,
+  "sha256": "d1eeea13544eb2406f6c7d91aa614d8c3ca22849005ec8be897b61465aa176cb",
+  "desc": "v34 CGt tape = T8fcWt + FWt strawberry spoiler only vs step-2 copies (sha d1eeea13)"
+ },
+ {
+  "tag": "v35",
+  "ref": 56697385,
+  "date": "2026-09-30T04:41",
+  "score": "2368.6",
+  "bytes": 1463454,
+  "size_ok": true,
+  "sha256": "abbc3296f27434a3137503841130fe30216acb7eb50e4ba198d0b09699bb222e",
+  "desc": "v35 NMp44Tr controller = c2tr + herdfirst->tape + 960-band NM controller (strawberry top-up) + reset-safe (sha abbc3296)"
+ }
+]

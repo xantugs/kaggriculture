@@ -1,0 +1,29 @@
+episodes listed 15123
+band 2400 candidates 14402 chosen 350 teams 138
+band 2500 candidates 10754 chosen 350 teams 125
+band 2600 candidates 2214 chosen 350 teams 97
+band 2700 candidates 229 chosen 159 teams 57
+band 2800 candidates 156 chosen 68 teams 18
+band 2900 candidates 54 chosen 22 teams 6
+band 3000 candidates 3 chosen 2 teams 1
+to obtain 1301 of which cached 12
+16:03 obtained 100 / 1301 429 s
+16:15 obtained 200 / 1301 1155 s
+16:20 obtained 300 / 1301 1406 s
+16:30 obtained 400 / 1301 2031 s
+16:35 obtained 500 / 1301 2329 s
+16:43 obtained 600 / 1301 2809 s
+16:51 obtained 700 / 1301 3264 s
+failed 115369959 OSError(22, 'The paging file is too small for this operation to complete', None, 1455, None)
+17:02 obtained 800 / 1301 3971 s
+failed 115381075 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+17:11 obtained 900 / 1301 4466 s
+failed 115121819 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115525969 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115017883 CalledProcessError(35, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115319112 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115198343 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+17:19 obtained 1000 / 1301 4959 s
+17:25 obtained 1100 / 1301 5314 s
+17:29 obtained 1200 / 1301 5594 s
+17:36 SAMPLE DONE 1294

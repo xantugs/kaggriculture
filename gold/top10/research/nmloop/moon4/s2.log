@@ -1,0 +1,31 @@
+s1 ranking (wins, clipped margin sum, n, genome); baseline NMp44 = genome 0: (1, -61449.0, 10, 0)
+S2 panel: 40 games; genomes [128, 32, 49, 129, 27, 46, 135, 75, 141, 84, 0, 61, 115, 36, 110, 7, 33, 81, 122, 63, 30, 5, 25, 19, 87, 26, 16, 15, 73, 14]
+s2: 30 genomes x 40 games = 1200 tasks to run
+  0/1200
+  100/1200
+  200/1200
+  300/1200
+  400/1200
+  500/1200
+  600/1200
+  700/1200
+  800/1200
+  900/1200
+  1000/1200
+  1100/1200
+s2 ranking (wins, clipped margin sum, n, genome); baseline NMp44 = genome 0: (15, -10511.0, 40, 0)
+  genome 110: wins 16  clipped   -64188  n 40
+  genome   0: wins 15  clipped   -10511  n 40
+  genome  63: wins 15  clipped  -192342  n 40
+  genome 128: wins 14  clipped   -95141  n 40
+  genome  61: wins 14  clipped  -134607  n 40
+  genome  32: wins 14  clipped  -160373  n 40
+  genome  36: wins 13  clipped  -156368  n 40
+  genome 129: wins 13  clipped  -161118  n 40
+  genome  49: wins 13  clipped  -193877  n 40
+  genome  75: wins 13  clipped  -224294  n 40
+  genome 141: wins 12  clipped  -153905  n 40
+  genome 115: wins 12  clipped  -172532  n 40
+  genome   5: wins 12  clipped  -219605  n 40
+  genome  15: wins 12  clipped  -247599  n 40
+  genome  81: wins 12  clipped  -249522  n 40

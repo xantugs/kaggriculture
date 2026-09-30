@@ -1,0 +1,34 @@
+S1 panel: [('lad', 115336805, 0), ('lad', 115338309, 1), ('lad', 115335380, 1), ('lad', 115333932, 1), ('lad', 115332494, 0), ('lad', 115345249, 1), ('lad', 115383896, 1), ('lad', 115470840, 0), ('lad', 115509682, 0), ('lad', 115361263, 0)]
+s1: 151 genomes x 10 games = 1510 tasks to run
+  0/1510
+  100/1510
+  200/1510
+  300/1510
+  400/1510
+  500/1510
+  600/1510
+  700/1510
+  800/1510
+  900/1510
+  1000/1510
+  1100/1510
+  1200/1510
+  1300/1510
+  1400/1510
+  1500/1510
+s1 ranking (wins, clipped margin sum, n, genome); baseline NMp44 = genome 0: (1, -61449.0, 10, 0)
+  genome 128: wins  3  clipped   -43817  n 10
+  genome  32: wins  3  clipped   -74052  n 10
+  genome  49: wins  3  clipped   -84618  n 10
+  genome 129: wins  3  clipped   -89057  n 10
+  genome  27: wins  2  clipped   -96742  n 10
+  genome  46: wins  2  clipped   -97279  n 10
+  genome 135: wins  2  clipped   -98905  n 10
+  genome  75: wins  2  clipped   -99496  n 10
+  genome 141: wins  2  clipped  -100105  n 10
+  genome  84: wins  2  clipped  -102282  n 10
+  genome   0: wins  1  clipped   -61449  n 10
+  genome  61: wins  1  clipped   -80068  n 10
+  genome 115: wins  1  clipped   -85126  n 10
+  genome  36: wins  1  clipped   -89577  n 10
+  genome 110: wins  1  clipped   -91263  n 10

@@ -1,0 +1,6 @@
+failed 115417340 CalledProcessError(56, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115374890 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115367811 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115187539 CalledProcessError(35, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+failed 115185561 CalledProcessError(28, ['curl', '-s', '--compressed', '--max-time', '150', '-A', 'Mozilla/5.0 curl/8.0', '-o', 'C:\\User
+18:19:49 fetched 304 new of 309 total 304
