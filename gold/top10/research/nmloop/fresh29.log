@@ -1,0 +1,98 @@
+21:06 list try 1: 0 ids
+21:16 list try 2: 0 ids
+21:26 list try 3: 0 ids
+21:36 list try 4: 0 ids
+21:46 list try 5: 0 ids
+21:56 list try 6: 0 ids
+22:06 list try 7: 0 ids
+22:16 list try 8: 0 ids
+22:26 list try 9: 0 ids
+22:36 list try 10: 0 ids
+22:46 list try 11: 0 ids
+22:56 list try 12: 0 ids
+23:06 list try 13: 0 ids
+23:16 list try 14: 0 ids
+23:26 list try 15: 0 ids
+23:36 list try 16: 0 ids
+23:47 list try 17: 0 ids
+23:57 list try 18: 0 ids
+00:07 list try 19: 584 ids
+2026-09-29 584 to fetch
+2026-09-29 50 fetched 66 s
+2026-09-29 100 fetched 138 s
+2026-09-29 150 fetched 206 s
+2026-09-29 200 fetched 251 s
+2026-09-29 250 fetched 288 s
+2026-09-29 300 fetched 359 s
+2026-09-29 350 fetched 431 s
+2026-09-29 400 fetched 499 s
+2026-09-29 450 fetched 565 s
+2026-09-29 500 fetched 628 s
+2026-09-29 550 fetched 699 s
+2026-09-29 done 584 747 s
+00:19 fetched 584 games
+656 seats {'Boey': 80, 'DSM': 80, 'Vadim Vasilenko': 80, 'Victor @ Tufa Labs': 80, 'DECEM': 80, 'Unknown Mother-Goose': 72, 'Majkel1337': 45, 'Yizhou': 37, 'Anton Tikhonov': 32, 'akmr': 30, 'tetsuya & yuanzhe & guoqin': 15, '🐚seek inspiration🐚': 10, 'My second life': 6, 'monsaraida': 3, 'yuto083': 2, 'Fourth Quadrant': 1, 'Azat Akhtyamov': 1, 'Artem The Farmer 🍅': 1, 'Zenith': 1}
+100 refs 76 s
+200 refs 121 s
+300 refs 165 s
+400 refs 201 s
+500 refs 237 s
+600 refs 271 s
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+Loading environment halite failed: No module named 'numpy'
+Loading environment kore_fleets failed: No module named 'numpy'
+Loading environment lux_ai_s3 failed: No module named 'numpy'
+Loading environment open_spiel_env failed: No module named 'numpy'
+Loading environment reinforce_tactics failed: No module named 'numpy'
+done 656 refs 290 s
+00:25 gate built
+00:41 NMp44 done
+00:41 tape done
+00:54 NMp44T hf done
+00:58 NMp26 done
+00:59 NMp13 done
+01:23 NMp65 done

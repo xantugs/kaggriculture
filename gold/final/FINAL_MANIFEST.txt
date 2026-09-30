@@ -1,0 +1,55 @@
+FINAL MANIFEST (30 Sep 2026, ~02:15 UTC). Nothing below has been submitted. The owner decides every submission.
+
+Live now (the 2 counting submissions): v33 c2tr (56681632, 29 Sep 16:14 UTC) + v32 PFcfc (56663295).
+Deadline 30 Sep 23:59 UTC; 5 submissions per UTC day; only the latest 2 count.
+
+RECOMMENDED PAIR (Claude + ChatGPT loop, L20-L23):
+
+  TAPE       = gold/final/CGt_final.py
+               sha256 d1eeea13544eb2406f6c7d91aa614d8c3ca22849005ec8be897b61465aa176cb, 1,444,659 bytes
+               (= gold/submit/main_ctl_CGt.py; T8fcWt + FWt's strawberry spoiler only vs step-2 chassis copies)
+
+  CONTROLLER = gold/final/NMp44Tr_final.py
+               sha256 abbc3296f27434a3137503841130fe30216acb7eb50e4ba198d0b09699bb222e, 1,463,454 bytes
+               (= gold/submit/main_ctl_NMp44Tr.py; NMp44T + reset-safe wrapper, identical to NMp44T in fresh processes)
+
+  Fallback controller (the same play in fresh processes, no reset wrapper): gold/final/NMp44T_final.py
+               sha256 e746eb2f22a0625f6e428ecca4c7763f861edacc3fa60cc279e65dfecae17af4
+
+What the controller is:
+- c2tr's router, but herd-first rivals (Boey / Fourth Quadrant fingerprints) go to the tape as well.
+- New-meta rivals (step-1 money 940-980, 0 hands) get the p1e controller with the NM opening:
+  - melon cycle;
+  - the day-10/11 melon cash-out runs only for cohorts under 12 melons at day 6;
+  - strawberry top-up to 26 plots once 3 strawberry buyers are visible on days 12-15.
+- Everyone else: exactly c2tr (the tape).
+
+Wins, NMp44T vs CGt (vs live v33 c2tr in brackets):
+- fresh28 (851 top-team seats): 138 vs 132 [124]
+- fresh29 (656, held out): 28 vs 25 [~22]
+- old goldg+top10g (381): 133 vs 134 [133]
+- blind new-meta forks (320): 253 vs 250 [250]
+- 115 live v33 games replayed: 69 vs 66 [66; live v33 won 65]
+Net +14 vs CGt, with 4 of 5 panels positive. The edge is small (~0.5% of games), and blind play is noisy (+7 on seeds 9500s, -4 on 9600s).
+
+Checks passed (both final files unless noted):
+- py_compile.
+- Imports: CGt is stdlib only. NMp44Tr has the same imports as c2tr_final.
+- Kaggle official self-play on seeds 6042 and 8500: DONE/DONE, 720 steps.
+- Deterministic across two fresh loads.
+- Zero stdout during play.
+- Kaggle token grep: 0.
+- 0 errors in 420 fresh960 + 115 ladder games (NMp44T/Tr).
+- Routing audit: NMp44T equals c2tr on every non-band, non-herd-first class and equals the tape vs herd-first (12/12 ladder, 80/81 fresh29).
+- Module reuse (only matters if Kaggle reused the agent module across episodes, which it doesn't):
+  - 30 back-to-back games in one module: NMp44Tr 1 differs (1 flip), CGt 3 differ (1 flip). All are copy / self games.
+  - NMp44T without the wrapper also lost a band win (azamat).
+
+DO NOT SUBMIT (research only):
+- NMp65/NMp66 (animal hold for melons);
+- NMp58/NMp60/NMp61 (crew caps);
+- NMp53 (early strawberry sells), NMp51/52 (earlier strawberries);
+- NMp64a/b (wheat caps), NMp39s (day-11 top-up), NMp50 (cash rule);
+- NMp44 (superseded by NMp44T/Tr);
+- NMp13/NMp26/NMp37;
+- every other gold/top10/cands/full_*.py.

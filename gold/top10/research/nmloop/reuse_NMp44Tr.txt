@@ -1,0 +1,2 @@
+  differs 115306945 offhand          fresh     +238 reused     -205  FLIP
+NMp44Tr_final.py: 30 games in one module: 1 differ from fresh, 1 outcome flips
