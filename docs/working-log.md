@@ -8,7 +8,7 @@ Submitted: v23 = m3, v24 = m5 (`gold/submit/main_ctl_mkt5_m7.py`), **v25 = sf8**
 8b899b2f..., submission 56600788, 27 Sep ~07:20 UTC). Active pair now v24 + v25.
 
 ## Environment (Windows, Git Bash)
-- Worktree: `C:/Users/khant/OneDrive/Documents/ChatGPT/2027/kaggriculture_review/kg` (branch `gold/top10`). Run from here.
+- Worktree: `kg/` (branch `gold/top10`). Run from here.
 - Python: `../.venv/Scripts/python.exe` (3.12, kaggle-environments 1.32.7). Prefix commands with `PYTHONIOENCODING=utf-8`.
 - The harness hardcodes `/home/user/kaggriculture/...`; a directory junction `C:\home\user\kaggriculture` -> this worktree
   makes those paths resolve. Do not rewrite those paths.
