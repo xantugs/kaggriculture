@@ -1,8 +1,0 @@
-[["b", "ses_b", {}],
- ["n20", "ses_b", {"_SES_CFG.n": 20}],
- ["n15", "ses_b", {"_SES_CFG.n": 15}],
- ["k3", "ses_b", {"_SES_CFG.kmax": 3}],
- ["nofert", "ses_b", {"_SES_CFG.fert": false}],
- ["d13", "ses_b", {"_SES_CFG.day": 13, "_SES_CFG.plant_last": 14}],
- ["nosell", "ses_b", {"_SES_CFG.sell": false}],
- ["slack1", "ses_b", {"_SES_CFG.slack": 1.0}]]

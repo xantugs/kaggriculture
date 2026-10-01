@@ -1,6 +1,0 @@
-Loading environment halite failed: No module named 'numpy'
-Loading environment kore_fleets failed: No module named 'numpy'
-Loading environment lux_ai_s3 failed: No module named 'numpy'
-Loading environment open_spiel_env failed: No module named 'numpy'
-Loading environment reinforce_tactics failed: No module named 'numpy'
-statuses ['DONE', 'DONE'] rewards [118042.0, 118042.0] steps 720 wall 59s

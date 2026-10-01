@@ -1,2 +1,0 @@
-{"t1": {"tom_ramp": {"from": 8, "per_day": 2.0, "cap": 12, "buyers": true}},
- "t2": {"tom_ramp": {"from": 8, "per_day": 2.0, "cap": 12, "buyers": true}, "tom_sw": [4, 3, 10, false]}}

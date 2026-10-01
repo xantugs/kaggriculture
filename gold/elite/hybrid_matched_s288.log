@@ -1,7 +1,0 @@
-184 games, 94 donor hybrids, start 288, own-town False
-team                  n    W  win%   margin    hyb$   v100$ gcErr | plain-route margin | own-town route margin
-Otter Vibe           86   27    31    -6619   99635  106254     0 |    -5171 |    +2934
-Sida Zuo             48    7    15   -10204  103547  113751     0 |    -8567 |    +5060
-Yannik Schiffner     38   12    32    -5690   98395  104085     0 |    -4973 |    +3975
-binghua              12    4    33    -4218  100064  104281     0 |     -876 |    +1971
-ALL: hybrid wins 50/184 (27%), mean margin -7206, gc errors 0, errs 0, wall 185s

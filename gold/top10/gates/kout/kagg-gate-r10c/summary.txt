@@ -1,6 +1,0 @@
-== cl_omw_v15a (base T5: 100 rows, wins 99)
-  T5d20                  n  100      +67 +-  189  wins   99 ->  100 (+1/-0)
-  T5d21                  n  100      +55 +-  157  wins   99 ->  100 (+1/-0)
-== cl_pub_metav4v13 (base T5: 100 rows, wins 100)
-  T5d20                  n  100      -20 +-  169  wins  100 ->  100 (+0/-0)
-  T5d21                  n  100      -92 +-  166  wins  100 ->  100 (+0/-0)

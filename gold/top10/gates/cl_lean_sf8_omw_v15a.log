@@ -1,4 +1,0 @@
-gold/top10/lean_sf8.py vs arena/cand/omw_v15a.py: 192-8-0 of 200  margin +4777  us 99510  them 94733  errs 0  tmax 2.172  wall 336s
-  net us-them: CARRO +764 EGG -44 FERTI -284 MELON +0 MILK +616 STRAW +3015 TOMAT +4561 WHEAT -1691 WOOL +426 anim -38 hire -1123 seed -266
-  rev us     : CARRO 7517 EGG 4426 FERTI 12329 MELON 14267 MILK 18720 STRAW 32528 TOMAT 6390 WHEAT 7607 WOOL 18922 anim -7497 hire -6404 seed -7015
-  tel/game: {'gc_days': 0.0, 'gc_errors': 0.0, 'gc_hires': 0.0, 'gc_noops': 0.0, 'gc_unserved': 0.0, 'gc_plan_ms': 0.0, 'gc_room_sells': 0.0}

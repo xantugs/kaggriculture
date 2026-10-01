@@ -1,3 +1,0 @@
-== cl_omw_v15a (base T7: 0 rows, wins 0)
-== cl_pub_metav4v13 (base T7: 0 rows, wins 0)
-== cl_pub_smallershock (base T7: 0 rows, wins 0)

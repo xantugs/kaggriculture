@@ -1,6 +1,0 @@
-== cl_omw_v15a (base T6c: 100 rows, wins 100)
-  T7                     n  100    +1126 +-  242  wins  100 ->  100 (+0/-0)
-== cl_pub_metav4v13 (base T6c: 100 rows, wins 100)
-  T7                     n  100     +953 +-  241  wins  100 ->  100 (+0/-0)
-== cl_pub_smallershock (base T6c: 100 rows, wins 100)
-  T7                     n  100    +1032 +-  241  wins  100 ->  100 (+0/-0)

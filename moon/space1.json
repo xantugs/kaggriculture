@@ -1,5 +1,0 @@
-{"load_limit": [16, 20, 24, 30, 40], "og_harvest": [1, 2, 3], "sell_drop": [0.6, 0.7, 0.8, 0.9], "fert_keep": [2, 4, 6, 10],
- "fert_floor": [15, 25, 40], "shed_target": [80, 88, 92], "wheat_extra": [0, 6, 12, 20], "fill_wheat_day": [22, 24, 25],
- "fill_carrot_day": [25, 26, 27], "carrot_pet": [4, 8, 12], "carrot_fm": [2, 4, 6], "tom_per_shop": [0, 3, 6, 8],
- "tom_last_day": [16, 17, 18], "labor_turn": [0.5, 1, 2, 4], "max_hires": [11, 12, 13, 14], "route_cap": [22, 23, 24],
- "herd_last_day": [14, 17, 20]}

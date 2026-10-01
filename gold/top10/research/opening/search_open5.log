@@ -1,7 +1,0 @@
-base s000 score +3346 wins 126/200 {'T8': (46, -2560), 'omw': (40, 5924), 'pub': (40, 6673)}
-s092 hires0=6 score -2210 wins 62/200 {'T8': (20, -7118), 'omw': (21, 577), 'pub': (21, -90)} 
-s093 over={"plant_must": false, "max_hands": 12, "hire_cost_w": 1.0, " abs_last=8 score +2327 wins 104/200 {'T8': (33, -3717), 'omw': (35, 5661), 'pub': (36, 5038)} 
-s094 straw_hf={"early": {"4": 3, "5": 5}, "ne": [10, 8], "sw": [9, 6, -0.2 anim_order=["GOOSE", "SHEEP", "COW"] score +2241 wins 120/200 {'T8': (53, -2770), 'omw': (34, 4679), 'pub': (33, 4815)} 
-s095 hires0=6 score -2210 wins 62/200 {'T8': (20, -7118), 'omw': (21, 577), 'pub': (21, -90)} 
-s096 anim_split=null score +3346 wins 126/200 {'T8': (46, -2560), 'omw': (40, 5924), 'pub': (40, 6673)} 
-done

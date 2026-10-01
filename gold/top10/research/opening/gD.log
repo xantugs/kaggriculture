@@ -1,6 +1,0 @@
-      0 [main] bash 48406 dofork: child -1 - forked process 29012 died unexpectedly, retry 0, exit code 0xC000026B, errno 11
-/usr/bin/bash: fork: retry: Resource temporarily unavailable
-1097910 [main] bash 48406 dofork: child -1 - forked process 33068 died unexpectedly, retry 0, exit code 0xC000026B, errno 11
-/usr/bin/bash: fork: retry: Resource temporarily unavailable
-3197325 [main] bash 48406 dofork: child -1 - forked process 35748 died unexpectedly, retry 0, exit code 0xC000026B, errno 11
-/usr/bin/bash: fork: retry: Resource temporarily unavailable

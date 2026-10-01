@@ -1,5 +1,0 @@
-== lv0 (base rs2: 51 rows, wins 27)
-== lv1 (base rs2: 51 rows, wins 26)
-== lv2 (base rs2: 51 rows, wins 31)
-== lv3 (base rs2: 50 rows, wins 24)
-== lv4 (base rs2: 50 rows, wins 26)

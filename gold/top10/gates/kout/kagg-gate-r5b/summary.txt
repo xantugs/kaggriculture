@@ -1,2 +1,0 @@
-== eg0920 (base sf8: 210 rows, wins 82)
-  esc                    n  210     +205 +-   97  wins   82 ->   82 (+5/-5)

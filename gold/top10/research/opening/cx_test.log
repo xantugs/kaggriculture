@@ -1,6 +1,0 @@
-      0 [main] bash 48128 dofork: child -1 - forked process 14968 died unexpectedly, retry 0, exit code 0xC000026B, errno 11
-gold/top10/research/opening/cx_test.sh: fork: retry: Resource temporarily unavailable
-1033468 [main] bash 48128 dofork: child -1 - forked process 34528 died unexpectedly, retry 0, exit code 0xC000026B, errno 11
-gold/top10/research/opening/cx_test.sh: fork: retry: Resource temporarily unavailable
-3056585 [main] bash 48128 dofork: child -1 - forked process 7916 died unexpectedly, retry 0, exit code 0xC000026B, errno 11
-gold/top10/research/opening/cx_test.sh: fork: retry: Resource temporarily unavailable

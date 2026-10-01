@@ -1,4 +1,0 @@
-  differs 115334960 Subramanya N     fresh    +1542 reused    +1826
-  differs 115331994 Tagir Analyzes   fresh   +15645 reused   +16844
-  differs 115306945 offhand          fresh    +1828 reused    -1923  FLIP
-CGt_final.py: 30 games in one module: 3 differ from fresh, 1 outcome flips

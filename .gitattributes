@@ -1,2 +1,3 @@
-# submitted agent files: keep the exact uploaded bytes (CRLF), so their sha256 matches the records
-gold/final/*_final.py -text
+# submitted agent files: keep the exact uploaded bytes (CRLF) so they match SHA256SUMS
+agents/*.py -text
+agents/SHA256SUMS text eol=lf

@@ -1,3 +1,0 @@
-{"base": "sf8", "cands": {"sf8": "gold/top10/lean_sf8.py", "c22": "gold/top10/cands/lean_sf8_c22.py", "fsf8": "gold/top10/full/sf8_full.py", "a_d18": "gold/top10/cands/full_a_d18.py"},
- "gates": {"top10g": ["sf8", "a_d18"], "live191": ["sf8", "c22"], "cl": ["sf8", "fsf8"]},
- "cl": {"opps": ["omw_v15a"], "seeds": [6100, 6100], "seats": "0"}}

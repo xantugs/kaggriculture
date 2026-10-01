@@ -1,5 +1,0 @@
-[["k2", "ses_b", {"_SES_CFG.kmax": 2}],
- ["k2s1", "ses_b", {"_SES_CFG.kmax": 2, "_SES_CFG.slack": 1.0}],
- ["k1", "ses_b", {"_SES_CFG.kmax": 1}],
- ["k2n20", "ses_b", {"_SES_CFG.kmax": 2, "_SES_CFG.n": 20}],
- ["k2pl14", "ses_b", {"_SES_CFG.kmax": 2, "_SES_CFG.plant_last": 14}]]

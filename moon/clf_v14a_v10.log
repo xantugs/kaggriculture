@@ -1,4 +1,0 @@
-../arena/cand/omw_v14a.py vs ../arena/cand/omw_v10.py: 170-30-0 of 200  margin +843  us 98303  them 97461  errs 0  tmax 1.248  wall 232s
-  net us-them: CARRO -24 EGG +42 FERTI -185 MELON +0 MILK +88 STRAW +174 TOMAT +4 WHEAT +579 WOOL +277 anim +0 hire -221 seed +108
-  rev us     : CARRO 5899 EGG 3833 FERTI 12416 MELON 14267 MILK 20886 STRAW 27486 TOMAT 2250 WHEAT 9513 WOOL 22748 anim -7668 hire -5557 seed -6691
-  tel/game: {'wf_changes': 0.2, 'wf_units': 0.2, 'wf_errors': 0.0}

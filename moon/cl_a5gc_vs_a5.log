@@ -1,4 +1,0 @@
-../arena/cand/omw_ad_a5gc.py vs ../arena/cand/omw_ad_a5.py: 118-82-0 of 200  margin +332  us 97484  them 97152  errs 0  tmax 0.853  wall 160s
-  net us-them: CARRO -1198 EGG +241 FERTI +13 MELON +0 MILK +51 STRAW +145 TOMAT -290 WHEAT +685 WOOL -64 anim +0 hire +458 seed +290
-  rev us     : CARRO 4983 EGG 4010 FERTI 12525 MELON 14267 MILK 20457 STRAW 27274 TOMAT 2077 WHEAT 9589 WOOL 22460 anim -7674 hire -4954 seed -6450
-  tel/game: {'gc_days': 6.0, 'gc_errors': 0.0, 'gc_hires': 55.3, 'gc_noops': 8.0, 'gc_unserved': 32.7, 'gc_plan_ms': 384.7, 'gc_room_sells': 1.2, 'gc_ovf_plan': 0.3, 'gc_floor_held': 573.3, 'gc_trimmed': 10.3, 'gc_dispatch': 13.4, 'gc_courier': 2.2, 'gc_unfinished_units': 0.1, 'gc_unfinished_acts': 0.1, 'gc_units_seen': 58.5, 'gc_units_planned': 58.5, 'gc_held': 1095.6, 'gc_held_released': 48.9, 'gc_rematch': 2.1, 'gc_footprint_cut': 1.6}

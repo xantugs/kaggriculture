@@ -1,2 +1,0 @@
-== goldg (base T5: 0 rows, wins 0)
-== top10g (base T5: 0 rows, wins 0)

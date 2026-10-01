@@ -1,3 +1,0 @@
-== cl_pub_smallershock (base sf8: 200 rows, wins 197)
-  c22                    n  200      +41 +-  110  wins  197 ->  197 (+2/-2)
-  c23                    n  200      +71 +-   94  wins  197 ->  199 (+2/-0)

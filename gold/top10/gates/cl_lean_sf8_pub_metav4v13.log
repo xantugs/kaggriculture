@@ -1,4 +1,0 @@
-gold/top10/lean_sf8.py vs arena/cand/pub_metav4v13.py: 199-1-0 of 200  margin +5857  us 100160  them 94303  errs 0  tmax 2.163  wall 356s
-  net us-them: CARRO +682 EGG +19 FERTI -560 MELON +0 MILK +569 STRAW +3336 TOMAT +4576 WHEAT -641 WOOL +253 anim -38 hire -1015 seed -163
-  rev us     : CARRO 7414 EGG 4426 FERTI 12213 MELON 14267 MILK 18897 STRAW 32817 TOMAT 6415 WHEAT 8011 WOOL 18876 anim -7497 hire -6394 seed -7006
-  tel/game: {'gc_days': 0.0, 'gc_errors': 0.0, 'gc_hires': 0.0, 'gc_noops': 0.0, 'gc_unserved': 0.0, 'gc_plan_ms': 0.0, 'gc_room_sells': 0.0}

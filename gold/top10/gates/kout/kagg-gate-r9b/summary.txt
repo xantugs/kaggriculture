@@ -1,2 +1,0 @@
-== eg0920 (base T5: 0 rows, wins 0)
-== s2800 (base T5: 0 rows, wins 0)

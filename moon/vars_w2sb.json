@@ -1,5 +1,0 @@
-[["w2sb_f2", "omw_w2s_b", {}],
- ["w2sb_f1", "omw_w2s_b", {"_W2S_CFG": {"d0": 5, "d1": 8, "max": 3, "reserve": 600, "spend_h": 0, "harvest_at": 3, "feed_days": 1, "gap": 1, "pool": 1, "sell": true, "sell_min": 2, "lookahead": true, "topup": 0}}],
- ["w2sb_f0_t6", "omw_w2s_b", {"_W2S_CFG": {"d0": 5, "d1": 8, "max": 3, "reserve": 600, "spend_h": 0, "harvest_at": 3, "feed_days": 0, "gap": 1, "pool": 1, "sell": true, "sell_min": 2, "lookahead": true, "topup": 6}}],
- ["w2sb_f0_t6_m5", "omw_w2s_b", {"_W2S_CFG": {"d0": 5, "d1": 8, "max": 5, "reserve": 500, "spend_h": 0, "harvest_at": 3, "feed_days": 0, "gap": 1, "pool": 1, "sell": true, "sell_min": 2, "lookahead": true, "topup": 6}}],
- ["w2sb_f0_t0", "omw_w2s_b", {"_W2S_CFG": {"d0": 5, "d1": 8, "max": 3, "reserve": 600, "spend_h": 0, "harvest_at": 3, "feed_days": 0, "gap": 1, "pool": 1, "sell": true, "sell_min": 2, "lookahead": true, "topup": 0}}]]

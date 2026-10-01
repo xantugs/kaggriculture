@@ -1,4 +1,0 @@
-base s000 score +3288 wins 137/200 {'T8': (58, -1980), 'omw': (39, 5907), 'pub': (40, 5937)}
-s121 mid_wheat_from=1 score +3351 wins 129/200 {'T8': (54, -1240), 'omw': (35, 4829), 'pub': (40, 6465)} 
-s122 crew={"a": 3.3, "tiles": 0.045, "anim": 0.18, "shed": 0.38, "plan access_free=true score +3288 wins 137/200 {'T8': (58, -1980), 'omw': (39, 5907), 'pub': (40, 5937)} 
-done

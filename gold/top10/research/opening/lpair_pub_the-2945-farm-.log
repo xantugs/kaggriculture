@@ -1,7 +1,0 @@
-all   n  51 delta  +4618 +-  4528 median  -6343 trim10  -2036  wins 29 -> 12  (us -563 them -5181)
-opponent collapses (them < 75% of base): 6
-trim  n  45 delta  -5084 +-  2044 median  -7211 trim10  -7244  wins 26 -> 6  (us -4560 them +524)
-flips +5 / -22
-our ledger delta:   CARRO -1472  EGG +70  FERTI +772  MELON -1296  MILK +1520  STRAW +774  TOMAT -2390  WHEAT +1149  WOOL +618  anim +188  hire -474  seed +135
-rival ledger delta: CARRO +171  EGG -1032  FERTI -928  MELON -84  MILK -861  STRAW -1878  TOMAT +47  WHEAT -726  WOOL -934  anim +216  hire +114  seed +185
-errors: 0 []

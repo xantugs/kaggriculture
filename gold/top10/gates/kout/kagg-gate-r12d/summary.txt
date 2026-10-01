@@ -1,3 +1,0 @@
-== eg0920 (base T6c: 0 rows, wins 0)
-== s2800 (base T6c: 149 rows, wins 120)
-  T7                     n  149    +1043 +-  136  wins  120 ->  125 (+6/-1)

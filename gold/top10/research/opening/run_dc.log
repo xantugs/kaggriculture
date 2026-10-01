@@ -1,7 +1,0 @@
-5 seats {'mtmr_s': 4, 'Azat A': 1}
-mtmr_s 113065954 m -11784.0 us 122624.0 el 134408.0 wall 11.6 err 0  T 13
-mtmr_s 113112818 m -1211.0 us 142367.0 el 143578.0 wall 11.6 err 0  T 13
-mtmr_s 113125640 m -3327.0 us 90867.0 el 94194.0 wall 10.0 err 0  T 13
-mtmr_s 113175616 m -24076.0 us 114078.0 el 138154.0 wall 8.8 err 0  T 20
-Azat A 113577176 m -15972.0 us 73927.0 el 89899.0 wall 8.8 err 0  T 22
-ALLDONE dc 5 wins 0 margin -11274

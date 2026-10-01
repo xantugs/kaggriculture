@@ -1,9 +1,0 @@
-{"base": "sf8",
- "cands": {"sf8": "gold/top10/lean_sf8.py", "c22": "gold/top10/cands/lean_sf8_c22.py", "c23": "gold/top10/cands/lean_sf8_c23.py",
-           "a_s2toff": "gold/top10/cands/full_a_s2toff.py", "a_herdoff": "gold/top10/cands/full_a_herdoff.py", "a_melonoff": "gold/top10/cands/full_a_melonoff.py",
-           "a_dpoff": "gold/top10/cands/full_a_dpoff.py", "a_tickoff": "gold/top10/cands/full_a_tickoff.py", "a_d15": "gold/top10/cands/full_a_d15.py",
-           "a_d18": "gold/top10/cands/full_a_d18.py", "a_rw2": "gold/top10/cands/full_a_rw2.py", "a_care8": "gold/top10/cands/full_a_care8.py"},
- "gates": {"top10g": ["sf8", "a_s2toff", "a_herdoff", "a_melonoff", "a_dpoff", "a_tickoff", "a_d15", "a_d18", "a_rw2", "a_care8", "c22"],
-           "goldg": ["sf8", "a_s2toff", "a_herdoff", "a_melonoff", "a_dpoff", "a_tickoff", "a_d15", "a_d18", "a_rw2", "a_care8", "c22"],
-           "eg0920": ["sf8", "a_s2toff", "a_herdoff", "a_melonoff", "a_dpoff", "a_tickoff", "a_d15", "a_d18", "a_rw2", "a_care8"],
-           "live191": ["sf8", "a_s2toff", "a_herdoff", "a_melonoff", "a_dpoff", "a_tickoff", "a_d15", "a_d18", "a_rw2", "a_care8"]}}

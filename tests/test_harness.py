@@ -10,7 +10,7 @@ from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("tested_harness", ROOT / "tools" / "harness.py")
+spec = importlib.util.spec_from_file_location("tested_harness", ROOT / "eval" / "harness.py")
 harness = importlib.util.module_from_spec(spec)
 with mock.patch.dict(sys.modules, {"kaggle_environments": SimpleNamespace(make=mock.Mock())}):
     spec.loader.exec_module(harness)
